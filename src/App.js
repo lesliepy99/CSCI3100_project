@@ -4,6 +4,7 @@ import {Container,Col,Row} from 'react-bootstrap';
 import Nav from './Nav';
 import Booklist from './Booklist';
 import Comment from './Comment';
+import Mainpage from './Mainpage';
 
 import './App.css';
 
@@ -26,6 +27,9 @@ class App extends Component{
             </Route>
             <Route path='/comment'>
               <Comment />
+            </Route>
+            <Route path='/mainpage'>
+              <Mainpage name="Jack"/>
             </Route>
            
           </Switch>
