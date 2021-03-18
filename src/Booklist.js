@@ -148,11 +148,53 @@ const useStyles = makeStyles((theme) => ({
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+const products = [
+    {
+        title: 'Running Shoes',
+        price: '$68',
+        image: 'https://source.unsplash.com/featured/?shoes'
+    },
+    {
+        title: 'Umbrella',
+        price: '$5',
+        image: 'https://source.unsplash.com/featured/?umbrella'
+    },{
+        title: 'Book - The Little Women',
+        price: '$20',
+        image: 'https://source.unsplash.com/featured/?women'
+    },{
+        title: 'iPhone4s',
+        price: '$130',
+        image: 'https://source.unsplash.com/featured/?iPhone4s'
+    },{
+        title: 'iPad mini',
+        price: '$100',
+        image: 'https://source.unsplash.com/featured/?ipad'
+    },{
+        title: 'Camera',
+        price: '$999',
+        image: 'https://source.unsplash.com/featured/?camera'
+    },{
+        title: 'T-shirt',
+        price: '$10',
+        image: 'https://source.unsplash.com/featured/?clothes'
+    },{
+        title: 'Sunglasses',
+        price: '$7',
+        image: 'https://source.unsplash.com/featured/?sunglasses'
+    },{
+        title: 'Book - Forest',
+        price: '$25',
+        image: 'https://source.unsplash.com/featured/?forest'
+    },
+]
+
 function Album() {
     const classes = useStyles();
     
     return (
         <main>
+            {/* Tool bar */}
             <Grid>
             <Toolbar className={classes.toolbar}>
                 <IconButton aria-label="shopping cart">
@@ -188,7 +230,7 @@ function Album() {
             </Toolbar>
             </Grid>
 
-            {/* Increase the priority of the hero background image */}
+            {/* Image background */}
             <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${'https://source.unsplash.com/random'})` }}>
             {<img style={{ display: 'none' }} src={'https://source.unsplash.com/random'} alt={'main image description'} />}
             <div className={classes.overlay} />
@@ -204,27 +246,26 @@ function Album() {
             </Container>
             </Paper> 
 
-            {/* End hero unit */}
+            {/* Product cards */}
             <Container className={classes.cardGrid} maxWidth="md">
-                {/* End hero unit */}
                 <Grid container spacing={4}>
-                    {cards.map((card) => (
-                    <Grid item key={card} xs={12} sm={6} md={4}>
+                    {products.map((post) => (
+                    <Grid item key={post} xs={12} sm={6} md={4}>
                         <Card className={classes.card}>
                         <CardActionArea>
                         <CardMedia
                             className={classes.cardMedia}
-                            image="https://source.unsplash.com/featured/?book"
+                            image= {post.image}// "https://source.unsplash.com/featured/?book"
                             title="Image title"
                         />
                         </CardActionArea>
 
                         <CardContent className={classes.cardContent}>
-                            <Typography gutterBottom variant="h8" component="h2">
-                            Product Name
+                            <Typography gutterBottom variant="h6" >
+                            {post.title}
                             </Typography>
-                            <Typography>
-                            Price
+                            <Typography variant="h8" component="h2">
+                            {post.price}
                             </Typography>
                         </CardContent>
                         <CardActions >
