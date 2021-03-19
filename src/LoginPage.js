@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 
 
@@ -32,14 +33,18 @@ class LoginPage extends React.Component {
                   <TextField label="Password" type="password" id="password" />
                   <br/>
                   <br/>
+                  <Link to='./home'>
                   <Button type="submit" variant="contained" color="primary" >
                     Sign IN
                   </Button>
+                  </Link>
                   <br/>
                   <br/>
-                  <Button href='/sign_up' variant="contained" color="primary">
+                  <Link to='./sign_up'>
+                  <Button variant="contained" color="primary">
                     Sign UP
                   </Button>
+                  </Link>
                   <br />
                 </form>
               </CardActions>

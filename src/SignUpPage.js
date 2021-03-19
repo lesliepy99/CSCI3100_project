@@ -19,6 +19,7 @@ class SignUpPage extends Component{
             <Card>
                 <CardContent>
                     <h4 class="center">Create Your Account</h4>
+                    <p>We will send an auth code to you!</p>
                 </CardContent>
                 <CardActions>
                     <form id="regist_form" action="http://localhost:3000/process_post" method="POST">
