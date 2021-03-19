@@ -14,7 +14,7 @@ class App extends Component {
     this.handleLoginClick = this.handleLoginClick.bind(this);
   }
 
-  handleLoginClick() {
+  handleLoginClick() {  
     this.setState({ logged: 1 })
   }
 
