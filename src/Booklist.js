@@ -18,6 +18,8 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+
 
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
@@ -26,6 +28,20 @@ import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
+
+// Drawer
+import clsx from 'clsx';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
+import LocalMallIcon from '@material-ui/icons/LocalMall';
+
+import Hidden from '@material-ui/core/Hidden';
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -48,8 +64,13 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(4),
     },
     cardGrid: {
-      paddingTop: theme.spacing(4),
+      paddingTop: theme.spacing(2),
       paddingBottom: theme.spacing(8),
+    },
+    catagory: {
+        paddingTop: theme.spacing(4),
+        paddingBottom: theme.spacing(8),
+        marginLeft: 140,
     },
     card: {
       height: '100%',
@@ -144,7 +165,32 @@ const useStyles = makeStyles((theme) => ({
       toolbarTitle: {
         flex: 1,
       },
+
+      // drawer
+      list: {
+        width: 250,
+      },
+      fullList: {
+        width: 'auto',
+      },
   }));
+
+const cartStyles = makeStyles((theme) => ({
+    cardGrid: {
+        paddingTop: theme.spacing(2),
+        paddingBottom: theme.spacing(2),
+    },
+    card: {
+      display: 'flex',
+      
+    },
+    cardDetails: {
+      flex: 1,
+    },
+    cardMedia: {
+      width: 100,
+    },
+}));
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -161,7 +207,7 @@ const products = [
     },{
         title: 'Book - The Little Women',
         price: '$20',
-        image: 'https://source.unsplash.com/featured/?women'
+        image: 'https://source.unsplash.com/featured/?girl'
     },{
         title: 'iPhone4s',
         price: '$130',
@@ -177,7 +223,7 @@ const products = [
     },{
         title: 'T-shirt',
         price: '$10',
-        image: 'https://source.unsplash.com/featured/?clothes'
+        image: 'https://source.unsplash.com/featured/?shirts'
     },{
         title: 'Sunglasses',
         price: '$7',
@@ -189,18 +235,119 @@ const products = [
     },
 ]
 
+const carts = [
+    {
+        title: 'Running Shoes',
+        price: '$68',
+        image: 'https://source.unsplash.com/featured/?shoes'
+    },
+    {
+        title: 'Umbrella',
+        price: '$5',
+        image: 'https://source.unsplash.com/featured/?umbrella'
+    },{
+        title: 'Book - The Little Women',
+        price: '$20',
+        image: 'https://source.unsplash.com/featured/?girl'
+    },
+]
+
 function Album() {
     const classes = useStyles();
+    const cart = cartStyles();
+
+    const [state, setState] = React.useState({
+        top: false,
+        left: false,
+        bottom: false,
+        right: false,
+      });
     
+      const toggleDrawer = (anchor, open) => (event) => {
+        if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+          return;
+        }
+    
+        setState({ ...state, [anchor]: open });
+      };
+    
+      const list = (anchor) => (
+        <div
+          className={clsx(classes.list, {
+            [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+          })}
+          role="presentation"
+          onClick={toggleDrawer(anchor, false)}
+          onKeyDown={toggleDrawer(anchor, false)}
+        >
+          <Typography
+                component="h2"
+                variant="h5"
+                color="inherit"
+                align="center"
+                noWrap
+                className={classes.toolbarTitle}
+                gutterBottom
+                >
+                Shopping Cart
+          </Typography>
+          <Divider />
+
+          {carts.map((item) => (
+          <Grid className={cart.cardGrid} item xs={12} md={12}>
+            <CardActionArea component="a" href="#">
+                <Card className={cart.card}>
+                <Hidden xsDown>
+                    <CardMedia className={cart.cardMedia} image={item.image} title="jo" />
+                </Hidden>
+                <div className={cart.cardDetails}>
+                    <CardContent>
+                    <Typography  variant="h8">
+                        {item.title}
+                    </Typography>
+                    <Typography variant="subtitle1" color="textSecondary">
+                        {item.price}
+                    </Typography>
+                    <Typography variant="subtitle1" paragraph>
+                        x1
+                    </Typography>
+                    
+                    </CardContent>
+                </div>
+                </Card>
+            </CardActionArea>
+         </Grid>
+          ))}
+
+          <Divider />
+          <Box textAlign='center' paddingTop={2}>
+          <Button
+            variant="contained"
+            color="secondary"
+            endIcon={<LocalMallIcon />}>
+            CHECKOUT
+          </Button>
+          </Box>
+        </div>
+      );
+      
     return (
         <main>
             {/* Tool bar */}
             <Grid>
             <Toolbar className={classes.toolbar}>
-                <IconButton aria-label="shopping cart">
+                <IconButton aria-label="shopping cart" onClick={toggleDrawer('left', true)}>
                     <ShoppingCartIcon />
-                    <Typography>Cart</Typography>
+                    {/* <Typography>Cart</Typography> */}
                 </IconButton>
+                <SwipeableDrawer
+                    anchor={'left'}
+                    open={state['left']}
+                    onClose={toggleDrawer('left', false)}
+                    onOpen={toggleDrawer('left', true)}
+                >
+                    {list('left')}
+                </SwipeableDrawer>
 
                 <Typography
                 component="h2"
@@ -246,8 +393,13 @@ function Album() {
             </Container>
             </Paper> 
 
-            {/* Product cards */}
+            {/* Display product cards */}
             <Container className={classes.cardGrid} maxWidth="md">
+            <div pclassName={classes.catagory}>
+                <Typography variant="h8" component="h2" paddingRight={140} gutterBottom>
+                            Recommendation
+                </Typography>
+            </div>
                 <Grid container spacing={4}>
                     {products.map((post) => (
                     <Grid item key={post} xs={12} sm={6} md={4}>
