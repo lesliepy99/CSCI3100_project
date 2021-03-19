@@ -257,10 +257,7 @@ function Album() {
     const cart = cartStyles();
 
     const [state, setState] = React.useState({
-        top: false,
         left: false,
-        bottom: false,
-        right: false,
       });
     
       const toggleDrawer = (anchor, open) => (event) => {
