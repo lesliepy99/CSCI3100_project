@@ -35,7 +35,7 @@ var UserSchema = Schema({
 var GoodSchema = Schema({
     name: { type: String, required: true },
     userId: { type: Schema.ObjectId, required: true },
-    isSold: { type: Boolean, default: 0 },
+    isSold: { type: Boolean, default: false },
     tags: [{
         tag: { type: String }
 
@@ -115,8 +115,36 @@ findUser = (username) => new Promise((resolve, reject) => {
 
     })
 })
+
+createGood = (name, userId, tags, number_of_views, number_of_likes, good_image, description, estimated_price) => new Promise((resolve, reject) => {
+    console.log(username);
+    GoodModel.create({
+        name: name, userId: userId, tags: tags, number_of_views: number_of_views,
+        number_of_likes: number_of_likes, good_image: good_image, description: description, estimated_price: estimated_price
+    }, (err, result) => {
+        if (err || !result) reject(err);
+        else {
+            resolve(true);
+        }
+    });
+})
+
+findAllGoods = () => new Promise((resolve, reject) => {
+    
+    GoodModel.find({}, (err, user) => {
+        if (err) reject(err);
+        else if (!user) resolve(undefined);
+        else {
+            resolve(user);
+        };
+    })
+})
+
+
+
 module.exports = {
     createUser: createUser,
     UserModel: UserModel,
     findUser: findUser,
+    createGood:createGood
 };
