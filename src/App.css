@@ -27,3 +27,14 @@ nav{
 wt{
 	color:white;
 }
+
+/*
+.background-image {
+    background-image: url(https://source.unsplash.com/random);
+    background-size: cover;
+    background-position: top;
+	background-color:rgba(0,0,0,0.3);
+    min-height: 100%;
+    height: 100vh;
+    position: relative;
+}*/
