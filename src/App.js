@@ -5,16 +5,26 @@ import Nav from './Nav';
 import Booklist from './Booklist';
 import Comment from './Comment';
 import Mainpage from './Mainpage';
+import { io } from "socket.io-client";
+// CommonJS
+
+
 
 import './App.css';
+
 
 
 class App extends Component{
   constructor(props){
     super(props);
   }
-
+  componentDidMount() {
+    console.log("Good");
+    
+  }
+  
   render(){
+   
     return(
       <Container>
         <Col>

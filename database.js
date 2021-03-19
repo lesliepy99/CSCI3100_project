@@ -1,3 +1,5 @@
+
+
 const mongoose = require('mongoose');
 var dbUri = "mongodb+srv://csci3100_project_team:csci3100project@cluster0.muf9n.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
@@ -70,16 +72,19 @@ var PostSchema = Schema({
 })
 
 var TransactionSchema = Schema({
-    good_id:{type:Schema.ObjectId,required:true},
-    seller_id:{type:Schema.ObjectId,required:true},
-    consumer_id:{type:Schema.ObjectId,required:true},
-    transaction_time:{type:Date}
+    good_id: { type: Schema.ObjectId, required: true },
+    seller_id: { type: Schema.ObjectId, required: true },
+    consumer_id: { type: Schema.ObjectId, required: true },
+    transaction_time: { type: Date }
 })
 
 UserModel = mongoose.model('User', UserSchema);
 GoodModel = mongoose.model('Good', GoodSchema);
 ChatModel = mongoose.model('Chat', ChatSchema);
 PostModel = mongoose.model('Post', PostSchema);
+
+
+
 TransactionModel = mongoose.model('Transaction', TransactionSchema);
 
 createUser = (name, password, email, school) => new Promise((resolve, reject) => {
@@ -99,6 +104,19 @@ createUser = (name, password, email, school) => new Promise((resolve, reject) =>
     });
 })
 
+findUser = (username) => new Promise((resolve, reject) => {
+    console.log(username);
+    UserModel.findOne({}, (err, user) => {
+        if (err) reject(err);
+        else if (!user) resolve(undefined);
+        else {
+            resolve(user);
+        };
+
+    })
+})
 module.exports = {
-    createUser: createUser
+    createUser: createUser,
+    UserModel: UserModel,
+    findUser: findUser,
 };
