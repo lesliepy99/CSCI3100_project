@@ -17,8 +17,8 @@ const transport = nodemailer.createTransport(smtpTransport({
     port: 465, 
     secure: true,
     auth: {
-      user: '296851537@qq.com', 
-      pass: 'tcypdhvmikenbgfi' 
+      user: '2911528281@qq.com', 
+      pass: 'gjmjcxjailojdedh' 
     }
 }));
 
@@ -43,7 +43,7 @@ app.post("/process_post", urlencodedParser,async(req,res)=>{
     if(regEmail.test(EMAIL)){
         let code=randomFns();
         transport.sendMail({
-            from: '296851537@qq.com', 
+            from: '2911528281@qq.com', 
             to: EMAIL, 
             subject: 'Email verification', 
             html: `
