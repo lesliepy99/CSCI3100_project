@@ -13,16 +13,13 @@ class Nav extends Component {
 
 	          <ul className="nav-links" >
 	            <Link to='/home/booklist'>
-	              <wt>书单</wt>
+	              <wt>Store</wt>
 		        </Link>
                 <Link to='/home/comment'>
-                    <wt>采购留言</wt>
+                    <wt>Forum</wt>
                 </Link>
                 <Link to='/home/mainpage'>
-                    <wt>个人主页</wt>
-                </Link>
-                <Link to='/home/comment'>
-                    <wt>商品展示</wt>
+                    <wt>User</wt>
                 </Link>
               </ul>
 
