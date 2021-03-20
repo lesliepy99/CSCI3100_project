@@ -5,6 +5,69 @@ const http = require("http");
 const { UserModel } = require('./database');
 var server = http.createServer(app);
 var io = require("socket.io")(server);
+const bodyParser = require('body-parser');
+const nodemailer = require('nodemailer');
+const smtpTransport = require('nodemailer-smtp-transport');
+const { assert } = require("console");
+
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+const transport = nodemailer.createTransport(smtpTransport({
+    host: 'smtp.qq.com', 
+    port: 465, 
+    secure: true,
+    auth: {
+      user: '2911528281@qq.com', 
+      pass: 'gjmjcxjailojdedh' 
+    }
+}));
+
+// generate random auth code
+const randomFns=()=> { 
+    let code = ""
+    for(let i= 0;i<6;i++){
+        code += parseInt(Math.random()*10)
+    }
+    return code 
+}
+const regEmail=/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/
+
+// send email
+app.post("/process_post", urlencodedParser,async(req,res)=>{
+    var response={
+        "email":req.body.email,
+        "password":req.body.password,
+        "password_confirm":req.body.password_confirm
+    };
+    let EMAIL=response["email"]
+    if(regEmail.test(EMAIL)){
+        let code=randomFns();
+        transport.sendMail({
+            from: '2911528281@qq.com', 
+            to: EMAIL, 
+            subject: 'Email verification', 
+            html: `
+            <p>Hello!</p>
+            <p>You are registering as a member of UTransorm!</p>
+            <p>Your Auth Code：<strong style="color: #ff4e2a;">${code}</strong></p>
+            <p>***The Auth Code is valid within 5 minutes***</p>` 
+        },
+        function(error,data){
+            assert(!error,500,"[ERROR] fail to send Auth Code!")
+            transport.close();
+        });
+        const authCode = require("../models/authCode");
+        const e_mail = EMAIL;
+        await authCode.deleteMany({e_mail});
+        await authCode.insertMany({e_mail,ayth_code:code});
+        setTimeout(async ()=>{   
+            await Code.deleteMany({e_mail})
+        },1000*60*5);
+    }else{
+        assert(false,422,'Wrong email format!')
+    }
+}
+);
 
 
 app.use(express.static(__dirname + '/build'));

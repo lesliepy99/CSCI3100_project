@@ -6,6 +6,7 @@ import Booklist from './Booklist';
 import Comment from './Comment';
 import Mainpage from './Mainpage';
 import './App.css';
+import Footer from './Footer';
 
 class Home extends Component{
     constructor(props){
@@ -14,6 +15,7 @@ class Home extends Component{
 
     render(){
         return(
+            <React.Fragment>
             <Container>
                 <Col>
                     <div className="app">
@@ -36,6 +38,8 @@ class Home extends Component{
                     </div>
                 </Col>
             </Container>
+            <Footer/>
+            </React.Fragment>
         );
     }
 }
