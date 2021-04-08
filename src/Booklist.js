@@ -19,6 +19,8 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
+import {connect} from 'react-redux';
+import { io } from "socket.io-client";
 
 
 import InputBase from '@material-ui/core/InputBase';
@@ -436,9 +438,22 @@ function Album() {
 class Booklist extends Component{
     constructor(props){
         super(props);
+        
     }
     
     render(){
+      
+      var socket = io.connect();
+      socket.on('goodChange', data => {
+          console.log(data);
+          console.log("Is that right?");
+          
+          this.props.dispatch({type:'update_good',data:data['fullDocument']})
+          // dispatch({type:'UPDATE'});
+        
+        });
+      console.log(this.props.goods);
+      console.log("Lok at here");
         return(
            /*<Container>
                <Row>
@@ -460,5 +475,9 @@ class Booklist extends Component{
             
     }
 }
-
-export default Booklist;
+function mapStateToProps(state){
+  return{
+    goods:state.goods
+  };
+}
+export default connect(mapStateToProps)(Booklist);

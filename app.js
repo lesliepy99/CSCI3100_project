@@ -79,13 +79,16 @@ io.sockets.on('connection',function (socket){
     console.log("Logged");
 })
 
-const changeStream = UserModel.watch();
+const UserChangeStream = UserModel.watch();
+const GoodChangeStream = GoodModel.watch();
 
-
-changeStream.on('change', (changes) => {
-            io.sockets.compress(true).emit('mongoStream',changes);
+UserChangeStream.on('change', (changes) => {
+            io.sockets.compress(true).emit('userChange',changes);
             console.log("Something changed");
-
+        });
+GoodChangeStream.on('change', (changes) => {
+            io.sockets.compress(true).emit('goodChange',changes);
+            console.log("good changed");
         });
 
 
@@ -96,7 +99,7 @@ app.post('/register', (req, res) => {
 
     console.log(req.body);
     console.log("done");
-    db.createUser(name, password, email, school)
+    db.createUser(req.body.name, req.body.password, req.body.email, req.body.school)
         .then(
             result => {
                 if (result) {
@@ -111,10 +114,33 @@ app.post('/register', (req, res) => {
 });
 
 app.get('/find_user',(req, res)=>{
-    db.findUser("Leslie").then(
+    db.findUser("leslie").then(
         re => { res.send(JSON.stringify(re)) },
         err => { res.status(500).send(err.toString()) }
     );   
 })
 
+app.post('/add_good',(req,res)=>{
+    console.log(req.body);
+    db.createGood(req.body.name, req.body.userId, req.body.tags, req.body.number_of_views, req.body.number_of_likes, req.body.good_image, req.body.description, req.body.estimated_price)
+    .then(
+        result => {
+            if (result) {
+                res.status(200).send("Registered!");
+            }
+            else {
+                res.status(403).send("Overlapped!");
+            }
+        },
+        err => { res.status(500).send(err.toString()) }
+    );
+})
+
+
+app.get('find_all_goods',(req,res)=>{
+    db.findAllGoods().then(
+        re => { res.send(JSON.stringify(re)) },
+        err => { res.status(500).send(err.toString()) }
+    );  
+});
 server.listen(3000)

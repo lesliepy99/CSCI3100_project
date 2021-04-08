@@ -11,10 +11,22 @@ console.log("Very good");
 
 
 var user_info = [];
+var goods = [];
 fetch('http://localhost:3000/find_user')
   .then(async response => {
     const data = await response.json();
     user_info.push(data['name']);
+
+  })
+  .catch(error => {
+
+    console.error('There was an error!', error);
+  });
+
+fetch('http://localhost:3000/find_all_goods')
+  .then(async response => {
+    const data = await response.json();
+    goods.push(data);
 
   })
   .catch(error => {
@@ -29,13 +41,16 @@ if (action.type=='TEST'){
     console.log(action.data);
      return {user_info:[action.data['name']]};
   }
+  else if(action.type=="update_good"){
+
+  }
    else{
     console.log("Are we else?"); 
     return state;}
   
 }
 var socket = io.connect();
-socket.on('mongoStream', data => {
+socket.on('userChange', data => {
   console.log(data);
   console.log("Is that right?");
   reducer(dataStore,'TEST');
