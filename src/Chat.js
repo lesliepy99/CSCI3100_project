@@ -13,6 +13,28 @@ import {connect} from 'react-redux';
 class Chat extends React.Component {
     constructor(props) {
         super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(event){
+        event.preventDefault();
+        const message_content=event.target.elements.send_text.value;
+        console.log('message_content: ', message_content);
+        console.log('my_id:', this.props.my_id);
+        fetch('http://localhost:3000/add_chat',{
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                uid_1: this.props.my_id,
+                message_content: message_content,
+            })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
     }
 
     render() {
@@ -26,8 +48,8 @@ class Chat extends React.Component {
                 <div>
                     <Typography id='message-area' component="div" style={{ backgroundColor: '#c1eff4', height: '60vh' }} />
                 </div>
-                <form action="http://localhost:3000/add_chat" method="POST" align='center' style={{ backgroundColor: '#c1eff4' }}>
-                    <TextField id="send_text" name='send_text' label="Message" multiline variant="outlined" style={{ width: 700, backgroundColor: 'white' }} />
+                <form onSubmit={this.handleSubmit} align='center' style={{ backgroundColor: '#c1eff4' }}>
+                    <TextField id="send_text" name='send_text' label="Message" multiline variant="outlined" ref={(c) => this.send_text = c} style={{ width: 700, backgroundColor: 'white' }} />
                     <Button type="submit" variant="contained" color="primary" style={{height: 54}} endIcon={<SendIcon />}>
                         Send
                     </Button>
