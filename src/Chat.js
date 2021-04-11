@@ -18,17 +18,17 @@ class Chat extends React.Component {
 
     handleSubmit(event){
         event.preventDefault();
+        const uid_1=this.props.my_id;
         const message_content=event.target.elements.send_text.value;
         console.log('message_content: ', message_content);
-        console.log('my_id:', this.props.my_id);
+        console.log('my_id:', uid_1);
         fetch('http://localhost:3000/add_chat',{
             method: 'POST',
             headers: {
-                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                uid_1: this.props.my_id,
+                uid_1: uid_1,
                 message_content: message_content,
             })
         })
