@@ -12,6 +12,7 @@ console.log("Very good");
 
 var user_info = [];
 var goods = [];
+var my_id = '12';
 fetch('http://localhost:3000/find_user')
   .then(async response => {
     const data = await response.json();
@@ -33,7 +34,7 @@ fetch('http://localhost:3000/find_all_goods')
 
     console.error('There was an error!', error);
   });
-const dataStore = { user_info: user_info }
+const dataStore = { user_info: user_info, goods: goods, my_id:my_id}
 const reducer = (state = dataStore, action) =>  {
   
 if (action.type=='TEST'){
