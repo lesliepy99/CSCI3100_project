@@ -10,7 +10,8 @@ const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 const { assert } = require("console");
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var jsonParser=bodyParser.json({ extended: false });
 
 const transport = nodemailer.createTransport(smtpTransport({
     host: 'smtp.qq.com', 
@@ -33,7 +34,7 @@ const randomFns=()=> {
 const regEmail=/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/
 
 // send email
-app.post("/process_post", urlencodedParser,async(req,res)=>{
+app.post("/send_email", urlencodedParser,async(req,res)=>{
     var response={
         "email":req.body.email,
         "password":req.body.password,
@@ -77,7 +78,7 @@ app.get('/', function (req, res) {
 
 io.sockets.on('connection',function (socket){
     console.log("Logged");
-})
+});
 
 const UserChangeStream = UserModel.watch();
 const GoodChangeStream = GoodModel.watch();
@@ -143,4 +144,25 @@ app.get('find_all_goods',(req,res)=>{
         err => { res.status(500).send(err.toString()) }
     );  
 });
+
+{/*app.post('/add_chat',(req,res)=>{
+    console.log(req.body);
+    db.createChatItem([req.body.uid_1, req.body.uid_2], req.body.message)
+    .then(
+        result => {
+            if (result) {
+                res.status(200).send("Registered!");
+            }
+            else {
+                res.status(403).send("Overlapped!");
+            }
+        },
+        err => { res.status(500).send(err.toString()) }
+    );
+})*/}
+
+app.post('/add_chat', jsonParser, (req,res)=>{
+    console.log(req.body);
+})
+
 server.listen(3000)
