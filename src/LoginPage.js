@@ -18,14 +18,16 @@ class LoginPage extends React.Component {
     render(){
         return (
         <Container maxWidth={'sm'} style={{backgroundColor: '#e3f2fd'}}>
-          <div style={{backgroundColor: '#35baf6', fontSize: 30}} align='center'>
+          <div style={{fontSize: 30}} align='center'>
               Sign In to UTransform
           </div>
           <br/>
           <form align='center'>
             <TextField label="E-mail" id="username" variant="outlined" style={{backgroundColor: 'white'}}/>
             <br />
+            <br />
             <TextField label="Password" type="password" id="password" variant="outlined" style={{backgroundColor: 'white'}}/>
+            <br />
             <br />
             <br />
             <Link to='./home'>
