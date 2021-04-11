@@ -19,7 +19,7 @@ class SignUpPage extends Component{
                 We will send an auth code to you!
             </div>
             <br/>
-            <form id="regist_form" action="http://localhost:3000/process_post" method="POST" align='center'> 
+            <form id="regist_form" action="http://localhost:3000/send_email" method="POST" align='center'> 
                 <TextField label="E-mail" id="email" name="email" variant="outlined" style={{backgroundColor: 'white'}}/>
                 <br/>
                 <TextField type="password"  label="Password" id="password" name="password" variant="outlined" style={{backgroundColor: 'white'}}/>
