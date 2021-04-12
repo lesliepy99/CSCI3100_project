@@ -66,11 +66,11 @@ if (action.type=='TEST'){
     user_info.push(action.data['fullDocument'])
   }
     
-    return {user_info:goods};
+  return  {user_info,goods,my_id};
   }
   else if(action.type=="signin"){
     my_id = action.data['id'];
-    return my_id;
+    return  {user_info,goods,my_id};
   }
   else if(action.type=="update_good"){
     if(action.data['operationType']=="replace"){
@@ -88,7 +88,7 @@ if (action.type=='TEST'){
       goods.push(action.data['fullDocument'])
     }
     
-    return {user_info,goods};
+    return  {user_info,goods,my_id};
   }
    else{
     console.log("Are we else?"); 
