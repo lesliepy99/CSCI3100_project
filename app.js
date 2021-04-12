@@ -95,26 +95,18 @@ app.post('/register', jsonParser, async (req, res) => {
     const nickname=req.body.nickname;
     const school=req.body.school;
     const authcode=req.body.authcode;
-    const veri=await AuthCodeModel.findOne({"auth_pair.email":email},{"auth_pair.authcode":authcode});
+    const veri=await AuthCodeModel.findOne({"auth_pair.email":email,"auth_pair.authcode":authcode});
+    var veri_result="true";
     if (!veri){
-        console.log("Hello1");
-        return res.json({data: false});
+        console.log("wrong auth code!");
+        veri_result="false";
     }
-    db.createUser(nickname, password, email, school)
-        .then(
-            result => {
-                if (result) {
-                    res.status(200).send("Registered!");
-                }
-                else {
-                    res.status(403).send("Overlapped!");
-                }
-            },
-            err => { res.status(500).send(err.toString()) }
-        );
-    console.log("Hello2");
-    await db.deleteAuthCode(email);
-    return res.json({data: true});
+    else{
+        db.createUser(nickname, password, email, school);  
+        console.log("right auth code!");
+        await db.deleteAuthCode(email);
+    }
+    return res.json({veri_result: veri_result});
 });
 
 app.post('/find_user', jsonParser, (req, res) => {

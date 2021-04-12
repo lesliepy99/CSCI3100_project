@@ -96,13 +96,15 @@ class SignUpPage extends Component {
                     })
                 })
                 .then(res => {
-                    if(res.json()==true){
+                    /*if(res.json()==true){
                         var sign_up_area=document.getElementById("sign_up_area");
                         var success_message=document.getElementById("success_message");
                         sign_up_area.style="display: none";
                         success_message.style="display: block";
                     }
                     else(alert("Fail to verify, your auth code is wrong or expired!"));
+                    */
+                   console.log(res.json());
                 })
                 .then(data => alert(data))
                 .catch(err => console.log(err));
