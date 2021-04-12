@@ -156,7 +156,7 @@ class Mainpage extends React.Component {
         </ButtonGroup>
         </div>
 
-        <Container maxWidth="md">
+        <Container maxWidth="md" style={{ backgroundColor: '#e3f2fd' }}>
           {ShownPart}
         </Container>
       
