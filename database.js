@@ -78,11 +78,18 @@ var TransactionSchema = Schema({
     transaction_time: { type: Date }
 })
 
+var AuthCodeSchema =new Schema({
+    auth_pair: [{
+        emial: String,
+        authcode: String
+    }]
+});
 UserModel = mongoose.model('User', UserSchema);
 GoodModel = mongoose.model('Good', GoodSchema);
 ChatModel = mongoose.model('Chat', ChatSchema);
 PostModel = mongoose.model('Post', PostSchema);
 TransactionModel = mongoose.model('Transaction', TransactionSchema);
+AuthcodeModel = mongoose.model('Authcode', AuthCodeSchema);
 
 createUser = (name, password, email, school) => new Promise((resolve, reject) => {
     UserModel.findOne({ email: email }, (err, user) => {
