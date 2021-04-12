@@ -23,7 +23,8 @@ var UserSchema = Schema({
     email: { type: String, required: true, unique: true },
     school: { type: String, required: true },
     year: { type: Number },
-    ranki: { type: String },
+    rank: { type: String },
+    
     location: { type: String },
     chat_list: [{
         userId: { type: Schema.ObjectId },
@@ -109,9 +110,9 @@ createUser = (name, password, email, school) => new Promise((resolve, reject) =>
     });
 })
 
-findUser = (username) => new Promise((resolve, reject) => {
-    console.log(username);
-    UserModel.findOne({}, (err, user) => {
+findUser = (email) => new Promise((resolve, reject) => {
+    console.log(email);
+    UserModel.findOne({email:email}, (err, user) => {
         if (err) reject(err);
         else if (!user) resolve(undefined);
         else {
@@ -231,7 +232,7 @@ addAuthPair = (email, authcode) => new Promise((resolve, reject) => {
 
 deleteAuthCode = () => new Promise((resolve, reject) => {
 
-    AuthCodeModel.findOne({"auth_pair.email":email}, (err, post) => {
+    AuthCodeModel.deleteOne({"auth_pair.email":email}, (err, post) => {
         if (err) reject(err);
         else if (!post) resolve(undefined);
         else {

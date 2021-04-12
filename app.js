@@ -117,8 +117,9 @@ app.post('/register', jsonParser, async (req, res) => {
     return res.json({veri_result: true});
 });
 
-app.get('/find_user', (req, res) => {
-    db.findUser("leslie").then(
+app.post('/find_user', jsonParser, (req, res) => {
+    const email = req.body.email;
+    db.findUser(email).then(
         re => { res.send(JSON.stringify(re)) },
         err => { res.status(500).send(err.toString()) }
     );

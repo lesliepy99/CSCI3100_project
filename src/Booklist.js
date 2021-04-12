@@ -444,6 +444,16 @@ class Booklist extends Component{
     render(){
       
       var socket = io.connect();
+      socket.on('userChange', data => {
+        console.log(data);
+        console.log("Is that right?");
+        
+        this.props.dispatch({type:'TEST',data:data['fullDocument']})
+        // dispatch({type:'UPDATE'});
+        console.log("Update user")
+      
+      });
+
       socket.on('goodChange', data => {
           console.log(data);
           console.log("Is that right?");
@@ -452,7 +462,8 @@ class Booklist extends Component{
           // dispatch({type:'UPDATE'});
         
         });
-      console.log(this.props.goods);
+      console.log(this.props.user_info);
+  
       console.log("Lok at here");
         return(
            /*<Container>
@@ -477,7 +488,8 @@ class Booklist extends Component{
 }
 function mapStateToProps(state){
   return{
-    goods:state.goods
+    goods:state.goods,
+    user_info:state.user_info
   };
 }
 export default connect(mapStateToProps)(Booklist);
