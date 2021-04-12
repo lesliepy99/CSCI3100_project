@@ -85,7 +85,7 @@ class SignUpPage extends Component {
                 })
                 .then(res => {
                     if(res.json().veri_result){
-                        sign_up_area=document.getElementById("sign_up_area");
+                        var sign_up_area=document.getElementById("sign_up_area");
                         sign_up_area.style="display: none";
                         sign_up_area.style="display: block";
                     }
