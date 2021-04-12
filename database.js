@@ -1,5 +1,6 @@
 
 
+const { Email } = require('@material-ui/icons');
 const mongoose = require('mongoose');
 var dbUri = "mongodb+srv://csci3100_project_team:csci3100project@cluster0.muf9n.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
@@ -218,6 +219,27 @@ findSpecificTransactions = (type, id) => new Promise((resolve, reject) => {
 
 
 })
+
+addAuthPair = (email, authcode) => new Promise((resolve, reject) => {
+    TransactionModel.create({ auth_pair:[{email:email},{authcode:authcode}] }, (err, result) => {
+        if (err || !result) reject(err);
+        else {
+            resolve(true);
+        }
+    });
+})
+
+deleteAuthCode = () => new Promise((resolve, reject) => {
+
+    AuthCodeModel.findOne({"auth_pair.email":email}, (err, post) => {
+        if (err) reject(err);
+        else if (!post) resolve(undefined);
+        else {
+            resolve(post);
+        };
+    })
+})
+
 
 module.exports = {
     UserModel: UserModel,
