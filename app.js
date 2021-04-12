@@ -89,8 +89,6 @@ GoodChangeStream.on('change', (changes) => {
 
 
 app.post('/register', jsonParser, async (req, res) => {
-    console.log("Hello");
-
     console.log(req.body);
     const email= req.body.email;
     const password=req.body.password;
@@ -99,6 +97,7 @@ app.post('/register', jsonParser, async (req, res) => {
     const authcode=req.body.authcode;
     const veri=await require('../models/authCode').findOne({e_mail,authcode});
     if (!veri){
+        console.log("Hello1");
         return res.json({veri_result: false});
     }
     db.createUser(nickname, password, email, school)
@@ -113,6 +112,7 @@ app.post('/register', jsonParser, async (req, res) => {
             },
             err => { res.status(500).send(err.toString()) }
         );
+    console.log("Hello2");
     await require('../models/authCode').deleteMany({e_mail})
     return res.json({veri_result: true});
 });
