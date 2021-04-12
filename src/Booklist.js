@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 // import {Container,Col,Row} from 'react-bootstrap';
+
 import './App.css';
 import books from './books.json';
 
@@ -16,7 +17,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+//import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import {connect} from 'react-redux';
@@ -45,15 +46,15 @@ import LocalMallIcon from '@material-ui/icons/LocalMall';
 
 import Hidden from '@material-ui/core/Hidden';
 
+import { Link } from 'react-router-dom';
+
+
 const useStyles = makeStyles((theme) => ({
     icon: {
       marginRight: theme.spacing(2),
     },
-    heroContent: {
-      
+    heroContent: { 
       padding: theme.spacing(8, 0, 8),
-
-      
       color: theme.palette.common.white,
       backgroundImage: 'url(https://source.unsplash.com/random)',
       backgroundSize: 'cover',
@@ -191,6 +192,7 @@ const cartStyles = makeStyles((theme) => ({
     },
     cardMedia: {
       width: 100,
+      height: 150,
     },
 }));
 
@@ -253,6 +255,8 @@ const carts = [
         image: 'https://source.unsplash.com/featured/?girl'
     },
 ]
+
+var a = 7;
 
 function Album() {
     const classes = useStyles();
@@ -320,12 +324,15 @@ function Album() {
 
           <Divider />
           <Box textAlign='center' paddingTop={2}>
+            
+          <Link to='./cart'>
           <Button
             variant="contained"
             color="secondary"
             endIcon={<LocalMallIcon />}>
             CHECKOUT
           </Button>
+          </Link>  
           </Box>
         </div>
       );
@@ -375,7 +382,7 @@ function Album() {
                 
             </Toolbar>
             </Grid>
-
+                
             {/* Image background */}
             <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${'https://source.unsplash.com/random'})` }}>
             {<img style={{ display: 'none' }} src={'https://source.unsplash.com/random'} alt={'main image description'} />}
@@ -401,7 +408,7 @@ function Album() {
             </div>
                 <Grid container spacing={4}>
                     {products.map((post) => (
-                    <Grid item key={post} xs={12} sm={6} md={4}>
+                    <Grid item key={post} xs={12} sm={4} md={4}>
                         <Card className={classes.card}>
                         <CardActionArea>
                         <CardMedia
@@ -420,9 +427,11 @@ function Album() {
                             </Typography>
                         </CardContent>
                         <CardActions >
+                        <Link to={{pathname: `/product/${a}`, state: {name: 'Book-Forest', price: "$20"}}} className="nav-link">
                             <Button variant="contained" size="small" color="secondary" disableElevation>
                                 detail
                             </Button>
+                          </Link>
                             <IconButton color="secondary" aria-label="add to shopping cart">
                                 <AddShoppingCartIcon />
                             </IconButton>
@@ -432,6 +441,7 @@ function Album() {
                     ))}
                 </Grid>
             </Container>
+                      
         </main>
     )
 }
@@ -466,21 +476,6 @@ class Booklist extends Component{
   
       console.log("Lok at here");
         return(
-           /*<Container>
-               <Row>
-                   <Col>
-                       <p>书单</p>
-                       {
-                        books.map((item)=>{
-                            return(
-                                <p>{item.name} {item.author}</p>
-                            );
-                        })
-                       }
-                   </Col>
-               </Row>
-           </Container>*/
-           
             <Album/>
         );
             

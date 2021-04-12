@@ -7,6 +7,7 @@ import Comment from './Comment';
 import Mainpage from './Mainpage';
 import './App.css';
 import Footer from './Footer';
+import Product from './Product';
 
 class Home extends Component{
     constructor(props){
@@ -31,6 +32,8 @@ class Home extends Component{
                                 <Route path='/home/mainpage'>
                                     <Mainpage name="Jack" />
                                 </Route>
+                                
+                                <Route path='/product/:id' component={Product}/>
 
                             </Switch>
                         </Router>
