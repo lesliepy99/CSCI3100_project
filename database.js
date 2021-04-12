@@ -82,7 +82,7 @@ var TransactionSchema = Schema({
 
 var AuthCodeSchema =new Schema({
     auth_pair: [{
-        emial: String,
+        email: String,
         authcode: String
     }]
 });
@@ -91,7 +91,7 @@ GoodModel = mongoose.model('Good', GoodSchema);
 ChatModel = mongoose.model('Chat', ChatSchema);
 PostModel = mongoose.model('Post', PostSchema);
 TransactionModel = mongoose.model('Transaction', TransactionSchema);
-AuthcodeModel = mongoose.model('Authcode', AuthCodeSchema);
+AuthCodeModel = mongoose.model('Authcode', AuthCodeSchema);
 
 createUser = (name, password, email, school) => new Promise((resolve, reject) => {
     UserModel.findOne({ email: email }, (err, user) => {
@@ -222,7 +222,7 @@ findSpecificTransactions = (type, id) => new Promise((resolve, reject) => {
 })
 
 addAuthPair = (email, authcode) => new Promise((resolve, reject) => {
-    TransactionModel.create({ auth_pair:[{email:email},{authcode:authcode}] }, (err, result) => {
+    AuthCodeModel.create({ auth_pair:[{email:email},{authcode:authcode}] }, (err, result) => {
         if (err || !result) reject(err);
         else {
             resolve(true);
@@ -230,9 +230,9 @@ addAuthPair = (email, authcode) => new Promise((resolve, reject) => {
     });
 })
 
-deleteAuthCode = () => new Promise((resolve, reject) => {
+deleteAuthCode = (email) => new Promise((resolve, reject) => {
 
-    AuthCodeModel.deleteOne({"auth_pair.email":email}, (err, post) => {
+    AuthCodeModel.deleteMany({"auth_pair.email":email}, (err, post) => {
         if (err) reject(err);
         else if (!post) resolve(undefined);
         else {
@@ -248,6 +248,7 @@ module.exports = {
     ChatModel: ChatModel,
     PostModel: PostModel,
     TransactionModel: TransactionModel,
+    AuthCodeModel: AuthCodeModel,
     createUser: createUser,
     findUser: findUser,
     createGood: createGood,
@@ -257,5 +258,7 @@ module.exports = {
     createPost: createPost,
     findAllPosts: findAllPosts,
     createTransaction: createTransaction,
-    findSpecificTransactions: findSpecificTransactions
+    findSpecificTransactions: findSpecificTransactions,
+    addAuthPair: addAuthPair,
+    deleteAuthCode: deleteAuthCode
 };

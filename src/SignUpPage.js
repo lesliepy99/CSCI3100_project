@@ -4,14 +4,24 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './App.css';
 import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import { PausePresentationTwoTone } from '@material-ui/icons';
 
 class SignUpPage extends Component {
     constructor(props) {
         super(props);
         this.state={verification: false};
+        this.handleClick = this.handleClick.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleClick(event){
+        event.preventDefault();
+        this.setState({verification: false});
+        var input_area=document.getElementById("input_area");
+        var verify_area=document.getElementById("verify_area");
+        var refresh_button=document.getElementById("refresh_button");
+        input_area.style="display: block";
+        verify_area.style="display: none";
+        refresh_button.style="display: none";
     }
 
     handleSubmit(event) {
@@ -62,9 +72,11 @@ class SignUpPage extends Component {
                 var input_area=document.getElementById("input_area");
                 var verify_area=document.getElementById("verify_area");
                 var prompt=document.getElementById("prompt");
+                var refresh_button=document.getElementById("refresh_button");
                 input_area.style="display: none";
-                prompt.innerHTML=`We sent an auth code to your email ${email}, please complete the verification within 5 minutes. If you didn't receive the auth code or your auth code is expired, please refresh the Web page and fill the registration form again.`;
+                prompt.innerHTML=`We sent an auth code to your email ${email}, please complete the verification within 5 minutes. If you didn't receive the auth code or your auth code is expired, please return to the last step and fill the registration form again.`;
                 verify_area.style="display: block";
+                refresh_button.style="display: block";
             }
         }
         if(this.state.verification){
@@ -84,14 +96,15 @@ class SignUpPage extends Component {
                     })
                 })
                 .then(res => {
-                    if(res.json().veri_result){
+                    if(res.json()==true){
                         var sign_up_area=document.getElementById("sign_up_area");
+                        var success_message=document.getElementById("success_message");
                         sign_up_area.style="display: none";
-                        sign_up_area.style="display: block";
+                        success_message.style="display: block";
                     }
                     else(alert("Fail to verify, your auth code is wrong or expired!"));
                 })
-                .then(data => console.log(data))
+                .then(data => alert(data))
                 .catch(err => console.log(err));
         }
     }
@@ -134,9 +147,13 @@ class SignUpPage extends Component {
                         <Button variant="contained" type="submit" >Create Account</Button>
                     </div>
                 </form>
+                <div align='center'>
+                    <br/>
+                    <Button id="refresh_button" onClick={this.handleClick} variant="contained" style={{display:"none"}}>Go Back to the Last Step and Resend AuthCode</Button>
+                </div>
                 <br />
               </div>
-              <div style={{ fontSize: 30, display:'none' }} align='center' >You successfully created your account!</div>
+              <div id="success_message" style={{ fontSize: 30, display:'none' }} align='center' >You successfully created your account!</div>
             </Container>
         );
     }
