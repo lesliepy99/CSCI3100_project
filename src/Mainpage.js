@@ -11,7 +11,12 @@ import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import IconButton from '@material-ui/core/IconButton';
+import  getConfig from  './utils/handle_image_upload'
+import ReactS3 from 'react-s3';
+import S3 from 'react-aws-s3';
 
+
+const ReactS3Client = new S3(getConfig("haha"));
 class Mainpage extends React.Component {
   constructor(props) {
     super(props);
@@ -45,6 +50,7 @@ class Mainpage extends React.Component {
       return { mainPageChoice: 4 };
     });
   }
+  
 
   render() {
     const mainPageChoice = this.state.mainPageChoice;
@@ -89,12 +95,14 @@ class UploadGood extends React.Component {
       locationOfGood: "",
       shortDescription: "",
       expectedPrice: "",
-      confirmTick: false
+      confirmTick: false,
+      selectedFile: null
 
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    
   }
 
   handleInputChange(event) {
@@ -111,8 +119,40 @@ class UploadGood extends React.Component {
     alert('Your ' + this.state.nameOfGood + 'has been uploaded to platform ');
     event.preventDefault();
   }
+  
+  onFileChange = event => { 
+    // Update the state 
+    this.setState({ selectedFile: event.target.files[0] }); 
+  }; 
 
+  onFileUpload = () => { 
+    console.log("Before call");
+    ReactS3Client
+    .uploadFile(this.state.selectedFile, "test.png")
+    .then(data => console.log(data))
+    .catch(err => console.error(err))
+
+    // Create an object of formData 
+    console.log("Call!")
+    const formData = new FormData(); 
+   
+    // Update the formData object 
+    formData.append( 
+      "myFile", 
+      this.state.selectedFile, 
+      this.state.selectedFile.name 
+    ); 
+   
+    // Details of the uploaded file 
+    
+    console.log(this.state.selectedFile); 
+   
+    
+  }; 
+
+  
   render() {
+
     return (
       <div>
         <h2> Please add description of your good: </h2>
@@ -227,7 +267,10 @@ class UploadGood extends React.Component {
           <br />
           <input type="submit" value="Upload" />
           <br /><br /><br /><br />
-
+          <input type="file" onChange={this.onFileChange}/> 
+                <button onClick={this.onFileUpload}> 
+                  Upload! 
+                </button> 
 
         </form>
       </div>

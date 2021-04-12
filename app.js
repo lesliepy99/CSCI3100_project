@@ -83,6 +83,7 @@ const UserChangeStream = UserModel.watch();
 const GoodChangeStream = GoodModel.watch();
 
 UserChangeStream.on('change', (changes) => {
+    
             io.sockets.compress(true).emit('userChange',changes);
             console.log("Something changed");
         });
@@ -93,7 +94,7 @@ GoodChangeStream.on('change', (changes) => {
 
 
 
-
+        
 app.post('/register', (req, res) => {
     console.log("Hello");
 

@@ -12,6 +12,7 @@ console.log("Very good");
 
 var user_info = [];
 var goods = [];
+var posts =[];
 fetch('http://localhost:3000/find_user')
   .then(async response => {
     const data = await response.json();
