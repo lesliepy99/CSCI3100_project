@@ -49,24 +49,46 @@ const dataStore = { user_info: user_info, goods: goods, my_id: my_id}
 const reducer = (state = dataStore, action) =>  {
   
 if (action.type=='TEST'){
-   
-    console.log(action.data);
     
+  if(action.data['operationType']=="replace"){
+    console.log(action.data);
+   
     var index = user_info.findIndex((element) => {
-      return element['email'] === action.data['email'];
+      return element['email'] === action.data['fullDocument']['email'];
     })
     console.log(index)
     console.log(user_info)
     console.log("lol")
-    user_info[0] = action.data
-    return {user_info};
+    user_info[index] = action.data['fullDocument']
+  }
+
+     else if (action.data['operationType']=="insert"){
+    user_info.push(action.data['fullDocument'])
+  }
+    
+    return {user_info:goods};
   }
   else if(action.type=="signin"){
     my_id = action.data['id'];
     return my_id;
   }
   else if(action.type=="update_good"){
-
+    if(action.data['operationType']=="replace"){
+      console.log(action.data);
+     
+      var index = goods.findIndex((element) => {
+        return element['_id'] === action.data['fullDocument']['_id'];
+      })
+      console.log(index)
+      console.log(goods)
+      console.log("lol goods")
+      goods[index] = action.data['fullDocument']
+    }  
+    else if (action.data['operationType']=="insert"){
+      goods.push(action.data['fullDocument'])
+    }
+    
+    return {user_info,goods};
   }
    else{
     console.log("Are we else?"); 

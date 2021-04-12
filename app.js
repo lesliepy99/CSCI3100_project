@@ -77,6 +77,7 @@ const GoodChangeStream = GoodModel.watch();
 
 UserChangeStream.on('change', (changes) => {
     io.sockets.compress(true).emit('userChange', changes);
+    console.log(changes)
     console.log("Something changed");
 });
 GoodChangeStream.on('change', (changes) => {

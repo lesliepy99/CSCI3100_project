@@ -468,12 +468,12 @@ class Booklist extends Component{
           console.log(data);
           console.log("Is that right?");
           
-          this.props.dispatch({type:'update_good',data:data['fullDocument']})
+          this.props.dispatch({type:'update_good',data:data})
           // dispatch({type:'UPDATE'});
         
         });
       console.log(this.props.user_info);
-  
+      console.log(this.props.goods);
       console.log("Lok at here");
         return(
             <Album/>
