@@ -26,7 +26,7 @@ import { io } from "socket.io-client";
 import PostList from './post_components/PostList';
 import PostDetail from './post_components/PostDetail';
 
-import CommentContent from './post_components/CommentContent'
+
   
 
 const blogs = [
@@ -85,31 +85,10 @@ class Main extends React.Component {
 
 {/*The language used in the textEditor is still Chinese */ }
 
-
-class NewPost extends React.Component {
-
+class Comment extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { content: "" };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  handleChange(event) {
-    this.setState({ content: event.target.value });
-  }
-
-  handleSubmit(event) {
-    // 1. add the post to postList
-    // 2. navigate back to postList page
-    alert("Text was submitted: " + this.state.content);
-    event.preventDefault();
-  }
-
-
-
-
   render() {
     var socket = io.connect();
       socket.on('postChange', data => {
@@ -124,54 +103,21 @@ class NewPost extends React.Component {
 
       console.log(this.props.posts);
 
-
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <h2>Write down what you want here</h2>
-        <TextField
-          id="standard-multiline-static"
-          label="Please type here"
-          variant="outlined"
-          multiline
-          rows={4}
-          value={this.state.value}
-          onChange={this.handleChange} />
-        <br />
-        <input type="submit" value="Submit" />
-      </form>
-    );
-  }
-}
-
-
-class Comment extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClickNewPost = this.handleClickNewPost.bind(this);
-    this.state = { commentContent: 1 };
-  }
-  handleClickNewPost() {
-    this.setState(() => {
-      return { commentContent: 2 };
-    });
-  }
-
-  render() {
-    let displayContent;
-    switch (this.state.commentContent) {
-      case 1:
-        displayContent = <Main />;
-        break;
-      case 2:
-        displayContent = <NewPost />;
-        break;
-    }
     return (
       <div align="center">
-        <Button startIcon={<CreateIcon />} size="large" color="primary" onClick={this.handleClickNewPost}>New Post</Button>
-        {displayContent}
+        {/*<Button startIcon={<CreateIcon />} size="large" color="primary" >New Post</Button>*/}
+        <Link
+           to={{
+              pathname: '/home/comment/NewPost',
+              }}
+        >
+           <Button color="primary" >
+              New Post
+           </Button>
+        </Link>
+        <Main/>
         {/*实验性质 */}
-        <CommentContent/>
+        
       </div>
 
     );
