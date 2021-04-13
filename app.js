@@ -167,7 +167,23 @@ app.post('/insertShoppingList',jsonParser, (req, res) => {
 
 app.post('/add_good',jsonParser, (req, res) => {
     console.log(req.body);
-    db.createGood(req.body.name, req.body.userId, req.body.tags, req.body.number_of_views, req.body.number_of_likes, req.body.good_image, req.body.description, req.body.estimated_price)
+    
+    const name = req.body.name;
+    const userId = req.body.userId;
+    const tags = req.body.tags;
+    const number_of_views = req.body.number_of_views;
+    const number_of_likes = req.body.number_of_likes;
+    const description = req.body.description;
+    const estimated_price = req.body.estimated_price;
+
+    db.createGood(
+        name, 
+        userId, 
+        tags, 
+        number_of_views, 
+        number_of_likes, 
+        description, 
+        estimated_price)
         .then(
             result => {
                 if (result) {
