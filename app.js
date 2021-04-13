@@ -35,7 +35,7 @@ const randomFns = () => {
 // send email
 app.post("/send_email", jsonParser, async (req, res) => {
     const EMAIL = req.body.email;
-    var email_exist=await db.findUser(EMAIL);
+    var email_exist=await UserModel.findOne({email: EMAIL});
     var isSend=true;
     if(email_exist){
         console.log("the email has signed up before!");
@@ -143,8 +143,8 @@ app.post('/login', jsonParser, async (req, res) => {
 });
 
 app.post('/find_user', jsonParser, (req, res) => {
-    const email = req.body.email;
-    db.findUser(email).then(
+    const uid = req.body.uid;
+    db.findUser(uid).then(
         re => { res.send(JSON.stringify(re)) },
         err => { res.status(500).send(err.toString()) }
     );
