@@ -35,6 +35,8 @@ class LoginPage extends React.Component {
         const veri_ok=resContent.veri_result;
         if(veri_ok){
           console.log("Successfully sign in!");
+          this.props.dispatch({type:'signin',data:"lalala"})
+
         }
         else alert("Wrong email or password!");
       })();

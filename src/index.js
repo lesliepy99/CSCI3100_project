@@ -81,7 +81,7 @@ if (action.type=='update_user'){
   return  {user_info,goods,my_id,posts};
   }
   else if(action.type=="signin"){
-    my_id = action.data['id'];
+    my_id = action.data;
     return  {user_info,goods,my_id,posts};
   }
   else if(action.type=="update_good"){
