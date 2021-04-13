@@ -214,7 +214,7 @@ class UploadGood extends Component {
       },{
         "location":this.state.locationOfGood
       }];
-    var userId = this.state.my_id;
+    var userId = this.props.my_id;
     var number_of_views = 0;
     var number_of_likes = 0;
     //alert('Your tags are ' + tags );
