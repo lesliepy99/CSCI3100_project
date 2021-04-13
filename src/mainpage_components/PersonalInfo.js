@@ -80,15 +80,20 @@ class PersonalInfo extends React.Component {
     render() {
         const data = this.props.user_info;
         var thisUser;
+
         for(var i=0;i<data.length;i++){
-            console.log(data[i]._id);
-            if ( "data[i]._id" == this.props.my_id ){
+            var tempID = data[i]._id;
+            console.log(tempID);
+            if ( (tempID)==(this.props.my_id).toString() ){
+                console.log("Find identical user_id: "+data[i]._id);
                 thisUser = data[i];
+                break;
             }
             else{
                 thisUser = null
             }
           }
+          
           console.log(thisUser);
       return (
         <div>
@@ -98,9 +103,9 @@ class PersonalInfo extends React.Component {
             {/* email:
                 name: 
                 school:  */}
-            <li>Name:        thisUser.name</li>
-            <li>email:        thisUser.email</li>
-            <li>University:        thisUser.school</li>
+            <li>Name:        {thisUser.name}</li>
+            <li>email:        {thisUser.email}</li>
+            <li>University:        {thisUser.school}</li>
             <li>Location:        Hong Kong</li>
             <li>Education Level:        University</li>
           </ul>
