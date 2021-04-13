@@ -14,33 +14,36 @@ var goods = [];
 var posts =[];
 var my_id = null;
 
-await fetch('http://localhost:3000/find_all_users',)
-.then(async res => {
-  
-  const data = await res.json();
-  for(var i=0;i<data.length;i++){
-    user_info.push(data[i]);
-  }
- 
-})
-.then(data => console.log(data))
-.catch(err => console.log(err));
-
-
-await fetch('http://localhost:3000/find_all_goods')
-  .then(async response => {
-    const data = await response.json();
+(async () => {
+  await fetch('http://localhost:3000/find_all_users',)
+  .then(async res => {
+    
+    const data = await res.json();
     for(var i=0;i<data.length;i++){
-      goods.push(data[i]);
+      user_info.push(data[i]);
     }
-
+  
   })
-  .catch(error => {
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+})();
+
+(async () => {
+  await fetch('http://localhost:3000/find_all_goods')
+    .then(async response => {
+      const data = await response.json();
+      for (var i = 0; i < data.length; i++) {
+        goods.push(data[i]);
+      }
+
+    })
+    .catch(error => {
 
     console.error('There was an error!', error);
-  });
+    });
+})();
 
-
+(async () => {
   await fetch('http://localhost:3000/find_all_posts')
   .then(async response => {
     const data = await response.json();
@@ -53,6 +56,7 @@ await fetch('http://localhost:3000/find_all_goods')
 
     console.error('There was an error!', error);
   });
+})();
 const dataStore = { user_info: user_info, goods: goods, my_id: my_id,posts:posts}
 const reducer = (state = dataStore, action) =>  {
   

@@ -35,30 +35,19 @@ class SignUpPage extends Component {
         if(!this.state.verification){
             console.log("before the verification,",email,password,nickname,school)
             var info_valid = true;
-            if (school == "") {
-                alert("you must choose a school!");
+            if(school=="CUHK"){
+                const regEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+\.?)+\.cuhk\.edu\.hk$/;
+                if (!regEmail.test(email)) {
+                    alert('Invalid email format! A CUHK email address should be like "xxx@xxx.cuhk.edu.hk"!');                        info_valid = false;
+                }
+            }
+            if (password.length < 6 ) {
+                alert("The length of password should be at least 6!");
                 info_valid = false;
             }
-            else{
-                if(school=="CUHK"){
-                    const regEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+\.?)+\.cuhk\.edu\.hk$/;
-                    if (!regEmail.test(email)) {
-                        alert('Invalid email format! A CUHK email address should be like "xxx@xxx.cuhk.edu.hk"!');
-                        info_valid = false;
-                    }
-                }
-                if (password.length < 6 ) {
-                    alert("The length of password should be at least 6!");
-                    info_valid = false;
-                }
-                if (password != password_confirm) {
-                    alert("Your input passwords are not the same!");
-                    info_valid = false;
-                }
-                if(nickname==""){
-                    alert("Please take a nickname for yourself!");
-                    info_valid = false;
-                }
+            if (password != password_confirm) {
+                alert("Your input passwords are not the same!");
+                info_valid = false;
             }
             if (info_valid) {
                 (async ()=> {
@@ -130,19 +119,19 @@ class SignUpPage extends Component {
                 <br />
                 <form id="regist_form" onSubmit={this.handleSubmit} align='center'>
                     <div id="input_area">
-                        <TextField label="E-mail" id="email" name="email" variant="outlined" style={{ backgroundColor: 'white' }} />
+                        <TextField required label="E-mail" id="email" name="email" variant="outlined" style={{ backgroundColor: 'white' }} />
                         <br />
                         <br />
-                        <TextField type="password" label="Password" id="password" name="password" variant="outlined" style={{ backgroundColor: 'white' }} />
+                        <TextField required type="password" label="Password" id="password" name="password" variant="outlined" style={{ backgroundColor: 'white' }} />
                         <br />
                         <br />
-                        <TextField type="password" label="Password Confirm" id="password-confirm" name="password_confirm" variant="outlined" style={{ backgroundColor: 'white' }} />
+                        <TextField required type="password" label="Password Confirm" id="password-confirm" name="password_confirm" variant="outlined" style={{ backgroundColor: 'white' }} />
                         <br />
                         <br />
-                        <TextField label="nickname" id="nickname" name="nickname" variant="outlined" style={{ backgroundColor: 'white' }} />
+                        <TextField required label="nickname" id="nickname" name="nickname" variant="outlined" style={{ backgroundColor: 'white' }} />
                         <br/>
                         <br />
-                        <TextField fullWidth select variant={'outlined'} id="school" name='school' label='Choose your school:' style={{ backgroundColor: 'white' }}>
+                        <TextField required fullWidth select variant={'outlined'} id="school" name='school' label='Choose your school:' style={{ backgroundColor: 'white' }}>
                             <MenuItem value=""></MenuItem>
                             <MenuItem value="CUHK">The Chinese University of Hong Kong</MenuItem>
                         </TextField>
