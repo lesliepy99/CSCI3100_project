@@ -166,14 +166,14 @@ app.post('/add_good',jsonParser, (req, res) => {
 })
 
 
-app.get('find_all_goods', (req, res) => {
+app.get('/find_all_goods', (req, res) => {
     db.findAllGoods().then(
         re => { res.send(JSON.stringify(re)) },
         err => { res.status(500).send(err.toString()) }
     );
 });
 
-app.get('find_all_posts', (req, res) => {
+app.get('/find_all_posts', (req, res) => {
     db.findAllPosts().then(
         re => { res.send(JSON.stringify(re)) },
         err => { res.status(500).send(err.toString()) }
