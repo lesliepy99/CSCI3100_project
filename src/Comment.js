@@ -18,10 +18,13 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import CreateIcon from '@material-ui/icons/Create';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import TextField from '@material-ui/core/TextField';
-import {Route, NavLink, Switch, Redirect, Link} from 'react-router-dom';
+import { NavLink, Redirect, Link} from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 import PostList from './post_components/PostList';
-import PostDetail from './post_components/PostDetail'
+import PostDetail from './post_components/PostDetail';
+
+import CommentContent from './post_components/CommentContent'
   
 
 const blogs = [
@@ -172,6 +175,8 @@ class Comment extends React.Component {
       <div align="center">
         <Button startIcon={<CreateIcon />} size="large" color="primary" onClick={this.handleClickNewPost}>New Post</Button>
         {displayContent}
+        {/*实验性质 */}
+        <CommentContent/>
       </div>
 
     );
