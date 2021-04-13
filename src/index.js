@@ -14,9 +14,8 @@ var goods = [];
 var posts =[];
 var my_id = null;
 
-fetch('http://localhost:3000/find_all_users',)
+await fetch('http://localhost:3000/find_all_users',)
 .then(async res => {
-
   
   const data = await res.json();
   for(var i=0;i<data.length;i++){
@@ -28,17 +27,33 @@ fetch('http://localhost:3000/find_all_users',)
 .catch(err => console.log(err));
 
 
-fetch('http://localhost:3000/find_all_goods')
+await fetch('http://localhost:3000/find_all_goods')
   .then(async response => {
     const data = await response.json();
-    goods.push(data);
+    for(var i=0;i<data.length;i++){
+      goods.push(data[i]);
+    }
 
   })
   .catch(error => {
 
     console.error('There was an error!', error);
   });
-const dataStore = { user_info: user_info, goods: goods, my_id: my_id}
+
+
+  await fetch('http://localhost:3000/find_all_posts')
+  .then(async response => {
+    const data = await response.json();
+    for(var i=0;i<data.length;i++){
+      posts.push(data[i]);
+    }
+
+  })
+  .catch(error => {
+
+    console.error('There was an error!', error);
+  });
+const dataStore = { user_info: user_info, goods: goods, my_id: my_id,posts:posts}
 const reducer = (state = dataStore, action) =>  {
   
 if (action.type=='update_user'){
@@ -59,11 +74,11 @@ if (action.type=='update_user'){
     user_info.push(action.data['fullDocument'])
   }
     
-  return  {user_info,goods,my_id};
+  return  {user_info,goods,my_id,posts};
   }
   else if(action.type=="signin"){
     my_id = action.data['id'];
-    return  {user_info,goods,my_id};
+    return  {user_info,goods,my_id,posts};
   }
   else if(action.type=="update_good"){
     if(action.data['operationType']=="replace"){
@@ -81,11 +96,28 @@ if (action.type=='update_user'){
       goods.push(action.data['fullDocument'])
     }
     
-    return  {user_info,goods,my_id};
+    return  {user_info,goods,my_id,posts};
   }
-   else{
-    console.log("Are we else?"); 
-    return state;}
+
+  else if(action.type=="update_post"){
+    if(action.data['operationType']=="insert_comment"){
+      console.log(action.data);
+     
+      var index = goods.findIndex((element) => {
+        return element['_id'] === action.data['fullDocument']['_id'];
+      })
+      console.log(index)
+      console.log(posts)
+      console.log("lol goods")
+      goods[index] = action.data['fullDocument']
+    }  
+    else if (action.data['operationType']=="add_post"){
+      goods.push(action.data['fullDocument'])
+    }
+    
+    return  {user_info,goods,my_id,posts};
+  }
+   
   
 }
 
