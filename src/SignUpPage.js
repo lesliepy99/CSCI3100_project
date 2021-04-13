@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './App.css';
 import MenuItem from '@material-ui/core/MenuItem';
+import { Link } from 'react-router-dom';
 
 class SignUpPage extends Component {
     constructor(props) {
@@ -56,33 +57,40 @@ class SignUpPage extends Component {
                 info_valid = false;
             }
             if (info_valid) {
-                fetch('http://localhost:3000/send_email', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        email: email,
-                    })
-                })
-                .then(res => res.json())
-                .then(data => console.log(data))
-                .catch(err => console.log(err));
-                this.setState({verification: true});
-                var input_area=document.getElementById("input_area");
-                var verify_area=document.getElementById("verify_area");
-                var prompt=document.getElementById("prompt");
-                var refresh_button=document.getElementById("refresh_button");
-                input_area.style="display: none";
-                prompt.innerHTML=`We sent an auth code to your email ${email}, please complete the verification within 5 minutes. If you didn't receive the auth code or your auth code is expired, please return to the last step and fill the registration form again.`;
-                verify_area.style="display: block";
-                refresh_button.style="display: block";
+                (async ()=> {
+                    const response= await fetch('http://localhost:3000/send_email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                        })
+                    });
+                    const resContent=await response.json();
+                    const isSend=resContent.isSend;
+                    if(isSend){
+                        this.setState({verification: true});
+                        var input_area=document.getElementById("input_area");
+                        var verify_area=document.getElementById("verify_area");
+                        var prompt=document.getElementById("prompt");
+                        var refresh_button=document.getElementById("refresh_button");
+                        input_area.style="display: none";
+                        prompt.innerHTML=`We sent an auth code to your email ${email}, please complete the verification within 5 minutes. If you didn't receive the auth code or your auth code is expired, please return to the last step and fill the registration form again.`;
+                        verify_area.style="display: block";
+                        refresh_button.style="display: block";
+                    }
+                    else{
+                        alert("This email has signed up before!");
+                    }
+                })();
             }
         }
         if(this.state.verification){
             var authcode=event.target.elements.authcode.value;
             console.log("when verification,",email,password,nickname,school,authcode);
-            fetch('http://localhost:3000/register', {
+            (async () => {
+                const response= await fetch('http://localhost:3000/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -94,27 +102,24 @@ class SignUpPage extends Component {
                         school: school,
                         authcode: authcode
                     })
-                })
-                .then(res => {
-                    /*if(res.json()==true){
-                        var sign_up_area=document.getElementById("sign_up_area");
-                        var success_message=document.getElementById("success_message");
-                        sign_up_area.style="display: none";
-                        success_message.style="display: block";
-                    }
-                    else(alert("Fail to verify, your auth code is wrong or expired!"));
-                    */
-                   console.log(res.json());
-                })
-                .then(data => alert(data))
-                .catch(err => console.log(err));
+                });
+                const resContent=await response.json();
+                const veri_ok=resContent.veri_result;
+                if(veri_ok){
+                    var sign_up_area=document.getElementById("sign_up_area");
+                    var success_message=document.getElementById("success_message");
+                    sign_up_area.style="display: none";
+                    success_message.style="display: block";
+                }
+                else alert("Fail to verify, your auth code is wrong or expired!");
+            })();
         }
     }
 
     render() {
         return (
             <Container maxWidth={'sm'} style={{ backgroundColor: '#e3f2fd' }}>
-              <div id="sign_up_area">
+              <div id="sign_up_area" style={{display: "block"}}>
                 <div style={{ fontSize: 30 }} align='center'>
                     Create Your Account
                 </div>
@@ -155,7 +160,14 @@ class SignUpPage extends Component {
                 </div>
                 <br />
               </div>
-              <div id="success_message" style={{ fontSize: 30, display:'none' }} align='center' >You successfully created your account!</div>
+              <div id="success_message" style={{ fontSize: 30, display:'none' }} align='center' >
+                  You successfully created your account!<br/><br/>
+                  <Link to="/">
+                      <Button variant="contained">Go Back to the Login Page</Button>
+                  </Link>
+                  <br/>
+                  <br/>
+              </div>
             </Container>
         );
     }

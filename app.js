@@ -35,30 +35,37 @@ const randomFns = () => {
 // send email
 app.post("/send_email", jsonParser, async (req, res) => {
     const EMAIL = req.body.email;
-
-    const code = randomFns();
-    transport.sendMail({
-        from: '"UTransform Service" <2911528281@qq.com>',
-        to: EMAIL,
-        subject: 'Email verification',
-        html: `
-            <p>Hello!</p>
-            <p>You are registering as a member of UTransorm!</p>
-            <p>Your Auth Code：<strong style="color: #ff4e2a;">${code}</strong></p>
-            <p>***The Auth Code is valid within 5 minutes***</p>`
-        },
-        function (error, data) {
-            assert(!error, 500, "[ERROR] fail to send Auth Code!")
-            transport.close();
-        }
-    );
-    const e_mail = EMAIL;
-    await db.deleteAuthCode(e_mail);
-    await db.addAuthPair( e_mail, code );
-    setTimeout(async () => {
-        await db.deleteAuthCode(e_mail)
-    }, 1000 * 60 * 5);
-
+    var email_exist=await db.findUser(EMAIL);
+    var isSend=true;
+    if(email_exist){
+        console.log("the email has signed up before!");
+        isSend=false;
+    }
+    else{
+        const code = randomFns();
+        transport.sendMail({
+            from: '"UTransform Service" <2911528281@qq.com>',
+            to: EMAIL,
+            subject: 'Email verification',
+            html: `
+                <p>Hello!</p>
+                <p>You are registering as a member of UTransorm!</p>
+                <p>Your Auth Code：<strong style="color: #ff4e2a;">${code}</strong></p>
+                <p>***The Auth Code is valid within 5 minutes***</p>`
+            },
+            function (error, data) {
+                assert(!error, 500, "[ERROR] fail to send Auth Code!")
+                transport.close();
+            }
+        );
+        const e_mail = EMAIL;
+        await db.deleteAuthCode(e_mail);
+        await db.addAuthPair( e_mail, code );
+        setTimeout(async () => {
+            await db.deleteAuthCode(e_mail)
+        }, 1000 * 60 * 5);
+    }
+    return res.json({isSend: isSend});
 }
 );
 
@@ -96,10 +103,10 @@ app.post('/register', jsonParser, async (req, res) => {
     const school=req.body.school;
     const authcode=req.body.authcode;
     const veri=await AuthCodeModel.findOne({"auth_pair.email":email,"auth_pair.authcode":authcode});
-    var veri_result="true";
+    var veri_result=true;
     if (!veri){
         console.log("wrong auth code!");
-        veri_result="false";
+        veri_result=false;
     }
     else{
         db.createUser(nickname, password, email, school);  
