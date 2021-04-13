@@ -22,7 +22,6 @@ var UserSchema = Schema({
     password: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     school: { type: String, required: true },
-    year: { type: Number },
     rank: { type: String },
     
     location: { type: String },
@@ -47,9 +46,7 @@ var GoodSchema = Schema({
     }],
     number_of_views: { type: Number, default: 0 },
     number_of_likes: { type: Number, default: 0 },
-    good_image: [{
-        imageUrl: { type: String }
-    }],
+   
     description: { type: String },
     estimated_price: { type: Number }
 
@@ -96,7 +93,7 @@ PostModel = mongoose.model('Post', PostSchema);
 TransactionModel = mongoose.model('Transaction', TransactionSchema);
 AuthCodeModel = mongoose.model('Authcode', AuthCodeSchema);
 
-createUser = (name, password, email, school) => new Promise((resolve, reject) => {
+createUser = (name, password, email, school,year) => new Promise((resolve, reject) => {
     UserModel.findOne({ email: email }, (err, user) => {
         if (err) reject(err);
         else if (!user) {
@@ -149,11 +146,11 @@ insertShoppingList = (user_id, good_id) => new Promise((resolve, reject) =>{
     });
 
 
-createGood = (name, userId, tags, number_of_views, number_of_likes, good_image, description, estimated_price) => new Promise((resolve, reject) => {
+createGood = (name, userId, tags, number_of_views, number_of_likes, description, estimated_price) => new Promise((resolve, reject) => {
    
     GoodModel.create({
         name: name, userId: userId, tags: tags, number_of_views: number_of_views,
-        number_of_likes: number_of_likes, good_image: good_image, description: description, estimated_price: estimated_price
+        number_of_likes: number_of_likes, description: description, estimated_price: estimated_price
     }, (err, result) => {
         if (err || !result) reject(err);
         else {
