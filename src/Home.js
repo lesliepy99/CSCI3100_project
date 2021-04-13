@@ -18,29 +18,34 @@ class Home extends Component{
         super(props);
     }
 
+  
+
     componentDidMount() {
-        fetch('http://localhost:3000/find_specific_transaction', {
+        
+        fetch("http://localhost:3000/find_specific_transaction",{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                id: this.props.my_id
+                id:this.props.my_id
             })
-        }).then(async response => {
-            const data = await response.json();
-            console.log("Hello");
-            console.log(data);
-
-        })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-
-    }
-
+        }).then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+                this.props.dispatch({type:'transaction_init',data:data})
+               
+           
+          
+        });    
+      }
+    
+    
     render() {
-
+        console.log("At the beginning");
+        console.log(this.props.my_id);
+    
+      
         return (
             <React.Fragment>
             <Container>
@@ -82,7 +87,8 @@ class Home extends Component{
 function mapStateToProps(state) {
     console.log(state)
     return {
-        my_id: state.my_id
+        my_id: state.my_id,
+        transactions: state.transactions
     };
 }
 export default connect(mapStateToProps)(Home);

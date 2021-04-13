@@ -4,6 +4,7 @@ const { Email } = require('@material-ui/icons');
 const mongoose = require('mongoose');
 var dbUri = "mongodb+srv://csci3100_project_team:csci3100project@cluster0.muf9n.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
+var ObjectId = require('mongoose').Types.ObjectId; 
 var Schema = mongoose.Schema;
 mongoose.connect(dbUri, {
     useNewUrlParser: true,
@@ -54,7 +55,7 @@ var GoodSchema = Schema({
 
 var ChatSchema = Schema({
     two_user_id: [{
-        id: { type: Schema.ObjectId }
+        id: { type: String }
     }],
     messages: [{
         content: { type: String },
@@ -256,13 +257,15 @@ findSpecificTransactions = (id) => new Promise((resolve, reject) => {
     //     })
     // }
     // else if (type == "consumer") {
-        TransactionModel.find().or([{ consumer_id: id },{ seller_id: id }], (err, transaction) => {
+        console.log("what happend")
+        TransactionModel.find({},(err, transaction) => {
             if (err) reject(err);
             else if (!transaction) resolve(undefined);
             else {
                 resolve(transaction);
             };
         })
+       
     // }
 
 

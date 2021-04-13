@@ -314,7 +314,8 @@ app.post('/create_transaction', urlencodedParser,(req, res) => {
 })
 
 
-app.post('/find_specific_transaction', urlencodedParser,(req, res) => {
+app.post('/find_specific_transaction', jsonParser,(req, res) => {
+    console.log("look at here lalalalal");
     console.log(req.body);
     const id = req.body.id;
    
