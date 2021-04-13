@@ -19,17 +19,11 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputBase from '@material-ui/core/InputBase';
 
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-
 import Header from './booklist_components/Header';
 import Display from './booklist_components/Display';
 import Bar from './booklist_components/Bar';
 import SearchBar from './SearchBar';
-//import CountryList from './CountryList';
+import CountryList from './CountryList';
 
 import { connect } from 'react-redux';
 import { io } from "socket.io-client";
@@ -139,7 +133,7 @@ const Search = props => {
         setFlag(event.target.value);
     };
 
-    console.log("search flag is" + flag);
+    console.log(flag);
 
     const [input, setInput] = useState('');
     const [goodDefault, setgoodDefault] = useState();
@@ -184,8 +178,11 @@ const Search = props => {
             <Header title={title} content={content} />
 
             <div className="col-xs-12 col-sm-6" align="center">
-                <Card>
-                <FormControl style={{ minWidth: 600}}>
+
+            
+                <p>hi</p>
+            
+                <FormControl style={{ minWidth: 600 }}>
                     <InputLabel id="demo-customized-select-label">Search by...</InputLabel>
                     <Select
                         labelId="demo-customized-select-label"
@@ -205,14 +202,13 @@ const Search = props => {
                     input={input}
                     onChange={updateInput}
                 />
-                </Card>
             </div>
 
             {input && <Display catagory={catagory} products={good} />}
 
             {input &&
             <Typography align="center" variant="h6" color="textSecondary" paragraph>
-                {length} Products Found
+                {length} Products in Total
             </Typography>
             }
             
