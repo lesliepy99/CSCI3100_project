@@ -35,7 +35,9 @@ class LoginPage extends React.Component {
         const resContent=await response.json();
         const my_id = resContent.my_id;
         if(my_id){
-          this.props.dispatch({type: 'signin', });
+          this.props.dispatch({type: 'signin', data: my_id});
+          console.log("here,",this.props.my_id);
+          this.props.history.push('/home');
         }
         else alert("Wrong email or password!");
       })();
@@ -67,11 +69,6 @@ class LoginPage extends React.Component {
               </Button>
             </Link>
             <br />
-            <Link to='./home'>
-              <Button variant="contained" color="primary">
-                temp
-              </Button>
-            </Link>
           </form>
           <br/>
         </Container>
