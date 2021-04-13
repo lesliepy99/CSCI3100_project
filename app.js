@@ -81,6 +81,7 @@ io.sockets.on('connection', function (socket) {
 
 const UserChangeStream = UserModel.watch();
 const GoodChangeStream = GoodModel.watch();
+const PostChangeStream = PostModel.watch();
 
 UserChangeStream.on('change', (changes) => {
     io.sockets.compress(true).emit('userChange', changes);
@@ -89,6 +90,10 @@ UserChangeStream.on('change', (changes) => {
 });
 GoodChangeStream.on('change', (changes) => {
     io.sockets.compress(true).emit('goodChange', changes);
+    console.log("good changed");
+});
+PostChangeStream.on('change', (changes) => {
+    io.sockets.compress(true).emit('postChange', changes);
     console.log("good changed");
 });
 
