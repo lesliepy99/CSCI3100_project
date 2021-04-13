@@ -11,7 +11,8 @@ import Product from './Product';
 
 import PostDetail from './post_components/PostDetail';
 import NewPost from './post_components/NewPost';
-
+import { connect } from 'react-redux';
+import { io } from "socket.io-client";
 class Home extends Component{
     constructor(props){
         super(props);
