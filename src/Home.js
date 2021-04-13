@@ -8,6 +8,10 @@ import Mainpage from './Mainpage';
 import './App.css';
 import Footer from './Footer';
 import Product from './Product';
+import Search from './Search';
+import Chat from './Chat';
+import ChatList from './ChatList';
+
 
 import PostDetail from './post_components/PostDetail';
 import NewPost from './post_components/NewPost';
@@ -67,6 +71,10 @@ class Home extends Component{
                                 
                                 <Route path='/product/:id' component={Product}/>
 
+                                <Route path='/search' component={Search}/>
+
+                                <Route path='/chat/:id' component={ChatList} />
+            
                             </Switch>
                         </Router>
 

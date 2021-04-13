@@ -13,8 +13,13 @@ import {connect} from 'react-redux';
 class Chat extends React.Component {
     constructor(props) {
         super(props);
-        this.state={date: new Date()};
+        console.log(props);
+        this.state={
+            date: new Date(),
+            // seller: this.props.match.params.id,
+            };
         this.handleSubmit = this.handleSubmit.bind(this);
+
     }
 
     handleSubmit(event){
@@ -45,6 +50,8 @@ class Chat extends React.Component {
     render() {
         console.log('hello!')
         console.log(this.props.my_id);
+        console.log(this.props.seller_id);
+
         return (
             <Container maxWidth={'md'} >
                 <div style={{ backgroundColor: '#35baf6', fontSize: 30 }} align='center' >
@@ -64,10 +71,12 @@ class Chat extends React.Component {
         );
     }
 }
-function mapStateToProps(state){
+function mapStateToProps(state, ownProps){
+    console.log(ownProps);
     return{
       goods:state.goods,
-      my_id:state.my_id
+      my_id:state.my_id,
+      seller_id: ownProps.seller,
     };
   }
 export default connect(mapStateToProps)(Chat);

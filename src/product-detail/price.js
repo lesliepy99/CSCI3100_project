@@ -6,7 +6,7 @@ const Price = props => {
 
     return (
         <div className="product-price">
-            <h1>{price} </h1>
+            <h1>${price} </h1>
             <Divider />
         </div>
         
