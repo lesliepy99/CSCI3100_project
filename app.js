@@ -131,16 +131,15 @@ app.post('/login', jsonParser, async (req, res) => {
     const email=req.body.email;
     const password=req.body.password;
     const veri = await UserModel.findOne({email:email, password: password});
-    var veri_result=true;
+    var my_id=null;
     console.log(veri);
     if(!veri){
-        veri_result=false;
         console.log("Wrong email or password!");
     }
     else{
-        /*TODO*/ 
+        my_id=veri._id;
     }
-    return res.json({veri_result: veri_result});
+    return res.json({my_id: my_id});
 });
 
 app.post('/find_user', jsonParser, (req, res) => {

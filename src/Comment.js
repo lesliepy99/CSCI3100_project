@@ -20,11 +20,13 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import TextField from '@material-ui/core/TextField';
 import { NavLink, Redirect, Link} from 'react-router-dom';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { io } from "socket.io-client";
 
 import PostList from './post_components/PostList';
 import PostDetail from './post_components/PostDetail';
 
-import CommentContent from './post_components/CommentContent'
+
   
 
 const blogs = [
@@ -83,107 +85,54 @@ class Main extends React.Component {
 
 {/*The language used in the textEditor is still Chinese */ }
 
-
-class NewPost extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = { content: "" };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({ content: event.target.value });
-  }
-
-  handleSubmit(event) {
-    // 1. add the post to postList
-    // 2. navigate back to postList page
-    alert("Text was submitted: " + this.state.content);
-    event.preventDefault();
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <h2>Write down what you want here</h2>
-        <TextField
-          id="standard-multiline-static"
-          label="Please type here"
-          variant="outlined"
-          multiline
-          rows={4}
-          value={this.state.value}
-          onChange={this.handleChange} />
-        <br />
-        <input type="submit" value="Submit" />
-      </form>
-    );
-  }
-}
-
-
-class NewComment extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-  render(){
-    return(
-      <h1>This is the New Comment Page</h1>
-    );
-  }
-}
-
-class CommentList extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-  render(){
-    return(
-      <h1>This is the Comment List Page</h1>
-    );
-  }
-}
-
-
-
 class Comment extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClickNewPost = this.handleClickNewPost.bind(this);
-    this.state = { commentContent: 1 };
   }
-  handleClickNewPost() {
-    this.setState(() => {
-      return { commentContent: 2 };
-    });
-  }
-
   render() {
-    let displayContent;
-    switch (this.state.commentContent) {
-      case 1:
-        displayContent = <Main />;
-        break;
-      case 2:
-        displayContent = <NewPost />;
-        break;
-    }
+    var socket = io.connect();
+      socket.on('postChange', data => {
+        console.log(data);
+        console.log("Is that right?");
+        
+        this.props.dispatch({type:'update_post',data:data['fullDocument']})
+        // dispatch({type:'UPDATE'});
+        console.log("Update post")
+      
+      });
+
+      console.log(this.props.posts);
+
     return (
       <div align="center">
-        <Button startIcon={<CreateIcon />} size="large" color="primary" onClick={this.handleClickNewPost}>New Post</Button>
-        {displayContent}
+        {/*<Button startIcon={<CreateIcon />} size="large" color="primary" >New Post</Button>*/}
+        <Link
+           to={{
+              pathname: '/home/comment/NewPost',
+              }}
+        >
+           <Button color="primary" >
+              New Post
+           </Button>
+        </Link>
+        <Main/>
         {/*实验性质 */}
-        <CommentContent/>
+        
       </div>
 
     );
   }
 }
 
-export default Comment;
+function mapStateToProps(state){
+  console.log(state)
+  return{
+    posts:state.posts
+  };
+}
+
+
+export default connect(mapStateToProps)(Comment);
 
 
 

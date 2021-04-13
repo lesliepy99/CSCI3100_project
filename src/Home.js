@@ -9,8 +9,11 @@ import './App.css';
 import Footer from './Footer';
 import Product from './Product';
 
-class Home extends Component {
-    constructor(props) {
+import PostDetail from './post_components/PostDetail';
+import NewPost from './post_components/NewPost';
+
+class Home extends Component{
+    constructor(props){
         super(props);
     }
 
@@ -39,31 +42,37 @@ class Home extends Component {
 
         return (
             <React.Fragment>
-                <Container>
-                    <Col>
-                        <div className="app">
-                            <Router>
-                                <Nav />
-                                <Switch>
-                                    <Route path='/home/booklist'>
-                                        <Booklist />
-                                    </Route>
-                                    <Route path='/home/comment'>
-                                        <Comment />
-                                    </Route>
-                                    <Route path='/home/mainpage'>
-                                        <Mainpage name="Jack" />
-                                    </Route>
+            <Container>
+                <Col>
+                    <div className="app">
+                        <Router>
+                            <Nav />
+                            <Switch>
+                                <Route path='/home/booklist'>
+                                    <Booklist />
+                                </Route>
+                                <Route path='/home/comment'>
+                                    <Comment />
+                                </Route>
+                                <Route path='/home/comment/NewPost'>
+                                    <NewPost />
+                                </Route>
+                                <Route path='/home/PostDetail'>
+                                    <PostDetail />
+                                </Route>
+                                <Route path='/home/mainpage'>
+                                    <Mainpage name="Jack" />
+                                </Route>
+                                
+                                <Route path='/product/:id' component={Product}/>
 
-                                    <Route path='/product/:id' component={Product} />
+                            </Switch>
+                        </Router>
 
-                                </Switch>
-                            </Router>
-
-                        </div>
-                    </Col>
-                </Container>
-                <Footer />
+                    </div>
+                </Col>
+            </Container>
+            <Footer/>
             </React.Fragment>
         );
     }

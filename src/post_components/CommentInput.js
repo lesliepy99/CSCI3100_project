@@ -85,7 +85,7 @@ class CommentInput extends Component {
         <div className='comment-field-button'>
           <button
             onClick={this.handleSubmit.bind(this)}>
-            Comment
+            
           </button>
         </div>
       </div>

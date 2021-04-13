@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { io } from "socket.io-client";
 
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -165,7 +167,7 @@ class Mainpage extends React.Component {
   }
 }
 
-class UploadGood extends React.Component {
+class UploadGood extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -194,11 +196,61 @@ class UploadGood extends React.Component {
     });
   }
 
-  handleSubmit(event) {
+  /* handleSubmit(event) {
     alert('Your ' + this.state.nameOfGood + 'has been uploaded to platform ');
     event.preventDefault();
-  }
+  } */
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    var name = this.state.nameOfGood;
+    var description = this.state.shortDescription;
+    var estimated_price = this.state.expectedPrice;
+
+    var tags = [
+      {
+        "type":this.state.typeOfGood
+      },{
+        "location":this.state.locationOfGood
+      }];
+    var userId = this.state.my_id;
+    var number_of_views = 0;
+    var number_of_likes = 0;
+    //alert('Your tags are ' + tags );
+
+      /* console.log("This is the upload good information,",
+      name ,
+      userId ,
+      tags ,
+      number_of_views ,
+      number_of_likes ,
+      description ,
+      estimated_price ) */
+
+      (async () => {
+           await fetch('http://localhost:3000/add_good', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                name: name,
+                userId: userId,
+                tags: tags,
+                number_of_views: number_of_views,
+                number_of_likes: number_of_likes,
+                description: description,
+                estimated_price: estimated_price
+              })
+          });
+
+          alert('Your ' + this.state.nameOfGood + 'has been uploaded to platform ');
+      })();
   
+}
+  
+
   onFileChange = event => { 
     // Update the state 
     this.setState({ selectedFile: event.target.files[0] }); 
@@ -232,6 +284,30 @@ class UploadGood extends React.Component {
   
   render() {
 
+    var socket = io.connect();
+
+    socket.on('userChange', data => {
+    console.log(data);
+    console.log("Is that right?");
+
+    this.props.dispatch({type:'update_user',data:data['fullDocument']})
+    // dispatch({type:'UPDATE'});
+    console.log("Update user")
+
+    });
+
+    socket.on('goodChange', data => {
+    console.log(data);
+    console.log("Is that right?");
+
+    this.props.dispatch({type:'update_good',data:data})
+    // dispatch({type:'UPDATE'});
+
+    });
+    console.log(this.props.user_info);
+    console.log(this.props.goods);
+    console.log("Look at here");
+
     return (
       <div>
         <h2> Please add description of your good: </h2>
@@ -247,8 +323,9 @@ class UploadGood extends React.Component {
 
         <form onSubmit={this.handleSubmit}>
 
-          <TextField
+          <TextField   required
             id="nameOfGood"
+            name="nameOfGood"
             label="Name of Good:"
             multiline
             rowsMax={4}
@@ -261,9 +338,10 @@ class UploadGood extends React.Component {
           <InputLabel shrink id="typeOfGood-label">
             Type of this product:
             </InputLabel>
-          <Select
+          <Select  required
             labelId="typeOfGood-label"
             id="typeOfGood"
+            name="typeOfGood"
             value={this.state.typeOfGood}
             onChange={this.handleInputChange}
             displayEmpty
@@ -287,9 +365,10 @@ class UploadGood extends React.Component {
           <InputLabel shrink id="locationOfGood-label">
             Location you want to sell this product:
             </InputLabel>
-          <Select
+          <Select  required
             labelId="locationOfGood-label"
             id="locationOfGood"
+            name="locationOfGood"
             value={this.state.locationOfGood}
             onChange={this.handleInputChange}
             displayEmpty
@@ -305,11 +384,12 @@ class UploadGood extends React.Component {
           <br /><br />
 
 
-          <TextField
+          <TextField  required
             id="shortDescription"
+            name="shortDescription"
             label="Short description:"
             multiline
-            rowsMax={4}
+            rowsMax={8}
             value={this.shortDescription}
             onChange={this.handleInputChange}
             variant="outlined"
@@ -317,8 +397,9 @@ class UploadGood extends React.Component {
           <br /><br />
 
 
-          <TextField
+          <TextField  required
             id="expectedPrice"
+            name="expectedPrice"
             label="Expected price (HKD):"
             type="number"
             InputLabelProps={{
@@ -331,17 +412,17 @@ class UploadGood extends React.Component {
 
 
           <br /><br /><br /><br />
-          <FormControlLabel
+          <FormControlLabel  required
             control={
-              <Checkbox
+              <Checkbox required
                 checked={this.state.isGoing}
                 onChange={this.handleInputChange}
                 name="confirmTick"
                 color="primary"
               />
             }
-            label="I have uploaded precise information about the good:"
-            labelPlacement="start"
+            label="I have uploaded precise information about the good"
+            labelPlacement="right"
           />
           <br />
           <input type="submit" value="Upload" />
@@ -424,4 +505,13 @@ class MyHistory extends React.Component {
 // ========================================
 
 //ReactDOM.render(<Mainpage name="Jack" />, document.getElementById("root"));
-export default Mainpage;
+function mapStateToProps(state){
+  console.log(state)
+  return{
+    my_id: state.my_id,
+    goods: state.goods,
+    posts: state.posts,
+    user_info: state.user_info
+  };
+}
+export default connect(mapStateToProps)(Mainpage);
