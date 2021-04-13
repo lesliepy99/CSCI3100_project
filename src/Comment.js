@@ -18,6 +18,11 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import CreateIcon from '@material-ui/icons/Create';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import TextField from '@material-ui/core/TextField';
+import {Route, NavLink, Switch, Redirect, Link} from 'react-router-dom';
+
+import PostList from './post_components/PostList';
+import PostDetail from './post_components/PostDetail'
+  
 
 const blogs = [
   {
@@ -46,20 +51,9 @@ class Main extends React.Component {
 
   constructor(props) {
     super(props);
-    this.handleClickPostDetail = this.handleClickPostDetail.bind(this);
-    this.state = {showPostDetail: false};
-  }
-  handleClickPostDetail() {
-    this.setState({showPostDetail: true});
   }
   render() {
-    const showPostDetail = this.state.showPostDetail;
-    let displayContent;
-    if (showPostDetail) {
-      displayContent = <PostDetail/>
-    } else {
-      displayContent = <PostList/> 
-    }
+
     return (
       <main>
         {/* return of 1st component: background image */}
@@ -77,8 +71,7 @@ class Main extends React.Component {
             </div>
           </Container>
         </Paper>
-
-         {displayContent} 
+        <PostList/>
       </main>
     )
   }
@@ -87,40 +80,6 @@ class Main extends React.Component {
 
 {/*The language used in the textEditor is still Chinese */ }
 
-class PostList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render(){
-    return(
-      <Container maxWidth="md">
-      <Grid container spacing={4}>
-        {blogs.map((blogs) => (
-          <Grid item key={blogs} xs={12} sm={12} md={12}>
-            <Card >
-              <CardContent >
-                <Typography gutterBottom variant="h5" component="h2">
-                  {blogs.title}
-                </Typography>
-                <Typography variant="body2" component="p">
-                  {blogs.content}
-                </Typography>
-              </CardContent>
-              <CardActions >
-                <Button size="small" color="primary" onClick={this.handleClickPostDetail}>Learn More</Button>
-                <IconButton >
-                  <FavoriteBorderIcon color="secondary" />
-                </IconButton>
-
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
-    )
-  }
-}
 
 class NewPost extends React.Component {
 
@@ -162,17 +121,6 @@ class NewPost extends React.Component {
   }
 }
 
-class PostDetail extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-  render(){
-    return(
-      <h1>This is the Detail of the Post</h1>
-    );
-  }
-
-}
 
 class NewComment extends React.Component {
   constructor(props) {
