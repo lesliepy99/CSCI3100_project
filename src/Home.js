@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Container, Col, Row } from 'react-bootstrap';
 import Nav from './Nav';
@@ -9,42 +9,70 @@ import './App.css';
 import Footer from './Footer';
 import Product from './Product';
 
-class Home extends Component{
-    constructor(props){
+class Home extends Component {
+    constructor(props) {
         super(props);
     }
 
-    render(){
-        return(
+    componentDidMount() {
+        fetch('http://localhost:3000/find_specific_transaction', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: this.props.my_id
+            })
+        }).then(async response => {
+            const data = await response.json();
+            console.log("Hello");
+            console.log(data);
+
+        })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+
+    }
+
+    render() {
+
+        return (
             <React.Fragment>
-            <Container>
-                <Col>
-                    <div className="app">
-                        <Router>
-                            <Nav />
-                            <Switch>
-                                <Route path='/home/booklist'>
-                                    <Booklist />
-                                </Route>
-                                <Route path='/home/comment'>
-                                    <Comment />
-                                </Route>
-                                <Route path='/home/mainpage'>
-                                    <Mainpage name="Jack" />
-                                </Route>
-                                
-                                <Route path='/product/:id' component={Product}/>
+                <Container>
+                    <Col>
+                        <div className="app">
+                            <Router>
+                                <Nav />
+                                <Switch>
+                                    <Route path='/home/booklist'>
+                                        <Booklist />
+                                    </Route>
+                                    <Route path='/home/comment'>
+                                        <Comment />
+                                    </Route>
+                                    <Route path='/home/mainpage'>
+                                        <Mainpage name="Jack" />
+                                    </Route>
 
-                            </Switch>
-                        </Router>
+                                    <Route path='/product/:id' component={Product} />
 
-                    </div>
-                </Col>
-            </Container>
-            <Footer/>
+                                </Switch>
+                            </Router>
+
+                        </div>
+                    </Col>
+                </Container>
+                <Footer />
             </React.Fragment>
         );
     }
 }
 
-export default Home;
+function mapStateToProps(state) {
+    console.log(state)
+    return {
+        my_id: state.my_id
+    };
+}
+export default connect(mapStateToProps)(Home);
