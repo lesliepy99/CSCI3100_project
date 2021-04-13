@@ -35,26 +35,30 @@ class SignUpPage extends Component {
         if(!this.state.verification){
             console.log("before the verification,",email,password,nickname,school)
             var info_valid = true;
-            const regEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/
-            if (!regEmail.test(email)) {
-                alert("Invalid email format!")
-                info_valid = false;
-            }
-            if (password.length < 6) {
-                alert("The length of password should be at least 6!");
-                info_valid = false;
-            }
-            if (password != password_confirm) {
-                alert("Your input passwords are not the same!");
-                info_valid = false;
-            }
-            if(nickname==""){
-                alert("Please take a nickname for yourself!");
-                info_valid = false;
-            }
             if (school == "") {
                 alert("you must choose a school!");
                 info_valid = false;
+            }
+            else{
+                if(school=="CUHK"){
+                    const regEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+\.?)+\.cuhk\.edu\.hk$/;
+                    if (!regEmail.test(email)) {
+                        alert('Invalid email format! A CUHK email address should be like "xxx@xxx.cuhk.edu.hk"!');
+                        info_valid = false;
+                    }
+                }
+                if (password.length < 6 ) {
+                    alert("The length of password should be at least 6!");
+                    info_valid = false;
+                }
+                if (password != password_confirm) {
+                    alert("Your input passwords are not the same!");
+                    info_valid = false;
+                }
+                if(nickname==""){
+                    alert("Please take a nickname for yourself!");
+                    info_valid = false;
+                }
             }
             if (info_valid) {
                 (async ()=> {
@@ -81,10 +85,10 @@ class SignUpPage extends Component {
                         refresh_button.style="display: block";
                     }
                     else{
-                        alert("This email has signed up before!");
+                        alert("This email has already been token!");
                     }
                 })();
-            }
+            }    
         }
         if(this.state.verification){
             var authcode=event.target.elements.authcode.value;
