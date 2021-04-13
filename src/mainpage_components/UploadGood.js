@@ -154,7 +154,7 @@ class UploadGood extends React.Component {
               })
           });
 
-          alert('Your ' + this.state.nameOfGood + 'has been uploaded to platform ');
+          alert('Your ' + this.state.nameOfGood + ' has been uploaded to platform ');
       })();
   
 }

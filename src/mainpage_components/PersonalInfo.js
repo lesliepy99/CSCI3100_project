@@ -78,16 +78,31 @@ const useStyles = makeStyles((theme) =>({
 
 class PersonalInfo extends React.Component {
     render() {
+        const data = this.props.user_info;
+        var thisUser;
+        for(var i=0;i<data.length;i++){
+            console.log(data[i]._id);
+            if ( "data[i]._id" == this.props.my_id ){
+                thisUser = data[i];
+            }
+            else{
+                thisUser = null
+            }
+          }
+          console.log(thisUser);
       return (
         <div>
           <h2> I'm feeling good Today </h2>
           <h3> My detailed personal information: </h3>
           <ul>
-            <li>Name:</li>
-            <li>Account ID:</li>
-            <li>University:</li>
-            <li>Location:</li>
-            <li>Education Level:</li>
+            {/* email:
+                name: 
+                school:  */}
+            <li>Name:        thisUser.name</li>
+            <li>email:        thisUser.email</li>
+            <li>University:        thisUser.school</li>
+            <li>Location:        Hong Kong</li>
+            <li>Education Level:        University</li>
           </ul>
           <button onClick={() => alert("Hello There!")}>Show an message</button>
         </div>
@@ -101,8 +116,6 @@ class PersonalInfo extends React.Component {
     console.log(state)
     return{
       my_id: state.my_id,
-      goods: state.goods,
-      posts: state.posts,
       user_info: state.user_info
     };
   }
