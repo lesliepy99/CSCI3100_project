@@ -65,15 +65,18 @@ const products = [
 
 const carts = [
   {
+    id: 1,
     title: 'Running Shoes',
     price: '$68',
     image: 'https://source.unsplash.com/featured/?shoes'
   },
   {
+    id: 2,
     title: 'Umbrella',
     price: '$5',
     image: 'https://source.unsplash.com/featured/?umbrella'
   }, {
+    id: 3,
     title: 'Book - The Little Women',
     price: '$20',
     image: 'https://source.unsplash.com/featured/?girl'
@@ -90,7 +93,6 @@ const catagory = "Recomendation";
 class Booklist extends Component {
   constructor(props) {
     super(props);
-
   }
 
   render() {
@@ -114,19 +116,21 @@ class Booklist extends Component {
           // dispatch({type:'UPDATE'});
         
         });
+
       console.log(this.props.user_info);
       console.log(this.props.goods);
+      console.log(this.props.my_id);
       console.log("Lok at here");
 
     return (
       <main>
         {/* Tool bar */}
-        <Bar carts={carts} />
+        <Bar carts={carts} products={this.props.goods}/>
 
         <Header title={title} content={content} />
 
         {/* Display product cards */}
-        <Display catagory={catagory} products={products} />
+        <Display catagory={catagory} products={this.props.goods} />
 
       </main>
     );
@@ -136,7 +140,8 @@ function mapStateToProps(state){
   console.log(state)
   return{
     goods:state.goods,
-    user_info:state.user_info
+    user_info:state.user_info,
+    my_id:state.my_id,
   };
 }
 export default connect(mapStateToProps)(Booklist);

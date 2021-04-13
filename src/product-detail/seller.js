@@ -43,9 +43,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Seller = props => {
   let seller = props.seller;
+  const description = props.description;
   const classes = useStyles();
 
-  console.log(seller);
+  //console.log(seller);
   return (
     <Grid className={classes.cardGrid}>
       <Card className={classes.card}>
@@ -65,8 +66,7 @@ const Seller = props => {
         />
         <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
+            {description}
         </Typography>
       </CardContent>
       </Card>

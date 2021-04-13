@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
     catagory: {
         paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(8),
+        paddingBottom: theme.spacing(6),
         marginLeft: 140,
     },
     card: {
@@ -45,8 +45,8 @@ const Display = props => {
 
     const classes = useStyles();
 
-    console.log(catagory);
-    console.log(products);
+    //console.log(catagory);
+    //console.log(products);
     return (
         <Container className={classes.cardGrid} maxWidth="md">
             <div pclassName={classes.catagory}>
@@ -64,21 +64,22 @@ const Display = props => {
                                     <CardActionArea>
                                         <CardMedia
                                             className={classes.cardMedia}
-                                            image={post.image} // "https://source.unsplash.com/featured/?book"
+                                            image="https://source.unsplash.com/random"
                                             title="Image title"
                                         />
                                     </CardActionArea>
 
                                     <CardContent className={classes.cardContent}>
                                         <Typography gutterBottom variant="h6" >
-                                            {post.title}
+                                            {post.name}
                                         </Typography>
                                         <Typography variant="h8" component="h2">
-                                            {post.price}
+                                            ${post.estimated_price}
                                         </Typography>
                                     </CardContent>
                                     <CardActions >
-                                        <Link to={{ pathname: `/product/${post.id}`, state: { name: 'Book-Forest', price: "$20" } }} className="nav-link">
+                                        <Link to={{ pathname: `/product/${post._id}`, state: { name: post.name, price: post.estimated_price, 
+                                                    description: post.description, sellerId: post.userId } }} className="nav-link">
                                             <Button variant="contained" size="small" color="secondary" disableElevation>
                                                 detail
                                             </Button>

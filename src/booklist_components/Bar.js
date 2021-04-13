@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import clsx from 'clsx';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -85,18 +86,19 @@ const useStyles = makeStyles((theme) => ({
     cardGrid: {
         paddingTop: theme.spacing(2),
         paddingBottom: theme.spacing(2),
-      },
-      card: {
+    },
+    card: {
         display: 'flex',
-    
-      },
-      cardDetails: {
+
+    },
+    cardDetails: {
         flex: 1,
-      },
-      cardMedia: {
+        paddingBottom: theme.spacing(-2),
+    },
+    cardMedia: {
         width: 100,
-        height: 150,
-      },
+        //height: 150,
+    },
 }));
 
 const Bar = props => {
@@ -131,17 +133,18 @@ const Bar = props => {
                 color="inherit"
                 align="center"
                 noWrap
+                style={{paddingTop: 8,}}
                 className={classes.toolbarTitle}
                 gutterBottom
             >
                 Shopping Cart
               </Typography>
-              
+
             <Divider />
 
             {carts.map((item) => (
                 <Grid className={classes.cardGrid} item xs={12} md={12}>
-                    <CardActionArea component="a" href="#">
+                    <CardActionArea component="a" href="#"></CardActionArea>
                         <Card className={classes.card}>
                             <Hidden xsDown>
                                 <CardMedia className={classes.cardMedia} image={item.image} title="jo" />
@@ -154,15 +157,25 @@ const Bar = props => {
                                     <Typography variant="subtitle1" color="textSecondary">
                                         {item.price}
                                     </Typography>
-                                    <Typography variant="subtitle1" paragraph>
-                                        x1
-                        </Typography>
 
+                                    
+                                    <Link to={{ pathname: `/product/${item.id}`, state: { name: 'Book-Forest', price: "$20" } }} className="nav-link">
+                                    <Button variant="contained" size="small" color="secondary" >
+                                                detail
+                                    </Button>
+                                    </Link>
+
+                                    <IconButton color="secondary" aria-label="delete froms shopping cart">
+                                        <DeleteIcon />
+                                    </IconButton>
+                                    
                                 </CardContent>
                             </div>
                         </Card>
-                    </CardActionArea>
+
+                    
                 </Grid>
+
             ))}
 
             <Divider />
@@ -174,7 +187,7 @@ const Bar = props => {
                         color="secondary"
                         endIcon={<LocalMallIcon />}>
                         CHECKOUT
-              </Button>
+                    </Button>
                 </Link>
             </Box>
         </div>
@@ -206,8 +219,8 @@ const Bar = props => {
                 >
                 </Typography>
 
-                <Link to={{ pathname: `/search`, state: { carts: {carts} } }} className="nav-link">
-                    <IconButton  aria-label="add to shopping cart">
+                <Link to={{ pathname: `/search`, state: { carts:  carts, products: props.products  } }} className="nav-link">
+                    <IconButton aria-label="add to shopping cart">
                         <SearchIcon />
                     </IconButton>
                 </Link>
