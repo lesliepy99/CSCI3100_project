@@ -9,6 +9,9 @@ import './App.css';
 import Footer from './Footer';
 import Product from './Product';
 
+import PostDetail from './post_components/PostDetail';
+import NewPost from './post_components/NewPost';
+
 class Home extends Component{
     constructor(props){
         super(props);
@@ -28,6 +31,12 @@ class Home extends Component{
                                 </Route>
                                 <Route path='/home/comment'>
                                     <Comment />
+                                </Route>
+                                <Route path='/home/comment/NewPost'>
+                                    <NewPost />
+                                </Route>
+                                <Route path='/home/PostDetail'>
+                                    <PostDetail />
                                 </Route>
                                 <Route path='/home/mainpage'>
                                     <Mainpage name="Jack" />
