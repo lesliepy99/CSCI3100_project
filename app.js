@@ -2,7 +2,7 @@ const db = require('./database');
 const express = require("express");
 var app = express();
 const http = require("http");
-const { UserModel } = require('./database');
+const { UserModel, AuthCodeModel } = require('./database');
 var server = http.createServer(app);
 var io = require("socket.io")(server);
 const bodyParser = require('body-parser');
@@ -34,11 +34,11 @@ const randomFns = () => {
 
 // send email
 app.post("/send_email", jsonParser, async (req, res) => {
-    let EMAIL = req.body.email;
+    const EMAIL = req.body.email;
 
-    let code = randomFns();
+    const code = randomFns();
     transport.sendMail({
-        from: '2911528281@qq.com',
+        from: '"UTransform Service" <2911528281@qq.com>',
         to: EMAIL,
         subject: 'Email verification',
         html: `
@@ -52,12 +52,11 @@ app.post("/send_email", jsonParser, async (req, res) => {
             transport.close();
         }
     );
-    const authCode = require("../models/authCode");
     const e_mail = EMAIL;
-    await authCode.deleteMany({ e_mail });
-    await authCode.insertMany({ e_mail, auth_code: code });
+    await db.deleteAuthCode(e_mail);
+    await db.addAuthPair( e_mail, code );
     setTimeout(async () => {
-        await Code.deleteMany({ e_mail })
+        await db.deleteAuthCode(e_mail)
     }, 1000 * 60 * 5);
 
 }
@@ -78,6 +77,7 @@ const GoodChangeStream = GoodModel.watch();
 
 UserChangeStream.on('change', (changes) => {
     io.sockets.compress(true).emit('userChange', changes);
+    console.log(changes)
     console.log("Something changed");
 });
 GoodChangeStream.on('change', (changes) => {
@@ -95,30 +95,23 @@ app.post('/register', jsonParser, async (req, res) => {
     const nickname=req.body.nickname;
     const school=req.body.school;
     const authcode=req.body.authcode;
-    const veri=await require('../models/authCode').findOne({e_mail,authcode});
+    const veri=await AuthCodeModel.findOne({"auth_pair.email":email,"auth_pair.authcode":authcode});
+    var veri_result="true";
     if (!veri){
-        console.log("Hello1");
-        return res.json({veri_result: false});
+        console.log("wrong auth code!");
+        veri_result="false";
     }
-    db.createUser(nickname, password, email, school)
-        .then(
-            result => {
-                if (result) {
-                    res.status(200).send("Registered!");
-                }
-                else {
-                    res.status(403).send("Overlapped!");
-                }
-            },
-            err => { res.status(500).send(err.toString()) }
-        );
-    console.log("Hello2");
-    await require('../models/authCode').deleteMany({e_mail})
-    return res.json({veri_result: true});
+    else{
+        db.createUser(nickname, password, email, school);  
+        console.log("right auth code!");
+        await db.deleteAuthCode(email);
+    }
+    return res.json({veri_result: veri_result});
 });
 
-app.get('/find_user', (req, res) => {
-    db.findUser("leslie").then(
+app.post('/find_user', jsonParser, (req, res) => {
+    const email = req.body.email;
+    db.findUser(email).then(
         re => { res.send(JSON.stringify(re)) },
         err => { res.status(500).send(err.toString()) }
     );

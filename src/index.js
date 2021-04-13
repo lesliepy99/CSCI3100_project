@@ -13,16 +13,27 @@ console.log("Very good");
 var user_info = [];
 var goods = [];
 var posts =[];
-fetch('http://localhost:3000/find_user')
-  .then(async response => {
-    const data = await response.json();
-    user_info.push(data['name']);
+var my_id = null;
 
+fetch('http://localhost:3000/find_user', {
+  method: 'POST',
+  headers: {
+      'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+      email: "1155124573@link.cuhk.edu.hk",     
   })
-  .catch(error => {
+})
+.then(async res => {
+  const data = await res.json();
+  user_info.push(data);
+  console.log("lalalalal"+data)
+  console.log(data.name)
+})
+.then(data => console.log(data))
+.catch(err => console.log(err));
 
-    console.error('There was an error!', error);
-  });
+
 
 fetch('http://localhost:3000/find_all_goods')
   .then(async response => {
@@ -34,16 +45,50 @@ fetch('http://localhost:3000/find_all_goods')
 
     console.error('There was an error!', error);
   });
-const dataStore = { user_info: user_info, goods: goods}
+const dataStore = { user_info: user_info, goods: goods, my_id: my_id}
 const reducer = (state = dataStore, action) =>  {
   
 if (action.type=='TEST'){
-   
+    
+  if(action.data['operationType']=="replace"){
     console.log(action.data);
-     return {user_info:[action.data['name']]};
+   
+    var index = user_info.findIndex((element) => {
+      return element['email'] === action.data['fullDocument']['email'];
+    })
+    console.log(index)
+    console.log(user_info)
+    console.log("lol")
+    user_info[index] = action.data['fullDocument']
+  }
+
+     else if (action.data['operationType']=="insert"){
+    user_info.push(action.data['fullDocument'])
+  }
+    
+  return  {user_info,goods,my_id};
+  }
+  else if(action.type=="signin"){
+    my_id = action.data['id'];
+    return  {user_info,goods,my_id};
   }
   else if(action.type=="update_good"){
-
+    if(action.data['operationType']=="replace"){
+      console.log(action.data);
+     
+      var index = goods.findIndex((element) => {
+        return element['_id'] === action.data['fullDocument']['_id'];
+      })
+      console.log(index)
+      console.log(goods)
+      console.log("lol goods")
+      goods[index] = action.data['fullDocument']
+    }  
+    else if (action.data['operationType']=="insert"){
+      goods.push(action.data['fullDocument'])
+    }
+    
+    return  {user_info,goods,my_id};
   }
    else{
     console.log("Are we else?"); 
