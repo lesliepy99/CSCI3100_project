@@ -77,20 +77,25 @@ const useStyles = makeStyles((theme) =>({
 
 class MyHistory extends React.Component {
     render() {
-      const data = this.props.user_info;
-      var thisUser;
-
+      const data = this.props.transactions;
+      var thisUser = []; 
+      // actually "thisUser" means this transaction. just for convenience
 
       for (var i = 0; i < data.length; i++) {
-        var tempID = data[i]._id;
+        var seller_id = data[i].seller_id;
+        var consumer_id = data[i].consumer_id;
         //console.log(tempID);
-        if ((tempID) == (this.props.my_id).toString()) {
-          console.log("Find identical user_id: " + data[i]._id);
-          thisUser = data[i];
-          break;
+        if ((seller_id) == (this.props.my_id).toString() || 
+                (consumer_id) == (this.props.my_id).toString()) {
+
+          console.log("Find identical transaction_id: " + 
+                data[i]._id + ". seller_id: " + seller_id + ". consumer_id: " + consumer_id);
+          thisUser = [].push(data[i]);
+          console.log("transaction is: "+data[i]);
+          //break;
         }
         else {
-          thisUser = null
+          continue;
         }
       }
 
@@ -105,11 +110,7 @@ class MyHistory extends React.Component {
               Look what you have obtained and how you maximize the use of resources:{" "}
           </h3>
           <ul>
-            <li>Name:</li>
-            <li>Account ID:</li>
-            <li>University:</li>
-            <li>Location:</li>
-            <li>Education Level:</li>
+            <li>{thisUser}</li>
           </ul>
           <button onClick={() => alert("Hello There!")}>Show an message</button>
         </div>
