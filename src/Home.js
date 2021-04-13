@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Container, Col, Row } from 'react-bootstrap';
 import Nav from './Nav';
@@ -9,13 +9,39 @@ import './App.css';
 import Footer from './Footer';
 import Product from './Product';
 
+import PostDetail from './post_components/PostDetail';
+import NewPost from './post_components/NewPost';
+import { connect } from 'react-redux';
+import { io } from "socket.io-client";
 class Home extends Component{
     constructor(props){
         super(props);
     }
 
-    render(){
-        return(
+    componentDidMount() {
+        fetch('http://localhost:3000/find_specific_transaction', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: this.props.my_id
+            })
+        }).then(async response => {
+            const data = await response.json();
+            console.log("Hello");
+            console.log(data);
+
+        })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+
+    }
+
+    render() {
+
+        return (
             <React.Fragment>
             <Container>
                 <Col>
@@ -28,6 +54,12 @@ class Home extends Component{
                                 </Route>
                                 <Route path='/home/comment'>
                                     <Comment />
+                                </Route>
+                                <Route path='/home/comment/NewPost'>
+                                    <NewPost />
+                                </Route>
+                                <Route path='/home/PostDetail'>
+                                    <PostDetail />
                                 </Route>
                                 <Route path='/home/mainpage'>
                                     <Mainpage name="Jack" />
@@ -47,4 +79,10 @@ class Home extends Component{
     }
 }
 
-export default Home;
+function mapStateToProps(state) {
+    console.log(state)
+    return {
+        my_id: state.my_id
+    };
+}
+export default connect(mapStateToProps)(Home);

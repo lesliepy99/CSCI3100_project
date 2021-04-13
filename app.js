@@ -317,8 +317,8 @@ app.post('/create_transaction', urlencodedParser,(req, res) => {
 app.post('/find_specific_transaction', urlencodedParser,(req, res) => {
     console.log(req.body);
     const id = req.body.id;
-    const type = req.body.type;
-    db.findSpecificTransactions({type, id})
+   
+    db.findSpecificTransactions({id})
         .then(
         re => { res.send(JSON.stringify(re)) },
         err => { res.status(500).send(err.toString()) }

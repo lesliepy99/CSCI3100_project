@@ -13,6 +13,7 @@ var user_info = [];
 var goods = [];
 var posts =[];
 var my_id = null;
+var transactions = [];
 
 
    fetch('http://localhost:3000/find_all_users',)
@@ -82,11 +83,11 @@ if (action.type=='update_user'){
     user_info.push(action.data['fullDocument'])
   }
     
-  return  {user_info,goods,my_id,posts};
+  return  {user_info,goods,my_id,posts,transactions};
   }
   else if(action.type=="signin"){
     my_id = action.data;
-    return  {user_info,goods,my_id,posts};
+    return  {user_info,goods,my_id,posts,transactions};
   }
   else if(action.type=="update_good"){
     if(action.data['operationType']=="replace"){
@@ -104,7 +105,7 @@ if (action.type=='update_user'){
       goods.push(action.data['fullDocument'])
     }
     
-    return  {user_info,goods,my_id,posts};
+    return  {user_info,goods,my_id,posts,transactions};
   }
 
   else if(action.type=="update_post"){
@@ -123,7 +124,16 @@ if (action.type=='update_user'){
       goods.push(action.data['fullDocument'])
     }
     
-    return  {user_info,goods,my_id,posts};
+    return  {user_info,goods,my_id,posts,transactions};
+  }
+
+  else if(action.type=="transaction_init"){ 
+    if(transactions.length==0){
+        for(var i=0;i<action.data.length;i++){
+          transactions.push(action.data[i]);
+        }
+    }
+    return  {user_info,goods,my_id,posts,transactions};
   }
    
   else{

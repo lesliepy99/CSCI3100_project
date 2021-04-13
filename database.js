@@ -245,25 +245,25 @@ createTransaction = (good_id, seller_id, consumer_id, transaction_time) => new P
 })
 
 
-findSpecificTransactions = (type, id) => new Promise((resolve, reject) => {
-    if (type == "seller") {
-        TransactionModel.find({ seller_id: id }, (err, transaction) => {
+findSpecificTransactions = (id) => new Promise((resolve, reject) => {
+    // if (type == "seller") {
+    //     TransactionModel.find({ seller_id: id }, (err, transaction) => {
+    //         if (err) reject(err);
+    //         else if (!transaction) resolve(undefined);
+    //         else {
+    //             resolve(transaction);
+    //         };
+    //     })
+    // }
+    // else if (type == "consumer") {
+        TransactionModel.find().or([{ consumer_id: id },{ seller_id: id }], (err, transaction) => {
             if (err) reject(err);
             else if (!transaction) resolve(undefined);
             else {
                 resolve(transaction);
             };
         })
-    }
-    else if (type == "consumer") {
-        TransactionModel.find({ consumer_id: id }, (err, transaction) => {
-            if (err) reject(err);
-            else if (!transaction) resolve(undefined);
-            else {
-                resolve(transaction);
-            };
-        })
-    }
+    // }
 
 
 })
