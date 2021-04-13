@@ -59,7 +59,7 @@ var ChatSchema = Schema({
     }],
     messages: [{
         content: { type: String },
-        senderId: { type: Schema.ObjectId },
+        senderId: { type: String },
         chat_time: { type: Date }
     }]
 

@@ -266,6 +266,7 @@ class UploadGood extends React.Component {
             <MenuItem value="lx">Luxuries</MenuItem>
             <MenuItem value="md">Medicine</MenuItem>
             <MenuItem value="sp">Sports Equipment</MenuItem>
+
           </Select>
           {/* <FormHelperText>Label + placeholder</FormHelperText> */}
           <br /><br />
@@ -334,6 +335,8 @@ class UploadGood extends React.Component {
             labelPlacement="right"
           />
           <br />
+
+          
           <input type="submit" value="Upload" />
           <br /><br /><br /><br />
           <input type="file" onChange={this.onFileChange}/> 

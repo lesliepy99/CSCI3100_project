@@ -102,6 +102,7 @@ if (action.type=='update_user'){
       goods[index] = action.data['fullDocument']
     }  
     else if (action.data['operationType']=="insert"){
+      
       goods.push(action.data['fullDocument'])
     }
     
@@ -109,7 +110,7 @@ if (action.type=='update_user'){
   }
 
   else if(action.type=="update_post"){
-    if(action.data['operationType']=="insert_comment"){
+    if(action.data['operationType']=="replace"){
       console.log(action.data);
      
       var index = goods.findIndex((element) => {
@@ -120,7 +121,7 @@ if (action.type=='update_user'){
       console.log("lol goods")
       goods[index] = action.data['fullDocument']
     }  
-    else if (action.data['operationType']=="add_post"){
+    else if (action.data['operationType']=="insert"){
       goods.push(action.data['fullDocument'])
     }
     
@@ -134,6 +135,10 @@ if (action.type=='update_user'){
         }
     }
     return  {user_info,goods,my_id,posts,transactions};
+  }
+
+  else if(action.type=="add_transaction"){
+    transactions.push(action.data['fullDocument'])
   }
    
   else{
