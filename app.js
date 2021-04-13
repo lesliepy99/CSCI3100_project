@@ -272,12 +272,21 @@ app.post('/find_specific_chat', urlencodedParser,(req, res) => {
         );
 })
 
-app.post('/create_chat', urlencodedParser,(req, res) => {
+app.post('/create_chat', jsonParser,(req, res) => {
     console.log(req.body);
-   
-    const two_user_id = req.body.two_user_id;
-    const new_message = req.body.new_message;
-    db.createChatItem({two_user_id, new_message})
+    const uid_1 = req.body.uid_1;
+    const uid_2 = req.body.uid_2;
+    const two_user_id = [{'id':uid_1}, {'id': uid_2}];
+    const message_content = req.body.message_content;
+    const send_time = req.body.send_time;
+    const new_message=[
+        {"content": message_content},
+        {"senderId": uid_1},
+        {"chat_time": send_time}
+    ];
+    console.log(two_user_id);
+    console.log(new_message);
+    db.createChatItem(two_user_id, new_message)
         .then(
             result => {
                 if (result) {
