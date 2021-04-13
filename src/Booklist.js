@@ -94,7 +94,7 @@ class Booklist extends Component {
   }
 
   render() {
-
+  
     var socket = io.connect();
       socket.on('userChange', data => {
         console.log(data);
@@ -133,6 +133,7 @@ class Booklist extends Component {
   }
 }
 function mapStateToProps(state){
+  console.log(state)
   return{
     goods:state.goods,
     user_info:state.user_info

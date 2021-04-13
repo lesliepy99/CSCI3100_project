@@ -14,8 +14,8 @@ var goods = [];
 var posts =[];
 var my_id = null;
 
-(async () => {
-  await fetch('http://localhost:3000/find_all_users',)
+
+   fetch('http://localhost:3000/find_all_users',)
   .then(async res => {
     
     const data = await res.json();
@@ -26,10 +26,10 @@ var my_id = null;
   })
   .then(data => console.log(data))
   .catch(err => console.log(err));
-})();
 
-(async () => {
-  await fetch('http://localhost:3000/find_all_goods')
+
+
+   fetch('http://localhost:3000/find_all_goods')
     .then(async response => {
       const data = await response.json();
       for (var i = 0; i < data.length; i++) {
@@ -41,10 +41,10 @@ var my_id = null;
 
     console.error('There was an error!', error);
     });
-})();
 
-(async () => {
-  await fetch('http://localhost:3000/find_all_posts')
+
+
+   fetch('http://localhost:3000/find_all_posts')
   .then(async response => {
     const data = await response.json();
     for(var i=0;i<data.length;i++){
@@ -56,8 +56,12 @@ var my_id = null;
 
     console.error('There was an error!', error);
   });
-})();
+
+console.log(goods);
+console.log(user_info);
+// console.log(goods);
 const dataStore = { user_info: user_info, goods: goods, my_id: my_id,posts:posts}
+console.log(dataStore)
 const reducer = (state = dataStore, action) =>  {
   
 if (action.type=='update_user'){
@@ -122,6 +126,9 @@ if (action.type=='update_user'){
     return  {user_info,goods,my_id,posts};
   }
    
+  else{
+
+    return state;}
   
 }
 
