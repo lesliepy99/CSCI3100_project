@@ -7,7 +7,6 @@ import { io } from "socket.io-client";
 import { createStore } from 'redux'
 import { Provider } from 'react-redux';
 
-console.log("Very good");
 
 
 var user_info = [];
@@ -15,24 +14,18 @@ var goods = [];
 var posts =[];
 var my_id = null;
 
-fetch('http://localhost:3000/find_user', {
-  method: 'POST',
-  headers: {
-      'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-      email: "1155124573@link.cuhk.edu.hk",     
-  })
-})
+fetch('http://localhost:3000/find_all_users',)
 .then(async res => {
+
+  
   const data = await res.json();
-  user_info.push(data);
-  console.log("lalalalal"+data)
-  console.log(data.name)
+  for(var i=0;i<data.length;i++){
+    user_info.push(data[i]);
+  }
+ 
 })
 .then(data => console.log(data))
 .catch(err => console.log(err));
-
 
 
 fetch('http://localhost:3000/find_all_goods')
@@ -48,7 +41,7 @@ fetch('http://localhost:3000/find_all_goods')
 const dataStore = { user_info: user_info, goods: goods, my_id: my_id}
 const reducer = (state = dataStore, action) =>  {
   
-if (action.type=='TEST'){
+if (action.type=='update_user'){
     
   if(action.data['operationType']=="replace"){
     console.log(action.data);
@@ -95,14 +88,7 @@ if (action.type=='TEST'){
     return state;}
   
 }
-var socket = io.connect();
-socket.on('userChange', data => {
-  console.log(data);
-  console.log("Is that right?");
-  reducer(dataStore,'TEST');
-  // dispatch({type:'UPDATE'});
 
-});
 const store = createStore(reducer);
 ReactDOM.render(
   <React.StrictMode>

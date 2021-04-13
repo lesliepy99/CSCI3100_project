@@ -31,6 +31,9 @@ var UserSchema = Schema({
         last_chat_time: { type: Date },
         most_recent_message: { type: String },
         unread_count: { type: Number }
+    }],
+    shopping_list:[{
+        good_id:{type:Schema.ObjectId}
     }]
 });
 
@@ -97,7 +100,7 @@ createUser = (name, password, email, school) => new Promise((resolve, reject) =>
     UserModel.findOne({ email: email }, (err, user) => {
         if (err) reject(err);
         else if (!user) {
-            UserModel.create({ name: name, password: password, email: email, school: school }, (err, result) => {
+            UserModel.create({ name: name, password: password, email: email, school: school,shopping_list:{} }, (err, result) => {
                 if (err || !result) reject(err);
                 else {
                     resolve(true);
@@ -122,8 +125,32 @@ findUser = (email) => new Promise((resolve, reject) => {
     })
 })
 
+findAllUsers = () => new Promise((resolve, reject) => {
+    
+    UserModel.find({}, (err, user) => {
+        if (err) reject(err);
+        else if (!user) resolve(undefined);
+        else {
+            resolve(user);
+        };
+
+    })
+})
+
+insertShoppingList = (user_id, good_id) => new Promise((resolve, reject) =>{
+        let update = {$push:{shopping_list:good_id}}
+        let options = {upsert: true, new: true, setDefaultsOnInsert: true};
+        ChatModel.findOneAndUpdate({ _id: user_id},update,options, (err, result) =>{
+            if (err || !result) reject(err);
+            else {
+                resolve(true);
+            }
+        })
+    });
+
+
 createGood = (name, userId, tags, number_of_views, number_of_likes, good_image, description, estimated_price) => new Promise((resolve, reject) => {
-    console.log(username);
+   
     GoodModel.create({
         name: name, userId: userId, tags: tags, number_of_views: number_of_views,
         number_of_likes: number_of_likes, good_image: good_image, description: description, estimated_price: estimated_price
@@ -134,6 +161,10 @@ createGood = (name, userId, tags, number_of_views, number_of_likes, good_image, 
         }
     });
 })
+
+
+
+
 
 findAllGoods = () => new Promise((resolve, reject) => {
 
@@ -146,13 +177,22 @@ findAllGoods = () => new Promise((resolve, reject) => {
     })
 })
 
-createChatItem = (two_user_id, messages) => new Promise((resolve, reject) => {
-    ChatrModel.create({ two_user_id: two_user_id, messages: messages }, (err, result) => {
+createChatItem = (two_user_id, new_message) => new Promise((resolve, reject) => {
+    let update = {$push:{messages:new_message}}
+    let options = {upsert: true, new: true, setDefaultsOnInsert: true};
+    ChatModel.findOneAndUpdate({ two_user_id: { $all: [two_user_id[0], two_user_id[1]]}},update,options, (err, result) =>{
         if (err || !result) reject(err);
         else {
             resolve(true);
         }
-    });
+    })
+
+    // ChatrModel.create({ two_user_id: two_user_id, messages: {} }, (err, result) => {
+    //     if (err || !result) reject(err);
+    //     else {
+    //         resolve(true);
+    //     }
+    // });
 })
 
 findSpecificChats = (two_user_id) => new Promise((resolve, reject) => {
@@ -185,6 +225,16 @@ findAllPosts = () => new Promise((resolve, reject) => {
             resolve(post);
         };
     })
+})
+
+addPostComment = (postId, senderId, content) => new Promise((resolve, reject) => {
+    var newComment = {"senderId":senderId, "content":content};
+    PostModel.update({_id:postId},{$push:{comments:newComment}}, (err, result) => {
+        if (err || !result) reject(err);
+        else {
+            resolve(true);
+        }
+    });
 })
 
 
@@ -251,12 +301,15 @@ module.exports = {
     AuthCodeModel: AuthCodeModel,
     createUser: createUser,
     findUser: findUser,
+    findAllUsers:findAllUsers,
+    insertShoppingList:insertShoppingList,
     createGood: createGood,
     findAllGoods: findAllGoods,
     createChatItem: createChatItem,
     findSpecificChats: findSpecificChats,
     createPost: createPost,
     findAllPosts: findAllPosts,
+    addPostComment:addPostComment,
     createTransaction: createTransaction,
     findSpecificTransactions: findSpecificTransactions,
     addAuthPair: addAuthPair,

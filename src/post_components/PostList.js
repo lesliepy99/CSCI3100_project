@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import '../App.css';
+
 import Button from '@material-ui/core/Button';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';

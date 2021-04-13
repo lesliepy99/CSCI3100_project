@@ -7,9 +7,9 @@ import books from './books.json';
 import { connect } from 'react-redux';
 import { io } from "socket.io-client";
 
-import Header from './booklist_components/Header';
-import Display from './booklist_components/Display';
-import Bar from './booklist_components/Bar';
+import Header from './Header';
+import Display from './Display';
+import Bar from './Bar';
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -96,27 +96,17 @@ class Booklist extends Component {
   render() {
 
     var socket = io.connect();
-      socket.on('userChange', data => {
-        console.log(data);
-        console.log("Is that right?");
-        
-        this.props.dispatch({type:'update_user',data:data['fullDocument']})
-        // dispatch({type:'UPDATE'});
-        console.log("Update user")
-      
-      });
+    socket.on('goodChange', data => {
+      console.log(data);
+      console.log("Is that right?");
 
-      socket.on('goodChange', data => {
-          console.log(data);
-          console.log("Is that right?");
-          
-          this.props.dispatch({type:'update_good',data:data})
-          // dispatch({type:'UPDATE'});
-        
-        });
-      console.log(this.props.user_info);
-      console.log(this.props.goods);
-      console.log("Lok at here");
+      this.props.dispatch({ type: 'update_good', data: data['fullDocument'] })
+      // dispatch({type:'UPDATE'});
+
+    });
+
+    console.log(this.props.goods);
+    console.log("Lok at here");
 
     return (
       <main>
@@ -132,10 +122,9 @@ class Booklist extends Component {
     );
   }
 }
-function mapStateToProps(state){
-  return{
-    goods:state.goods,
-    user_info:state.user_info
+function mapStateToProps(state) {
+  return {
+    goods: state.goods
   };
 }
 export default connect(mapStateToProps)(Booklist);
