@@ -104,6 +104,11 @@ if (action.type=='update_user'){
     else if (action.data['operationType']=="insert"){
       
       goods.push(action.data['fullDocument'])
+=======
+      if(!goods.some(item => action.data['fullDocument']._id == item._id)){
+        goods.push(action.data['fullDocument']);
+      }
+>>>>>>> Stashed changes
     }
     
     return  {user_info,goods,my_id,posts,transactions};
