@@ -116,6 +116,22 @@ app.post('/register', jsonParser, async (req, res) => {
     return res.json({veri_result: veri_result});
 });
 
+app.post('/login', jsonParser, async (req, res) => {
+    const email=req.body.email;
+    const password=req.body.password;
+    const veri = await UserModel.findOne({email:email, password: password});
+    var veri_result=true;
+    console.log(veri);
+    if(!veri){
+        veri_result=false;
+        console.log("Wrong email or password!");
+    }
+    else{
+        /*TODO*/ 
+    }
+    return res.json({veri_result: veri_result});
+});
+
 app.post('/find_user', jsonParser, (req, res) => {
     const email = req.body.email;
     db.findUser(email).then(

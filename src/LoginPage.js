@@ -13,6 +13,31 @@ import { Link } from 'react-router-dom';
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(event){
+      event.preventDefault();
+      var email = event.target.elements.email.value;
+      var password = event.target.elements.password.value;
+      (async ()=>{
+        const response=await fetch("http://localhost:3000/login",{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+            })
+        });
+        const resContent=await response.json();
+        const veri_ok=resContent.veri_result;
+        if(veri_ok){
+          console.log("Successfully sign in!");
+        }
+        else alert("Wrong email or password!");
+      })();
     }
 
     render(){
@@ -22,19 +47,17 @@ class LoginPage extends React.Component {
               Sign In to UTransform
           </div>
           <br/>
-          <form align='center'>
-            <TextField label="E-mail" id="username" variant="outlined" style={{backgroundColor: 'white'}}/>
+          <form onSubmit={this.handleSubmit} align='center'>
+            <TextField required label="E-mail" id="email" name="email" variant="outlined" style={{backgroundColor: 'white'}}/>
             <br />
             <br />
-            <TextField label="Password" type="password" id="password" variant="outlined" style={{backgroundColor: 'white'}}/>
+            <TextField required label="Password" type="password" id="password" name="password" variant="outlined" style={{backgroundColor: 'white'}}/>
             <br />
             <br />
             <br />
-            <Link to='./home'>
-              <Button type="submit" variant="contained" color="primary" >
+            <Button type="submit" variant="contained" color="primary" >
                 Sign IN
-              </Button>
-            </Link>
+            </Button>
             <br />
             <br />
             <Link to='./sign_up'>
