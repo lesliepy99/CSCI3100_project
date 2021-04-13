@@ -401,7 +401,7 @@ function Album() {
 
             {/* Display product cards */}
             <Container className={classes.cardGrid} maxWidth="md">
-            <div pclassName={classes.catagory}>
+            <div className={classes.catagory}>
                 <Typography variant="h8" component="h2" paddingRight={140} gutterBottom>
                             Recommendation
                 </Typography>
