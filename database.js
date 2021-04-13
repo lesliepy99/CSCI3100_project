@@ -122,6 +122,19 @@ findUser = (email) => new Promise((resolve, reject) => {
     })
 })
 
+findAllUsers = () => new Promise((resolve, reject) => {
+    
+    UserModel.find({}, (err, user) => {
+        if (err) reject(err);
+        else if (!user) resolve(undefined);
+        else {
+            resolve(user);
+        };
+
+    })
+})
+
+
 createGood = (name, userId, tags, number_of_views, number_of_likes, good_image, description, estimated_price) => new Promise((resolve, reject) => {
     console.log(username);
     GoodModel.create({
@@ -146,13 +159,22 @@ findAllGoods = () => new Promise((resolve, reject) => {
     })
 })
 
-createChatItem = (two_user_id, messages) => new Promise((resolve, reject) => {
-    ChatrModel.create({ two_user_id: two_user_id, messages: messages }, (err, result) => {
+createChatItem = (two_user_id, new_message) => new Promise((resolve, reject) => {
+    let update = {$push:{messages:new_message}}
+    let options = {upsert: true, new: true, setDefaultsOnInsert: true};
+    ChatModel.findOneAndUpdate({ two_user_id: { $all: [two_user_id[0], two_user_id[1]]}},update,options, (err, result) =>{
         if (err || !result) reject(err);
         else {
             resolve(true);
         }
-    });
+    })
+
+    // ChatrModel.create({ two_user_id: two_user_id, messages: {} }, (err, result) => {
+    //     if (err || !result) reject(err);
+    //     else {
+    //         resolve(true);
+    //     }
+    // });
 })
 
 findSpecificChats = (two_user_id) => new Promise((resolve, reject) => {
@@ -185,6 +207,16 @@ findAllPosts = () => new Promise((resolve, reject) => {
             resolve(post);
         };
     })
+})
+
+addPostComment = (postId, senderId, content) => new Promise((resolve, reject) => {
+    var newComment = {"senderId":senderId, "content":content};
+    PostModel.update({_id:postId},{$push:{comments:newComment}}, (err, result) => {
+        if (err || !result) reject(err);
+        else {
+            resolve(true);
+        }
+    });
 })
 
 
@@ -251,6 +283,7 @@ module.exports = {
     AuthCodeModel: AuthCodeModel,
     createUser: createUser,
     findUser: findUser,
+    findAllUsers:findAllUsers,
     createGood: createGood,
     findAllGoods: findAllGoods,
     createChatItem: createChatItem,

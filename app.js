@@ -117,7 +117,14 @@ app.post('/find_user', jsonParser, (req, res) => {
     );
 })
 
-app.post('/add_good', (req, res) => {
+app.get('/find_all_users',(req,res)=>{
+    db.findAllUsers().then(
+        re => { res.send(JSON.stringify(re)) },
+        err => { res.status(500).send(err.toString()) }
+    );
+})
+
+app.post('/add_good',jsonParser, (req, res) => {
     console.log(req.body);
     db.createGood(req.body.name, req.body.userId, req.body.tags, req.body.number_of_views, req.body.number_of_likes, req.body.good_image, req.body.description, req.body.estimated_price)
         .then(
@@ -140,6 +147,52 @@ app.get('find_all_goods', (req, res) => {
         err => { res.status(500).send(err.toString()) }
     );
 });
+
+app.get('find_all_posts', (req, res) => {
+    db.findAllPosts().then(
+        re => { res.send(JSON.stringify(re)) },
+        err => { res.status(500).send(err.toString()) }
+    );
+});
+
+app.post('/add_post', urlencodedParser,(req, res) => {
+    console.log(req.body);
+    const senderId = req.body.senderId;
+    const content = req.body.content;
+    const comments = req.body.comments;
+    db.createPost({ senderId,content,comments })
+        .then(
+            result => {
+                if (result) {
+                    res.status(200).send("Registered!");
+                }
+                else {
+                    res.status(403).send("Overlapped!");
+                }
+            },
+            err => { res.status(500).send(err.toString()) }
+        );
+})
+
+
+app.post('/add_post_comment', urlencodedParser,(req, res) => {
+    console.log(req.body);
+    const senderId = req.body.senderId;
+    const content = req.body.content;
+    const comments = req.body.comments;
+    db.createPost({ senderId,content,comments })
+        .then(
+            result => {
+                if (result) {
+                    res.status(200).send("Registered!");
+                }
+                else {
+                    res.status(403).send("Overlapped!");
+                }
+            },
+            err => { res.status(500).send(err.toString()) }
+        );
+})
 
 {/*app.post('/add_chat',(req,res)=>{
     console.log(req.body);

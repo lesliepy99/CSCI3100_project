@@ -458,7 +458,7 @@ class Booklist extends Component{
         console.log(data);
         console.log("Is that right?");
         
-        this.props.dispatch({type:'TEST',data:data['fullDocument']})
+        this.props.dispatch({type:'update_user',data:data['fullDocument']})
         // dispatch({type:'UPDATE'});
         console.log("Update user")
       
