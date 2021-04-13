@@ -150,7 +150,7 @@ insertShoppingList = (user_id, good_id) => new Promise((resolve, reject) =>{
 
 
 createGood = (name, userId, tags, number_of_views, number_of_likes, good_image, description, estimated_price) => new Promise((resolve, reject) => {
-    console.log(username);
+   
     GoodModel.create({
         name: name, userId: userId, tags: tags, number_of_views: number_of_views,
         number_of_likes: number_of_likes, good_image: good_image, description: description, estimated_price: estimated_price
@@ -302,12 +302,14 @@ module.exports = {
     createUser: createUser,
     findUser: findUser,
     findAllUsers:findAllUsers,
+    insertShoppingList:insertShoppingList,
     createGood: createGood,
     findAllGoods: findAllGoods,
     createChatItem: createChatItem,
     findSpecificChats: findSpecificChats,
     createPost: createPost,
     findAllPosts: findAllPosts,
+    addPostComment:addPostComment,
     createTransaction: createTransaction,
     findSpecificTransactions: findSpecificTransactions,
     addAuthPair: addAuthPair,

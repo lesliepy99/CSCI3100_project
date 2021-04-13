@@ -131,6 +131,24 @@ app.get('/find_all_users',(req,res)=>{
     );
 })
 
+app.post('/insertShoppingList',jsonParser, (req, res) => {
+    console.log(req.body);
+    const user_id = req.body.user_id;
+    const good_id = req.body.good_id;
+    db.insertShoppingList(user_id,good_id)
+        .then(
+            result => {
+                if (result) {
+                    res.status(200).send("Registered!");
+                }
+                else {
+                    res.status(403).send("Overlapped!");
+                }
+            },
+            err => { res.status(500).send(err.toString()) }
+        );
+})
+
 app.post('/add_good',jsonParser, (req, res) => {
     console.log(req.body);
     db.createGood(req.body.name, req.body.userId, req.body.tags, req.body.number_of_views, req.body.number_of_likes, req.body.good_image, req.body.description, req.body.estimated_price)
