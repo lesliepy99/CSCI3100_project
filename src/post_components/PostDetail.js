@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'C:/Users/yanyu/Documents/GitHub/CSCI3100_project/src/App.css';
+import '../App.css';
 import Button from '@material-ui/core/Button';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';

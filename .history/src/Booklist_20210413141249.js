@@ -132,10 +132,9 @@ class Booklist extends Component {
     );
   }
 }
-function mapStateToProps(state){
-  return{
-    goods:state.goods,
-    user_info:state.user_info
+function mapStateToProps(state) {
+  return {
+    goods: state.goods
   };
 }
 export default connect(mapStateToProps)(Booklist);
