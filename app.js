@@ -2,7 +2,7 @@ const db = require('./database');
 const express = require("express");
 var app = express();
 const http = require("http");
-const { UserModel, AuthCodeModel } = require('./database');
+const { UserModel, AuthCodeModel, TransactionModel } = require('./database');
 var server = http.createServer(app);
 var io = require("socket.io")(server);
 const bodyParser = require('body-parser');
@@ -82,6 +82,7 @@ io.sockets.on('connection', function (socket) {
 const UserChangeStream = UserModel.watch();
 const GoodChangeStream = GoodModel.watch();
 const PostChangeStream = PostModel.watch();
+const TransactionChangeStream = TransactionModel.watch();
 
 UserChangeStream.on('change', (changes) => {
     io.sockets.compress(true).emit('userChange', changes);
@@ -94,6 +95,11 @@ GoodChangeStream.on('change', (changes) => {
 });
 PostChangeStream.on('change', (changes) => {
     io.sockets.compress(true).emit('postChange', changes);
+    console.log("good changed");
+});
+
+TransactionChangeStream.on('change', (changes) => {
+    io.sockets.compress(true).emit('TransactionChange', changes);
     console.log("good changed");
 });
 
