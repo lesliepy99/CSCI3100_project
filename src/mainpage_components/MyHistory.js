@@ -77,6 +77,26 @@ const useStyles = makeStyles((theme) =>({
 
 class MyHistory extends React.Component {
     render() {
+      const data = this.props.user_info;
+      var thisUser;
+
+
+      for (var i = 0; i < data.length; i++) {
+        var tempID = data[i]._id;
+        //console.log(tempID);
+        if ((tempID) == (this.props.my_id).toString()) {
+          console.log("Find identical user_id: " + data[i]._id);
+          thisUser = data[i];
+          break;
+        }
+        else {
+          thisUser = null
+        }
+      }
+
+
+
+      console.log(thisUser);
       return (
         <div>
           <h2> Your history of selling/purchasing </h2>
@@ -103,8 +123,7 @@ class MyHistory extends React.Component {
     console.log(state)
     return{
       my_id: state.my_id,
-      goods: state.goods,
-      posts: state.posts,
+      transactions: state.transactions,
       user_info: state.user_info
     };
   }
