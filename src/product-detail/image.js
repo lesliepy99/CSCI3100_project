@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: theme.spacing(2),
         justifyContent: 'center',
         alignItems: 'center',
-
     },
     cardGrid: {
         marginLeft: theme.spacing(2),

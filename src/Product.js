@@ -11,17 +11,6 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
-
-
-const useStyles = makeStyles((theme) => ({
-    cardGrid: {
-        paddingTop: theme.spacing(2),
-        paddingBottom: theme.spacing(8),
-    },
-}));
-
-
-
 export default class Product extends React.Component {
     constructor(props) {
         super(props);
@@ -44,12 +33,6 @@ export default class Product extends React.Component {
             ]
         }
     }
-
-    componentWillUnmount() {
-        console.log(this.props);
-    }
-
-
 
     render() {
         console.log(this.props);
