@@ -78,12 +78,15 @@ const useStyles = makeStyles((theme) =>({
 
 class PersonalInfo extends React.Component {
     render() {
+
+        
         const data = this.props.user_info;
         var thisUser;
 
+
         for(var i=0;i<data.length;i++){
             var tempID = data[i]._id;
-            console.log(tempID);
+            //console.log(tempID);
             if ( (tempID)==(this.props.my_id).toString() ){
                 console.log("Find identical user_id: "+data[i]._id);
                 thisUser = data[i];
@@ -93,6 +96,8 @@ class PersonalInfo extends React.Component {
                 thisUser = null
             }
           }
+
+
           
           console.log(thisUser);
       return (
@@ -106,8 +111,8 @@ class PersonalInfo extends React.Component {
             <li>Name:        {thisUser.name}</li>
             <li>email:        {thisUser.email}</li>
             <li>University:        {thisUser.school}</li>
-            <li>Location:        Hong Kong</li>
-            <li>Education Level:        University</li>
+            <li>Location:        Hong Kong (*By default)</li>
+            <li>Education Level:        University (*By default)</li>
           </ul>
           <button onClick={() => alert("Hello There!")}>Show an message</button>
         </div>

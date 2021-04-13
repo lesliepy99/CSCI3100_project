@@ -29,7 +29,7 @@ import Header from './booklist_components/Header';
 import Display from './booklist_components/Display';
 import Bar from './booklist_components/Bar';
 import SearchBar from './SearchBar';
-// import CountryList from './CountryList';
+import CountryList from './CountryList';
 
 import { connect } from 'react-redux';
 import { io } from "socket.io-client";
