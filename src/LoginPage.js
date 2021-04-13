@@ -68,6 +68,11 @@ class LoginPage extends React.Component {
               </Button>
             </Link>
             <br />
+            <Link to='./home'>
+              <Button variant="contained" color="primary">
+                temp
+              </Button>
+            </Link>
           </form>
           <br/>
         </Container>
