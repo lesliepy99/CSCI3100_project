@@ -177,10 +177,10 @@ app.post('/add_post', urlencodedParser,(req, res) => {
 
 app.post('/add_post_comment', urlencodedParser,(req, res) => {
     console.log(req.body);
+    const postId = req.body.postId;
     const senderId = req.body.senderId;
     const content = req.body.content;
-    const comments = req.body.comments;
-    db.createPost({ senderId,content,comments })
+    db.addPostComment({postId, senderId, content})
         .then(
             result => {
                 if (result) {
@@ -194,24 +194,68 @@ app.post('/add_post_comment', urlencodedParser,(req, res) => {
         );
 })
 
-{/*app.post('/add_chat',(req,res)=>{
+app.post('/find_specific_chat', urlencodedParser,(req, res) => {
     console.log(req.body);
-    db.createChatItem([req.body.uid_1, req.body.uid_2], req.body.message)
-    .then(
-        result => {
-            if (result) {
-                res.status(200).send("Registered!");
-            }
-            else {
-                res.status(403).send("Overlapped!");
-            }
-        },
+    const two_user_id = req.body.two_user_id;
+    
+    db.findSpecificChats({two_user_id})
+        .then(
+        re => { res.send(JSON.stringify(re)) },
         err => { res.status(500).send(err.toString()) }
-    );
-})*/}
+        );
+})
 
-app.post('/add_chat', jsonParser, (req, res) => {
+app.post('/create_chat', urlencodedParser,(req, res) => {
     console.log(req.body);
+   
+    const two_user_id = req.body.two_user_id;
+    const new_message = req.body.new_message;
+    db.createChatItem({two_user_id, new_message})
+        .then(
+            result => {
+                if (result) {
+                    res.status(200).send("Registered!");
+                }
+                else {
+                    res.status(403).send("Overlapped!");
+                }
+            },
+            err => { res.status(500).send(err.toString()) }
+        );
+})
+
+
+app.post('/create_transaction', urlencodedParser,(req, res) => {
+    console.log(req.body);
+   
+    const good_id = req.body.good_id;
+    const seller_id = req.body.seller_id;
+    const consumer_id = req.body.comsumer_id;
+    const transaction_time = req.body.transaction_time;
+    db.createChatItem({good_id, seller_id, consumer_id, transaction_time})
+        .then(
+            result => {
+                if (result) {
+                    res.status(200).send("Registered!");
+                }
+                else {
+                    res.status(403).send("Overlapped!");
+                }
+            },
+            err => { res.status(500).send(err.toString()) }
+        );
+})
+
+
+app.post('/find_specific_transaction', urlencodedParser,(req, res) => {
+    console.log(req.body);
+    const id = req.body.id;
+    const type = req.body.type;
+    db.findSpecificTransactions({type, id})
+        .then(
+        re => { res.send(JSON.stringify(re)) },
+        err => { res.status(500).send(err.toString()) }
+        );
 })
 
 server.listen(3000)
