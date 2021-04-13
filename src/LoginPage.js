@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import './App.css';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -32,11 +33,9 @@ class LoginPage extends React.Component {
             })
         });
         const resContent=await response.json();
-        const veri_ok=resContent.veri_result;
-        if(veri_ok){
-          console.log("Successfully sign in!");
-          this.props.dispatch({type:'signin',data:"lalala"})
-
+        const my_id = resContent.my_id;
+        if(my_id){
+          this.props.dispatch({type: 'signin', });
         }
         else alert("Wrong email or password!");
       })();
@@ -80,4 +79,9 @@ class LoginPage extends React.Component {
     }
 }
 
-export default LoginPage;
+function mapStateToProps(state){
+  return{
+    my_id:state.my_id
+  };
+}
+export default connect(mapStateToProps)(LoginPage);
