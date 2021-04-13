@@ -24,6 +24,11 @@ import  getConfig from  './utils/handle_image_upload'
 import ReactS3 from 'react-s3';
 import S3 from 'react-aws-s3';
 
+import UploadGood from './mainpage_components/UploadGood';
+import ViewRank from './mainpage_components/ViewRank';
+import PersonalInfo from './mainpage_components/PersonalInfo';
+import MyHistory from './mainpage_components/MyHistory';
+
 const useStyles = makeStyles((theme) =>({
   root: {
     maxWidth: 450,
@@ -74,7 +79,7 @@ const useStyles = makeStyles((theme) =>({
 }));
 
 
-const ReactS3Client = new S3(getConfig("haha"));
+
 
 
 class Mainpage extends React.Component {
@@ -132,10 +137,21 @@ class Mainpage extends React.Component {
         ShownPart = <PersonalInfo />;
     }
 
-    /* const classes =  useStyles(); */
-
+    
+    /* const classes = useStyles(); */
     return (
       <main>
+        {/* <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${'https://source.unsplash.com/random'})` }}>
+          {<img style={{ display: 'none' }} src={'https://source.unsplash.com/random'} alt={'main image description'} />}
+          <div className={classes.overlay} />
+          <Container maxWidth="sm">
+            <div className={classes.mainFeaturedPostContent}>
+              <Typography align="center" component="h1" variant="h3" color="inherit" gutterBottom>
+              Personal Mainpage
+              </Typography>
+            </div>
+          </Container>
+        </Paper> */}
         <Paper style={{ backgroundImage: `url(${'https://picsum.photos/1000/300'})` }}>
             {<img style={{ display: 'none' }} src={'https://picsum.photos/1000/300'} alt={'Oops, Picture is Gone!'} />}
             <div />
@@ -167,344 +183,14 @@ class Mainpage extends React.Component {
   }
 }
 
-class UploadGood extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      nameOfGood: "",
-      typeOfGood: "",
-      locationOfGood: "",
-      shortDescription: "",
-      expectedPrice: "",
-      confirmTick: false,
-      selectedFile: null
-
-    };
-
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    
-  }
-
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value
-    });
-  }
-
-  /* handleSubmit(event) {
-    alert('Your ' + this.state.nameOfGood + 'has been uploaded to platform ');
-    event.preventDefault();
-  } */
-
-  handleSubmit(event) {
-    event.preventDefault();
-
-    var name = this.state.nameOfGood;
-    var description = this.state.shortDescription;
-    var estimated_price = this.state.expectedPrice;
-
-    var tags = [
-      {
-        "type":this.state.typeOfGood
-      },{
-        "location":this.state.locationOfGood
-      }];
-    var userId = this.state.my_id;
-    var number_of_views = 0;
-    var number_of_likes = 0;
-    //alert('Your tags are ' + tags );
-
-      /* console.log("This is the upload good information,",
-      name ,
-      userId ,
-      tags ,
-      number_of_views ,
-      number_of_likes ,
-      description ,
-      estimated_price ) */
-
-      (async () => {
-           await fetch('http://localhost:3000/add_good', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                name: name,
-                userId: userId,
-                tags: tags,
-                number_of_views: number_of_views,
-                number_of_likes: number_of_likes,
-                description: description,
-                estimated_price: estimated_price
-              })
-          });
-
-          alert('Your ' + this.state.nameOfGood + 'has been uploaded to platform ');
-      })();
-  
-}
-  
-
-  onFileChange = event => { 
-    // Update the state 
-    this.setState({ selectedFile: event.target.files[0] }); 
-  }; 
-
-  onFileUpload = () => { 
-    console.log("Before call");
-    ReactS3Client
-    .uploadFile(this.state.selectedFile, "test.png")
-    .then(data => console.log(data))
-    .catch(err => console.error(err))
-
-    // Create an object of formData 
-    console.log("Call!")
-    const formData = new FormData(); 
-   
-    // Update the formData object 
-    formData.append( 
-      "myFile", 
-      this.state.selectedFile, 
-      this.state.selectedFile.name 
-    ); 
-   
-    // Details of the uploaded file 
-    
-    console.log(this.state.selectedFile); 
-   
-    
-  }; 
-
-  
-  render() {
-
-    var socket = io.connect();
-
-    socket.on('userChange', data => {
-    console.log(data);
-    console.log("Is that right?");
-
-    this.props.dispatch({type:'update_user',data:data['fullDocument']})
-    // dispatch({type:'UPDATE'});
-    console.log("Update user")
-
-    });
-
-    socket.on('goodChange', data => {
-    console.log(data);
-    console.log("Is that right?");
-
-    this.props.dispatch({type:'update_good',data:data})
-    // dispatch({type:'UPDATE'});
-
-    });
-    console.log(this.props.user_info);
-    console.log(this.props.goods);
-    console.log("Look at here");
-
-    return (
-      <div>
-        <h2> Please add description of your good: </h2>
-        <h3> For your good's description, please include: </h3>
-        <ul>
-          <li>Name</li>
-          <li>Type</li>
-          <li>Location you sell the good</li>
-          <li>Short Description</li>
-          <li>Expected Price</li>
-          <li>(Optional) Its Photo</li>
-        </ul>
-
-        <form onSubmit={this.handleSubmit}>
-
-          <TextField   required
-            id="nameOfGood"
-            name="nameOfGood"
-            label="Name of Good:"
-            multiline
-            rowsMax={4}
-            value={this.nameOfGood}
-            onChange={this.handleInputChange}
-            variant="outlined"
-          />
-          <br /><br />
-
-          <InputLabel shrink id="typeOfGood-label">
-            Type of this product:
-            </InputLabel>
-          <Select  required
-            labelId="typeOfGood-label"
-            id="typeOfGood"
-            name="typeOfGood"
-            value={this.state.typeOfGood}
-            onChange={this.handleInputChange}
-            displayEmpty
-          >
-            <MenuItem value="">
-              <em>Please choose from below listed types:</em>
-            </MenuItem>
-            <MenuItem value="bt">Book, Teaching Materials</MenuItem>
-            <MenuItem value="cb">Clothes, Bags</MenuItem>
-            <MenuItem value="cd">Cosmetics, Detergents</MenuItem>
-            <MenuItem value="ed">Electronic Devices</MenuItem>
-            <MenuItem value="fd">Food, Drink, Cook Materials</MenuItem>
-            <MenuItem value="lx">Luxuries</MenuItem>
-            <MenuItem value="md">Medicine</MenuItem>
-            <MenuItem value="sp">Sports Equipment</MenuItem>
-          </Select>
-          {/* <FormHelperText>Label + placeholder</FormHelperText> */}
-          <br /><br />
-
-
-          <InputLabel shrink id="locationOfGood-label">
-            Location you want to sell this product:
-            </InputLabel>
-          <Select  required
-            labelId="locationOfGood-label"
-            id="locationOfGood"
-            name="locationOfGood"
-            value={this.state.locationOfGood}
-            onChange={this.handleInputChange}
-            displayEmpty
-          >
-            <MenuItem value="">
-              <em>Please choose from below listed areas:</em>
-            </MenuItem>
-            <MenuItem value="hk">Hong Kong Island</MenuItem>
-            <MenuItem value="kl">Kowloon</MenuItem>
-            <MenuItem value="nt">New Territories</MenuItem>
-          </Select>
-          {/* <FormHelperText>Label + placeholder</FormHelperText> */}
-          <br /><br />
-
-
-          <TextField  required
-            id="shortDescription"
-            name="shortDescription"
-            label="Short description:"
-            multiline
-            rowsMax={8}
-            value={this.shortDescription}
-            onChange={this.handleInputChange}
-            variant="outlined"
-          />
-          <br /><br />
-
-
-          <TextField  required
-            id="expectedPrice"
-            name="expectedPrice"
-            label="Expected price (HKD):"
-            type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            value={this.expectedPrice}
-            onChange={this.handleInputChange}
-            variant="outlined"
-          />
-
-
-          <br /><br /><br /><br />
-          <FormControlLabel  required
-            control={
-              <Checkbox required
-                checked={this.state.isGoing}
-                onChange={this.handleInputChange}
-                name="confirmTick"
-                color="primary"
-              />
-            }
-            label="I have uploaded precise information about the good"
-            labelPlacement="right"
-          />
-          <br />
-          <input type="submit" value="Upload" />
-          <br /><br /><br /><br />
-          <input type="file" onChange={this.onFileChange}/> 
-                <button onClick={this.onFileUpload}> 
-                  Upload! 
-                </button> 
-
-        </form>
-      </div>
-    );
-  }
-}
-
-class ViewRank extends React.Component {
-  render() {
-    return (
-      <div>
-        <h2> Here is your rank data: </h2>
-        <h3>
-          {" "}
-            Please try to follow community rules and stay honest while using the
-            platform:{" "}
-        </h3>
-        <ul>
-          <li>Jerry loves your CSCI1000 book</li>
-          <li>Alice thinks your goods have high-quality</li>
-          <li>John wants to consult about your CSCI5000 course</li>
-          <li>Barbara likes the bike you post</li>
-          <li>Alexander inviters you to look at his good</li>
-        </ul>
-        <button onClick={() => alert("Hello There!")}> Show an alert</button>
-      </div>
-    );
-  }
-}
-
-class PersonalInfo extends React.Component {
-  render() {
-    return (
-      <div>
-        <h2> I'm feeling Fine Today </h2>
-        <h3> My detailed personal information: </h3>
-        <ul>
-          <li>Name:</li>
-          <li>Account ID:</li>
-          <li>University:</li>
-          <li>Location:</li>
-          <li>Education Level:</li>
-        </ul>
-        <button onClick={() => alert("Hello There!")}>Show an alert</button>
-      </div>
-    );
-  }
-}
-
-class MyHistory extends React.Component {
-  render() {
-    return (
-      <div>
-        <h2> Your history of selling/purchasing </h2>
-        <h3>
-          {" "}
-            Look what you have obtained and how you maximize the use of resources:{" "}
-        </h3>
-        <ul>
-          <li>Name:</li>
-          <li>Account ID:</li>
-          <li>University:</li>
-          <li>Location:</li>
-          <li>Education Level:</li>
-        </ul>
-        <button onClick={() => alert("Hello There!")}>Show an alert</button>
-      </div>
-    );
-  }
-}
 
 // ========================================
 
 //ReactDOM.render(<Mainpage name="Jack" />, document.getElementById("root"));
+
+// the place to store all the possible mapProp querys
+
+/* 
 function mapStateToProps(state){
   console.log(state)
   return{
@@ -515,3 +201,5 @@ function mapStateToProps(state){
   };
 }
 export default connect(mapStateToProps)(Mainpage);
+ */
+export default Mainpage;

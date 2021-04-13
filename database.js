@@ -111,9 +111,9 @@ createUser = (name, password, email, school,year) => new Promise((resolve, rejec
     });
 })
 
-findUser = (email) => new Promise((resolve, reject) => {
-    console.log(email);
-    UserModel.findOne({email:email}, (err, user) => {
+findUser = (uid) => new Promise((resolve, reject) => {
+    console.log(uid);
+    UserModel.findOne({_id:uid}, (err, user) => {
         if (err) reject(err);
         else if (!user) resolve(undefined);
         else {
