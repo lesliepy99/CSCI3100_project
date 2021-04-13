@@ -20,6 +20,8 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import TextField from '@material-ui/core/TextField';
 import { NavLink, Redirect, Link} from 'react-router-dom';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { io } from "socket.io-client";
 
 import PostList from './post_components/PostList';
 import PostDetail from './post_components/PostDetail';
@@ -105,7 +107,24 @@ class NewPost extends React.Component {
     event.preventDefault();
   }
 
+
+
+
   render() {
+    var socket = io.connect();
+      socket.on('postChange', data => {
+        console.log(data);
+        console.log("Is that right?");
+        
+        this.props.dispatch({type:'update_post',data:data['fullDocument']})
+        // dispatch({type:'UPDATE'});
+        console.log("Update post")
+      
+      });
+
+      console.log(this.props.posts);
+
+
     return (
       <form onSubmit={this.handleSubmit}>
         <h2>Write down what you want here</h2>
@@ -123,30 +142,6 @@ class NewPost extends React.Component {
     );
   }
 }
-
-
-class NewComment extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-  render(){
-    return(
-      <h1>This is the New Comment Page</h1>
-    );
-  }
-}
-
-class CommentList extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-  render(){
-    return(
-      <h1>This is the Comment List Page</h1>
-    );
-  }
-}
-
 
 
 class Comment extends React.Component {
@@ -183,7 +178,15 @@ class Comment extends React.Component {
   }
 }
 
-export default Comment;
+function mapStateToProps(state){
+  console.log(state)
+  return{
+    posts:state.posts
+  };
+}
+
+
+export default connect(mapStateToProps)(Comment);
 
 
 
