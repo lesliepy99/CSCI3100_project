@@ -9,6 +9,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import Divider from '@material-ui/core/Divider';
 import { Link } from 'react-router-dom';
 
 import IconButton from '@material-ui/core/IconButton';
@@ -93,7 +94,9 @@ const Display = props => {
                     return null
                 })}
             </Grid>
+            <Divider/>
         </Container>
+
     );
 };
 

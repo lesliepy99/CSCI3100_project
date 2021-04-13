@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import '../App.css';
 import Button from '@material-ui/core/Button';
 import { fade, makeStyles } from '@material-ui/core/styles';
@@ -15,12 +16,18 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import CreateIcon from '@material-ui/icons/Create';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import TextField from '@material-ui/core/TextField';
-import {Route, NavLink, Switch, Redirect, Link} from 'react-router-dom'
+import {Route, NavLink, Switch, Redirect, Link} from 'react-router-dom';
 
+import CommentContent from './CommentContent'
 
 export default function PostDetail() {
     return (
+        <div>
         <h1>This is the PostDetail Page</h1>
+        {/* <PostContent/> */}
+        {/* <CommentContent/> */}
+        
+        </div>
 
     )
 }

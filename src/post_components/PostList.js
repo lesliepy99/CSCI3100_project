@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+
 import Button from '@material-ui/core/Button';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -58,8 +59,7 @@ export default function PostList() {
                 
                 <Link
                     to={{
-                        pathname: '/PostDetail',
-                        component: <PostDetail/>,
+                        pathname: '/home/PostDetail',
                     }}
                 >
                     <Button color="primary" >
