@@ -146,6 +146,17 @@ class Booklist extends Component {
 
     allGood = filtered;
 
+    console.log(allGood);
+
+    // filter rec goods
+    allGood.sort(function(a, b){
+      return (b.number_of_likes-a.number_of_likes)
+    });
+    console.log(allGood);
+
+    let recGood = allGood.slice(0,18);
+
+
     // filter shopping cart
     let shopList = my_info.shopping_list;
 
@@ -168,7 +179,7 @@ class Booklist extends Component {
         <Header title={title} content={content} />
 
         {/* Display product cards */}
-        <Display catagory={catagory} products={allGood} myId={this.props.my_id}/>
+        <Display catagory={catagory} products={recGood} myId={this.props.my_id} allUser={this.props.user_info}/>
 
       </main>
     );

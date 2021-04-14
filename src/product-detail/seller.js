@@ -42,11 +42,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Seller = props => {
-  let seller = props.seller;
+  let sellerId = props.sellerId;
   const description = props.description;
+  const allUser = props.allUser;
   const classes = useStyles();
 
-  //console.log(seller);
+  let seller_info = allUser.filter(info => {
+    //return country.name.toLowerCase().includes(inputs.toLowerCase())
+    if(info._id == sellerId){
+      return info;
+    }
+  })
+
+  let seller = seller_info[0];
+
+  console.log(seller);
   return (
     <Grid className={classes.cardGrid}>
       <Card className={classes.card}>
@@ -62,7 +72,7 @@ const Seller = props => {
             </IconButton>
           }
           title={seller.name}
-          subheader={seller.location}
+          subheader={seller.school}
         />
         <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
