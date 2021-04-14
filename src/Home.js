@@ -17,6 +17,7 @@ import PostDetail from './post_components/PostDetail';
 import NewPost from './post_components/NewPost';
 import { connect } from 'react-redux';
 import { io } from "socket.io-client";
+import { uploadFile } from 'react-s3';
 class Home extends Component{
     constructor(props){
         super(props);
@@ -50,6 +51,7 @@ class Home extends Component{
             })
         }).then((response) => response.json())
         .then((data) => {
+        
             console.log("The chat");
             console.log(data);
             this.props.dispatch({type:'chat_init',data:data})   
