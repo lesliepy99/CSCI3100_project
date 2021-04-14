@@ -80,9 +80,8 @@ class Home extends Component{
                                 <Route path='/home/NewPost'>
                                     <NewPost />
                                 </Route>
-                                <Route path='/home/PostDetail'>
-                                    <PostDetail />
-                                </Route>
+                                <Route path='/home/PostDetail/:id' component={PostDetail}/>
+                                
                                 <Route path='/home/mainpage'>
                                     <Mainpage name="Jack" />
                                 </Route>

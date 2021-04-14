@@ -26,15 +26,16 @@ import { io } from "socket.io-client";
 class PostDetail extends React.Component  {
     constructor(props) {
         super(props);
+        this.state={ content: this.props.location.content}
       }
     render(){
-       var blogs = this.props.posts; 
-
+        var content = this.state.content;
         return (
             
             <div>
             
             <h1>This is the PostDetail Page!!</h1>
+            <p>{content}</p>
             {/* <PostContent/> */}
             
             {/* <CommentContent/> */}
