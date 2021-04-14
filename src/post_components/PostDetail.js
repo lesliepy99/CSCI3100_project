@@ -18,19 +18,39 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import TextField from '@material-ui/core/TextField';
 import {Route, NavLink, Switch, Redirect, Link} from 'react-router-dom';
 
-import CommentContent from './CommentContent'
+import CommentContent from './CommentContent';
+import { connect } from 'react-redux';
+import { io } from "socket.io-client";
 
-export default function PostDetail() {
-    console.log("Detail Page")
-    return (
-        
-        <div>
-        
-        <h1>This is the PostDetail Page!!</h1>
-        {/* <PostContent/> */}
-        <CommentContent/>
-        
-        </div>
 
-    )
+class PostDetail extends React.Component  {
+    constructor(props) {
+        super(props);
+      }
+    render(){
+       var blogs = this.props.posts; 
+
+        return (
+            
+            <div>
+            
+            <h1>This is the PostDetail Page!!</h1>
+            {/* <PostContent/> */}
+            <CommentContent/>
+            
+            </div>
+    
+        )
+    }
+    
 }
+
+function mapStateToProps(state) {
+    console.log(state)
+    return {
+    my_id: state.my_id,
+    posts: state.posts,
+    };
+  }
+
+  export default connect(mapStateToProps)(PostDetail);
