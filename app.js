@@ -306,7 +306,7 @@ app.post('/create_transaction', urlencodedParser,(req, res) => {
    
     const good_id = req.body.good_id;
     const seller_id = req.body.seller_id;
-    const consumer_id = req.body.comsumer_id;
+    const consumer_id = req.body.consumer_id;
     const transaction_time = req.body.transaction_time;
     db.createChatItem({good_id, seller_id, consumer_id, transaction_time})
         .then(
