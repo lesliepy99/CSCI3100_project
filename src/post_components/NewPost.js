@@ -29,7 +29,7 @@ class NewPost extends React.Component {
     handleSubmit(event) {
       // 1. add the post to postList
       // 2. navigate back to postList page
-      // alert("Text was submitted: " + this.state.content);
+      alert("You have created a new post! Click the forum button to view it!");
       event.preventDefault();
 
       var PostContent = this.state.content; 
