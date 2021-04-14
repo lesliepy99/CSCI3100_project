@@ -279,8 +279,6 @@ app.post('/create_chat',jsonParser,(req, res) => {
     const two_user_id = [{'id':uid_1}, {'id': uid_2}];
     const message_content = req.body.message_content;
     const send_time = req.body.send_time;
-    const two_user_id = req.body.two_user_id;
-    const new_message = req.body.messages;
     
    
     db.createChatItem(two_user_id, message_content, uid_1, send_time) .then(
