@@ -110,46 +110,46 @@ class MyHistory extends React.Component {
 
           // find seller name
           var sellerName = "";
-          for(var i=0;i<userData.length;i++){
-            var tempID = userData[i]._id;
+          for(var seller_i=0;seller_i<userData.length;seller_i++){
+            var sellertempID = userData[seller_i]._id;
             //console.log(tempID);
-            if ( (tempID)==(seller_id).toString() ){
-                console.log("Find sellerName: "+userData[i].name);
-                sellerName = userData[i].name;
+            if ( (sellertempID)==(seller_id).toString() ){
+                console.log("Find sellerName: "+userData[seller_i].name);
+                sellerName = userData[seller_i].name;
                 break;
             }
             else{
-                
+                continue;
             }
           }
 
           // find consumer name
           var consumerName = "";
-          for(var i=0;i<userData.length;i++){
-            var tempID = userData[i]._id;
+          for(var consumer_i=0;consumer_i<userData.length;consumer_i++){
+            var consumertempID = userData[consumer_i]._id;
             //console.log(tempID);
-            if ( (tempID)==(consumer_id).toString() ){
-                console.log("Find consumerName: "+userData[i].name);
-                consumerName = userData[i].name;
+            if ( (consumertempID)==(consumer_id).toString() ){
+                console.log("Find consumerName: "+userData[consumer_i].name);
+                consumerName = userData[consumer_i].name;
                 break;
             }
             else{
-                
+                continue;
             }
           }
 
           // find good name
           var goodName = "";
-          for(var i=0;i<goodData.length;i++){
-            var tempID = goodData[i]._id;
+          for(var good_i=0;good_i<goodData.length;good_i++){
+            var goodtempID = goodData[good_i]._id;
             //console.log(tempID);
-            if ( (tempID)==(good_id).toString() ){
-                console.log("Find goodName: "+goodData[i].name);
-                goodName = goodData[i].name;
+            if ( (goodtempID)==(good_id).toString() ){
+                console.log("Find goodName: "+goodData[good_i].name);
+                goodName = goodData[good_i].name;
                 break;
             }
             else{
-                
+                continue;
             }
           }
 
