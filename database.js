@@ -94,7 +94,7 @@ PostModel = mongoose.model('Post', PostSchema);
 TransactionModel = mongoose.model('Transaction', TransactionSchema);
 AuthCodeModel = mongoose.model('Authcode', AuthCodeSchema);
 
-createUser = (name, password, email, school,year) => new Promise((resolve, reject) => {
+createUser = (name, password, email, school) => new Promise((resolve, reject) => {
     UserModel.findOne({ email: email }, (err, user) => {
         if (err) reject(err);
         else if (!user) {
@@ -175,16 +175,56 @@ findAllGoods = () => new Promise((resolve, reject) => {
     })
 })
 
-createChatItem = (two_user_id, new_message) => new Promise((resolve, reject) => {
-    let update = {$push:{messages:new_message}}
-    let options = {upsert: true, new: true, setDefaultsOnInsert: true};
-    ChatModel.findOneAndUpdate({ two_user_id: { $all: [two_user_id[0], two_user_id[1]]}},update,options, (err, result) =>{
-        if (err || !result) reject(err);
-        else {
-            resolve(true);
-        }
-    })
+createChatItem = (two_user_id, content, senderId, chat_time) => new Promise((resolve, reject) => {
+    console.log("chat_two_user_id"+two_user_id)
+    
+    // console.log( mongoose.Types.ObjectId(two_user_id[0]))
+    // console.log(mongoose.Types.ObjectId(two_user_id[1]))
 
+    var ids = [{'id':two_user_id[0]['id']},{'id':two_user_id[1]['id']}]
+    console.log("in database");
+    console.log(content)
+    console.log(senderId)
+    console.log(chat_time)
+    let update = {$push:{messages:{'content':content,'senderId':senderId,'chat_time': chat_time}}}
+    // let update = {$push:{messages:{'content':content,'senderId':senderId}}}
+    ChatModel.findOne({ two_user_id: {  $all: [
+        {"$elemMatch": two_user_id[0]},
+        {"$elemMatch": two_user_id[1]}
+      ]}}, (err, result)=>{
+          if(err) reject(err);
+          else if(!result){
+             
+             ChatModel.create({two_user_id:ids,messages:[]}, (err, result) =>{
+                if (err || !result) reject(err);
+                else {
+                    ChatModel.update({ two_user_id: {  $all: [
+                        {"$elemMatch": two_user_id[0]},
+                        {"$elemMatch": two_user_id[1]}
+                      ]}},update, (err, result) =>{
+                        if (err || !result) reject(err);
+                        else {
+                            resolve(true);
+                        }
+                    })
+                }
+            })
+          }
+          else{
+              console.log("Already exist");
+            ChatModel.update({ two_user_id: {  $all: [
+                {"$elemMatch": two_user_id[0]},
+                {"$elemMatch": two_user_id[1]}
+              ]}},update, (err, result) =>{
+                if (err || !result) reject(err);
+                else {
+                    resolve(true);
+                }
+            })
+           
+              resolve(true);
+          }
+      })
     // ChatrModel.create({ two_user_id: two_user_id, messages: {} }, (err, result) => {
     //     if (err || !result) reject(err);
     //     else {
@@ -193,9 +233,12 @@ createChatItem = (two_user_id, new_message) => new Promise((resolve, reject) => 
     // });
 })
 
-findSpecificChats = (two_user_id) => new Promise((resolve, reject) => {
-
-    ChatModel.find({ two_user_id: { $all: [two_user_id[0], two_user_id[1]] } }, (err, chat) => {
+findSpecificChats = (id) => new Promise((resolve, reject) => {
+   
+    ChatModel.find({ two_user_id: {  $all: [
+       
+        {"$elemMatch": id}
+      ]}}, (err, chat) => {
         if (err) reject(err);
         else if (!chat) resolve(undefined);
         else {
@@ -226,8 +269,12 @@ findAllPosts = () => new Promise((resolve, reject) => {
 })
 
 addPostComment = (postId, senderId, content) => new Promise((resolve, reject) => {
+    console.log(postId);
+    console.log(senderId);
+    console.log(content);
+    let update = {$push:{comments: {"senderId":senderId, "content":content}}}
     var newComment = {"senderId":senderId, "content":content};
-    PostModel.update({_id:postId},{$push:{comments:newComment}}, (err, result) => {
+    PostModel.update({_id:postId},update, (err, result) => {
         if (err || !result) reject(err);
         else {
             resolve(true);

@@ -222,12 +222,13 @@ app.get('/find_all_posts', (req, res) => {
     );
 });
 
-app.post('/add_post', urlencodedParser,(req, res) => {
+app.post('/add_post', jsonParser,(req, res) => {
+    console.log("body")
     console.log(req.body);
     const senderId = req.body.senderId;
     const content = req.body.content;
     const comments = req.body.comments;
-    db.createPost({ senderId,content,comments })
+    db.createPost( senderId,content,comments )
         .then(
             result => {
                 if (result) {
@@ -242,12 +243,12 @@ app.post('/add_post', urlencodedParser,(req, res) => {
 })
 
 
-app.post('/add_post_comment', urlencodedParser,(req, res) => {
+app.post('/add_post_comment',jsonParser,(req, res) => {
     console.log(req.body);
     const postId = req.body.postId;
     const senderId = req.body.senderId;
     const content = req.body.content;
-    db.addPostComment({postId, senderId, content})
+    db.addPostComment(postId, senderId, content)
         .then(
             result => {
                 if (result) {
@@ -261,44 +262,66 @@ app.post('/add_post_comment', urlencodedParser,(req, res) => {
         );
 })
 
-app.post('/find_specific_chat', urlencodedParser,(req, res) => {
+app.post('/find_specific_chat', jsonParser,(req, res) => {
     console.log(req.body);
-    const two_user_id = req.body.two_user_id;
-    
-    db.findSpecificChats({two_user_id})
+    const id = req.body.id;
+    console.log(id);
+    db.findSpecificChats({id})
         .then(
         re => { res.send(JSON.stringify(re)) },
         err => { res.status(500).send(err.toString()) }
         );
 })
 
-app.post('/create_chat', jsonParser,(req, res) => {
+app.post('/create_chat',jsonParser,(req, res) => {
     console.log(req.body);
     const uid_1 = req.body.uid_1;
     const uid_2 = req.body.uid_2;
     const two_user_id = [{'id':uid_1}, {'id': uid_2}];
     const message_content = req.body.message_content;
     const send_time = req.body.send_time;
-    const new_message=[
-        {"content": message_content},
-        {"senderId": uid_1},
-        {"chat_time": send_time}
-    ];
-    console.log(two_user_id);
-    console.log(new_message);
-    db.createChatItem(two_user_id, new_message)
-        .then(
-            result => {
-                if (result) {
-                    res.status(200).send("Registered!");
-                }
-                else {
-                    res.status(403).send("Overlapped!");
-                }
-            },
-            err => { res.status(500).send(err.toString()) }
-        );
-})
+    
+   
+    db.createChatItem(two_user_id, message_content, uid_1, send_time) .then(
+        result => {
+            if (result) {
+                res.status(200).send("Registered!");
+            }
+            else {
+                res.status(403).send("Overlapped!");
+            }
+        },
+        err => { res.status(500).send(err.toString()) }
+    );
+});
+
+// app.post('/create_chat', jsonParser,(req, res) => {
+//     console.log(req.body);
+//     const uid_1 = req.body.uid_1;
+//     const uid_2 = req.body.uid_2;
+//     const two_user_id = [{'id':uid_1}, {'id': uid_2}];
+//     const message_content = req.body.message_content;
+//     const send_time = req.body.send_time;
+//     const new_message=[
+//         {"content": message_content},
+//         {"senderId": uid_1},
+//         {"chat_time": send_time}
+//     ];
+//     console.log(two_user_id);
+//     console.log(new_message);
+//     db.createChatItem(two_user_id, new_message)
+//         .then(
+//             result => {
+//                 if (result) {
+//                     res.status(200).send("Registered!");
+//                 }
+//                 else {
+//                     res.status(403).send("Overlapped!");
+//                 }
+//             },
+//             err => { res.status(500).send(err.toString()) }
+//         );
+// })
 
 
 app.post('/create_transaction', urlencodedParser,(req, res) => {

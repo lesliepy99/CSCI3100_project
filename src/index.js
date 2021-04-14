@@ -14,7 +14,7 @@ var goods = [];
 var posts =[];
 var my_id = null;
 var transactions = [];
-
+var my_chats = [];
 
    fetch('http://localhost:3000/find_all_users',)
   .then(async res => {
@@ -61,7 +61,7 @@ var transactions = [];
 console.log(goods);
 console.log(user_info);
 // console.log(goods);
-const dataStore = { user_info: user_info, goods: goods, my_id: my_id,posts:posts}
+const dataStore = { user_info: user_info, goods: goods, my_id: my_id,posts:posts,my_chats:my_chats}
 console.log(dataStore)
 const reducer = (state = dataStore, action) =>  {
   
@@ -80,14 +80,16 @@ if (action.type=='update_user'){
   }
 
      else if (action.data['operationType']=="insert"){
-    user_info.push(action.data['fullDocument'])
+      if(!user_info.some(item => action.data['fullDocument']._id == item._id)){
+        user_info.push(action.data['fullDocument'])
+      }   
   }
     
-  return  {user_info,goods,my_id,posts,transactions};
+  return  {user_info,goods,my_id,posts,transactions,my_chats};
   }
   else if(action.type=="signin"){
     my_id = action.data;
-    return  {user_info,goods,my_id,posts,transactions};
+    return  {user_info,goods,my_id,posts,transactions,my_chats};
   }
   else if(action.type=="update_good"){
     if(action.data['operationType']=="replace"){
@@ -107,7 +109,7 @@ if (action.type=='update_user'){
       }
     }
     
-    return  {user_info,goods,my_id,posts,transactions};
+    return  {user_info,goods,my_id,posts,transactions,my_chats};
   }
 
   else if(action.type=="update_post"){
@@ -123,10 +125,12 @@ if (action.type=='update_user'){
       goods[index] = action.data['fullDocument']
     }  
     else if (action.data['operationType']=="add_post"){
-      goods.push(action.data['fullDocument'])
-    }
-    
-    return  {user_info,goods,my_id,posts,transactions};
+      if(!posts.some(item => action.data['fullDocument']._id == item._id)){
+        posts.push(action.data['fullDocument'])
+      }
+      
+    }   
+    return  {user_info,goods,my_id,posts,transactions,my_chats};
   }
 
   else if(action.type=="transaction_init"){ 
@@ -135,8 +139,31 @@ if (action.type=='update_user'){
           transactions.push(action.data[i]);
         }
     }
-    return  {user_info,goods,my_id,posts,transactions};
+    return  {user_info,goods,my_id,posts,transactions,my_chats};
   }
+  else if(action.type=="add_transaction"){ 
+    if(!transactions.some(item => action.data['fullDocument']._id == item._id)){
+      transactions.push(action.data['fullDocument'])
+    }
+    return  {user_info,goods,my_id,posts,transactions,my_chats};
+  }
+
+  else if(action.type=="chat_init"){ 
+    if(my_chats.length==0){
+        for(var i=0;i<action.data.length;i++){
+          my_chats.push(action.data[i]);
+        }
+    }
+    return  {user_info,goods,my_id,posts,transactions,my_chats};
+  }
+  else if(action.type=="addChat"){ 
+    if(!my_chats.some(item => action.data['fullDocument']._id == item._id)){
+      my_chats.push(action.data['fullDocument'])
+    }
+    return  {user_info,goods,my_id,posts,transactions,my_chats};
+  }
+
+  
    
   else{
 
