@@ -102,8 +102,8 @@ class PersonalInfo extends React.Component {
           console.log(thisUser);
       return (
         <div>
-          <h2> I'm feeling good Today </h2>
-          <h3> My detailed personal information: </h3>
+          <h2> My personal information </h2>
+          <h3> I'm feeling good Today :D </h3>
           <ul>
             {/* email:
                 name: 

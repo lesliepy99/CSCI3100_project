@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) =>({
 class MyHistory extends React.Component {
     render() {
       const data = this.props.transactions;
-      var thisUser = ["*** Transaction Data ***","\n"]; 
+      var thisUser = ["                *** Transaction Data ***","\n\n"]; 
       var transaction_index = 0;
       // console.log("transaction length is: "+ thisUser.length);
       // actually "thisUser" means this transaction. just for convenience
@@ -102,14 +102,14 @@ class MyHistory extends React.Component {
 
           thisUser = thisUser.concat("Transaction number " + transaction_index.toString() + ":  \n");
           thisUser = thisUser.concat(
-            "    Good_id: " + good_id.toString());
+            "        Good_id: " + good_id.toString() + "\n");
           thisUser = thisUser.concat(
-            "    Seller_id: " + seller_id.toString());
+            "        Seller_id: " + seller_id.toString() + "\n");
           thisUser = thisUser.concat(
-            "    Consumer_id: " + consumer_id.toString());
+            "        Consumer_id: " + consumer_id.toString() + "\n");
           thisUser = thisUser.concat(
-            "    Transaction_time: " + transaction_time.toString());
-          thisUser = thisUser.concat("\n");
+            "        Transaction_time: " + transaction_time.toString() + "\n");
+          thisUser = thisUser.concat("\n\n");
 
 
           console.log("transaction length is: "+ thisUser.length);
@@ -126,18 +126,19 @@ class MyHistory extends React.Component {
       //console.log(JSON.stringify(thisUser));
       return (
         <div style={{whiteSpace: 'pre-wrap'}}>
-          <h2> Your history of selling/purchasing </h2>
+          <h2> Transaction history </h2>
           <h3>
             {" "}
-              Find all your previous transactions here:{" "}
+              Find all your previous transactions here{" "}
           </h3>
-          <ul>
+          {/* <ul>
             {
               //JSON.stringify(thisUser)
               thisUser.map(txt => <li>{txt}</li>)
               //thisUser
             }
-          </ul>
+          </ul> */}
+          {thisUser}
           <button onClick={() => alert("Hello There!")}>Show an message</button>
         </div>
       );
