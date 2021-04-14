@@ -86,7 +86,8 @@ class UploadGood extends React.Component {
       shortDescription: "",
       expectedPrice: "",
       confirmTick: false,
-      selectedFile: null
+      selectedFile: null,
+      displayImage:null
 
     };
 
@@ -162,13 +163,13 @@ class UploadGood extends React.Component {
 
   onFileChange = event => { 
     // Update the state 
-    this.setState({ selectedFile: event.target.files[0] }); 
+    this.setState({ selectedFile: event.target.files[0],displayImage:URL.createObjectURL(event.target.files[0]) }); 
   }; 
 
   onFileUpload = () => { 
     console.log("Before call");
     ReactS3Client
-    .uploadFile(this.state.selectedFile, "test.png")
+    .uploadFile(this.state.selectedFile, this.props.my_id+".png")
     .then(data => console.log(data))
     .catch(err => console.error(err))
 
@@ -319,8 +320,9 @@ class UploadGood extends React.Component {
             onChange={this.handleInputChange}
             variant="outlined"
           />
-
-
+          <br /><br /><br /><br />
+         <img src={ this.state.displayImage  } alt="Example2" width="96" height="65" />
+          
           <br /><br /><br /><br />
           <FormControlLabel  required
             control={

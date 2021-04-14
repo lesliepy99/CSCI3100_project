@@ -3,7 +3,7 @@
    
     var config = {
         bucketName: 'utransformer',
-        dirName: 'media',
+        dirName: 'good_image',
         region: 'ap-southeast-1',
         accessKeyId: 'AKIA2GJN7FX7LP6KTL55',
         secretAccessKey: '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',
