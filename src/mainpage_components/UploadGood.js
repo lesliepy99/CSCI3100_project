@@ -164,7 +164,7 @@ class UploadGood extends React.Component {
                                           
           }); 
 
-          alert('Your good: ' + this.state.nameOfGood + ' has been uploaded along with photo.');
+          alert('Your good: "' + this.state.nameOfGood + '" has been uploaded along with photo.');
       })();
   
 }
