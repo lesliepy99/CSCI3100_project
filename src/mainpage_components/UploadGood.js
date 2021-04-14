@@ -344,7 +344,7 @@ class UploadGood extends React.Component {
           <br /><br /><br /><br />
           <input type="file" onChange={this.onFileChange}/> 
                 <button onClick={this.onFileUpload}> 
-                  Upload! 
+                  Upload photo! 
                 </button> 
 
         </form>

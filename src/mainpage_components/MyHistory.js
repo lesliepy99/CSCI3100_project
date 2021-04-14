@@ -78,20 +78,42 @@ const useStyles = makeStyles((theme) =>({
 class MyHistory extends React.Component {
     render() {
       const data = this.props.transactions;
-      var thisUser = []; 
+      var thisUser = ["*** Transaction Data ***","\n"]; 
+      var transaction_index = 0;
+      // console.log("transaction length is: "+ thisUser.length);
       // actually "thisUser" means this transaction. just for convenience
 
       for (var i = 0; i < data.length; i++) {
+
         var seller_id = data[i].seller_id;
         var consumer_id = data[i].consumer_id;
+        var good_id = data[i].good_id;
+        var transaction_time = data[i].transaction_time;
+
         //console.log(tempID);
         if ((seller_id) == (this.props.my_id).toString() || 
                 (consumer_id) == (this.props.my_id).toString()) {
 
           console.log("Find identical transaction_id: " + 
                 data[i]._id + ". seller_id: " + seller_id + ". consumer_id: " + consumer_id);
-          thisUser = [].push(data[i]);
-          console.log("transaction is: "+data[i]);
+
+          transaction_index ++;
+
+
+          thisUser = thisUser.concat("Transaction number " + transaction_index.toString() + ":  \n");
+          thisUser = thisUser.concat(
+            "    Good_id: " + good_id.toString());
+          thisUser = thisUser.concat(
+            "    Seller_id: " + seller_id.toString());
+          thisUser = thisUser.concat(
+            "    Consumer_id: " + consumer_id.toString());
+          thisUser = thisUser.concat(
+            "    Transaction_time: " + transaction_time.toString());
+          thisUser = thisUser.concat("\n");
+
+
+          console.log("transaction length is: "+ thisUser.length);
+          console.log("transaction is: "+ thisUser);
           //break;
         }
         else {
@@ -101,16 +123,20 @@ class MyHistory extends React.Component {
 
 
 
-      console.log(thisUser);
+      //console.log(JSON.stringify(thisUser));
       return (
-        <div>
+        <div style={{whiteSpace: 'pre-wrap'}}>
           <h2> Your history of selling/purchasing </h2>
           <h3>
             {" "}
-              Look what you have obtained and how you maximize the use of resources:{" "}
+              Find all your previous transactions here:{" "}
           </h3>
           <ul>
-            <li>{thisUser}</li>
+            {
+              //JSON.stringify(thisUser)
+              thisUser.map(txt => <li>{txt}</li>)
+              //thisUser
+            }
           </ul>
           <button onClick={() => alert("Hello There!")}>Show an message</button>
         </div>
