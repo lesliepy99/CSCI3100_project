@@ -11,6 +11,22 @@ import SendIcon from '@material-ui/icons/Send';
 import {connect} from 'react-redux';
 import { io } from "socket.io-client";
 
+function sortDownDate(message1, message2) {
+    return Date.parse(message1.chat_time) - Date.parse(message2.chat_time);
+}
+
+function formatDateTime(date) {  
+    var y = date.getFullYear();  
+    var m = date.getMonth() + 1;  
+    m = m < 10 ? ('0' + m) : m;  
+    var d = date.getDate();  
+    d = d < 10 ? ('0' + d) : d;  
+    var h = date.getHours();  
+    var minute = date.getMinutes();  
+    minute = minute < 10 ? ('0' + minute) : minute;  
+    return y + '-' + m + '-' + d+' '+h+':'+minute;  
+};
+
 class Chat extends React.Component {
     constructor(props) {
         super(props);
@@ -81,6 +97,20 @@ class Chat extends React.Component {
         const my_id=this.props.my_id;
         const seller_id=this.props.seller_id;
         const all_chats=this.props.my_chats;
+        const all_users=this.props.user_info;
+        var user1;
+        var user2;
+        for(var i=0;i<all_users.length;i++){
+            var tempID = all_users[i]._id;
+            if ( (tempID)==(my_id).toString() ){
+                user1=all_users[i];
+            }
+            if((tempID)==(seller_id).toString()){
+                user2 =all_users[i];
+            }
+        }
+        const username1=user1.name;
+        const username2=user2.name;
         var cur_chats=[];
         console.log('yes, there are chats:',all_chats);
         for(var i=0;i<all_chats.length;i++){
@@ -92,15 +122,19 @@ class Chat extends React.Component {
                 console.log("add one item to cur_chats!");
             }
         }
-
-        //message_area.innerHTML+=`debug`;
+        console.log("two user are:",username1,"and",username2);
         var cur_messages=[];
         for(var i=0;i<cur_chats.length;i++){
             cur_messages=cur_messages.concat(cur_chats[i].messages)
         }
+        cur_messages=cur_messages.sort(sortDownDate);
         console.log('wuxiang debug:',cur_messages);
-        var displayMessage='';
-        //displayMessage+=cur_messages[0].content;
+        var displayMessage=``;
+        for(var i=0;i<cur_messages.length;i++){
+            var sender_name=cur_messages[i].senderId==my_id?username1:username2;
+            var time=new Date(cur_messages[i].chat_time);
+            displayMessage+=`${sender_name} (at  ${formatDateTime(time)}): ${cur_messages[i].content}<br/>`;
+        }
 
         return (
             <Container maxWidth={'md'} >
@@ -115,7 +149,7 @@ class Chat extends React.Component {
                 <hr/>
                 <div>
                     <Typography id='message_area' component="div" style={{ backgroundColor: '#c1eff4', height: '60vh' }}>
-                        hello, world!{displayMessage}
+                        <div dangerouslySetInnerHTML={{__html: displayMessage}}/>
                     </Typography>
                 </div>
                 <hr/>
@@ -133,6 +167,7 @@ class Chat extends React.Component {
 function mapStateToProps(state, ownProps){
     return{
       goods:state.goods,
+      user_info: state.user_info,
       my_id:state.my_id,
       my_chats: state.my_chats,
       seller_id: ownProps.seller,
