@@ -220,15 +220,15 @@ class UploadGood extends React.Component {
 
     return (
       <div>
-        <h2> Please add description of your good: </h2>
-        <h3> For your good's description, please include: </h3>
+        <h2> Upload good </h2>
+        <h3> For adding your good's description, please include: </h3>
         <ul>
           <li>Name</li>
           <li>Type</li>
           <li>Location you sell the good</li>
           <li>Short Description</li>
           <li>Expected Price</li>
-          <li>(Optional) Its Photo</li>
+          <li>Its Photo</li>
         </ul>
 
         <form onSubmit={this.handleSubmit}>

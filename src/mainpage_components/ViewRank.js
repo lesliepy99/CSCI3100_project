@@ -79,7 +79,7 @@ class ViewRank extends React.Component {
     render() {
       return (
         <div>
-          <h2> Here is your rank data: </h2>
+          <h2> My rank data </h2>
           <h3>
             {" "}
               Please try to follow community rules and stay honest while using the
