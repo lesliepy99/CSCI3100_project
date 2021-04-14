@@ -123,7 +123,7 @@ const DisplayUser = props => {
                                             />
                                             <CardMedia
                                                 className={classes.cardMedia}
-                                                image={getImageUrl("user_avatar", post._id)}//'https://source.unsplash.com/featured/?people'
+                                                image='https://source.unsplash.com/featured/?people'
                                                 title="Paella dish"
                                             />
                                         </Card>
@@ -189,7 +189,7 @@ const DisplayUser = props => {
                                             />
                                             <CardMedia
                                                 className={classes.cardMedia}
-                                                image={image={getImageUrl("user_avatar", post._id)}//'https://source.unsplash.com/featured/?people'
+                                                image='https://source.unsplash.com/featured/?people'
                                                 title="Paella dish"
                                             />
                                         </Card>
