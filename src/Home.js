@@ -37,10 +37,23 @@ class Home extends Component{
         }).then((response) => response.json())
         .then((data) => {
             console.log(data)
-                this.props.dispatch({type:'transaction_init',data:data})
-               
-           
-          
+                this.props.dispatch({type:'transaction_init',data:data})                                 
+        });    
+
+        fetch("http://localhost:3000/find_specific_chat",{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id:this.props.my_id
+            })
+        }).then((response) => response.json())
+        .then((data) => {
+            console.log("The chat");
+            console.log(data);
+            this.props.dispatch({type:'chat_init',data:data})   
+                                        
         });    
       }
     

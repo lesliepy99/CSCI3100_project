@@ -233,11 +233,12 @@ createChatItem = (two_user_id, content, senderId, chat_time) => new Promise((res
     // });
 })
 
-findSpecificChats = (two_user_id) => new Promise((resolve, reject) => {
-    console.log("chat_two_user_id"+two_user_id)
-    console.log(two_user_id[0])
-  
-    ChatModel.find({ two_user_id: { $all: [two_user_id[0], two_user_id[1]] } }, (err, chat) => {
+findSpecificChats = (id) => new Promise((resolve, reject) => {
+   
+    ChatModel.find({ two_user_id: {  $all: [
+       
+        {"$elemMatch": id}
+      ]}}, (err, chat) => {
         if (err) reject(err);
         else if (!chat) resolve(undefined);
         else {

@@ -263,9 +263,9 @@ app.post('/add_post_comment', urlencodedParser,(req, res) => {
 
 app.post('/find_specific_chat', jsonParser,(req, res) => {
     console.log(req.body);
-    const two_user_id = req.body.two_user_id;
-    
-    db.findSpecificChats({two_user_id})
+    const id = req.body.id;
+    console.log(id);
+    db.findSpecificChats({id})
         .then(
         re => { res.send(JSON.stringify(re)) },
         err => { res.status(500).send(err.toString()) }
