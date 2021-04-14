@@ -72,11 +72,12 @@ const Display = props => {
     };
     
     let len = products.length;
-    //console.log(len);
+    console.log(len);
     let list = [];
-    
+    //let list = [{id: 1, style: "outlined"}, {id: 2,style: "outlined"}, {id: 3, style: "outlined"}, {id: 4, style: "outlined"}, {id: 5, syle: "outlined"}];
     for (var i = 1; i < len; i++) {
         if(i*9 >=len){
+            console.log(i);
             list.push(i);
             i = len;
         }
@@ -84,7 +85,7 @@ const Display = props => {
         list.push(i);
         }
     }
-    //console.log(list);
+    console.log(list);
 
     const [flag, setFlag] = React.useState('');
     const [goods, setGoods] = React.useState('');
@@ -96,15 +97,14 @@ const Display = props => {
         setFlag(pageNumber);
         setGoods(array.slice((pageNumber-1)*9, pageNumber*9));
     };
-    //console.log(flag);
-    //console.log(goods);
+    console.log(flag);
+    console.log(goods);
     useEffect(() => { changePage() }, []);
 
     let sample = products;
-    sample = sample.slice(0, 9);
+    sample.slice(0, 9);
 
-
-    if(goods.length != 0){
+    if(goods){
     return (
         <Container className={classes.cardGrid} maxWidth="md">
             <div pclassName={classes.catagory}>
@@ -189,7 +189,7 @@ const Display = props => {
                 </div>
     
                 <Grid container spacing={4}>
-                    {sample.map((post) => {
+                    {goods && goods.map((post) => {
                         if (post) {
                             return (
                                 <Grid item key={post} xs={12} sm={4} md={4}>
@@ -236,7 +236,7 @@ const Display = props => {
                 <div style={{paddingTop: 16, align: "center"}} align="center">
                 <ButtonGroup color="secondary" aria-label="outlined secondary button group">
                     {list.map((page) => {
-                        if((flag && flag==page) || (!flag && page==1)){
+                        if(flag && flag==page){
                         return(    
                         <Button variant="contained" onClick={(e) => changePage(e, page)}>
                             {page}

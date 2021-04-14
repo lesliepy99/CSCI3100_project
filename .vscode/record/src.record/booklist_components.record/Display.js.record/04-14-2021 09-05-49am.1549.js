@@ -72,7 +72,7 @@ const Display = props => {
     };
     
     let len = products.length;
-    //console.log(len);
+    console.log(len);
     let list = [];
     
     for (var i = 1; i < len; i++) {
@@ -84,7 +84,7 @@ const Display = props => {
         list.push(i);
         }
     }
-    //console.log(list);
+    console.log(list);
 
     const [flag, setFlag] = React.useState('');
     const [goods, setGoods] = React.useState('');
@@ -96,13 +96,12 @@ const Display = props => {
         setFlag(pageNumber);
         setGoods(array.slice((pageNumber-1)*9, pageNumber*9));
     };
-    //console.log(flag);
-    //console.log(goods);
+    console.log(flag);
+    console.log(goods);
     useEffect(() => { changePage() }, []);
 
     let sample = products;
-    sample = sample.slice(0, 9);
-
+    sample.slice(0, 9);
 
     if(goods.length != 0){
     return (
@@ -236,7 +235,7 @@ const Display = props => {
                 <div style={{paddingTop: 16, align: "center"}} align="center">
                 <ButtonGroup color="secondary" aria-label="outlined secondary button group">
                     {list.map((page) => {
-                        if((flag && flag==page) || (!flag && page==1)){
+                        if(flag && flag==page){
                         return(    
                         <Button variant="contained" onClick={(e) => changePage(e, page)}>
                             {page}

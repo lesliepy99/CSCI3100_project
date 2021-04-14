@@ -236,7 +236,7 @@ const Display = props => {
                 <div style={{paddingTop: 16, align: "center"}} align="center">
                 <ButtonGroup color="secondary" aria-label="outlined secondary button group">
                     {list.map((page) => {
-                        if((flag && flag==page) || (!flag && page==1)){
+                        if(flag && flag==page){
                         return(    
                         <Button variant="contained" onClick={(e) => changePage(e, page)}>
                             {page}

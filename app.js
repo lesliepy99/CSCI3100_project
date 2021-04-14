@@ -274,26 +274,55 @@ app.post('/find_specific_chat', jsonParser,(req, res) => {
 
 app.post('/create_chat',jsonParser,(req, res) => {
     console.log(req.body);
-    
+    const uid_1 = req.body.uid_1;
+    const uid_2 = req.body.uid_2;
+    const two_user_id = [{'id':uid_1}, {'id': uid_2}];
+    const message_content = req.body.message_content;
+    const send_time = req.body.send_time;
     const two_user_id = req.body.two_user_id;
     const new_message = req.body.messages;
-    console.log(two_user_id)
-    console.log(two_user_id[0])
-    console.log("before pass");
+    
    
-    db.createChatItem(two_user_id, new_message[0]['content'], new_message[1]['senderId'], new_message[2]['chat_time'])
-        .then(
-            result => {
-                if (result) {
-                    res.status(200).send("Registered!");
-                }
-                else {
-                    res.status(403).send("Overlapped!");
-                }
-            },
-            err => { res.status(500).send(err.toString()) }
-        );
-})
+    db.createChatItem(two_user_id, message_content, uid_1, send_time) .then(
+        result => {
+            if (result) {
+                res.status(200).send("Registered!");
+            }
+            else {
+                res.status(403).send("Overlapped!");
+            }
+        },
+        err => { res.status(500).send(err.toString()) }
+    );
+});
+
+// app.post('/create_chat', jsonParser,(req, res) => {
+//     console.log(req.body);
+//     const uid_1 = req.body.uid_1;
+//     const uid_2 = req.body.uid_2;
+//     const two_user_id = [{'id':uid_1}, {'id': uid_2}];
+//     const message_content = req.body.message_content;
+//     const send_time = req.body.send_time;
+//     const new_message=[
+//         {"content": message_content},
+//         {"senderId": uid_1},
+//         {"chat_time": send_time}
+//     ];
+//     console.log(two_user_id);
+//     console.log(new_message);
+//     db.createChatItem(two_user_id, new_message)
+//         .then(
+//             result => {
+//                 if (result) {
+//                     res.status(200).send("Registered!");
+//                 }
+//                 else {
+//                     res.status(403).send("Overlapped!");
+//                 }
+//             },
+//             err => { res.status(500).send(err.toString()) }
+//         );
+// })
 
 
 app.post('/create_transaction', urlencodedParser,(req, res) => {
@@ -301,7 +330,7 @@ app.post('/create_transaction', urlencodedParser,(req, res) => {
    
     const good_id = req.body.good_id;
     const seller_id = req.body.seller_id;
-    const consumer_id = req.body.comsumer_id;
+    const consumer_id = req.body.consumer_id;
     const transaction_time = req.body.transaction_time;
     db.createChatItem({good_id, seller_id, consumer_id, transaction_time})
         .then(

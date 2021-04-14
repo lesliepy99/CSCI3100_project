@@ -5,6 +5,7 @@ import ProductPrice from './product-detail/price';
 import ProductSeller from './product-detail/seller';
 import ProductBuyActions from './product-detail/actions';
 import ProductDetail from './product-detail/detail';
+import Bar from './booklist_components/Bar';
 
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -16,6 +17,8 @@ export default class Product extends React.Component {
         super(props);
 
         this.state = {
+            id: this.props.location.state.id,
+            myId: this.props.location.state.myId,
             name: this.props.location.state.name,
             images: 'https://source.unsplash.com/random',
             price: this.props.location.state.price,
@@ -44,6 +47,7 @@ export default class Product extends React.Component {
 
         return (
             <div>
+                <Bar />
                 <Container style={{flexGrow: 1}} >
                     <Grid container spacing={5}>
                         <Grid item xs={false} sm={4} md={6}>
@@ -55,7 +59,7 @@ export default class Product extends React.Component {
                             <div className="col-xs-12 col-sm-6">
                                 <ProductPrice price={this.props.location.state.price} />
                                 <ProductSeller seller={this.state.seller} description={this.state.description}/>
-                                <ProductBuyActions sellerId={this.state.sellerId}/>
+                                <ProductBuyActions sellerId={this.state.sellerId} myId={this.state.myId} goodId={this.state.id}/>
                                 <ProductDetail features={this.state.features} />
                             </div>
                         </Grid>

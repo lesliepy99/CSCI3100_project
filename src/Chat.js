@@ -27,24 +27,26 @@ class Chat extends React.Component {
         this.setState({date: new Date()});
         const send_time=this.state.date;
         const uid_1=this.props.my_id;
+        const uid_2=this.props.seller_id;
         const message_content=event.target.elements.send_text.value;
         console.log('message_content: ', message_content);
         console.log('my_id:', uid_1);
+        console.log('seller_id:', uid_2);
         console.log('send_time:',send_time);
-        fetch('http://localhost:3000/add_chat',{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                uid_1: uid_1,
-                message_content: message_content,
-                send_time: send_time,
-            })
-        })
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .catch(err => console.log(err))
+        (async ()=>{
+            await fetch('http://localhost:3000/create_chat',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    uid_1: uid_1.toString(),
+                    uid_2: uid_2.toString(),
+                    message_content: message_content,
+                    send_time: send_time,
+                })
+            });
+        })();
     }
 
     render() {

@@ -138,7 +138,7 @@ findAllUsers = () => new Promise((resolve, reject) => {
 insertShoppingList = (user_id, good_id) => new Promise((resolve, reject) =>{
         let update = {$push:{shopping_list:good_id}}
         let options = {upsert: true, new: true, setDefaultsOnInsert: true};
-        ChatModel.findOneAndUpdate({ _id: user_id},update,options, (err, result) =>{
+        UserModel.findOneAndUpdate({ _id: user_id},update,options, (err, result) =>{
             if (err || !result) reject(err);
             else {
                 resolve(true);
