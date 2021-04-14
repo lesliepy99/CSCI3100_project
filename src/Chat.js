@@ -19,6 +19,30 @@ class Chat extends React.Component {
             // seller: this.props.match.params.id,
             };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(event){
+        event.preventDefault();
+        const good_id=this.props.goodId;
+        const my_id = this.props.my_id;
+        const seller_id= this.props.seller;
+        const transaction_time=this.state.date;
+        console.log(good_id);
+        (()=>{
+            fetch("http://localhost:3000/create_transaction",{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    good_id: good_id,
+                    seller_id: seller_id,
+                    consumer_id: my_id,
+                    transaction_time: transaction_time
+                })
+            });
+        })();
 
     }
 
@@ -61,31 +85,40 @@ class Chat extends React.Component {
         console.log('yes, there are chats:',all_chats);
         for(var i=0;i<all_chats.length;i++){
             var tempTwoUid = all_chats[i].two_user_id;
-            var temp_uid_1 = tempTwoUid[0];
-            var temp_uid_2 = tempTwoUid[1];
+            var temp_uid_1 = tempTwoUid[0].id;
+            var temp_uid_2 = tempTwoUid[1].id;
             if ( ((temp_uid_1)==(my_id).toString() && (temp_uid_2)==(seller_id).toString()) || ((temp_uid_1)==(seller_id).toString() && (temp_uid_2)==(my_id).toString()) ){
                 cur_chats.push(all_chats[i]);
+                console.log("add one item to cur_chats!");
             }
         }
 
-        const message_area=document.getElementById("message-area");
+        //message_area.innerHTML+=`debug`;
+        var cur_messages=[];
         for(var i=0;i<cur_chats.length;i++){
-            var tempContent=cur_chats[i].massages[0].content;
-            alert(tempContent);
-            message_area.innerHTML+=`${tempContent} <br/>`;
+            cur_messages=cur_messages.concat(cur_chats[i].messages)
         }
-
+        console.log('wuxiang debug:',cur_messages);
+        var displayMessage='';
+        //displayMessage+=cur_messages[0].content;
 
         return (
             <Container maxWidth={'md'} >
                 <div style={{ backgroundColor: '#35baf6', fontSize: 30 }} align='center' >
                     Chat Box
                 </div>
+                <div style={{ backgroundColor: '#c1eff4'}} align='right'>
+                  <Button onClick={this.handleClick} variant="contained">
+                      Begin Transaction!
+                  </Button>
+                </div>
+                <hr/>
                 <div>
-                    <Typography id='message-area' component="div" style={{ backgroundColor: '#c1eff4', height: '60vh' }}>
-                        hello, world!
+                    <Typography id='message_area' component="div" style={{ backgroundColor: '#c1eff4', height: '60vh' }}>
+                        hello, world!{displayMessage}
                     </Typography>
                 </div>
+                <hr/>
                 <form onSubmit={this.handleSubmit} align='center' style={{ backgroundColor: '#c1eff4' }}>
                     <TextField id="send_text" name='send_text' label="Message" multiline variant="outlined" ref={(c) => this.send_text = c} style={{ width: 700, backgroundColor: 'white' }} />
                     <Button type="submit" variant="contained" color="primary" style={{height: 54}} endIcon={<SendIcon />}>
@@ -103,6 +136,7 @@ function mapStateToProps(state, ownProps){
       my_id:state.my_id,
       my_chats: state.my_chats,
       seller_id: ownProps.seller,
+      goodId: ownProps.goodId
     };
   }
 export default connect(mapStateToProps)(Chat);

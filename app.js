@@ -316,14 +316,13 @@ app.post('/create_chat',jsonParser,(req, res) => {
 });
 
 
-app.post('/create_transaction', urlencodedParser,(req, res) => {
+app.post('/create_transaction', jsonParser,(req, res) => {
     console.log(req.body);
-   
     const good_id = req.body.good_id;
     const seller_id = req.body.seller_id;
     const consumer_id = req.body.consumer_id;
     const transaction_time = req.body.transaction_time;
-    db.createChatItem({good_id, seller_id, consumer_id, transaction_time})
+    db.createTransaction(good_id, seller_id, consumer_id, transaction_time)
         .then(
             result => {
                 if (result) {
