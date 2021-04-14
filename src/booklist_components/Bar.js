@@ -24,6 +24,8 @@ import Divider from '@material-ui/core/Divider';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
 import Hidden from '@material-ui/core/Hidden';
 
+import { connect } from 'react-redux';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -102,9 +104,38 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Bar = props => {
-    const carts = props.carts;
-
     const classes = useStyles();
+
+    //const carts = props.carts;
+    //const userId = props.userId;
+
+    // filter my info
+    let filter_info = props.user_info.filter(info => {
+        //return country.name.toLowerCase().includes(inputs.toLowerCase())
+        if(info._id == props.my_id){
+          return info;
+        }
+    })
+  
+    let my_info = filter_info[0];
+  
+    console.log(my_info);
+
+    // filter shopping cart
+    let shopList = my_info.shopping_list;
+
+    let filtered = props.goods.filter(good => {
+
+      if(shopList.some(item => item._id === good._id)){
+        return good
+      }
+    })
+
+    let cartGood = filtered;
+
+    console.log(cartGood);
+
+
 
     const [state, setState] = React.useState({
         left: false,
@@ -142,24 +173,25 @@ const Bar = props => {
 
             <Divider />
 
-            {carts.map((item) => (
+            {cartGood.map((item) => (
                 <Grid className={classes.cardGrid} item xs={12} md={12}>
                     <CardActionArea component="a" href="#"></CardActionArea>
                         <Card className={classes.card}>
                             <Hidden xsDown>
-                                <CardMedia className={classes.cardMedia} image={item.image} title="jo" />
+                                <CardMedia className={classes.cardMedia} image={"https://source.unsplash.com/random"} title="jo" />
                             </Hidden>
                             <div className={classes.cardDetails}>
                                 <CardContent>
                                     <Typography variant="h8">
-                                        {item.title}
+                                        {item.name}
                                     </Typography>
                                     <Typography variant="subtitle1" color="textSecondary">
-                                        {item.price}
+                                        HK${item.estimated_price}
                                     </Typography>
 
                                     
-                                    <Link to={{ pathname: `/product/${item.id}`, state: { name: 'Book-Forest', price: "$20" } }} className="nav-link">
+                                    <Link to={{ pathname: `/product/${item._id}`, state: { id: item._id, name: item.name, price: item.estimated_price, 
+                                                    description: item.description, sellerId: item.userId, myId: props.my_id } }} style={{ textDecoration: 'none' }} className="nav-link">
                                     <Button variant="contained" size="small" color="secondary" >
                                                 detail
                                     </Button>
@@ -219,7 +251,7 @@ const Bar = props => {
                 >
                 </Typography>
 
-                <Link to={{ pathname: `/search`, state: { carts:  carts, products: props.products  } }} className="nav-link">
+                <Link to={{ pathname: `/search` }} className="nav-link">
                     <IconButton aria-label="add to shopping cart">
                         <SearchIcon />
                     </IconButton>
@@ -245,5 +277,14 @@ const Bar = props => {
         </Grid>
     );
 };
+function mapStateToProps(state){
+    console.log(state)
+    return{
+      goods:state.goods,
+      user_info:state.user_info,
+      my_id:state.my_id,
+    };
+  }
+  export default connect(mapStateToProps)(Bar);
 
-export default Bar;
+//export default Bar;

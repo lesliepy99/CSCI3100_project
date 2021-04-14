@@ -123,11 +123,23 @@ const Search = props => {
         },
     ];
 
-    const carts = props.location.state.carts;
+    //const carts = props.location.state.carts;
 
     //console.log(props);
     // So strange!!!
     //console.log(props.location.state.carts.carts);
+    // filter unsold goods
+
+    let allGood = props.goods;
+
+    let filter = allGood.filter(item => {
+      //return country.name.toLowerCase().includes(inputs.toLowerCase())
+      if(!item.isSold){
+        return item;
+      }
+    })
+
+    allGood = filter;
 
     const title = "Search";
     const content = "Search your wanted product in multiple ways";
@@ -147,8 +159,8 @@ const Search = props => {
 
 
     const fetchData = async () => {
-        setgood(props.goods);
-        setgoodDefault(props.goods);
+        setgood(allGood);
+        setgoodDefault(allGood);
     }
 
     const updateInput = async (inputs) => {
@@ -179,7 +191,7 @@ const Search = props => {
 
     return (
         <div>
-            <Bar carts={carts} />
+            <Bar  />
 
             <Header title={title} content={content} />
 
@@ -208,15 +220,13 @@ const Search = props => {
                 </Card>
             </div>
 
-            {input && <Display catagory={catagory} products={good} />}
+            {input && <Display catagory={catagory} products={good} myId={props.my_id} />}
 
             {input &&
             <Typography align="center" variant="h6" color="textSecondary" paragraph>
                 {length} Products Found
             </Typography>
             }
-            
-
         </div>
     );
 

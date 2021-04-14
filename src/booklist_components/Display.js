@@ -14,6 +14,9 @@ import { Link } from 'react-router-dom';
 
 import IconButton from '@material-ui/core/IconButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+
+import { useState, useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -45,8 +48,60 @@ const Display = props => {
 
     const classes = useStyles();
 
-    //console.log(catagory);
-    //console.log(products);
+    const myId = props.myId;
+
+    const addCart = (e, goodId) => {
+        console.log(e, goodId);
+
+        (async () => {
+            await fetch('http://localhost:3000/insertShoppingList', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user_id: myId,
+                    good_id: { _id: goodId },
+                })
+            }
+            );
+            console.log(myId);
+            alert('Your ' + goodId + ' has been uploaded to platform ');
+        })();
+
+    };
+    
+    let len = products.length;
+    console.log(len);
+    let list = [];
+    //let list = [{id: 1, style: "outlined"}, {id: 2,style: "outlined"}, {id: 3, style: "outlined"}, {id: 4, style: "outlined"}, {id: 5, syle: "outlined"}];
+    for (var i = 1; i < len; i++) {
+        if(i*9 >=len){
+            console.log(i);
+            list.push(i);
+            i = len;
+        }
+        else{
+        list.push(i);
+        }
+    }
+    console.log(list);
+
+    const [flag, setFlag] = React.useState('');
+    const [goods, setGoods] = React.useState('');
+
+    const changePage = async(e, pageNumber) => {
+        console.log(e, pageNumber);
+        //pageNumber.style = "contained";
+        let array = products;
+        setFlag(pageNumber);
+        setGoods(array.slice((pageNumber-1)*9, pageNumber*9));
+    };
+    console.log(flag);
+    console.log(goods);
+    useEffect(() => { changePage() }, []);
+
+
     return (
         <Container className={classes.cardGrid} maxWidth="md">
             <div pclassName={classes.catagory}>
@@ -56,7 +111,7 @@ const Display = props => {
             </div>
 
             <Grid container spacing={4}>
-                {products && products.map((post) => {
+                {goods && goods.map((post) => {
                     if (post) {
                         return (
                             <Grid item key={post} xs={12} sm={4} md={4}>
@@ -74,17 +129,21 @@ const Display = props => {
                                             {post.name}
                                         </Typography>
                                         <Typography variant="h8" component="h2">
-                                            ${post.estimated_price}
+                                            HK${post.estimated_price}
                                         </Typography>
                                     </CardContent>
                                     <CardActions >
-                                        <Link to={{ pathname: `/product/${post._id}`, state: { name: post.name, price: post.estimated_price, 
-                                                    description: post.description, sellerId: post.userId } }} className="nav-link">
+                                        <Link to={{
+                                            pathname: `/product/${post._id}`, state: {
+                                                id: post._id, name: post.name, price: post.estimated_price,
+                                                description: post.description, sellerId: post.userId, myId: props.myId
+                                            }
+                                        }} style={{ textDecoration: 'none' }} className="nav-link">
                                             <Button variant="contained" size="small" color="secondary" disableElevation>
                                                 detail
                                             </Button>
                                         </Link>
-                                        <IconButton color="secondary" aria-label="add to shopping cart">
+                                        <IconButton color="secondary" aria-label="add to shopping cart" onClick={(e) => addCart(e, post._id)}>
                                             <AddShoppingCartIcon />
                                         </IconButton>
                                     </CardActions>
@@ -95,6 +154,26 @@ const Display = props => {
                     return null
                 })}
             </Grid>
+            
+            <div style={{paddingTop: 16, align: "center"}} align="center">
+            <ButtonGroup color="secondary" aria-label="outlined secondary button group">
+                {list.map((page) => {
+                    if(flag && flag==page){
+                    return(    
+                    <Button variant="contained" onClick={(e) => changePage(e, page)}>
+                        {page}
+                    </Button>
+                    )}
+                    else{
+                        return(    
+                            <Button  onClick={(e) => changePage(e, page)}>
+                                {page}
+                            </Button>
+                        )
+                    }
+                })}
+                </ButtonGroup>
+                </div>
         </Container>
     );
 };
