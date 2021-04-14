@@ -100,7 +100,7 @@ class Chat extends React.Component {
         }
         console.log('wuxiang debug:',cur_messages);
         var displayMessage='';
-        displayMessage+=cur_messages[0].content;
+        //displayMessage+=cur_messages[0].content;
 
         return (
             <Container maxWidth={'md'} >
