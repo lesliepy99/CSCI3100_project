@@ -28,7 +28,6 @@ export default function PostDetail() {
         
         <h1>This is the PostDetail Page!!</h1>
         {/* <PostContent/> */}
-        {/* <CommentContent/> */}
         <CommentContent/>
         
         </div>
