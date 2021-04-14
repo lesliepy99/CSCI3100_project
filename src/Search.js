@@ -29,6 +29,9 @@ import Header from './booklist_components/Header';
 import Display from './booklist_components/Display';
 import Bar from './booklist_components/Bar';
 import SearchBar from './SearchBar';
+import Tab from './tab';
+import Checker from './Checker';
+import DisplayUser from './booklist_components/UserDisplay';
 // import CountryList from './CountryList';
 
 import { connect } from 'react-redux';
@@ -131,12 +134,13 @@ const Search = props => {
     // filter unsold goods
 
     let allGood = props.goods;
+    let allUser = props.user_info;
 
     let filter = allGood.filter(item => {
-      //return country.name.toLowerCase().includes(inputs.toLowerCase())
-      if(!item.isSold){
-        return item;
-      }
+        //return country.name.toLowerCase().includes(inputs.toLowerCase())
+        if (!item.isSold) {
+            return item;
+        }
     })
 
     allGood = filter;
@@ -146,7 +150,26 @@ const Search = props => {
 
     const catagory = ""//"Search Result";
 
-    const [flag, setFlag] = React.useState('');
+    // Product or user?
+    const [msg, setMsg] = useState('');
+
+    const callBack = (childMsg) => {
+        setMsg(childMsg);
+    };
+    console.log(msg);
+
+    // What price?
+    {/*const prices = ["HKD 0~50", "HKD 50~100", "HKD 100~150", "HKD 100~150", "HKD 100~150", "City U", "LU"];
+
+    const [school, setSchool] = useState('');
+
+    const schoolBack = (childSchool) => {
+        setSchool(childSchool);
+    };
+    console.log(school);*/}
+
+
+    const [flag, setFlag] = React.useState(1);
     const handleChange = (event) => {
         setFlag(event.target.value);
     };
@@ -156,91 +179,200 @@ const Search = props => {
     const [input, setInput] = useState('');
     const [goodDefault, setgoodDefault] = useState();
     const [good, setgood] = useState();
+    const [userDefault, setuserDefault] = useState();
+    const [users, setusers] = useState();
 
+    // What tags?
+    const tagger = ["Book, Teaching Materials", "Clothes, Bags", "Electronic Devices", "Cosmetics, Detergents",
+        "Food, Drink, Cooking Materials", "Luxuries", "Medicine", "Sports Equipment", "Others"];
+
+    const [tag, setTag] = useState('');
+
+    const tagBack = (childTag) => {
+        setTag(childTag);
+        setInput('');
+    };
+    console.log(tag);
+
+    // What school?
+    const schools = ["CUHK", "HKU", "HKUST", "Poly U", "HKBU", "City U", "LU", "Others"];
+
+    const [school, setSchool] = useState('');
+
+    const schoolBack =  (childSchool) => {
+        setSchool(childSchool);
+        setInput('');
+    };
+    console.log(school);
 
     const fetchData = async () => {
         setgood(allGood);
         setgoodDefault(allGood);
+        setusers(allUser);
+        setuserDefault(allUser);
     }
 
     const updateInput = async (inputs) => {
-        const filtered = goodDefault.filter(country => {
-            if (flag == 3) {
-                return country.name.toLowerCase().includes(inputs.toLowerCase())
+        let filtered = goodDefault.filter(item => {
+            if((tag) && item.tags.some(i=> i.tag.toLowerCase().includes(tag.toLowerCase()))){
+                return item;
             }
-            if (flag == 2) {
-                return country.estimated_price <= inputs
-            }
-            if (flag == 1) {
-                return country.name.toLowerCase().includes(inputs.toLowerCase())
+            if(!tag){
+                return item;
             }
         })
+
+        filtered = filtered.filter(item => {
+            if (flag == 3) {
+                return item.name.toLowerCase().includes(inputs.toLowerCase())
+            }
+            if (flag == 2) {
+                return item.estimated_price <= inputs
+            }
+            if (flag == 1) {
+                return item.name.toLowerCase().includes(inputs.toLowerCase())
+            }
+        })
+
+        let userfiltered = userDefault.filter(item => {
+            if((school) && item.tags.some(i=> i.school.toLowerCase().includes(school.toLowerCase()))){
+                return item;
+            }
+            if(!school){
+                return item;
+            }
+        })
+
+        userfiltered = userfiltered.filter(ite => {
+            if (flag == 3) {
+                return ite.name.toLowerCase().includes(inputs.toLowerCase())
+            }
+            if (flag == 2) {
+                return ite.name.toLowerCase().includes(school.toLowerCase())
+            }
+            if (flag == 1) {
+                return ite.name.toLowerCase().includes(inputs.toLowerCase())
+            }
+        })
+
+        /*
+        filtered = filtered.filter(item => {
+            if(item.tags.some(cat => cat === tag)){
+                return item;
+            }
+        })*/
         setInput(inputs);
         setgood(filtered);
+        setusers(userfiltered);
     }
 
     useEffect(() => { fetchData() }, []);
 
     console.log(good);
+    console.log(users);
 
-    let length = products.length;
+    let length = allGood.length;
 
     if (good) {
         length = good.length;
     }
 
+    let num = allUser.length;
+
+    if (users) {
+        num = users.length;
+    }
+
     return (
         <div>
-            <Bar  />
+            <Bar />
 
             <Header title={title} content={content} />
 
+            <Tab parentMsg={callBack} />
+
             <div className="col-xs-12 col-sm-6" align="center">
                 <Card>
-                <FormControl style={{ minWidth: 600}}>
-                    <InputLabel id="demo-customized-select-label">Search by...</InputLabel>
-                    <Select
-                        labelId="demo-customized-select-label"
-                        id="demo-customized-select"
-                        defaultValue={1}
-                        value={flag}
-                        onChange={handleChange}
-                        input={<BootstrapInput />}
-                    >
-                        <MenuItem value={1}>Name</MenuItem>
-                        <MenuItem value={2}>Catagory</MenuItem>
-                        <MenuItem value={3}>Location</MenuItem>
-                    </Select>
-                </FormControl>
-
-                <SearchBar
-                    input={input}
-                    onChange={updateInput}
-                />
+                    <SearchBar
+                        input={input}
+                        onChange={updateInput}
+                    />
                 </Card>
             </div>
 
-            {input && <Display catagory={catagory} products={good} myId={props.my_id} />}
+            <Container style={{ padding: 0 }} >
+                <Grid container spacing={5}>
+                    <Grid item xs={false} sm={3} md={3}>
+                        <div style={{ paddingTop: 20, paddingBottom: 20 }}>
+                            <Card >
+                                <div style={{ paddingTop: 20, paddingBottom: 20 }} align="center">
+                                    <FormControl style={{ minWidth: 200 }}>
+                                        <InputLabel id="demo-customized-select-label">Search by...</InputLabel>
+                                        <Select
+                                            labelId="demo-customized-select-label"
+                                            id="demo-customized-select"
+                                            defaultValue={1}
+                                            value={flag}
+                                            onChange={handleChange}
+                                            input={<BootstrapInput />}
+                                        >
+                                            <MenuItem value={1}>Name</MenuItem>
+                                            <MenuItem value={2}>Highest Price</MenuItem>
+                                            <MenuItem value={3}>Related Class</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </div>
 
-            {input &&
-            <Typography align="center" variant="h6" color="textSecondary" paragraph>
-                {length} Products Found
-            </Typography>
-            }
+                                <div style={{ paddingTop: 20, paddingBottom: 20, marginLeft: 18 }}>
+                                    <Checker tags={tagger} tagKind="Tag" parentTag={tagBack} />
+                                </div>
+
+                                <div style={{ paddingTop: 20, paddingBottom: 20, marginLeft: 18 }}>
+                                    <Checker tags={schools} tagKind="School" parentTag={schoolBack} />
+                                </div>
+                            </Card>
+                        </div>
+                    </Grid>
+
+                    <Grid item xs={12} sm={9} md={9}>
+                        <div className="col-xs-12 col-sm-6">
+                            {(!input) && <h1 align="center">Result will be shown here.</h1>}
+
+                            {input && (msg != 1) && <Display catagory={catagory} products={good} myId={props.my_id} />}
+
+                            {input && (msg != 1) &&
+                                <Typography align="center" variant="h6" color="textSecondary" paragraph>
+                                    {length} Products Found
+                                </Typography>
+                            }
+                            
+                            {input && (msg == 1) && <DisplayUser catagory={catagory} products={users} myId={props.my_id} />}
+
+                            {input && (msg == 1) &&
+                                <Typography align="center" variant="h6" color="textSecondary" paragraph>
+                                    {num} Users Found
+                                </Typography>
+                            }
+                        </div>
+                    </Grid>
+                </Grid>
+            </Container>
+
+
         </div>
     );
 
 
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
     console.log(state)
-    return{
-      goods:state.goods,
-      user_info:state.user_info,
-      my_id:state.my_id,
+    return {
+        goods: state.goods,
+        user_info: state.user_info,
+        my_id: state.my_id,
     };
-  }
-  export default connect(mapStateToProps)(Search);
+}
+export default connect(mapStateToProps)(Search);
 
 // export default Search

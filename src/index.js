@@ -163,9 +163,9 @@ if (action.type=='update_user'){
     return  {user_info,goods,my_id,posts,transactions,my_chats};
   }
   else if(action.type=="addChat"){ 
-    if(!my_chats.some(item => action.data['fullDocument']._id == item._id)){
-
-      my_chats.push(action.data['fullDocument'])
+    console.log("wuxiang debug at index.js:",action.data);
+    if(!my_chats.some(item => action.data._id == item._id)){
+      my_chats.push(action.data)
     }
     return  {user_info,goods,my_id,posts,transactions,my_chats};
   }

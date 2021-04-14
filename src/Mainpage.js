@@ -29,6 +29,9 @@ import ViewRank from './mainpage_components/ViewRank';
 import PersonalInfo from './mainpage_components/PersonalInfo';
 import MyHistory from './mainpage_components/MyHistory';
 
+// import from utils folder
+import Header from './mainpage_components/Utils/Header';
+
 const useStyles = makeStyles((theme) =>({
   root: {
     maxWidth: 450,
@@ -79,7 +82,8 @@ const useStyles = makeStyles((theme) =>({
 }));
 
 
-
+const title = "Personal Mainpage";
+const title_content = "Check the personal information and transactions here";
 
 
 class Mainpage extends React.Component {
@@ -141,28 +145,7 @@ class Mainpage extends React.Component {
     /* const classes = useStyles(); */
     return (
       <main>
-        {/* <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${'https://source.unsplash.com/random'})` }}>
-          {<img style={{ display: 'none' }} src={'https://source.unsplash.com/random'} alt={'main image description'} />}
-          <div className={classes.overlay} />
-          <Container maxWidth="sm">
-            <div className={classes.mainFeaturedPostContent}>
-              <Typography align="center" component="h1" variant="h3" color="inherit" gutterBottom>
-              Personal Mainpage
-              </Typography>
-            </div>
-          </Container>
-        </Paper> */}
-        <Paper style={{ backgroundImage: `url(${'https://picsum.photos/1000/300'})` }}>
-            {<img style={{ display: 'none' }} src={'https://picsum.photos/1000/300'} alt={'Oops, Picture is Gone!'} />}
-            <div />
-            <Container maxWidth="sm">
-                <div >
-                    <Typography align="center" component="h1" variant="h3" color="white"  gutterBottom>
-                    Personal Mainpage
-                    </Typography>
-                </div>
-            </Container>
-        </Paper>
+        <Header title={title} content={title_content} />
         {/* <h1>Personal Mainpage of {this.props.name}</h1> */}
 
       <div className="body" align="center">

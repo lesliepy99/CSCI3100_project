@@ -120,9 +120,9 @@ class UploadGood extends React.Component {
 
     var tags = [
       {
-        "type":this.state.typeOfGood
+        tag:this.state.typeOfGood
       },{
-        "location":this.state.locationOfGood
+        tag:this.state.locationOfGood
       }];
     var userId = this.props.my_id;
     var number_of_views = 0;
@@ -220,15 +220,15 @@ class UploadGood extends React.Component {
 
     return (
       <div>
-        <h2> Please add description of your good: </h2>
-        <h3> For your good's description, please include: </h3>
+        <h2> Upload good </h2>
+        <h3> For adding your good's description, please include: </h3>
         <ul>
           <li>Name</li>
           <li>Type</li>
           <li>Location you sell the good</li>
           <li>Short Description</li>
           <li>Expected Price</li>
-          <li>(Optional) Its Photo</li>
+          <li>Its Photo</li>
         </ul>
 
         <form onSubmit={this.handleSubmit}>
@@ -267,6 +267,7 @@ class UploadGood extends React.Component {
             <MenuItem value="lx">Luxuries</MenuItem>
             <MenuItem value="md">Medicine</MenuItem>
             <MenuItem value="sp">Sports Equipment</MenuItem>
+            <MenuItem value="ot">Others</MenuItem>
 
           </Select>
           {/* <FormHelperText>Label + placeholder</FormHelperText> */}
@@ -343,7 +344,7 @@ class UploadGood extends React.Component {
           <br /><br /><br /><br />
           <input type="file" onChange={this.onFileChange}/> 
                 <button onClick={this.onFileUpload}> 
-                  Upload! 
+                  Upload photo! 
                 </button> 
 
         </form>
