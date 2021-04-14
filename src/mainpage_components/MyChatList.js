@@ -21,6 +21,7 @@ class MyChatList extends React.Component {
         const all_chats=this.props.my_chats;
         const all_users=this.props.user_info;
         var chat_users=[];
+        var data =[]
         for(var i=0;i<all_chats.length;i++){
             var tempTwoUid = all_chats[i].two_user_id;
             var temp_uid_1 = tempTwoUid[0].id;
@@ -45,6 +46,7 @@ class MyChatList extends React.Component {
                 }
             }
             var username=tempUser.name;
+            data.push([{"id":uid_2},{"username":username}])
             renderItem+=`
                 <Link to={{ pathname: '/chat/${uid_2}', state: { seller: "${uid_2}"  } }}>
                   <ListItem button>
@@ -57,10 +59,22 @@ class MyChatList extends React.Component {
             `
         }
         console.log(renderItem);
-
+        console.log(data)
+        
+        data.map((item) => (console.log(item)))
+        data.map((item) => (console.log(item['id'])))
         return (
             <List component="nav" aria-label="main mailbox folders">
-              <div dangerouslySetInnerHTML={{__html: renderItem}}/>
+               {data.map((item) => (
+                   <Link to={{ pathname: '/chat/'+item.id, state: { seller: item.id  } }}>
+                   <ListItem button>
+                     <ListItemIcon>
+                       <ChatIcon />
+                     </ListItemIcon>
+                     <ListItemText primary="$item['username']" />
+                   </ListItem >
+                 </Link>
+              ))}
             </List>
         );
     }
