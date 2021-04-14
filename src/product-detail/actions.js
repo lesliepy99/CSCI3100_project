@@ -40,7 +40,7 @@ const Buy = props => {
 
     return (
         <div className={classes.root}>
-            <Link to={{ pathname: `/chat/${sellerId}`, state: { seller: sellerId } }} style={{ textDecoration: 'none' }}>
+            <Link to={{ pathname: `/chat/${sellerId}`, state: { seller: sellerId, goodId: goodId  } }} style={{ textDecoration: 'none' }}>
             <Button variant="contained" color="primary">
                 I Want
             </Button>
