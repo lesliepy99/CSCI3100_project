@@ -72,7 +72,7 @@ const Display = props => {
     };
     
     let len = products.length;
-    //console.log(len);
+    console.log(len);
     let list = [];
     
     for (var i = 1; i < len; i++) {
@@ -84,7 +84,7 @@ const Display = props => {
         list.push(i);
         }
     }
-    //console.log(list);
+    console.log(list);
 
     const [flag, setFlag] = React.useState('');
     const [goods, setGoods] = React.useState('');
