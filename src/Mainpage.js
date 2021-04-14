@@ -152,7 +152,7 @@ class Mainpage extends React.Component {
       <div className="body" align="center">
         <ButtonGroup variant="contained" size="large" color="primary" aria-label="contained primary button group">
           <Button onClick={this.handleUploadGoodClick}>Upload Good</Button>
-          <Button onClick={this.handleViewRankClick}>View My Rank</Button>
+          {/* <Button onClick={this.handleViewRankClick}>View My Rank</Button> */}
           <Button onClick={this.handlePersonalInfoClick}>Personal Info</Button>
           <Button onClick={this.handleMyHistoryClick}>My History</Button>
         </ButtonGroup>

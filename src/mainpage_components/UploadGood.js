@@ -219,7 +219,7 @@ class UploadGood extends React.Component {
     console.log("Look at here");
 
     return (
-      <div>
+      <div style={{ padding: "5% 5% 15% 15%" }}>
         <h2> Upload good </h2>
         <h3> For adding your good's description, please include: </h3>
         <ul>

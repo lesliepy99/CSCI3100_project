@@ -125,7 +125,7 @@ class MyHistory extends React.Component {
 
       //console.log(JSON.stringify(thisUser));
       return (
-        <div style={{whiteSpace: 'pre-wrap'}}>
+        <div style={{whiteSpace: 'pre-wrap', padding: "5% 5% 15% 15%"  }}>
           <h2> Transaction history </h2>
           <h3>
             {" "}
