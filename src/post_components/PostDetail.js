@@ -21,9 +21,12 @@ import {Route, NavLink, Switch, Redirect, Link} from 'react-router-dom';
 import CommentContent from './CommentContent'
 
 export default function PostDetail() {
+    console.log("Detail Page")
     return (
+        
         <div>
-        <h1>This is the PostDetail Page</h1>
+        
+        <h1>This is the PostDetail Page!!</h1>
         {/* <PostContent/> */}
         {/* <CommentContent/> */}
         <CommentContent/>
