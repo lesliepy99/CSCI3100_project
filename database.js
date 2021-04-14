@@ -94,7 +94,7 @@ PostModel = mongoose.model('Post', PostSchema);
 TransactionModel = mongoose.model('Transaction', TransactionSchema);
 AuthCodeModel = mongoose.model('Authcode', AuthCodeSchema);
 
-createUser = (name, password, email, school,year) => new Promise((resolve, reject) => {
+createUser = (name, password, email, school) => new Promise((resolve, reject) => {
     UserModel.findOne({ email: email }, (err, user) => {
         if (err) reject(err);
         else if (!user) {
@@ -269,8 +269,12 @@ findAllPosts = () => new Promise((resolve, reject) => {
 })
 
 addPostComment = (postId, senderId, content) => new Promise((resolve, reject) => {
+    console.log(postId);
+    console.log(senderId);
+    console.log(content);
+    let update = {$push:{comments: {"senderId":senderId, "content":content}}}
     var newComment = {"senderId":senderId, "content":content};
-    PostModel.update({_id:postId},{$push:{comments:newComment}}, (err, result) => {
+    PostModel.update({_id:postId},update, (err, result) => {
         if (err || !result) reject(err);
         else {
             resolve(true);

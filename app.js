@@ -222,12 +222,13 @@ app.get('/find_all_posts', (req, res) => {
     );
 });
 
-app.post('/add_post', urlencodedParser,(req, res) => {
+app.post('/add_post', jsonParser,(req, res) => {
+    console.log("body")
     console.log(req.body);
     const senderId = req.body.senderId;
     const content = req.body.content;
     const comments = req.body.comments;
-    db.createPost({ senderId,content,comments })
+    db.createPost( senderId,content,comments )
         .then(
             result => {
                 if (result) {
@@ -242,12 +243,12 @@ app.post('/add_post', urlencodedParser,(req, res) => {
 })
 
 
-app.post('/add_post_comment', urlencodedParser,(req, res) => {
+app.post('/add_post_comment',jsonParser,(req, res) => {
     console.log(req.body);
     const postId = req.body.postId;
     const senderId = req.body.senderId;
     const content = req.body.content;
-    db.addPostComment({postId, senderId, content})
+    db.addPostComment(postId, senderId, content)
         .then(
             result => {
                 if (result) {
