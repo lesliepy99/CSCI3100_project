@@ -2,7 +2,7 @@ const db = require('./database');
 const express = require("express");
 var app = express();
 const http = require("http");
-const { UserModel, AuthCodeModel, TransactionModel } = require('./database');
+const { UserModel, AuthCodeModel, TransactionModel, ChatModel } = require('./database');
 var server = http.createServer(app);
 var io = require("socket.io")(server);
 const bodyParser = require('body-parser');
@@ -83,6 +83,7 @@ const UserChangeStream = UserModel.watch();
 const GoodChangeStream = GoodModel.watch();
 const PostChangeStream = PostModel.watch();
 const TransactionChangeStream = TransactionModel.watch();
+const ChatChangeStream = ChatModel.watch();
 
 UserChangeStream.on('change', (changes) => {
     io.sockets.compress(true).emit('userChange', changes);
@@ -95,12 +96,16 @@ GoodChangeStream.on('change', (changes) => {
 });
 PostChangeStream.on('change', (changes) => {
     io.sockets.compress(true).emit('postChange', changes);
-    console.log("good changed");
+    console.log("post changed");
 });
 
 TransactionChangeStream.on('change', (changes) => {
     io.sockets.compress(true).emit('TransactionChange', changes);
-    console.log("good changed");
+    console.log("transaction changed");
+});
+ChatChangeStream.on('change', (changes) => {
+    io.sockets.compress(true).emit('ChatChange', changes);
+    console.log("chat changed");
 });
 
 
@@ -281,9 +286,7 @@ app.post('/add_post_comment',jsonParser,(req, res) => {
 })
 
 app.post('/find_specific_chat', jsonParser,(req, res) => {
-    console.log(req.body);
     const id = req.body.id;
-    console.log(id);
     db.findSpecificChats({id})
         .then(
         re => { res.send(JSON.stringify(re)) },
@@ -292,7 +295,6 @@ app.post('/find_specific_chat', jsonParser,(req, res) => {
 })
 
 app.post('/create_chat',jsonParser,(req, res) => {
-    console.log(req.body);
     const uid_1 = req.body.uid_1;
     const uid_2 = req.body.uid_2;
     const two_user_id = [{'id':uid_1}, {'id': uid_2}];
@@ -312,34 +314,6 @@ app.post('/create_chat',jsonParser,(req, res) => {
         err => { res.status(500).send(err.toString()) }
     );
 });
-
-// app.post('/create_chat', jsonParser,(req, res) => {
-//     console.log(req.body);
-//     const uid_1 = req.body.uid_1;
-//     const uid_2 = req.body.uid_2;
-//     const two_user_id = [{'id':uid_1}, {'id': uid_2}];
-//     const message_content = req.body.message_content;
-//     const send_time = req.body.send_time;
-//     const new_message=[
-//         {"content": message_content},
-//         {"senderId": uid_1},
-//         {"chat_time": send_time}
-//     ];
-//     console.log(two_user_id);
-//     console.log(new_message);
-//     db.createChatItem(two_user_id, new_message)
-//         .then(
-//             result => {
-//                 if (result) {
-//                     res.status(200).send("Registered!");
-//                 }
-//                 else {
-//                     res.status(403).send("Overlapped!");
-//                 }
-//             },
-//             err => { res.status(500).send(err.toString()) }
-//         );
-// })
 
 
 app.post('/create_transaction', urlencodedParser,(req, res) => {
