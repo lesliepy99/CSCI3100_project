@@ -49,7 +49,7 @@ const SearchBar = ({input:keyword,onChange: setKeyword}) => {
      className={classes.input}   
      key="random1"
      value={keyword}
-     placeholder={"Search"}
+     placeholder={"search"}
      onChange={(e) => setKeyword(e.target.value)}
     />
     <IconButton className={classes.iconButton} aria-label="search" >

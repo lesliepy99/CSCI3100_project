@@ -5,21 +5,23 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import { Link } from 'react-router-dom';
 
+import { red } from '@material-ui/core/colors';
 import IconButton from '@material-ui/core/IconButton';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Header from './Header';
-
-import getImageUrl from '../utils/getImageUrl';
 
 import { useState, useEffect } from 'react';
+
+import getImageUrl from '../utils/getImageUrl';
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -38,42 +40,23 @@ const useStyles = makeStyles((theme) => ({
         variant: "outlined",
     },
     cardMedia: {
-        paddingTop: '80%' // '56.25%', // 16:9
+        paddingTop: '56.25%', // 16:9
     },
     cardContent: {
         flexGrow: 1,
     },
+    avatar: {
+        backgroundColor: red[500],
+    },
 }));
 
-const Display = props => {
+const DisplayUser = props => {
     const catagory = props.catagory;
     const products = props.products;
 
     const classes = useStyles();
 
-    const myId = props.myId;
-
-    const addCart = (e, goodId) => {
-        console.log(e, goodId);
-
-        (async () => {
-            await fetch('http://localhost:3000/insertShoppingList', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    user_id: myId,
-                    good_id: { _id: goodId },
-                })
-            }
-            );
-            console.log(myId);
-            alert('Good has been added to your shopping cart!');
-        })();
-
-
-    };
+    //const myId = props.myId;
 
     let len = products.length;
     //console.log(len);
@@ -95,7 +78,7 @@ const Display = props => {
 
     const changePage = async (e, pageNumber) => {
         console.log(e, pageNumber);
-
+        //pageNumber.style = "contained";
         let array = products;
         setFlag(pageNumber);
         setGoods(array.slice((pageNumber - 1) * 9, pageNumber * 9));
@@ -112,49 +95,39 @@ const Display = props => {
         return (
             <Container className={classes.cardGrid} maxWidth="md">
                 <div pclassName={classes.catagory}>
-                <Typography variant="h8" component="h2" paddingRight={140} gutterBottom>
-                    {catagory}
-                </Typography>
-            </div>
+                    <Typography variant="h8" component="h2" paddingRight={140} gutterBottom>
+                        {catagory}
+                    </Typography>
+                </div>
 
                 <Grid container spacing={4}>
                     {goods && goods.map((post) => {
                         if (post) {
                             return (
                                 <Grid item key={post} xs={12} sm={4} md={4}>
-                                    <Card className={classes.card}>
-                                        <CardActionArea>
+                                    <Grid className={classes.cardGrid}>
+                                        <Card className={classes.card}>
+                                            <CardHeader
+                                                avatar={
+                                                    <Avatar aria-label="recipe" className={classes.avatar}>
+                                                        {post.name[0]}
+                                                    </Avatar>
+                                                }
+                                                action={
+                                                    <IconButton aria-label="settings">
+                                                        <MoreVertIcon />
+                                                    </IconButton>
+                                                }
+                                                title={post.name}
+                                                subheader={post.school}
+                                            />
                                             <CardMedia
                                                 className={classes.cardMedia}
-                                                image= {getImageUrl("good_image", post._id)} //"https://source.unsplash.com/random"
-                                                title="Image title"
+                                                image={getImageUrl("user_avatar", post._id)}//'https://source.unsplash.com/featured/?people'
+                                                title="Paella dish"
                                             />
-                                        </CardActionArea>
-
-                                        <CardContent className={classes.cardContent}>
-                                            <Typography gutterBottom variant="h6" >
-                                                {post.name}
-                                            </Typography>
-                                            <Typography variant="h8" component="h2">
-                                                HK${post.estimated_price}
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions >
-                                            <Link to={{
-                                                pathname: `/product/${post._id}`, state: {
-                                                    id: post._id, name: post.name, price: post.estimated_price, tags: post.tags,
-                                                    description: post.description, sellerId: post.userId, myId: props.myId, allUser: props.allUser
-                                                }
-                                            }} style={{ textDecoration: 'none' }} className="nav-link">
-                                                <Button variant="contained" size="small" color="secondary" disableElevation>
-                                                    detail
-                                            </Button>
-                                            </Link>
-                                            <IconButton color="secondary" aria-label="add to shopping cart" onClick={(e) => addCart(e, post._id)}>
-                                                <AddShoppingCartIcon />
-                                            </IconButton>
-                                        </CardActions>
-                                    </Card>
+                                        </Card>
+                                    </Grid>
                                 </Grid>
                             )
                         }
@@ -189,9 +162,9 @@ const Display = props => {
         return (
             <Container className={classes.cardGrid} maxWidth="md">
                 <div pclassName={classes.catagory}>
-                <Typography variant="h8" component="h2" paddingRight={140} gutterBottom>
-                    {catagory}
-                </Typography>
+                    <Typography variant="h8" component="h2" paddingRight={140} gutterBottom>
+                        {catagory}
+                    </Typography>
                 </div>
 
                 <Grid container spacing={4}>
@@ -200,38 +173,26 @@ const Display = props => {
                             return (
                                 <Grid item key={post} xs={12} sm={4} md={4}>
                                     <Card className={classes.card}>
-                                        <CardActionArea>
+                                            <CardHeader
+                                                avatar={
+                                                    <Avatar aria-label="recipe" className={classes.avatar}>
+                                                        {post.name[0]}
+                                                    </Avatar>
+                                                }
+                                                action={
+                                                    <IconButton aria-label="settings">
+                                                        <MoreVertIcon />
+                                                    </IconButton>
+                                                }
+                                                title={post.name}
+                                                subheader={post.school}
+                                            />
                                             <CardMedia
                                                 className={classes.cardMedia}
-                                                image={getImageUrl("good_image", post._id)}//"https://source.unsplash.com/random"
-                                                title="Image title"
+                                                image={image={getImageUrl("user_avatar", post._id)}} //'https://source.unsplash.com/featured/?people'
+                                                title="Paella dish"
                                             />
-                                        </CardActionArea>
-
-                                        <CardContent className={classes.cardContent}>
-                                            <Typography gutterBottom variant="h6" >
-                                                {post.name}
-                                            </Typography>
-                                            <Typography variant="h8" component="h2">
-                                                HK${post.estimated_price}
-                                            </Typography>
-                                        </CardContent>
-                                        <CardActions >
-                                            <Link to={{
-                                                pathname: `/product/${post._id}`, state: {
-                                                    id: post._id, name: post.name, price: post.estimated_price, tags: post.tags,
-                                                    description: post.description, sellerId: post.userId, myId: props.myId, allUser: props.allUser
-                                                }
-                                            }} style={{ textDecoration: 'none' }} className="nav-link">
-                                                <Button variant="contained" size="small" color="secondary" disableElevation>
-                                                    detail
-                                                </Button>
-                                            </Link>
-                                            <IconButton color="secondary" aria-label="add to shopping cart" onClick={(e) => addCart(e, post._id)}>
-                                                <AddShoppingCartIcon />
-                                            </IconButton>
-                                        </CardActions>
-                                    </Card>
+                                        </Card>
                                 </Grid>
                             )
                         }
@@ -264,4 +225,4 @@ const Display = props => {
     }
 };
 
-export default Display;
+export default DisplayUser;

@@ -69,7 +69,7 @@ const Display = props => {
             }
             );
             console.log(myId);
-            alert('Good has been added to your shopping cart!');
+            alert('Good has been added to your shopping cart');
         })();
 
 
