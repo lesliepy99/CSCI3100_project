@@ -76,10 +76,18 @@ const useStyles = makeStyles((theme) =>({
 
 
 class MyHistory extends React.Component {
+    /* constructor(props){
+      super(props);
+    } */
     render() {
-      const data = this.props.transactions;
+      //this.props.dispatch({type:'transaction_init',data:this.props.transactions});
+      const data =      this.props.transactions;
+      const goodData =  this.props.goods;
+      const userData =  this.props.user_info;
+      
       var thisUser = ["                *** Transaction Data ***","\n\n"]; 
       var transaction_index = 0;
+      
       // console.log("transaction length is: "+ thisUser.length);
       // actually "thisUser" means this transaction. just for convenience
 
@@ -100,14 +108,60 @@ class MyHistory extends React.Component {
           transaction_index ++;
 
 
+          // find seller name
+          var sellerName = "";
+          for(var i=0;i<userData.length;i++){
+            var tempID = userData[i]._id;
+            //console.log(tempID);
+            if ( (tempID)==(seller_id).toString() ){
+                console.log("Find sellerName: "+userData[i].name);
+                sellerName = userData[i].name;
+                break;
+            }
+            else{
+                
+            }
+          }
+
+          // find consumer name
+          var consumerName = "";
+          for(var i=0;i<userData.length;i++){
+            var tempID = userData[i]._id;
+            //console.log(tempID);
+            if ( (tempID)==(consumer_id).toString() ){
+                console.log("Find consumerName: "+userData[i].name);
+                consumerName = userData[i].name;
+                break;
+            }
+            else{
+                
+            }
+          }
+
+          // find good name
+          var goodName = "";
+          for(var i=0;i<goodData.length;i++){
+            var tempID = goodData[i]._id;
+            //console.log(tempID);
+            if ( (tempID)==(good_id).toString() ){
+                console.log("Find goodName: "+goodData[i].name);
+                goodName = goodData[i].name;
+                break;
+            }
+            else{
+                
+            }
+          }
+
+
           thisUser = thisUser.concat(
             "Transaction number " + transaction_index.toString() + ":  \n");
           thisUser = thisUser.concat(
-            "        Good_id:                " + good_id.toString() + "\n");
+            "        Good_name:                " + goodName + "\n");
           thisUser = thisUser.concat(
-            "        Seller_id:               " + seller_id.toString() + "\n");
+            "        Seller_name:                " + sellerName + "\n");
           thisUser = thisUser.concat(
-            "        Consumer_id:          " + consumer_id.toString() + "\n");
+            "        Consumer_name:        " + consumerName + "\n");
           thisUser = thisUser.concat(
             "        Transaction_time:    " + transaction_time.toString() + "\n");
           thisUser = thisUser.concat("\n\n");
@@ -140,7 +194,7 @@ class MyHistory extends React.Component {
             }
           </ul> */}
           {thisUser}
-          <button onClick={() => alert("Hello There!")}>Show an message</button>
+          {/* <button onClick={() => alert("Hello There!")}>Show an message</button> */}
         </div>
       );
     }
@@ -153,7 +207,8 @@ class MyHistory extends React.Component {
     return{
       my_id: state.my_id,
       transactions: state.transactions,
-      user_info: state.user_info
+      user_info: state.user_info,
+      goods: state.goods
     };
   }
   export default connect(mapStateToProps)(MyHistory);

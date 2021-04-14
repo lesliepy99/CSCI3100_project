@@ -111,7 +111,7 @@ class PersonalInfo extends React.Component {
             <li>Education:          University (*By default)</li>
             <li>email:                 {thisUser.email}</li>
           </ul> 
-          <button onClick={() => alert("Hello There!")}>Show an message</button>
+          {/* <button onClick={() => alert("Hello There!")}>Show an message</button> */}
         </div>
       );
     }
