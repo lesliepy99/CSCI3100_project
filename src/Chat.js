@@ -133,7 +133,7 @@ class Chat extends React.Component {
         for(var i=0;i<cur_messages.length;i++){
             var sender_name=cur_messages[i].senderId==my_id?username1:username2;
             var time=new Date(cur_messages[i].chat_time);
-            displayMessage+=`${sender_name} (at  ${formatDateTime(cur_messages[i].chat_time)}): ${cur_messages[i].content}<br/>`;
+            displayMessage+=`${sender_name} (at  ${formatDateTime(time)}): ${cur_messages[i].content}<br/>`;
         }
 
         return (
