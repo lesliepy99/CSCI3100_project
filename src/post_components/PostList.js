@@ -14,62 +14,64 @@ import IconButton from '@material-ui/core/IconButton';
 import {Route, NavLink, Switch, Redirect, Link, BrowserRouter} from 'react-router-dom';
 
 import PostDetail from './PostDetail'
+import { connect } from 'react-redux';
+import { io } from "socket.io-client";
 
 
-const blogs = [
-    {
-      title: 'Books',
-      content: 'Looking for any science fictions!',
-    },
-    {
-      title: 'Computer',
-      content: 'Anyone on campus has laptops on sale?',
-    }, {
-      title: 'Basketball',
-      content: 'Need a basketball to replace mine! Contact me if you got any!',
-    }, {
-      title: 'Charger',
-      content: 'Badly in need of a charger for my phone and I do not care about the price!',
-    }, {
-      title: ' High-quality Earphone',
-      content: 'Got addicted to rock music recently and need a high-quality earphone!',
-    }, {
-      title: 'Interesting Shoes',
-      content: 'Looking for some interesting shoes!',
-    },
-  ]
 
 
-export default function PostList() {
-    return (
-    <Container maxWidth="md">
-      <Grid container spacing={4}>
-        {blogs.map((blogs) => (
-          <Grid item key={blogs} xs={12} sm={12} md={12}>
-            <Card >
-              <CardContent >
-                <Typography gutterBottom variant="h5" component="h2">
-                  {blogs.title}
-                </Typography>
-                <Typography variant="body2" component="p">
-                  {blogs.content}
-                </Typography>
-              </CardContent>
-              <CardActions >               
-                <Link
-                    to={{
-                        pathname: '/home/PostDetail',
-                    }}
-                >
-                    <Button color="primary" >
-                         Read Detail
-                    </Button>
-                </Link>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
-    )
+class PostList extends React.Component {
+
+
+  constructor(props) {
+    super(props);
   }
+    render(){
+      
+    var blogs = this.props.posts;
+    
+      return (
+        <Container maxWidth="md">
+          <Grid container spacing={4}>
+            {blogs.map((blogs) => (
+              <Grid item key={blogs} xs={12} sm={12} md={12}>
+                <Card >
+                  <CardContent >
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {blogs.senderId} {/* 需改成title */}
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                      {blogs.content}
+                    </Typography>
+                  </CardContent>
+                  <CardActions >               
+                    <Link
+                        to={{
+                            pathname: '/home/PostDetail',
+                        }}
+                    >
+                        <Button color="primary" >
+                             Read Detail
+                        </Button>
+                    </Link>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+        )
+    }
+    
+  }
+  
+
+  function mapStateToProps(state) {
+    console.log(state)
+    return {
+    my_id: state.my_id,
+    posts: state.posts,
+    };
+  }
+
+  export default connect(mapStateToProps)(PostList);
