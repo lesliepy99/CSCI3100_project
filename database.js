@@ -98,7 +98,7 @@ createUser = (name, password, email, school) => new Promise((resolve, reject) =>
     UserModel.findOne({ email: email }, (err, user) => {
         if (err) reject(err);
         else if (!user) {
-            UserModel.create({ name: name, password: password, email: email, school: school,shopping_list:{} }, (err, result) => {
+            UserModel.create({ name: name, password: password, email: email, school: school,shopping_list:[] }, (err, result) => {
                 if (err || !result) reject(err);
                 else {
                     resolve(true);

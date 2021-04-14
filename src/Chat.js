@@ -93,6 +93,14 @@ class Chat extends React.Component {
       
             this.props.dispatch({ type: 'addChat', data: data })     
         });
+         
+        socket.on('TransactionChange', data => {
+            console.log(data);
+            console.log("Is that right?");
+      
+            this.props.dispatch({ type: 'add_transaction', data: data })     
+        });
+
         console.log('hello! this chat is between:',this.props.my_id,this.props.seller_id)
         const my_id=this.props.my_id;
         const seller_id=this.props.seller_id;
