@@ -109,31 +109,79 @@ const Bar = props => {
     //const carts = props.carts;
     //const userId = props.userId;
 
+    let allGood = props.goods;
+    console.log(allGood);
+
     // filter my info
     let filter_info = props.user_info.filter(info => {
-        //return country.name.toLowerCase().includes(inputs.toLowerCase())
-        if(info._id == props.my_id){
-          return info;
+        if (info._id == props.my_id) {
+            return info;
         }
     })
-  
+
     let my_info = filter_info[0];
-  
+
     console.log(my_info);
+
+    const myId = props.my_id;
 
     // filter shopping cart
     let shopList = my_info.shopping_list;
 
-    let filtered = props.goods.filter(good => {
+    let filtered = allGood.filter(good => {
 
-      if(shopList.some(item => item._id === good._id)){
-        return good
-      }
+        if (shopList.some(item => item.good_id === good._id)) {
+            return good
+        }
     })
 
     let cartGood = filtered;
 
     console.log(cartGood);
+
+    // delete from cart
+    const deleteCart = (e, goodId) => {
+        console.log(e, goodId);
+
+        (async () => {
+            await fetch('http://localhost:3000/deleteShoppingListItem', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user_id: myId,
+                    good_id: { _id: goodId },
+                })
+            }
+            );
+
+            alert('Your ' + goodId + ' has been uploaded to platform ');
+
+            
+        })();
+
+        // filter my cart
+        let filter = allGood.filter(item => {
+            if (item._id != goodId) {
+                return item;
+            }
+        })
+
+        allGood = filter;
+        console.log(allGood);
+
+        filter = cartGood.filter(item => {
+            if (item._id != goodId) {
+                return item;
+            }
+        })
+        cartGood = filter;
+
+    };
+
+    console.log(cartGood);
+
 
 
 
@@ -164,7 +212,7 @@ const Bar = props => {
                 color="inherit"
                 align="center"
                 noWrap
-                style={{paddingTop: 8,}}
+                style={{ paddingTop: 8, }}
                 className={classes.toolbarTitle}
                 gutterBottom
             >
@@ -176,36 +224,40 @@ const Bar = props => {
             {cartGood.map((item) => (
                 <Grid className={classes.cardGrid} item xs={12} md={12}>
                     <CardActionArea component="a" href="#"></CardActionArea>
-                        <Card className={classes.card}>
-                            <Hidden xsDown>
-                                <CardMedia className={classes.cardMedia} image={"https://source.unsplash.com/random"} title="jo" />
-                            </Hidden>
-                            <div className={classes.cardDetails}>
-                                <CardContent>
-                                    <Typography variant="h8">
-                                        {item.name}
-                                    </Typography>
-                                    <Typography variant="subtitle1" color="textSecondary">
-                                        HK${item.estimated_price}
-                                    </Typography>
+                    <Card className={classes.card}>
+                        <Hidden xsDown>
+                            <CardMedia className={classes.cardMedia} image={"https://source.unsplash.com/random"} title="jo" />
+                        </Hidden>
+                        <div className={classes.cardDetails}>
+                            <CardContent>
+                                <Typography variant="h8">
+                                    {item.name}
+                                </Typography>
+                                <Typography variant="subtitle1" color="textSecondary">
+                                    HK${item.estimated_price}
+                                </Typography>
 
-                                    
-                                    <Link to={{ pathname: `/product/${item._id}`, state: { id: item._id, name: item.name, price: item.estimated_price, 
-                                                    description: item.description, sellerId: item.userId, myId: props.my_id } }} style={{ textDecoration: 'none' }} className="nav-link">
+
+                                <Link to={{
+                                    pathname: `/product/${item._id}`, state: {
+                                        id: item._id, name: item.name, price: item.estimated_price,
+                                        description: item.description, sellerId: item.userId, myId: props.my_id
+                                    }
+                                }} style={{ textDecoration: 'none' }} className="nav-link">
                                     <Button variant="contained" size="small" color="secondary" >
-                                                detail
+                                        detail
                                     </Button>
-                                    </Link>
+                                </Link>
 
-                                    <IconButton color="secondary" aria-label="delete froms shopping cart">
-                                        <DeleteIcon />
-                                    </IconButton>
-                                    
-                                </CardContent>
-                            </div>
-                        </Card>
+                                <IconButton color="secondary" aria-label="delete froms shopping cart" onClick={(e) => deleteCart(e, item._id)}>
+                                    <DeleteIcon />
+                                </IconButton>
 
-                    
+                            </CardContent>
+                        </div>
+                    </Card>
+
+
                 </Grid>
 
             ))}
@@ -213,7 +265,7 @@ const Bar = props => {
             <Divider />
             <Box textAlign='center' paddingTop={2}>
 
-                <Link to='./cart'>
+                <Link to='./cart' style={{ textDecoration: 'none' }}>
                     <Button
                         variant="contained"
                         color="secondary"
@@ -256,35 +308,18 @@ const Bar = props => {
                         <SearchIcon />
                     </IconButton>
                 </Link>
-                {/* Search */}
-                {/*<div className={classes.search}>
-              <div className={classes.searchIcon}>
-              <SearchIcon />
-              
-              </div>
-
-              <InputBase
-              placeholder="Search…"
-              classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-              />
-              </div>*/}
-
             </Toolbar>
         </Grid>
     );
 };
-function mapStateToProps(state){
+function mapStateToProps(state) {
     console.log(state)
-    return{
-      goods:state.goods,
-      user_info:state.user_info,
-      my_id:state.my_id,
+    return {
+        goods: state.goods,
+        user_info: state.user_info,
+        my_id: state.my_id,
     };
-  }
-  export default connect(mapStateToProps)(Bar);
+}
+export default connect(mapStateToProps)(Bar);
 
 //export default Bar;

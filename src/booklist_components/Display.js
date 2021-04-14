@@ -91,7 +91,7 @@ const Display = props => {
 
     const changePage = async(e, pageNumber) => {
         console.log(e, pageNumber);
-        //pageNumber.style = "contained";
+
         let array = products;
         setFlag(pageNumber);
         setGoods(array.slice((pageNumber-1)*9, pageNumber*9));

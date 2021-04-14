@@ -97,7 +97,6 @@ class Booklist extends Component {
   }
 
   render() {
-
     var socket = io.connect();
     socket.on('userChange', data => {
       console.log(data);
@@ -153,7 +152,7 @@ class Booklist extends Component {
     filtered = allGood.filter(good => {
 
       if(shopList.some(item => item._id === good._id)){
-        return good
+        return good;
       }
     })
 
