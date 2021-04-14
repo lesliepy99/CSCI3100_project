@@ -94,6 +94,7 @@ class Mainpage extends React.Component {
     this.handleViewRankClick = this.handleViewRankClick.bind(this);
     this.handlePersonalInfoClick = this.handlePersonalInfoClick.bind(this);
     this.handleMyHistoryClick = this.handleMyHistoryClick.bind(this);
+    this.handleMyChatListClick = this.handleMyChatListClick.bind(this);
     this.state = { mainPageChoice: 1 };
   }
 
@@ -118,6 +119,12 @@ class Mainpage extends React.Component {
   handleMyHistoryClick() {
     this.setState((state) => {
       return { mainPageChoice: 4 };
+    });
+  }
+
+  handleMyChatListClick() {
+    this.setState((state) => {
+      return { mainPageChoice: 5 };
     });
   }
   
@@ -155,6 +162,7 @@ class Mainpage extends React.Component {
           {/* <Button onClick={this.handleViewRankClick}>View My Rank</Button> */}
           <Button onClick={this.handlePersonalInfoClick}>Personal Info</Button>
           <Button onClick={this.handleMyHistoryClick}>My History</Button>
+          <Button onClick={this.handleMyChatListClick}>My Chat List</Button>
         </ButtonGroup>
         </div>
 

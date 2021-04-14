@@ -6,6 +6,7 @@ import UploadGood from './UploadGood';
 import ViewRank from './ViewRank';
 import PersonalInfo from './PersonalInfo';
 import MyHistory from './MyHistory';
+import MyChatList from './MyChatList';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -45,6 +46,9 @@ const MainpageRoute = props => {
           break;
         case 4:
           ShownPart = <MyHistory />;
+          break;
+        case 5:
+          ShownPart = <MyChatList />;
           break;
         default:
           ShownPart = <PersonalInfo />;
