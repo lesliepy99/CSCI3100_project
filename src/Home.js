@@ -77,7 +77,7 @@ class Home extends Component{
                                 <Route path='/home/comment'>
                                     <Comment />
                                 </Route>
-                                <Route path='/home/comment/NewPost'>
+                                <Route path='/home/NewPost'>
                                     <NewPost />
                                 </Route>
                                 <Route path='/home/PostDetail'>

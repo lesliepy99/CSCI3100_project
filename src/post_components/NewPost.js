@@ -4,6 +4,8 @@ import TextField from '@material-ui/core/TextField';
 
 
 
+
+
 class NewPost extends React.Component {
 
 
@@ -26,6 +28,27 @@ class NewPost extends React.Component {
       alert("Text was submitted: " + this.state.content);
       event.preventDefault();
     }
+
+    componentDidMount() {
+        
+        fetch("http://localhost:3000/add_post",{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                postId:this.props.post_id,   //this.props.???
+                senderId:this.props.sender_id,
+                content:this.props.content
+                
+            })
+        }).then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+                this.props.dispatch({type:'update_post',data:data}) // what's here?
+                 
+        });    
+      }
     render() {
       console.log("Yes")
       return (

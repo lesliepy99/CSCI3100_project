@@ -55,8 +55,7 @@ export default function PostList() {
                   {blogs.content}
                 </Typography>
               </CardContent>
-              <CardActions >
-                
+              <CardActions >               
                 <Link
                     to={{
                         pathname: '/home/PostDetail',
@@ -66,9 +65,6 @@ export default function PostList() {
                          Read Detail
                     </Button>
                 </Link>
-
-
-
               </CardActions>
             </Card>
           </Grid>
