@@ -261,7 +261,7 @@ app.post('/add_post_comment', urlencodedParser,(req, res) => {
         );
 })
 
-app.post('/find_specific_chat', urlencodedParser,(req, res) => {
+app.post('/find_specific_chat', jsonParser,(req, res) => {
     console.log(req.body);
     const two_user_id = req.body.two_user_id;
     
@@ -272,12 +272,16 @@ app.post('/find_specific_chat', urlencodedParser,(req, res) => {
         );
 })
 
-app.post('/create_chat', urlencodedParser,(req, res) => {
+app.post('/create_chat',jsonParser,(req, res) => {
     console.log(req.body);
-   
+    
     const two_user_id = req.body.two_user_id;
-    const new_message = req.body.new_message;
-    db.createChatItem({two_user_id, new_message})
+    const new_message = req.body.messages;
+    console.log(two_user_id)
+    console.log(two_user_id[0])
+    console.log("before pass");
+   
+    db.createChatItem(two_user_id, new_message[0]['content'], new_message[1]['senderId'], new_message[2]['chat_time'])
         .then(
             result => {
                 if (result) {
