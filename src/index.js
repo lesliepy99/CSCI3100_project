@@ -87,10 +87,27 @@ if (action.type=='update_user'){
   }
 
   else if (action.data['operationType']=="update"){
-    console.log(action.data['updateDescription']['updatedFields'])
-    console.log(JSON.parse(action.data['updateDescription']['updatedFields']))
-}
+   console.log("Helllllllllllllllllllllllllllllll")
+    fetch('http://localhost:3000/find_all_users',)
+  .then(async res => {
     
+    const data = await res.json();
+    user_info = [];
+    for(var i=0;i<data.length;i++){
+      user_info.push(data[i]);
+    }
+    console.log(user_info)
+    console.log(
+      "Where to return"
+    )
+    return  {user_info,goods,my_id,posts,transactions,my_chats};
+  })
+  
+    
+}
+  console.log(
+    "before return"
+  )
   return  {user_info,goods,my_id,posts,transactions,my_chats};
   }
   else if(action.type=="signin"){

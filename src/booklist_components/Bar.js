@@ -193,7 +193,8 @@ const Bar = props => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
-
+        props.dispatch({type:"default"}) 
+        console.log("clicked")  
         setState({ ...state, [anchor]: open });
     };
 
