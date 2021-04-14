@@ -24,7 +24,6 @@ import { connect } from 'react-redux';
 import { io } from "socket.io-client";
 
 import PostList from './post_components/PostList';
-import PostDetail from './post_components/PostDetail';
 
 
   
@@ -100,7 +99,7 @@ class Comment extends React.Component {
         console.log("Update post")
       
       });
-
+      //To check the posts
       console.log(this.props.posts);
 
     return (
@@ -108,7 +107,7 @@ class Comment extends React.Component {
         {/*<Button startIcon={<CreateIcon />} size="large" color="primary" >New Post</Button>*/}
         <Link
            to={{
-              pathname: '/home/comment/NewPost',
+              pathname: '/home/NewPost',
               }}
         >
            <Button color="primary" >
