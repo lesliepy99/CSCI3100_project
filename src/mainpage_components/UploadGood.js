@@ -269,15 +269,15 @@ class UploadGood extends React.Component {
             <MenuItem value="">
               <em>Please choose from below listed types:</em>
             </MenuItem>
-            <MenuItem value="bt">Book, Teaching Materials</MenuItem>
-            <MenuItem value="cb">Clothes, Bags</MenuItem>
-            <MenuItem value="cd">Cosmetics, Detergents</MenuItem>
-            <MenuItem value="ed">Electronic Devices</MenuItem>
-            <MenuItem value="fd">Food, Drink, Cook Materials</MenuItem>
-            <MenuItem value="lx">Luxuries</MenuItem>
-            <MenuItem value="md">Medicine</MenuItem>
-            <MenuItem value="sp">Sports Equipment</MenuItem>
-            <MenuItem value="ot">Others</MenuItem>
+            <MenuItem value="Book, Teaching Materials">Book, Teaching Materials</MenuItem>
+            <MenuItem value="Clothes, Bags">Clothes, Bags</MenuItem>
+            <MenuItem value="Cosmetics, Detergents">Cosmetics, Detergents</MenuItem>
+            <MenuItem value="Electronic Devices">Electronic Devices</MenuItem>
+            <MenuItem value="Food, Drink, Cooking Materials">Food, Drink, Cook Materials</MenuItem>
+            <MenuItem value="Luxuries">Luxuries</MenuItem>
+            <MenuItem value="Medicine">Medicine</MenuItem>
+            <MenuItem value="Sports Equipment">Sports Equipment</MenuItem>
+            <MenuItem value="Others">Others</MenuItem>
 
           </Select>
           {/* <FormHelperText>Label + placeholder</FormHelperText> */}
@@ -298,9 +298,9 @@ class UploadGood extends React.Component {
             <MenuItem value="">
               <em>Please choose from below listed areas:</em>
             </MenuItem>
-            <MenuItem value="hk">Hong Kong Island</MenuItem>
-            <MenuItem value="kl">Kowloon</MenuItem>
-            <MenuItem value="nt">New Territories</MenuItem>
+            <MenuItem value="Hong Kong Island">Hong Kong Island</MenuItem>
+            <MenuItem value="Kowloon">Kowloon</MenuItem>
+            <MenuItem value="New Territories">New Territories</MenuItem>
           </Select>
           {/* <FormHelperText>Label + placeholder</FormHelperText> */}
           <br /><br />
