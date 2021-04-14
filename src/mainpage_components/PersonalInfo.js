@@ -101,15 +101,15 @@ class PersonalInfo extends React.Component {
           
           console.log(thisUser);
       return (
-        <div style={{ padding: "5% 5% 15% 15%" }}>
+        <div style={{ whiteSpace: 'pre-wrap', padding: "5% 5% 15% 15%" }}>
           <h2> My personal information </h2>
           <h3> I'm feeling good Today :D </h3>
           <ul>
-            <li>Name:        {thisUser.name}</li>
-            <li>University:        {thisUser.school}</li>
-            <li>Location:        Hong Kong (*By default)</li>
-            <li>Education Level:        University (*By default)</li>
-            <li>email:        {thisUser.email}</li>
+            <li>Name:                {thisUser.name}</li>
+            <li>University:          {thisUser.school}</li>
+            <li>Location:            Hong Kong (*By default)</li>
+            <li>Education:          University (*By default)</li>
+            <li>email:                {thisUser.email}</li>
           </ul> 
           <button onClick={() => alert("Hello There!")}>Show an message</button>
         </div>
