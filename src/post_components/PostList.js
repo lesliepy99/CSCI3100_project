@@ -29,7 +29,7 @@ class PostList extends React.Component {
     render(){
       
     var blogs = this.props.posts;
-    
+
       return (
         <Container maxWidth="md">
           <Grid container spacing={4}>
@@ -47,7 +47,7 @@ class PostList extends React.Component {
                   <CardActions >               
                     <Link
                         to={{
-                            pathname: '/home/PostDetail',
+                            pathname: `/home/PostDetail/${blogs._id}`,//不同的URL导向不同的post内容
                         }}
                     >
                         <Button color="primary" >
