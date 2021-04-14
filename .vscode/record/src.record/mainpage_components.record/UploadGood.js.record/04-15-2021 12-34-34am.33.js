@@ -159,7 +159,8 @@ class UploadGood extends React.Component {
               console.log("The upload good data (without photo)");
               console.log(data);
               this.state.resultGoodID = data._id;
-              var nonsense = this.onFileUpload(); 
+              var nonsense = this.onFileUpload();
+              //this.props.dispatch({type:'chat_init',data:data})   
                                           
           }); 
 
@@ -193,8 +194,11 @@ class UploadGood extends React.Component {
     ); 
    
     // Details of the uploaded file 
+    
     console.log(this.state.selectedFile); 
     return ("nonsense");
+   
+    
   }; 
 
   

@@ -73,10 +73,22 @@ const BootstrapInput = withStyles((theme) => ({
 }))(InputBase);
 
 const Search = props => {
+    console.log(props);
+    console.log(props.goods);
+    console.log("yes!");
+
+    //const carts = props.location.state.carts;
+
+    //console.log(props);
+    // So strange!!!
+    //console.log(props.location.state.carts.carts);
+    // filter unsold goods
+
     let allGood = props.goods;
     let allUser = props.user_info;
 
     let filter = allGood.filter(item => {
+        //return country.name.toLowerCase().includes(inputs.toLowerCase())
         if (!item.isSold) {
             return item;
         }
@@ -95,6 +107,7 @@ const Search = props => {
     const callBack = (childMsg) => {
         setMsg(childMsg);
     };
+    console.log(msg);
 
     // What price?
     {/*const prices = ["HKD 0~50", "HKD 50~100", "HKD 100~150", "HKD 100~150", "HKD 100~150", "City U", "LU"];
@@ -103,7 +116,8 @@ const Search = props => {
 
     const schoolBack = (childSchool) => {
         setSchool(childSchool);
-    };*/}
+    };
+    console.log(school);*/}
 
 
     const [flag, setFlag] = React.useState(1);
@@ -111,6 +125,7 @@ const Search = props => {
         setFlag(event.target.value);
     };
 
+    console.log("search flag is" + flag);
 
     const [input, setInput] = useState('');
     const [goodDefault, setgoodDefault] = useState();
@@ -135,6 +150,7 @@ const Search = props => {
         setTag(childTag);
         setInput('');
     };
+    console.log(tag);
 
     // What region?
     const region = ["Hong Kong Island", "Kowloon", "New Territories", "None"];
@@ -145,16 +161,22 @@ const Search = props => {
         setLoc(childLoc);
         setInput('');
     };
+    console.log(loc);
 
     // What school?
     const schools = ["CUHK", "HKU", "HKUST", "Poly U", "HKBU", "City U", "LU", "None"];
 
     const [school, setSchool] = useState('');
 
+
+
     const schoolBack = (childSchool) => {
         setSchool(childSchool);
         setInput('');
     };
+    console.log(school);
+
+
 
     const updateInput = async (inputs) => {
         let filtered = goodDefault.filter(item => {

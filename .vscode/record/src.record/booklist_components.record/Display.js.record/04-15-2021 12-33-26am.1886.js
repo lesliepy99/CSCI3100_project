@@ -93,6 +93,8 @@ const Display = props => {
     const [goods, setGoods] = React.useState('');
 
     const changePage = async (e, pageNumber) => {
+        console.log(e, pageNumber);
+
         let array = products;
         setFlag(pageNumber);
         setGoods(array.slice((pageNumber - 1) * 9, pageNumber * 9));

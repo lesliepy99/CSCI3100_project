@@ -54,7 +54,7 @@ const Display = props => {
     const myId = props.myId;
 
     const addCart = (e, goodId) => {
-
+        console.log(e, goodId);
 
         (async () => {
             await fetch('http://localhost:3000/insertShoppingList', {
@@ -68,6 +68,7 @@ const Display = props => {
                 })
             }
             );
+            console.log(myId);
             alert('Good has been added to your shopping cart!');
         })();
 
@@ -75,7 +76,7 @@ const Display = props => {
     };
 
     let len = products.length;
-
+    //console.log(len);
     let list = [];
 
     for (var i = 1; i < len; i++) {
@@ -87,17 +88,20 @@ const Display = props => {
             list.push(i);
         }
     }
-
+    //console.log(list);
 
     const [flag, setFlag] = React.useState('');
     const [goods, setGoods] = React.useState('');
 
     const changePage = async (e, pageNumber) => {
+        console.log(e, pageNumber);
+
         let array = products;
         setFlag(pageNumber);
         setGoods(array.slice((pageNumber - 1) * 9, pageNumber * 9));
     };
-
+    //console.log(flag);
+    //console.log(goods);
     useEffect(() => { changePage() }, []);
 
     let sample = products;

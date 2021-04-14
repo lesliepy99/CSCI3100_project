@@ -195,6 +195,8 @@ class UploadGood extends React.Component {
     // Details of the uploaded file 
     console.log(this.state.selectedFile); 
     return ("nonsense");
+   
+    
   }; 
 
   
