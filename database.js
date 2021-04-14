@@ -136,7 +136,7 @@ findAllUsers = () => new Promise((resolve, reject) => {
 })
 
 insertShoppingList = (user_id, good_id) => new Promise((resolve, reject) =>{
-        let update = {$push:{shopping_list:good_id}}
+        let update = {$push:{shopping_list:{"good_id":good_id}}}
         let options = {upsert: true, new: true, setDefaultsOnInsert: true};
         UserModel.findOneAndUpdate({ _id: user_id},update,options, (err, result) =>{
             if (err || !result) reject(err);
@@ -146,6 +146,16 @@ insertShoppingList = (user_id, good_id) => new Promise((resolve, reject) =>{
         })
     });
 
+deleteShoppingListItem = (user_id, good_id) => new Promise((resolve, reject) =>{
+    let update = {$push:{shopping_list:{"good_id":good_id}}}
+    let options = {upsert: true, new: true, setDefaultsOnInsert: true};
+    UserModel.updateOne({_id:user_id},{ $pull: {"shopping_list":{'good_id':good_id}}},(err, result) =>{
+        if (err || !result) reject(err);
+        else {
+            resolve(true);
+        }
+    });
+});
 
 createGood = (name, userId, tags, number_of_views, number_of_likes, description, estimated_price) => new Promise((resolve, reject) => {
    
@@ -350,6 +360,7 @@ module.exports = {
     findUser: findUser,
     findAllUsers:findAllUsers,
     insertShoppingList:insertShoppingList,
+    deleteShoppingListItem:deleteShoppingListItem,
     createGood: createGood,
     findAllGoods: findAllGoods,
     createChatItem: createChatItem,

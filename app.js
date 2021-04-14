@@ -175,6 +175,24 @@ app.post('/insertShoppingList',jsonParser, (req, res) => {
         );
 })
 
+app.post('/deleteShoppingListItem',jsonParser, (req, res) => {
+    console.log(req.body);
+    const user_id = req.body.user_id;
+    const good_id = req.body.good_id;
+    db.deleteShoppingListItem(user_id,good_id)
+        .then(
+            result => {
+                if (result) {
+                    res.status(200).send("Registered!");
+                }
+                else {
+                    res.status(403).send("Overlapped!");
+                }
+            },
+            err => { res.status(500).send(err.toString()) }
+        );
+})
+
 app.post('/add_good',jsonParser, (req, res) => {
     console.log(req.body);
     

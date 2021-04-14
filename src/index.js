@@ -67,7 +67,7 @@ const reducer = (state = dataStore, action) =>  {
   
 if (action.type=='update_user'){
     
-  if(action.data['operationType']=="replace"){
+  if(action.data['operationType']=="replace" || action.data['operationType']=="update"){
     console.log(action.data);
    
     var index = user_info.findIndex((element) => {
@@ -92,7 +92,7 @@ if (action.type=='update_user'){
     return  {user_info,goods,my_id,posts,transactions,my_chats};
   }
   else if(action.type=="update_good"){
-    if(action.data['operationType']=="replace"){
+    if(action.data['operationType']=="replace"|| action.data['operationType']=="update"){
       console.log(action.data);
      
       var index = goods.findIndex((element) => {
