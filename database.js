@@ -165,7 +165,7 @@ createGood = (name, userId, tags, number_of_views, number_of_likes, description,
     }, (err, result) => {
         if (err || !result) reject(err);
         else {
-            resolve(true);
+            resolve(result);
         }
     });
 })

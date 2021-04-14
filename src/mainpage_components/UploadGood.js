@@ -87,7 +87,8 @@ class UploadGood extends React.Component {
       expectedPrice: "",
       confirmTick: false,
       selectedFile: null,
-      displayImage:null
+      displayImage: null,
+      resultGoodID: null
 
     };
 
@@ -153,9 +154,17 @@ class UploadGood extends React.Component {
                 description: description,
                 estimated_price: estimated_price
               })
-          });
+          }).then((response) => response.json())
+          .then((data) => {
+              console.log("The upload good data (without photo)");
+              console.log(data);
+              this.state.resultGoodID = data._id;
+              var nonsense = this.onFileUpload();
+              //this.props.dispatch({type:'chat_init',data:data})   
+                                          
+          }); 
 
-          alert('Your ' + this.state.nameOfGood + ' has been uploaded to platform ');
+          alert('Your good: ' + this.state.nameOfGood + ' has been uploaded along with photo.');
       })();
   
 }
@@ -169,7 +178,7 @@ class UploadGood extends React.Component {
   onFileUpload = () => { 
     console.log("Before call");
     ReactS3Client
-    .uploadFile(this.state.selectedFile, this.props.my_id+".png")
+    .uploadFile(this.state.selectedFile, this.state.resultGoodID+".png")
     .then(data => console.log(data))
     .catch(err => console.error(err))
 
@@ -178,7 +187,7 @@ class UploadGood extends React.Component {
     const formData = new FormData(); 
    
     // Update the formData object 
-    formData.append( 
+    formData.append(
       "myFile", 
       this.state.selectedFile, 
       this.state.selectedFile.name 
@@ -187,6 +196,7 @@ class UploadGood extends React.Component {
     // Details of the uploaded file 
     
     console.log(this.state.selectedFile); 
+    return ("nonsense");
    
     
   }; 
@@ -219,7 +229,7 @@ class UploadGood extends React.Component {
     console.log("Look at here");
 
     return (
-      <div>
+      <div style={{ padding: "5% 5% 15% 15%" }}>
         <h2> Upload good </h2>
         <h3> For adding your good's description, please include: </h3>
         <ul>
@@ -259,15 +269,15 @@ class UploadGood extends React.Component {
             <MenuItem value="">
               <em>Please choose from below listed types:</em>
             </MenuItem>
-            <MenuItem value="bt">Book, Teaching Materials</MenuItem>
-            <MenuItem value="cb">Clothes, Bags</MenuItem>
-            <MenuItem value="cd">Cosmetics, Detergents</MenuItem>
-            <MenuItem value="ed">Electronic Devices</MenuItem>
-            <MenuItem value="fd">Food, Drink, Cook Materials</MenuItem>
-            <MenuItem value="lx">Luxuries</MenuItem>
-            <MenuItem value="md">Medicine</MenuItem>
-            <MenuItem value="sp">Sports Equipment</MenuItem>
-            <MenuItem value="ot">Others</MenuItem>
+            <MenuItem value="Book, Teaching Materials">Book, Teaching Materials</MenuItem>
+            <MenuItem value="Clothes, Bags">Clothes, Bags</MenuItem>
+            <MenuItem value="Cosmetics, Detergents">Cosmetics, Detergents</MenuItem>
+            <MenuItem value="Electronic Devices">Electronic Devices</MenuItem>
+            <MenuItem value="Food, Drink, Cooking Materials">Food, Drink, Cook Materials</MenuItem>
+            <MenuItem value="Luxuries">Luxuries</MenuItem>
+            <MenuItem value="Medicine">Medicine</MenuItem>
+            <MenuItem value="Sports Equipment">Sports Equipment</MenuItem>
+            <MenuItem value="Others">Others</MenuItem>
 
           </Select>
           {/* <FormHelperText>Label + placeholder</FormHelperText> */}
@@ -288,9 +298,9 @@ class UploadGood extends React.Component {
             <MenuItem value="">
               <em>Please choose from below listed areas:</em>
             </MenuItem>
-            <MenuItem value="hk">Hong Kong Island</MenuItem>
-            <MenuItem value="kl">Kowloon</MenuItem>
-            <MenuItem value="nt">New Territories</MenuItem>
+            <MenuItem value="Hong Kong Island">Hong Kong Island</MenuItem>
+            <MenuItem value="Kowloon">Kowloon</MenuItem>
+            <MenuItem value="New Territories">New Territories</MenuItem>
           </Select>
           {/* <FormHelperText>Label + placeholder</FormHelperText> */}
           <br /><br />
@@ -322,7 +332,9 @@ class UploadGood extends React.Component {
             variant="outlined"
           />
           <br /><br /><br /><br />
-         <img src={ this.state.displayImage  } alt="Example2" width="96" height="65" />
+
+         <img label="Preview Photo" src={ this.state.displayImage  } alt="Example2" width="96" height="65" />
+         <input label="Choose upload photo" required type="file" onChange={this.onFileChange}/>
           
           <br /><br /><br /><br />
           <FormControlLabel  required
@@ -334,7 +346,7 @@ class UploadGood extends React.Component {
                 color="primary"
               />
             }
-            label="I have uploaded precise information about the good"
+            label="I have uploaded precise information about the good."
             labelPlacement="right"
           />
           <br />
@@ -342,10 +354,10 @@ class UploadGood extends React.Component {
           
           <input type="submit" value="Upload" />
           <br /><br /><br /><br />
-          <input type="file" onChange={this.onFileChange}/> 
-                <button onClick={this.onFileUpload}> 
+           
+                {/* <button onClick={this.onFileUpload}> 
                   Upload photo! 
-                </button> 
+                </button>  */}
 
         </form>
       </div>

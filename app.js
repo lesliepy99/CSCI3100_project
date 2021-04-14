@@ -220,7 +220,7 @@ app.post('/add_good',jsonParser, (req, res) => {
         .then(
             result => {
                 if (result) {
-                    res.status(200).send("Registered!");
+                    res.status(200).send(result);
                 }
                 else {
                     res.status(403).send("Overlapped!");
