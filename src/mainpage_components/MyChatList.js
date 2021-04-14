@@ -46,35 +46,21 @@ class MyChatList extends React.Component {
             }
             var username=tempUser.name;
             renderItem+=`
-                <Link to={{ pathname: '/chat/${uid_2}', state: { seller: ${uid_2}  } }}>
+                <Link to={{ pathname: '/chat/${uid_2}', state: { seller: "${uid_2}"  } }}>
                   <ListItem button>
                     <ListItemIcon>
                       <ChatIcon />
                     </ListItemIcon>
-                    <ListItemText primary=${username} />
+                    <ListItemText primary="${username}" />
                   </ListItem >
                 </Link><Divider/>
             `
         }
+        console.log(renderItem);
+
         return (
             <List component="nav" aria-label="main mailbox folders">
-              <div dangerouslySetInnerHTML={{__html: renderItem}}>
-              {/*<Link to={{ pathname: `/chat/${sellerId}`, state: { seller: sellerId  } }}>
-                <ListItem button>
-                    <ListItemIcon>
-                        <ChatIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Inbox" />
-                </ListItem>
-              </Link>
-                <Divider />
-                <ListItem button>
-                    <ListItemIcon>
-                        <ChatIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Drafts" />
-                </ListItem>*/}
-              </div>
+              <div dangerouslySetInnerHTML={{__html: renderItem}}/>
             </List>
         );
     }
