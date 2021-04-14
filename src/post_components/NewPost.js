@@ -32,9 +32,9 @@ class NewPost extends React.Component {
       // alert("Text was submitted: " + this.state.content);
       event.preventDefault();
 
-      var PostContent = this.state.content; //位置正确吗？
-      var SenderId = this.props.sender_id;
-      var Comments = this.props.comments;
+      var PostContent = this.state.content; 
+      var SenderId = this.props.my_id;
+      var Comments = [];
 
 
       (async () => {
@@ -46,13 +46,13 @@ class NewPost extends React.Component {
             body: JSON.stringify({
                 senderId: SenderId,
                 content: PostContent, 
-                comments: Comments,//应该是空白？
+                comments: Comments,
                 
             })
-        }).then((response) => response.json())
+        }).then((response) => response.text()) //change from json to text
         .then((data) => {
             console.log(data)
-                this.props.dispatch({type:'update_post',data:data}) // what's here?               
+                               
         }); 
    
    })();
@@ -95,9 +95,7 @@ class NewPost extends React.Component {
   function mapStateToProps(state) {
     console.log(state)
     return {
-    sender_id: state.sender_id,
-    content: state.content,
-    comments: state.comments,
+    my_id: state.my_id,
     };
   }
   export default connect(mapStateToProps)(NewPost);
