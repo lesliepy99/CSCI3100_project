@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { io } from "socket.io-client";
 import { createStore } from 'redux'
 import { Provider } from 'react-redux';
+import { CompareArrowsOutlined } from '@material-ui/icons';
 
 
 
@@ -180,10 +181,37 @@ if (action.type=='update_user'){
     return  {user_info,goods,my_id,posts,transactions,my_chats};
   }
   else if(action.type=="addChat"){ 
-    console.log("wuxiang debug at index.js:",action.data);
-    if(!my_chats.some(item => action.data._id == item._id)){
-      my_chats.push(action.data)
+    // console.log("wuxiang debug at index.js:",action.data['updateDescription']['updatedFields']);
+    console.log(action.data)
+     
+    if(action.data['fullDocument']!=undefined){
+      console.log("Not exist")
+      if(!my_chats.some(item =>item._id==action.data['fullDocument']['_id'])){
+        my_chats.push(action.data['fullDocument'])
+      }
+      return  {user_info,goods,my_id,posts,transactions,my_chats};
     }
+    else{
+    for(var i=0;i<1000;i++){
+      var index = "messages."+i
+      if(action.data['updateDescription']['updatedFields'][index]!=undefined){
+         console.log("Found it!")
+         var specificChatIndex = my_chats.findIndex(item => action.data['documentKey']['_id'].toString() == item._id.toString());
+         console.log(specificChatIndex)
+         if(!my_chats[specificChatIndex]["messages"].some(item => item._id.toString()==action.data['updateDescription']['updatedFields'][index]["_id"])){
+         my_chats[specificChatIndex]["messages"].push(action.data['updateDescription']['updatedFields'][index])}
+         console.log(my_chats[specificChatIndex]["messages"])
+       
+         console.log(action.data['updateDescription']['updatedFields'][index])
+         break
+      }
+      
+    }}
+    
+
+    console.log("Ready to return-------------------------")
+
+
     return  {user_info,goods,my_id,posts,transactions,my_chats};
   }
   // else if(action.type=="shopping_list_init"){ 

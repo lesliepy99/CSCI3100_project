@@ -148,7 +148,7 @@ class Chat extends React.Component {
                 </div>
                 <hr/>
                 <div>
-                    <Typography id='message_area' component="div" style={{ backgroundColor: '#c1eff4'}}>
+                    <Typography id='message_area' component="div" style={{ backgroundColor: '#c1eff4', minHeight: 300}}>
                         <div dangerouslySetInnerHTML={{__html: displayMessage}}/>
                     </Typography>
                 </div>

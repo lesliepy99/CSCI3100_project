@@ -21,21 +21,25 @@ import {Route, NavLink, Switch, Redirect, Link} from 'react-router-dom';
 import CommentContent from './CommentContent';
 import { connect } from 'react-redux';
 import { io } from "socket.io-client";
+import { useHistory, useParams } from 'react-router-dom'
 
 
 class PostDetail extends React.Component  {
     constructor(props) {
         super(props);
-        this.state={ content: this.props.location.content}
+        this.state={ content: this.props.location.state.content,            
+        }
       }
     render(){
-        var content = this.state.content;
+        var Content = this.state.content;
+        const { id } = this.props.match.params;
+        console.log(Content);
+
         return (
             
             <div>
             
-            <h1>This is the PostDetail Page!!</h1>
-            <p>{content}</p>
+            <h1>{Content}</h1>
             {/* <PostContent/> */}
             
             {/* <CommentContent/> */}
