@@ -28,6 +28,7 @@ import UploadGood from './mainpage_components/UploadGood';
 import ViewRank from './mainpage_components/ViewRank';
 import PersonalInfo from './mainpage_components/PersonalInfo';
 import MyHistory from './mainpage_components/MyHistory';
+import MainpageRoute from './mainpage_components/MainpageRoute';
 
 // import from utils folder
 import Header from './mainpage_components/Utils/Header';
@@ -123,7 +124,7 @@ class Mainpage extends React.Component {
 
   render() {
     const mainPageChoice = this.state.mainPageChoice;
-    let ShownPart;
+    /* let ShownPart;
     switch (this.state.mainPageChoice) {
       case 1:
         ShownPart = <UploadGood />;
@@ -139,7 +140,7 @@ class Mainpage extends React.Component {
         break;
       default:
         ShownPart = <PersonalInfo />;
-    }
+    } */
 
     
     /* const classes = useStyles(); */
@@ -157,8 +158,8 @@ class Mainpage extends React.Component {
         </ButtonGroup>
         </div>
 
-        <Container maxWidth="md" style={{ backgroundColor: '#e3f2fd' }}>
-          {ShownPart}
+        <Container maxWidth="md" /* style={{ backgroundColor: '#e3f2fd' }} */>
+          <  MainpageRoute choice={mainPageChoice}  />
         </Container>
       
       </main>
