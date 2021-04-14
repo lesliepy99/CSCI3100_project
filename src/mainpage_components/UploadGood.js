@@ -242,8 +242,8 @@ class UploadGood extends React.Component {
         </ul>
 
         <form onSubmit={this.handleSubmit}>
-
-          <TextField   required
+          <br /><br />
+          <TextField required
             id="nameOfGood"
             name="nameOfGood"
             label="Name of Good:"
@@ -331,10 +331,13 @@ class UploadGood extends React.Component {
             onChange={this.handleInputChange}
             variant="outlined"
           />
-          <br /><br /><br /><br />
+          <br /><br />
 
-         <img label="Preview Photo" src={ this.state.displayImage  } alt="Example2" width="96" height="65" />
-         <input label="Choose upload photo" required type="file" onChange={this.onFileChange}/>
+         <img id="Preview Photo" alt="Please upload photo, preview will be shown here."
+                    src={ this.state.displayImage  } width="96" height="96" />
+
+         <br /><br />
+         <input id="Choose_photo" required type="file" onChange={this.onFileChange}/>
           
           <br /><br /><br /><br />
           <FormControlLabel  required
