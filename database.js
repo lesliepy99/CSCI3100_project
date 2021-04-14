@@ -158,7 +158,7 @@ deleteShoppingListItem = (user_id, good_id) => new Promise((resolve, reject) =>{
 });
 
 createGood = (name, userId, tags, number_of_views, number_of_likes, description, estimated_price) => new Promise((resolve, reject) => {
-   
+    console.log(tags);
     GoodModel.create({
         name: name, userId: userId, tags: tags, number_of_views: number_of_views,
         number_of_likes: number_of_likes, description: description, estimated_price: estimated_price

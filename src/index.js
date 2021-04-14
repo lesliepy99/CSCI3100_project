@@ -66,10 +66,11 @@ console.log(dataStore)
 const reducer = (state = dataStore, action) =>  {
   
 if (action.type=='update_user'){
-    
-  if(action.data['operationType']=="replace" || action.data['operationType']=="update"){
+    console.log("Watch the change")
+    console.log(action.data)
+  if(action.data['operationType']=="replace" ){
     console.log(action.data);
-   
+    console.log("Can you see?")
     var index = user_info.findIndex((element) => {
       return element['email'] === action.data['fullDocument']['email'];
     })
@@ -84,6 +85,11 @@ if (action.type=='update_user'){
         user_info.push(action.data['fullDocument'])
       }   
   }
+
+  else if (action.data['operationType']=="update"){
+    console.log(action.data['updateDescription']['updatedFields'])
+    console.log(JSON.parse(action.data['updateDescription']['updatedFields']))
+}
     
   return  {user_info,goods,my_id,posts,transactions,my_chats};
   }
@@ -92,9 +98,9 @@ if (action.type=='update_user'){
     return  {user_info,goods,my_id,posts,transactions,my_chats};
   }
   else if(action.type=="update_good"){
-    if(action.data['operationType']=="replace"|| action.data['operationType']=="update"){
+    if(action.data['operationType']=="replace"){
       console.log(action.data);
-     
+      
       var index = goods.findIndex((element) => {
         return element['_id'] === action.data['fullDocument']['_id'];
       })
@@ -113,7 +119,7 @@ if (action.type=='update_user'){
   }
 
   else if(action.type=="update_post"){
-    if(action.data['operationType']=="insert_comment"){
+    if(action.data['operationType']=="update"){
       console.log(action.data);
      
       var index = goods.findIndex((element) => {
@@ -124,7 +130,7 @@ if (action.type=='update_user'){
       console.log("lol goods")
       goods[index] = action.data['fullDocument']
     }  
-    else if (action.data['operationType']=="add_post"){
+    else if (action.data['operationType']=="insert"){
       if(!posts.some(item => action.data['fullDocument']._id == item._id)){
         posts.push(action.data['fullDocument'])
       }
@@ -158,12 +164,19 @@ if (action.type=='update_user'){
   }
   else if(action.type=="addChat"){ 
     if(!my_chats.some(item => action.data['fullDocument']._id == item._id)){
+
       my_chats.push(action.data['fullDocument'])
     }
     return  {user_info,goods,my_id,posts,transactions,my_chats};
   }
-
-  
+  // else if(action.type=="shopping_list_init"){ 
+  //   if(shoppingList.length==0){
+  //       for(var i=0;i<action.data.length;i++){
+  //         transactions.push(action.data[i]);
+  //       }
+  //   }
+  //   return  {user_info,goods,my_id,posts,transactions,my_chats};
+  // }
    
   else{
 
