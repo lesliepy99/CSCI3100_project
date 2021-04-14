@@ -33,7 +33,7 @@ const Buy = props => {
                })
            }
            );
-           alert('Your ' + good_id + ' has been uploaded to platform ');
+           alert('Good_id "' + good_id + '" has been added to your shopping cart');
        })();
 
     };

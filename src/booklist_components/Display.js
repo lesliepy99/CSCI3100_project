@@ -66,7 +66,7 @@ const Display = props => {
             }
             );
             console.log(myId);
-            alert('Your ' + goodId + ' has been uploaded to platform ');
+            alert('Good_id "' + goodId + '" has been added to your shopping cart');
         })();
 
     };
