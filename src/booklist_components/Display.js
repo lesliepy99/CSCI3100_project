@@ -182,7 +182,7 @@ const Display = props => {
     else{
         return (
             <Container className={classes.cardGrid} maxWidth="md">
-                <div pclassName={classes.catagory}>
+                <div className={classes.catagory}>
                     <Typography variant="h8" component="h2" paddingRight={140} gutterBottom>
                         {catagory}
                     </Typography>

@@ -37,10 +37,11 @@ class PostList extends React.Component {
               <Grid item key={blogs} xs={12} sm={12} md={12}>
                 <Card >
                   <CardContent >
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {blogs.senderId} {/* 需改成title */}
-                    </Typography>
-                    <Typography variant="body2" component="p">
+                    {/*<Typography gutterBottom variant="h5" component="h2">
+                      {blogs.senderId} {/* 需改成title 
+                      </Typography>  */}
+                    
+                    <Typography variant="body3" component="p" align="left">
                       {blogs.content}
                     </Typography>
                   </CardContent>
@@ -48,6 +49,7 @@ class PostList extends React.Component {
                     <Link
                         to={{
                             pathname: `/home/PostDetail/${blogs._id}`,//不同的URL导向不同的post内容
+                            state:{content:blogs.content}
                         }}
                     >
                         <Button color="primary" >
