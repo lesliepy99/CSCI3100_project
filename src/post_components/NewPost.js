@@ -76,11 +76,12 @@ class NewPost extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <h2>Write down what you want here</h2>
           <TextField
-            id="PostSubmitForm"
+            id="standard-full-width"
             label="Please type here"
             variant="outlined"
             multiline
-            rows={4}
+            fullWidth
+            rows={8}
             value={this.PostContent}  // set value to be content
             onChange={this.handleChange} 
             />
