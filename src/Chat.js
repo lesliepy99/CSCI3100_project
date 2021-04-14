@@ -133,7 +133,7 @@ class Chat extends React.Component {
         for(var i=0;i<cur_messages.length;i++){
             var sender_name=cur_messages[i].senderId==my_id?username1:username2;
             var time=new Date(cur_messages[i].chat_time);
-            displayMessage+=`${sender_name} (at  ${formatDateTime(time)}): ${cur_messages[i].content}<br/>`;
+            displayMessage+=`${sender_name} (at  ${formatDateTime(time)}): ${cur_messages[i].content}<hr/>`;
         }
 
         return (
@@ -148,13 +148,13 @@ class Chat extends React.Component {
                 </div>
                 <hr/>
                 <div>
-                    <Typography id='message_area' component="div" style={{ backgroundColor: '#c1eff4', height: '60vh' }}>
+                    <Typography id='message_area' component="div" style={{ backgroundColor: '#c1eff4'}}>
                         <div dangerouslySetInnerHTML={{__html: displayMessage}}/>
                     </Typography>
                 </div>
                 <hr/>
                 <form onSubmit={this.handleSubmit} align='center' style={{ backgroundColor: '#c1eff4' }}>
-                    <TextField id="send_text" name='send_text' label="Message" multiline variant="outlined" ref={(c) => this.send_text = c} style={{ width: 700, backgroundColor: 'white' }} />
+                    <TextField id="send_text" name='send_text' label="Message" multiline variant="outlined" ref={(c) => this.send_text = c} style={{ width: 500, backgroundColor: 'white' }} />
                     <Button type="submit" variant="contained" color="primary" style={{height: 54}} endIcon={<SendIcon />}>
                         Send
                     </Button>
