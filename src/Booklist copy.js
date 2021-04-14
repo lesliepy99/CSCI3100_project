@@ -102,7 +102,7 @@ class Booklist extends Component {
       console.log(data);
       console.log("Is that right?");
 
-      this.props.dispatch({ type: 'update_user', data: data })
+      this.props.dispatch({ type: 'update_user', data: data['fullDocument'] })
       // dispatch({type:'UPDATE'});
       console.log("Update user")
 
@@ -179,7 +179,7 @@ class Booklist extends Component {
         <Header title={title} content={content} />
 
         {/* Display product cards */}
-        <Display catagory={catagory} products={recGood} myId={this.props.my_id} allUser={this.props.user_info}/>
+        <Display catagory={catagory} products={recGood} myId={this.props.my_id}/>
 
       </main>
     );

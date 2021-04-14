@@ -26,6 +26,8 @@ import Hidden from '@material-ui/core/Hidden';
 
 import { connect } from 'react-redux';
 
+import getImageUrl from '../utils/getImageUrl';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -106,8 +108,6 @@ const useStyles = makeStyles((theme) => ({
 const Bar = props => {
     const classes = useStyles();
 
-    //const carts = props.carts;
-    //const userId = props.userId;
 
     let allGood = props.goods;
     console.log(allGood);
@@ -123,13 +123,10 @@ const Bar = props => {
 
     console.log(my_info);
 
-    const myId = props.my_id;
-
     // filter shopping cart
     let shopList = my_info.shopping_list;
 
     let filtered = allGood.filter(good => {
-
         if (shopList.some(item => item.good_id === good._id)) {
             return good
         }
@@ -138,6 +135,9 @@ const Bar = props => {
     let cartGood = filtered;
 
     console.log(cartGood);
+
+    props.dispatch({ type: "default" })
+    const myId = props.my_id;
 
     // delete from cart
     const deleteCart = (e, goodId) => {
@@ -155,35 +155,10 @@ const Bar = props => {
                 })
             }
             );
-
             alert('Your ' + goodId + ' has been uploaded to platform ');
-
-            
-        })();
-
-        // filter my cart
-        let filter = allGood.filter(item => {
-            if (item._id != goodId) {
-                return item;
-            }
-        })
-
-        allGood = filter;
-        console.log(allGood);
-
-        filter = cartGood.filter(item => {
-            if (item._id != goodId) {
-                return item;
-            }
-        })
-        cartGood = filter;
+        })().then(props.dispatch({ type: "default" }));
 
     };
-
-    console.log(cartGood);
-
-
-
 
     const [state, setState] = React.useState({
         left: false,
@@ -193,8 +168,8 @@ const Bar = props => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
-        props.dispatch({type:"default"}) 
-        console.log("clicked")  
+        props.dispatch({ type: "default" })
+        console.log("clicked")
         setState({ ...state, [anchor]: open });
     };
 
@@ -227,7 +202,7 @@ const Bar = props => {
                     <CardActionArea component="a" href="#"></CardActionArea>
                     <Card className={classes.card}>
                         <Hidden xsDown>
-                            <CardMedia className={classes.cardMedia} image={"https://source.unsplash.com/random"} title="jo" />
+                            <CardMedia className={classes.cardMedia} image={getImageUrl("good_image", item._id)} title="jo" />
                         </Hidden>
                         <div className={classes.cardDetails}>
                             <CardContent>
@@ -241,8 +216,8 @@ const Bar = props => {
 
                                 <Link to={{
                                     pathname: `/product/${item._id}`, state: {
-                                        id: item._id, name: item.name, price: item.estimated_price,
-                                        description: item.description, sellerId: item.userId, myId: props.my_id
+                                        id: item._id, name: item.name, price: item.estimated_price, tags: item.tags,
+                                        description: item.description, sellerId: item.userId, myId: props.my_id, allUser: props.user_info
                                     }
                                 }} style={{ textDecoration: 'none' }} className="nav-link">
                                     <Button variant="contained" size="small" color="secondary" >

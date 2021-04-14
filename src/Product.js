@@ -12,15 +12,18 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
+import getImageUrl from './utils/getImageUrl';
+
 export default class Product extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            allUser: this.props.location.state.allUser,
             id: this.props.location.state.id,
             myId: this.props.location.state.myId,
             name: this.props.location.state.name,
-            images: 'https://source.unsplash.com/random',
+            images: getImageUrl("good_image", this.props.match.params.id),//'https://source.unsplash.com/random',
             price: this.props.location.state.price,
             seller: { "name": "Sherlock", "id": 1, "location": "cuhk"},
             sellerId: this.props.location.state.sellerId,
@@ -35,15 +38,14 @@ export default class Product extends React.Component {
                 "Material: Plastic",
                 "Finish: Painted",
                 "Metal Finish: Chrome",
-            ]
+            ],
+            feature: this.props.location.state.tags,
         }
     }
 
     render() {
         console.log(this.props);
         console.log(this.props.match.params.id);
-        //console.log(this.props.location.state.name);
-        //console.log(this.props);
 
         return (
             <div>
@@ -58,9 +60,9 @@ export default class Product extends React.Component {
                         <Grid item xs={12} sm={8} md={6}>
                             <div className="col-xs-12 col-sm-6">
                                 <ProductPrice price={this.props.location.state.price} />
-                                <ProductSeller seller={this.state.seller} description={this.state.description}/>
+                                <ProductSeller sellerId={this.state.sellerId} description={this.state.description} allUser={this.state.allUser}/>
                                 <ProductBuyActions sellerId={this.state.sellerId} myId={this.state.myId} goodId={this.state.id}/>
-                                <ProductDetail features={this.state.features} />
+                                <ProductDetail features={this.state.feature} />
                             </div>
                         </Grid>
                     </Grid>

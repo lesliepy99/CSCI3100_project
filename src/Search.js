@@ -76,55 +76,6 @@ const Search = props => {
     console.log(props);
     console.log(props.goods);
     console.log("yes!");
-    const products = [
-        {
-            id: 1,
-            title: 'Running Shoes',
-            price: '$68',
-            image: 'https://source.unsplash.com/featured/?shoes'
-        },
-        {
-            id: 2,
-            title: 'Umbrella',
-            price: '$5',
-            image: 'https://source.unsplash.com/featured/?umbrella'
-        }, {
-            id: 3,
-            title: 'Book - The Little Women',
-            price: '$20',
-            image: 'https://source.unsplash.com/featured/?girl'
-        }, {
-            id: 4,
-            title: 'iPhone4s',
-            price: '$130',
-            image: 'https://source.unsplash.com/featured/?iPhone4s'
-        }, {
-            id: 5,
-            title: 'iPad mini',
-            price: '$100',
-            image: 'https://source.unsplash.com/featured/?ipad'
-        }, {
-            id: 6,
-            title: 'Camera',
-            price: '$999',
-            image: 'https://source.unsplash.com/featured/?camera'
-        }, {
-            id: 7,
-            title: 'T-shirt',
-            price: '$10',
-            image: 'https://source.unsplash.com/featured/?shirts'
-        }, {
-            id: 8,
-            title: 'Sunglasses',
-            price: '$7',
-            image: 'https://source.unsplash.com/featured/?sunglasses'
-        }, {
-            id: 9,
-            title: 'Book - Forest',
-            price: '$25',
-            image: 'https://source.unsplash.com/featured/?forest'
-        },
-    ];
 
     //const carts = props.location.state.carts;
 
@@ -184,26 +135,9 @@ const Search = props => {
 
     // What tags?
     const tagger = ["Book, Teaching Materials", "Clothes, Bags", "Electronic Devices", "Cosmetics, Detergents",
-        "Food, Drink, Cooking Materials", "Luxuries", "Medicine", "Sports Equipment", "Others"];
+        "Food, Drink, Cooking Materials", "Luxuries", "Medicine", "Sports Equipment", "None"];
 
     const [tag, setTag] = useState('');
-
-    const tagBack = (childTag) => {
-        setTag(childTag);
-        setInput('');
-    };
-    console.log(tag);
-
-    // What school?
-    const schools = ["CUHK", "HKU", "HKUST", "Poly U", "HKBU", "City U", "LU", "Others"];
-
-    const [school, setSchool] = useState('');
-
-    const schoolBack =  (childSchool) => {
-        setSchool(childSchool);
-        setInput('');
-    };
-    console.log(school);
 
     const fetchData = async () => {
         setgood(allGood);
@@ -212,33 +146,74 @@ const Search = props => {
         setuserDefault(allUser);
     }
 
+    const tagBack = (childTag) => {
+        setTag(childTag);
+        setInput('');
+    };
+    console.log(tag);
+
+    // What region?
+    const region = ["Hong Kong Island", "Kowloon", "New Territories", "None"];
+
+    const [loc, setLoc] = useState('');
+
+    const locBack = (childLoc) => {
+        setLoc(childLoc);
+        setInput('');
+    };
+    console.log(loc);
+
+    // What school?
+    const schools = ["CUHK", "HKU", "HKUST", "Poly U", "HKBU", "City U", "LU", "None"];
+
+    const [school, setSchool] = useState('');
+
+
+
+    const schoolBack = (childSchool) => {
+        setSchool(childSchool);
+        setInput('');
+    };
+    console.log(school);
+
+
+
     const updateInput = async (inputs) => {
         let filtered = goodDefault.filter(item => {
-            if((tag) && item.tags.some(i=> i.tag.toLowerCase().includes(tag.toLowerCase()))){
+            if ((tag) && item.tags.some(i => i.tag.toLowerCase().includes(tag.toLowerCase()))) {
                 return item;
             }
-            if(!tag){
+            if (!tag) {
+                return item;
+            }
+        })
+
+        filtered = filtered.filter(item => {
+            if ((loc) && item.tags.some(i => i.tag.toLowerCase().includes(tag.toLowerCase()))) {
+                return item;
+            }
+            if (!loc) {
                 return item;
             }
         })
 
         filtered = filtered.filter(item => {
             if (flag == 3) {
-                return item.name.toLowerCase().includes(inputs.toLowerCase())
+                return item.tags.some(i => i.tag.toLowerCase().includes(input.toLowerCase()))
             }
             if (flag == 2) {
                 return item.estimated_price <= inputs
             }
             if (flag == 1) {
-                return item.name.toLowerCase().includes(inputs.toLowerCase())
+                return item.name.toLowerCase().includes(input.toLowerCase())
             }
         })
 
         let userfiltered = userDefault.filter(item => {
-            if((school) && item.tags.some(i=> i.school.toLowerCase().includes(school.toLowerCase()))){
+            if ((school) && item.school.toLowerCase().includes(school.toLowerCase())) {
                 return item;
             }
-            if(!school){
+            if (!school) {
                 return item;
             }
         })
@@ -318,13 +293,17 @@ const Search = props => {
                                         >
                                             <MenuItem value={1}>Name</MenuItem>
                                             <MenuItem value={2}>Highest Price</MenuItem>
-                                            <MenuItem value={3}>Related Class</MenuItem>
+                                            <MenuItem value={3}>Region</MenuItem>
                                         </Select>
                                     </FormControl>
                                 </div>
 
                                 <div style={{ paddingTop: 20, paddingBottom: 20, marginLeft: 18 }}>
                                     <Checker tags={tagger} tagKind="Tag" parentTag={tagBack} />
+                                </div>
+
+                                <div style={{ paddingTop: 20, paddingBottom: 20, marginLeft: 18 }}>
+                                    <Checker tags={region} tagKind="Loc" parentTag={locBack} />
                                 </div>
 
                                 <div style={{ paddingTop: 20, paddingBottom: 20, marginLeft: 18 }}>
@@ -336,16 +315,18 @@ const Search = props => {
 
                     <Grid item xs={12} sm={9} md={9}>
                         <div className="col-xs-12 col-sm-6">
-                            {(!input) && <h1 align="center">Result will be shown here.</h1>}
+                            {(!input) && (msg != 1) && <Display catagory={catagory} products={allGood} myId={props.my_id} allUser={props.user_info} />}
 
-                            {input && (msg != 1) && <Display catagory={catagory} products={good} myId={props.my_id} />}
+                            {input && (msg != 1) && <Display catagory={catagory} products={good} myId={props.my_id} allUser={props.user_info} />}
 
                             {input && (msg != 1) &&
                                 <Typography align="center" variant="h6" color="textSecondary" paragraph>
                                     {length} Products Found
                                 </Typography>
                             }
-                            
+
+                            {(!input) && (msg == 1) && <DisplayUser catagory={catagory} products={allUser} myId={props.my_id} />}
+
                             {input && (msg == 1) && <DisplayUser catagory={catagory} products={users} myId={props.my_id} />}
 
                             {input && (msg == 1) &&
