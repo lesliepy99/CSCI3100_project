@@ -36,8 +36,10 @@ class PostDetail extends React.Component  {
             
             <h1>This is the PostDetail Page!!</h1>
             {/* <PostContent/> */}
-            <CommentContent/>
             
+            {/* <CommentContent/> */}
+
+            {/* Haven't done the comment part */}
             </div>
     
         )
