@@ -120,9 +120,9 @@ class UploadGood extends React.Component {
 
     var tags = [
       {
-        "type":this.state.typeOfGood
+        tag:this.state.typeOfGood
       },{
-        "location":this.state.locationOfGood
+        tag:this.state.locationOfGood
       }];
     var userId = this.props.my_id;
     var number_of_views = 0;
@@ -267,6 +267,7 @@ class UploadGood extends React.Component {
             <MenuItem value="lx">Luxuries</MenuItem>
             <MenuItem value="md">Medicine</MenuItem>
             <MenuItem value="sp">Sports Equipment</MenuItem>
+            <MenuItem value="ot">Others</MenuItem>
 
           </Select>
           {/* <FormHelperText>Label + placeholder</FormHelperText> */}
