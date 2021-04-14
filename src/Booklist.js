@@ -97,13 +97,12 @@ class Booklist extends Component {
   }
 
   render() {
-
     var socket = io.connect();
     socket.on('userChange', data => {
       console.log(data);
       console.log("Is that right?");
 
-      this.props.dispatch({ type: 'update_user', data: data['fullDocument'] })
+      this.props.dispatch({ type: 'update_user', data: data })
       // dispatch({type:'UPDATE'});
       console.log("Update user")
 
@@ -153,7 +152,7 @@ class Booklist extends Component {
     filtered = allGood.filter(good => {
 
       if(shopList.some(item => item._id === good._id)){
-        return good
+        return good;
       }
     })
 
