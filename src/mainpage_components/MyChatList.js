@@ -66,12 +66,12 @@ class MyChatList extends React.Component {
         return (
             <List component="nav" aria-label="main mailbox folders">
                {data.map((item) => (
-                   <Link to={{ pathname: '/chat/'+item.id, state: { seller: item.id  } }}>
+                   <Link to={{ pathname: '/chat/'+item[0].id, state: { seller: item[0].id  } }}>
                    <ListItem button>
                      <ListItemIcon>
                        <ChatIcon />
                      </ListItemIcon>
-                     <ListItemText primary="$item['username']" />
+                     <ListItemText primary={`${item[1].username}`} />
                    </ListItem >
                  </Link>
               ))}
