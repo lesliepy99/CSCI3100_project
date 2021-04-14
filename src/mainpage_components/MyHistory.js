@@ -103,13 +103,13 @@ class MyHistory extends React.Component {
           thisUser = thisUser.concat(
             "Transaction number " + transaction_index.toString() + ":  \n");
           thisUser = thisUser.concat(
-            "        Good_id:              " + good_id.toString() + "\n");
+            "        Good_id:                " + good_id.toString() + "\n");
           thisUser = thisUser.concat(
-            "        Seller_id:            " + seller_id.toString() + "\n");
+            "        Seller_id:               " + seller_id.toString() + "\n");
           thisUser = thisUser.concat(
             "        Consumer_id:          " + consumer_id.toString() + "\n");
           thisUser = thisUser.concat(
-            "        Transaction_time:     " + transaction_time.toString() + "\n");
+            "        Transaction_time:    " + transaction_time.toString() + "\n");
           thisUser = thisUser.concat("\n\n");
 
 
