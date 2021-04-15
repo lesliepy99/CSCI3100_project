@@ -84,13 +84,13 @@ class Main extends React.Component {
             <div>
             <Box p={1}>
               <WhiteTextTypography align="center"  variant="h3"  gutterBottom={true}>{/*true 的语法，color怎么调 */}
-                My Posts
+                Post Area
               </WhiteTextTypography>
               </Box>
               
               <Box p={1}>
               <WhiteTextTypography align="center" variant="h5"  paragraph = {true}>
-                Write down what you are looking for
+                Share you thoughts with others
               </WhiteTextTypography>
               </Box>
               
