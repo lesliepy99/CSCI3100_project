@@ -160,6 +160,7 @@ const Bar = props => {
                 })
             }
             );
+            alert('The item has been deleted.');
         })().then(props.dispatch({ type: "default" }));
 
     };

@@ -70,6 +70,7 @@ const Display = props => {
                 })
             }
             );
+            alert('Good has been added to your shopping cart!');
         })();
 
 

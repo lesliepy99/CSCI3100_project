@@ -111,17 +111,14 @@ const Bar = props => {
 
     let allGood = props.goods;
 
-    console.log(props.user_info);
-
     // filter my info
     let filter_info = props.user_info.filter(info => {
         if (info._id == props.my_id) {
-            console.log(info);
             return info;
         }
     })
     console.log(filter_info);
-
+    
     let my_info = filter_info[0];
 
     console.log(my_info);
@@ -160,6 +157,7 @@ const Bar = props => {
                 })
             }
             );
+            alert('The item has been deleted.');
         })().then(props.dispatch({ type: "default" }));
 
     };
