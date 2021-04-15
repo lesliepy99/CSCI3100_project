@@ -1,5 +1,3 @@
-// Reference: https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/blog
-
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -7,7 +5,7 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
-    backGround: {
+    mainFeaturedPost: {
         position: 'relative',
         backgroundColor: theme.palette.grey[800],
         color: theme.palette.common.white,
@@ -26,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         left: 0,
         backgroundColor: 'rgba(0,0,0,.3)',
       },
-    content: {
+    mainFeaturedPostContent: {
         align: 'center',
         position: 'relative',
         padding: theme.spacing(3),
@@ -44,10 +42,11 @@ const Header = props => {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.backGround} style={{ backgroundImage: `url(${'https://source.unsplash.com/random'})` }}>
+    <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${'https://source.unsplash.com/random'})` }}>
+    {<img style={{ display: 'none' }} src={'https://source.unsplash.com/random'} alt={'main image description'} />}
     <div className={classes.overlay} />
     <Container maxWidth="sm">
-        <div className={classes.content}>
+        <div className={classes.mainFeaturedPostContent}>
             <Typography align="center" component="h1" variant="h3" color="inherit"  gutterBottom>
             {title}
             </Typography>

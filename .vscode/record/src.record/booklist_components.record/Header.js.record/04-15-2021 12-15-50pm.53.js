@@ -1,5 +1,3 @@
-// Reference: https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/blog
-
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -45,6 +43,7 @@ const Header = props => {
 
   return (
     <Paper className={classes.backGround} style={{ backgroundImage: `url(${'https://source.unsplash.com/random'})` }}>
+    {<img style={{ display: 'none' }} src={'https://source.unsplash.com/random'} alt={'main image description'} />}
     <div className={classes.overlay} />
     <Container maxWidth="sm">
         <div className={classes.content}>

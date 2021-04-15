@@ -1,5 +1,3 @@
-// Reference: https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/blog
-
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -30,10 +28,6 @@ const useStyles = makeStyles((theme) => ({
         align: 'center',
         position: 'relative',
         padding: theme.spacing(3),
-        [theme.breakpoints.up('md')]: {
-          padding: theme.spacing(6),
-          paddingRight: 0,
-        },
     },
 
 }));
@@ -44,7 +38,7 @@ const Header = props => {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.backGround} style={{ backgroundImage: `url(${'https://source.unsplash.com/random'})` }}>
+    <Paper className={classes.mainFeaturedPost} style={{ backGround: `url(${'https://source.unsplash.com/random'})` }}>
     <div className={classes.overlay} />
     <Container maxWidth="sm">
         <div className={classes.content}>

@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
       variant: "outlined",
   },
   cardMedia: {
-    paddingTop: '56.25%', //"80%"
+    paddingTop: '56.25%',//"80%"
   },
   avatar: {
     backgroundColor: red[500],

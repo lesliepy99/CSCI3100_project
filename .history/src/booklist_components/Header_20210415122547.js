@@ -1,5 +1,4 @@
 // Reference: https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/blog
-
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
