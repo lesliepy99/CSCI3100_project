@@ -282,7 +282,7 @@ const Bar = props => {
                 >
                 </Typography>
 
-                <Link to={{ pathname: `/home/search` }} className="nav-link">
+                <Link to={{ pathname: `/search` }} className="nav-link">
                     <IconButton aria-label="add to shopping cart">
                         <SearchIcon />
                     </IconButton>

@@ -90,7 +90,7 @@ class Home extends Component{
                                 
                                 <Route path='/home/product/:id' component={Product}/>
 
-                                <Route path='/home/search' component={Search}/>
+                                <Route path='/search' component={Search}/>
 
                                 <Route path='/chat/:id' component={ChatList} />
             

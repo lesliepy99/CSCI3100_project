@@ -215,7 +215,7 @@ const Display = props => {
                                         </CardContent>
                                         <CardActions >
                                             <Link to={{
-                                                pathname: `/home/product/${post._id}`, state: {
+                                                pathname: `/product/${post._id}`, state: {
                                                     id: post._id, name: post.name, price: post.estimated_price, tags: post.tags,
                                                     description: post.description, sellerId: post.userId, myId: props.myId, allUser: props.allUser
                                                 }
