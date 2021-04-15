@@ -145,7 +145,7 @@ class Booklist extends Component {
       return (b.number_of_likes-a.number_of_likes)
     });
 
-    let recGood = allGood.slice(0,27);
+    let recGood = allGood.slice(0,18);
 
     return (
       <main>
