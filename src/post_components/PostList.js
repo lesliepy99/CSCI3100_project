@@ -52,7 +52,10 @@ class PostList extends React.Component {
                             state:{content:blogs.content}
                         }}
                     >
-                        <Button color="primary" >
+                        <Button 
+                          color="primary"
+                          variant="contained"
+                         >
                              Read Detail
                         </Button>
                     </Link>

@@ -25,6 +25,8 @@ import { io } from "socket.io-client";
 
 import PostList from './post_components/PostList';
 import { withStyles } from "@material-ui/core/styles";
+import { spacing } from '@material-ui/system';
+import Box from '@material-ui/core/Box';
 
 import Image from './img/notebook_new.jpg'; // Import using relative path
 
@@ -77,16 +79,24 @@ class Main extends React.Component {
         <Paper Paper style={styles.paperContainer}>
          
           <div />
+          <Box p={3}>
           <Container maxWidth="sm">
             <div>
+            <Box p={1}>
               <WhiteTextTypography align="center"  variant="h3"  gutterBottom={true}>{/*true 的语法，color怎么调 */}
                 My Posts
               </WhiteTextTypography>
+              </Box>
+              
+              <Box p={1}>
               <WhiteTextTypography align="center" variant="h5"  paragraph = {true}>
                 Write down what you are looking for
               </WhiteTextTypography>
+              </Box>
+              
             </div>
           </Container>
+          </Box>
         </Paper>
         <PostList/>
       </main>
@@ -117,16 +127,20 @@ class Comment extends React.Component {
 
     return (
       <div align="center">
-        {/*<Button startIcon={<CreateIcon />} size="large" color="primary" >New Post</Button>*/}
+        <Box m={2}>
         <Link
            to={{
               pathname: '/home/NewPost',
               }}
         >
-           <Button color="primary" >
+           <Button 
+            variant="contained"
+            startIcon={<CreateIcon />}
+            color="primary" >
               New Post
            </Button>
         </Link>
+        </Box>
         <Main/>
         {/*实验性质 */}
         
