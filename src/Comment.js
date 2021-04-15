@@ -24,8 +24,9 @@ import { connect } from 'react-redux';
 import { io } from "socket.io-client";
 
 import PostList from './post_components/PostList';
+import { withStyles } from "@material-ui/core/styles";
 
-import Image from './notebook.jpg'; // Import using relative path
+import Image from './img/notebook_new.jpg'; // Import using relative path
 
 
   
@@ -52,6 +53,16 @@ const blogs = [
     content: 'Looking for some interesting shoes!',
   },
 ]
+const styles = {
+  paperContainer: {
+      backgroundImage: `url(${Image})`
+  }
+};
+const WhiteTextTypography = withStyles({
+  root: {
+    color: "#FFFFFF"
+  }
+})(Typography);
 
 class Main extends React.Component {
 
@@ -63,17 +74,17 @@ class Main extends React.Component {
     return (
       <main>
         {/* return of 1st component: background image */}
-        <Paper style={{ backgroundImage: `url(${'https://pixabay.com/images/id-731212/'})` }}>
-          {<img style={{ display: 'none' }} src={'https://pixabay.com/images/id-731212/'} alt={'Oops, Picture is Gone!'} />}
+        <Paper Paper style={styles.paperContainer}>
+         
           <div />
           <Container maxWidth="sm">
             <div>
-              <Typography align="center" component="h1" variant="h3" color="inherit" gutterBottom>
+              <WhiteTextTypography align="center"  variant="h3"  gutterBottom={true}>{/*true 的语法，color怎么调 */}
                 My Posts
-              </Typography>
-              <Typography align="center" variant="h5" color="inherit" paragraph>
+              </WhiteTextTypography>
+              <WhiteTextTypography align="center" variant="h5"  paragraph = {true}>
                 Write down what you are looking for
-              </Typography>
+              </WhiteTextTypography>
             </div>
           </Container>
         </Paper>
