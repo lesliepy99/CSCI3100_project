@@ -25,6 +25,8 @@ import { io } from "socket.io-client";
 
 import PostList from './post_components/PostList';
 
+import Image from './notebook.jpg'; // Import using relative path
+
 
   
 
