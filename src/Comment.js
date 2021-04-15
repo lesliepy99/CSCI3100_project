@@ -79,7 +79,7 @@ class Main extends React.Component {
         <Paper Paper style={styles.paperContainer}>
          
           <div />
-          <Box p={3}>
+          <Box p={3} mb={2}>
           <Container maxWidth="sm">
             <div>
             <Box p={1}>
