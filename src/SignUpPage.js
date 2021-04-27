@@ -51,7 +51,7 @@ class SignUpPage extends Component {
             }
             if (info_valid) {
                 (async ()=> {
-                    const response= await fetch('http://localhost:3000/send_email', {
+                    const response= await fetch('http://54.254.174.175:3000/send_email', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -83,7 +83,7 @@ class SignUpPage extends Component {
             var authcode=event.target.elements.authcode.value;
             console.log("when verification,",email,password,nickname,school,authcode);
             (async () => {
-                const response= await fetch('http://localhost:3000/register', {
+                const response= await fetch('http://54.254.174.175:3000/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

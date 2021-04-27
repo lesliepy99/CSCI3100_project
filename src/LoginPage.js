@@ -22,7 +22,7 @@ class LoginPage extends React.Component {
       var email = event.target.elements.email.value;
       var password = event.target.elements.password.value;
       (async ()=>{
-        const response=await fetch("http://localhost:3000/login",{
+        const response=await fetch("http://54.254.174.175:3000/login",{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

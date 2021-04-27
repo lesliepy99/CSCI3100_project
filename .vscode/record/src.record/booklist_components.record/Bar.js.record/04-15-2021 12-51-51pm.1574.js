@@ -145,7 +145,7 @@ const Bar = props => {
     const deleteCart = (e, goodId) => {
 
         (async () => {
-            await fetch('http://localhost:3000/deleteShoppingListItem', {
+            await fetch('http://54.254.174.175:3000/deleteShoppingListItem', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

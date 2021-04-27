@@ -140,7 +140,7 @@ class UploadGood extends React.Component {
       estimated_price ) */
       console.log(this.props.my_id);
       (async () => {
-           await fetch('http://localhost:3000/add_good', {
+           await fetch('http://54.254.174.175:3000/add_good', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'

@@ -46,7 +46,7 @@ class Chat extends React.Component {
         const transaction_time=this.state.date;
         console.log(good_id);
         (()=>{
-            fetch("http://localhost:3000/create_transaction",{
+            fetch("http://54.254.174.175:3000/create_transaction",{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ class Chat extends React.Component {
         const uid_2=this.props.seller_id;
         const message_content=event.target.elements.send_text.value;
         (async ()=>{
-            await fetch('http://localhost:3000/create_chat',{
+            await fetch('http://54.254.174.175:3000/create_chat',{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

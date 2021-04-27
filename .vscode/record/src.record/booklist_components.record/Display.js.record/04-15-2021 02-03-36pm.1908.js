@@ -59,7 +59,7 @@ const Display = props => {
 
 
         (async () => {
-            await fetch('http://localhost:3000/insertShoppingList', {
+            await fetch('http://54.254.174.175:3000/insertShoppingList', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

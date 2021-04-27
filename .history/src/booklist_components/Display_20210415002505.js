@@ -57,7 +57,7 @@ const Display = props => {
         console.log(e, goodId);
 
         (async () => {
-            await fetch('http://localhost:3000/insertShoppingList', {
+            await fetch('http://54.254.174.175:3000/insertShoppingList', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

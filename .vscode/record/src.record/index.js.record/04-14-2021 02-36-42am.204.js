@@ -16,7 +16,7 @@ var my_id = null;
 var transactions = [];
 
 
-   fetch('http://localhost:3000/find_all_users',)
+   fetch('http://54.254.174.175:3000/find_all_users',)
   .then(async res => {
     
     const data = await res.json();
@@ -30,7 +30,7 @@ var transactions = [];
 
 
 
-   fetch('http://localhost:3000/find_all_goods')
+   fetch('http://54.254.174.175:3000/find_all_goods')
     .then(async response => {
       const data = await response.json();
       for (var i = 0; i < data.length; i++) {
@@ -45,7 +45,7 @@ var transactions = [];
 
 
 
-   fetch('http://localhost:3000/find_all_posts')
+   fetch('http://54.254.174.175:3000/find_all_posts')
   .then(async response => {
     const data = await response.json();
     for(var i=0;i<data.length;i++){

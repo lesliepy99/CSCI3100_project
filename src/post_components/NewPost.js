@@ -38,7 +38,7 @@ class NewPost extends React.Component {
 
 
       (async () => {
-        await  fetch("http://localhost:3000/add_post",{
+        await  fetch("http://54.254.174.175:3000/add_post",{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

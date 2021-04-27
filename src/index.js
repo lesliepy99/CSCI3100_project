@@ -17,7 +17,7 @@ var my_id = null;
 var transactions = [];
 var my_chats = [];
 
-   fetch('http://localhost:3000/find_all_users',)
+   fetch('http://54.254.174.175:3000/find_all_users',)
   .then(async res => {
     
     const data = await res.json();
@@ -31,7 +31,7 @@ var my_chats = [];
 
 
 
-   fetch('http://localhost:3000/find_all_goods')
+   fetch('http://54.254.174.175:3000/find_all_goods')
     .then(async response => {
       const data = await response.json();
       for (var i = 0; i < data.length; i++) {
@@ -46,7 +46,7 @@ var my_chats = [];
 
 
 
-   fetch('http://localhost:3000/find_all_posts')
+   fetch('http://54.254.174.175:3000/find_all_posts')
   .then(async response => {
     const data = await response.json();
     for(var i=0;i<data.length;i++){
@@ -89,7 +89,7 @@ if (action.type=='update_user'){
 
   else if (action.data['operationType']=="update"){
    console.log("Helllllllllllllllllllllllllllllll")
-    fetch('http://localhost:3000/find_all_users',)
+    fetch('http://54.254.174.175:3000/find_all_users',)
   .then(async res => {
     
     const data = await res.json();
