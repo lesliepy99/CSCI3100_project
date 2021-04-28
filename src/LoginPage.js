@@ -43,7 +43,7 @@ class LoginPage extends React.Component {
       })();
     }
     
-    confirm = () =>{
+    adminLogin = () =>{
       this.props.history.push('/admin_page')
     }
     render(){
@@ -73,7 +73,7 @@ class LoginPage extends React.Component {
             </Link>
             <br />
             <br />
-            <Button type="primary" onClick={this.adminLogin}>Admin Login</Button>
+            <Button  variant="contained" color="primary" onClick={this.adminLogin}>Admin Login</Button>
             <br />
           </form>
           <br/>
