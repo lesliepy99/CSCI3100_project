@@ -123,9 +123,11 @@ app.post('/admin_login', urlencodedParser, async (req, res) => {
     const username=req.body.username;
     db.verifyUser(username,password).then(
         re => { res.send(JSON.stringify(re));
-        console.log("right") },
-        err => { res.status(500).send(err.toString());
-        console.log("wrong") }
+        console.log("right") ;
+        res.sendFile(__dirname + '/src/admin/manage_page.html')
+    },
+        err => { res.sendFile(__dirname + '/src/admin/admin_page.html');
+     }
     );
 });
 
