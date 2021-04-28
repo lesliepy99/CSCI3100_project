@@ -162,9 +162,15 @@ app.post('/admin_login', urlencodedParser, async (req, res) => {
     const password=req.body.password;
     const username=req.body.username;
     db.verifyUser(username,password).then(
-        re => { 
+        re => {
+		console.log(re);
+	if(re==undefined){
+		console.log("receive");
+		res.status(400).send("Wrong password or username");
+	}
+		else{
         console.log("right") ;
-        res.sendFile(__dirname + '/src/admin/manage_page.html')
+        res.sendFile(__dirname + '/src/admin/manage_page.html')}
     },
         err => { res.sendFile(__dirname + '/src/admin/admin_page.html');
      }
