@@ -73,9 +73,9 @@ class LoginPage extends React.Component {
               </Button>
             </Link>
             <br />
-            <br />
+            {/* <br />
             <Button  variant="contained" color="primary" onClick={this.adminLogin}>Admin Login</Button>
-            <br />
+            <br /> */}
           </form>
           <br/>
         </Container>
