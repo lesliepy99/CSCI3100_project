@@ -34,6 +34,7 @@
         </style>
 </head>
 <body>  
+    <div class="container p-3 my-3 border">
         <ul>
             <li id="user" class="tag"><a href="#user">User info</a></li>
             <li id="good" class="tag"><a href="#good">good info</a></li>
@@ -41,6 +42,7 @@
   <ul class="accordion" id="2"data-accordion data-options="multi_expand:true;">
     
   </ul>
+</div>
 </body>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -76,7 +78,7 @@ $(document).ready(function() {
              var html='';
              for (var i = 0; i < data.length; i++) {
 
-       html+='<li class="accordion-navigation"> <a href="#info">'+data[i]['name']+'</a>'+ '<div class="content">'+
+       html+='<li class="accordion-navigation" id='+data[i]['_id']+'> <a href="#info">'+data[i]['name']+'</a>'+ '<div class="content">'+
         "<p>id: "+ data[i]['_id']+"</p></div></li>"
     
      
