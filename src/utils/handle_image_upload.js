@@ -1,4 +1,9 @@
-
+/*
+* MODULE getConfig
+*PROGRAMMER: PU Yuan
+*VERSION: 1.0 (28 April 2021)
+*PURPOSE: Configuration information of the S3 bucket
+*/
  const getConfig = function(type){
    
     var config = {
@@ -10,7 +15,5 @@
     }
     return config;
 }
-
-
 
 export default getConfig;
