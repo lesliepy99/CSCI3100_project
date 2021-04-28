@@ -122,7 +122,7 @@ app.post('/admin_login', urlencodedParser, async (req, res) => {
     const password=req.body.password;
     const username=req.body.username;
     db.verifyUser(username,password).then(
-        re => { res.send(JSON.stringify(re));
+        re => { 
         console.log("right") ;
         res.sendFile(__dirname + '/src/admin/manage_page.html')
     },
