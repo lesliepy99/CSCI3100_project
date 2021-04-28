@@ -2,7 +2,12 @@
 <html>
 <head>
 	<title>动态网页请求后台数据</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/foundation/5.5.3/css/foundation.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/foundation/5.5.3/js/foundation.min.js"></script>
+    <script src="https://cdn.staticfile.org/foundation/5.5.3/js/vendor/modernizr.js"></script>
     <style>
         ul {
             list-style-type: none;
@@ -13,7 +18,7 @@
             background-color: #f3f3f3;
         }
         
-        li {
+        li.tag {
             float: left;
         }
         
@@ -25,24 +30,17 @@
             text-decoration: none;
         }
         
-        li a:hover:not(.active) {
-            background-color: #ddd;
-        }
         
-        li a.active {
-            color: white;
-            background-color: #4CAF50;
-        }
         </style>
 </head>
 <body>  
         <ul>
-            <li id="user"><a href="#user">User info</a></li>
-            <li id="good"><a href="#good">good info</a></li>
+            <li id="user" class="tag"><a href="#user">User info</a></li>
+            <li id="good" class="tag"><a href="#good">good info</a></li>
           </ul>
+  <ul class="accordion" id="2"data-accordion data-options="multi_expand:true;">
     
-    <div id="2">
-    </div>
+  </ul>
 </body>
 <script type="text/javascript">
    $("#user").click(function(){
@@ -54,9 +52,9 @@
             var data = JSON.parse(res);
             console.log(data);
              var html='';
-             for (var i = 0; i < data.length; i++) {
-            // res.data[i]                
-       html+='<li>'+data[i]['name']+'</li>'
+             for (var i = 0; i < data.length; i++) {      
+            html+='<li class="accordion-navigation"> <a href="#info">'+data[i]['name']+'</a>'+ '<div class="content">'+
+        "id: "+ data[i]['_id']+"</div></li>"
      
             document.getElementById("2").innerHTML=html; 
             }  
@@ -74,8 +72,10 @@
             console.log(data);
              var html='';
              for (var i = 0; i < data.length; i++) {
-            // res.data[i]                
-       html+='<li>'+data[i]['name']+'</li>'
+
+       html+='<li class="accordion-navigation"> <a href="#info">'+data[i]['name']+'</a>'+ '<div class="content">'+
+        "id: "+ data[i]['_id']+"</div></li>"
+    
      
             document.getElementById("2").innerHTML=html; 
             }  
