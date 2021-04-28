@@ -15,7 +15,8 @@
          type:"GET",      
        
         success:function(res){
-             
+            var data = JOSN.parse(res);
+            console.log(data);
              var html='';
              for (var i = 0; i < res.length; i++) {
             // res.data[i]
