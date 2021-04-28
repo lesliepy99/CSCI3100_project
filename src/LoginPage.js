@@ -42,7 +42,10 @@ class LoginPage extends React.Component {
         else alert("Wrong email or password!");
       })();
     }
-
+    
+    confirm = () =>{
+      this.props.history.push('/admin_page')
+    }
     render(){
         return (
         <Container maxWidth={'sm'} style={{backgroundColor: '#e3f2fd'}}>
@@ -68,6 +71,9 @@ class LoginPage extends React.Component {
                 Sign UP
               </Button>
             </Link>
+            <br />
+            <br />
+            <Button type="primary" onClick={this.adminLogin}>Admin Login</Button>
             <br />
           </form>
           <br/>
