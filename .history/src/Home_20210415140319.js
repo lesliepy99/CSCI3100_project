@@ -27,7 +27,7 @@ class Home extends Component{
 
     componentDidMount() {
         
-        fetch("http://54.254.174.175:3000/find_specific_transaction",{
+        fetch("http://localhost:3000/find_specific_transaction",{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ class Home extends Component{
                 this.props.dispatch({type:'transaction_init',data:data})                                 
         });    
 
-        fetch("http://54.254.174.175:3000/find_specific_chat",{
+        fetch("http://localhost:3000/find_specific_chat",{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

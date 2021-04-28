@@ -70,7 +70,10 @@ app.post("/send_email", jsonParser, async (req, res) => {
 );
 
 
+
+
 app.use(express.static(__dirname + '/build'));
+app.use(express.static(__dirname + '/src/admin'));
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/build/index.html')
 });
@@ -78,6 +81,8 @@ app.get('/', function (req, res) {
 io.sockets.on('connection', function (socket) {
     console.log("Logged");
 });
+
+
 
 const UserChangeStream = UserModel.watch();
 const GoodChangeStream = GoodModel.watch();
@@ -108,8 +113,20 @@ ChatChangeStream.on('change', (changes) => {
     console.log("chat changed");
 });
 
+app.get('/admin', function (req, res) {
+    res.sendFile(__dirname + '/src/admin/admin_page.html')
+});
 
-
+app.post('/admin_login', urlencodedParser, async (req, res) => {
+    console.log(req.body);
+    const password=req.body.password;
+    const username=req.body.username;
+    db.verifyUser(username,password).then(
+        re => { res.send(JSON.stringify(re)) },
+        err => { res.status(500).send(err.toString());
+        console.log("wrong") }
+    );
+});
 
 app.post('/register', jsonParser, async (req, res) => {
     console.log(req.body);

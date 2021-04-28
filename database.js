@@ -87,12 +87,32 @@ var AuthCodeSchema =new Schema({
         authcode: String
     }]
 });
+
+var AdminSchema = new Schema({
+    username: { type: String, required: true },
+    password: { type: String, required: true },
+})
 UserModel = mongoose.model('User', UserSchema);
 GoodModel = mongoose.model('Good', GoodSchema);
 ChatModel = mongoose.model('Chat', ChatSchema);
 PostModel = mongoose.model('Post', PostSchema);
 TransactionModel = mongoose.model('Transaction', TransactionSchema);
 AuthCodeModel = mongoose.model('Authcode', AuthCodeSchema);
+AdminModel = mongoose.model('Admin',AdminSchema);
+
+verifyUser = (username,password) => new Promise((resolve, reject) => {
+    UserModel.findOne({username:username, password:password}, (err, user) => {
+        if (err) reject(err);
+        else if (!user) resolve(undefined);
+        else {
+            console.log("success!")
+            resolve(user);
+        };
+
+    })
+})
+
+
 
 createUser = (name, password, email, school) => new Promise((resolve, reject) => {
     UserModel.findOne({ email: email }, (err, user) => {
@@ -356,6 +376,8 @@ module.exports = {
     PostModel: PostModel,
     TransactionModel: TransactionModel,
     AuthCodeModel: AuthCodeModel,
+    AdminModel:AdminModel,
+    verifyUser:verifyUser,
     createUser: createUser,
     findUser: findUser,
     findAllUsers:findAllUsers,
