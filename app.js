@@ -1,3 +1,14 @@
+/*
+*SERVER MODULE
+*PROGRAMMER: PU Yuan
+*VERSION: 1.0 (28 April 2021)
+*
+*PURPOSE: general-purpose server, provide intereaction between clients and database
+*/
+
+/**
+ * Module dependencies and prototypes.
+ */
 const db = require('./database');
 const express = require("express");
 var app = express();
@@ -9,10 +20,11 @@ const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 const { assert } = require("console");
-
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var jsonParser = bodyParser.json({ extended: false });
 
+
+// Specify the configuration of the email account to send auth code
 const transport = nodemailer.createTransport(smtpTransport({
     host: 'smtp.qq.com',
     port: 465,
@@ -71,17 +83,30 @@ app.post("/send_email", jsonParser, async (req, res) => {
 
 
 
-
+/**
+ * Set static path to provide static files.
+ */
 app.use(express.static(__dirname + '/build'));
 app.use(express.static(__dirname + '/src/admin'));
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/build/index.html')
 });
 
+
+//Listen on the login activities
 io.sockets.on('connection', function (socket) {
     console.log("Logged");
 });
 
+/**
+ * Set up stream listeners and socket.io for mongodb models
+ *
+ *   - UserModel
+ *   - GoodModel
+ *   - Transaction model
+ *   - ChatModel
+ *
+ */
 
 
 const UserChangeStream = UserModel.watch();
@@ -113,10 +138,25 @@ ChatChangeStream.on('change', (changes) => {
     console.log("chat changed");
 });
 
+
+/**
+ * DESCRIPTION: a REST API to return main page of the app to clients
+ * URL: /admin
+ * METHOD: GET
+ */
 app.get('/admin', function (req, res) {
     res.sendFile(__dirname + '/src/admin/admin_page.html')
 });
 
+
+/**
+ * DESCRIPTION: a REST API to authticate the login information of administrators
+ * URL: /admin_login
+ * METHOD: POST
+ * Parameters: 
+ *   - username : STRING
+ *   - password : STRING
+ */
 app.post('/admin_login', urlencodedParser, async (req, res) => {
     console.log(req.body);
     const password=req.body.password;
@@ -131,6 +171,19 @@ app.post('/admin_login', urlencodedParser, async (req, res) => {
     );
 });
 
+/**
+ * DESCRIPTION: a REST API to register a user, the procedures including:
+ *              (1). Verify the auth_code
+ *              (2). If auth_code is verified, insert a new user document to database
+ * URL: /register
+ * METHOD: POST
+ * Parameters: 
+ *   - email : STRING
+ *   - password : STRING
+ *   - nickname : STRING
+ *   - school : STRING
+ *   - authcode : STRING
+ */
 app.post('/register', jsonParser, async (req, res) => {
     console.log(req.body);
     const email= req.body.email;
@@ -152,6 +205,14 @@ app.post('/register', jsonParser, async (req, res) => {
     return res.json({veri_result: veri_result});
 });
 
+/**
+ * DESCRIPTION: a REST API to authticate the login information of common users
+ * URL: /admin_login
+ * METHOD: POST
+ * Parameters: 
+ *   - email : STRING
+ *   - password : STRING
+ */
 app.post('/login', jsonParser, async (req, res) => {
     const email=req.body.email;
     const password=req.body.password;
@@ -167,6 +228,14 @@ app.post('/login', jsonParser, async (req, res) => {
     return res.json({my_id: my_id});
 });
 
+
+/**
+ * DESCRIPTION: a REST API to find and return the information of a specific registered user
+ * URL: /find_user
+ * METHOD: POST
+ * Parameters: 
+ *   - uid : STRING
+ */
 app.post('/find_user', jsonParser, (req, res) => {
     const uid = req.body.uid;
     db.findUser(uid).then(
@@ -175,6 +244,12 @@ app.post('/find_user', jsonParser, (req, res) => {
     );
 })
 
+/**
+ * DESCRIPTION: a REST API to find and return the information of all specific registered users
+ * URL: /find_all_users
+ * METHOD: GET
+ * Parameters: NONE
+ */
 app.get('/find_all_users',(req,res)=>{
     db.findAllUsers().then(
         re => { res.send(JSON.stringify(re)) },
@@ -182,6 +257,15 @@ app.get('/find_all_users',(req,res)=>{
     );
 })
 
+
+/**
+ * DESCRIPTION: a REST API to insert the id of a specific good into the shopping list data structure of a user
+ * URL: /insertShoppingList
+ * METHOD: POST
+ * Parameters: 
+ *   - user_id : STRING
+ *   - good_id : STRING
+ */
 app.post('/insertShoppingList',jsonParser, (req, res) => {
     console.log(req.body);
     const user_id = req.body.user_id;
@@ -200,6 +284,14 @@ app.post('/insertShoppingList',jsonParser, (req, res) => {
         );
 })
 
+/**
+ * DESCRIPTION: a REST API to delete the id of a specific good into from shopping list data structure of a user
+ * URL: /deleteShoppingListItem
+ * METHOD: POST
+ * Parameters: 
+ *   - user_id : STRING
+ *   - good_id : STRING
+ */
 app.post('/deleteShoppingListItem',jsonParser, (req, res) => {
     console.log(req.body);
     const user_id = req.body.user_id;
@@ -218,6 +310,20 @@ app.post('/deleteShoppingListItem',jsonParser, (req, res) => {
         );
 })
 
+
+/**
+ * DESCRIPTION: a REST API to insert a good document to the database
+ * URL: /add_good
+ * METHOD: POST
+ * Parameters: 
+ *   - user_id : STRING
+ *   - name : STRING
+ *   - tags : ARRAY of STRING
+ *   - number_of_views : NUMBER
+ *   - number_of_likes : NUMBER
+ *   - description : STRING
+ *   - estimated_price: Number
+ */
 app.post('/add_good',jsonParser, (req, res) => {
     console.log(req.body);
     
@@ -250,7 +356,12 @@ app.post('/add_good',jsonParser, (req, res) => {
         );
 })
 
-
+/**
+ * DESCRIPTION: a REST API to find and return the information of all goods
+ * URL: /find_all_goods
+ * METHOD: GET
+ * Parameters: NONE
+ */
 app.get('/find_all_goods', (req, res) => {
     db.findAllGoods().then(
         re => { res.send(JSON.stringify(re)) },
@@ -258,6 +369,12 @@ app.get('/find_all_goods', (req, res) => {
     );
 });
 
+/**
+ * DESCRIPTION: a REST API to find and return the information of all posts
+ * URL: /find_all_posts
+ * METHOD: GET
+ * Parameters: NONE
+ */
 app.get('/find_all_posts', (req, res) => {
     db.findAllPosts().then(
         re => { res.send(JSON.stringify(re)) },
@@ -265,6 +382,15 @@ app.get('/find_all_posts', (req, res) => {
     );
 });
 
+/**
+ * DESCRIPTION: a REST API to insert a post document to the database
+ * URL: /add_post
+ * METHOD: POST
+ * Parameters: 
+ *   - sender_id : STRING
+ *   - content : STRING
+ *   - comments : ARRAY of STRING
+ */
 app.post('/add_post', jsonParser,(req, res) => {
     console.log("body")
     console.log(req.body);
@@ -286,6 +412,15 @@ app.post('/add_post', jsonParser,(req, res) => {
 })
 
 
+/**
+ * DESCRIPTION: a REST API to insert a comment to a specific post 
+ * URL: /add_post_comment
+ * METHOD: POST
+ * Parameters: 
+ *   - postId : STRING
+ *   - senderId : STRING
+ *   - content : STRING
+ */
 app.post('/add_post_comment',jsonParser,(req, res) => {
     console.log(req.body);
     const postId = req.body.postId;
@@ -305,6 +440,13 @@ app.post('/add_post_comment',jsonParser,(req, res) => {
         );
 })
 
+/**
+ * DESCRIPTION: a REST API to find all chat messages of a specific user
+ * URL: /find_specific_chat
+ * METHOD: POST
+ * Parameters: 
+ *   - id : STRING
+ */
 app.post('/find_specific_chat', jsonParser,(req, res) => {
     const id = req.body.id;
     db.findSpecificChats({id})
@@ -314,6 +456,18 @@ app.post('/find_specific_chat', jsonParser,(req, res) => {
         );
 })
 
+/**
+ * DESCRIPTION: a REST API such that if the chat document already exists between two
+ *              users, insert a chat message to that document; else, create a chat
+ *              document between the two users
+ * URL: /create_chat
+ * METHOD: POST
+ * Parameters: 
+ *   - uid_1 : STRING
+ *   - uid_2 : STRING
+ *   - message_content : STRING 
+ *   - send_time : DATE
+ */
 app.post('/create_chat',jsonParser,(req, res) => {
     const uid_1 = req.body.uid_1;
     const uid_2 = req.body.uid_2;
@@ -335,7 +489,16 @@ app.post('/create_chat',jsonParser,(req, res) => {
     );
 });
 
-
+/**
+ * DESCRIPTION: a REST API such that create a transaction record and add to database
+ * URL: /create_transaction
+ * METHOD: POST
+ * Parameters: 
+ *   - good_id : STRING
+ *   - seller_id : STRING
+ *   - consumer_id : STRING 
+ *   - transaction_time : DATE
+ */
 app.post('/create_transaction', jsonParser,(req, res) => {
     console.log(req.body);
     const good_id = req.body.good_id;
@@ -357,8 +520,14 @@ app.post('/create_transaction', jsonParser,(req, res) => {
 })
 
 
+/**
+ * DESCRIPTION: a REST API to find all specific transactions where the specific user is involved
+ * URL: /find_specific_transaction
+ * METHOD: POST
+ * Parameters: 
+ *   - id : STRING
+ */
 app.post('/find_specific_transaction', jsonParser,(req, res) => {
-    console.log("look at here lalalalal");
     console.log(req.body);
     const id = req.body.id;
    
@@ -369,4 +538,7 @@ app.post('/find_specific_transaction', jsonParser,(req, res) => {
         );
 })
 
+/**
+ * Configure the port to be 3000
+ */
 server.listen(3000)
