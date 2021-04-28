@@ -43,6 +43,9 @@
   </ul>
 </body>
 <script type="text/javascript">
+$(document).ready(function() {
+    $(document).foundation();
+})
    $("#user").click(function(){
        $.ajax({
          url:'http://54.254.174.175:3000/find_all_users',         
