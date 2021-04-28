@@ -101,7 +101,7 @@ AuthCodeModel = mongoose.model('Authcode', AuthCodeSchema);
 AdminModel = mongoose.model('Admin',AdminSchema);
 
 verifyUser = (username,password) => new Promise((resolve, reject) => {
-    UserModel.findOne({username:username, password:password}, (err, user) => {
+    AdminModel.findOne({username:username, password:password}, (err, user) => {
         if (err) reject(err);
         else if (!user) resolve(undefined);
         else {

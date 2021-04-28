@@ -122,7 +122,8 @@ app.post('/admin_login', urlencodedParser, async (req, res) => {
     const password=req.body.password;
     const username=req.body.username;
     db.verifyUser(username,password).then(
-        re => { res.send(JSON.stringify(re)) },
+        re => { res.send(JSON.stringify(re));
+        console.log("right") },
         err => { res.status(500).send(err.toString());
         console.log("wrong") }
     );
