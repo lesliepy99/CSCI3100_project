@@ -1,3 +1,10 @@
+/**
+ * MODULE NAV
+ * PROGRAMMER: PU Yuan
+ * VERSION: 1.0 (28 April 2021)
+ * PURPOSE: provide a navigation bar which help users to navigate to other pages
+ */
+
 import React, { Component } from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';

@@ -23,10 +23,10 @@ class Home extends Component{
         super(props);
     }
 
-  
-
-    componentDidMount() {
-        
+    // Once the home page is loaded, that is, when the user login and the app has
+    //got the corresponding user information, fetch the transaction records and chat 
+    //messages of this user from database and put them into the redux local storage
+    componentDidMount() {  
         fetch("http://54.254.174.175:3000/find_specific_transaction",{
             method: 'POST',
             headers: {
