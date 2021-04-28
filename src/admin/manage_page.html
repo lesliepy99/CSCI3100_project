@@ -17,10 +17,10 @@
         success:function(res){
              console.log(res);
              var html='';
-             for (var i = 0; i < res.data.length; i++) {
+             for (var i = 0; i < res.length; i++) {
             // res.data[i]
                                            
-       html+='<li>'+res.data[i].name+'</li>'
+       html+='<li>'+res[i].name+'</li>'
       // controls是常用控件：如暂停，音量等；poster：开始的图片；height与width是播放器的宽与高（100%则表示原有大小展现）；object-fix是适应边框
             document.getElementById("2").innerHTML=html; // 获取或者替换掉html里面的内容
             }  
