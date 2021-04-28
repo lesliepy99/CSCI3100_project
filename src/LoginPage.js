@@ -44,7 +44,8 @@ class LoginPage extends React.Component {
     }
     
     adminLogin = () =>{
-      this.props.history.push('/admin_page')
+      fetch('http://54.254.174.175:3000/admin')
+ 
     }
     render(){
         return (
