@@ -137,6 +137,9 @@ const Search = props => {
     const handleOrder = (currentOrder) => {
         console.log(currentOrder);
         if (currentOrder == "Low to High") {
+            allGood.sort(function (a, b) {
+                return (a.estimated_price - b.estimated_price)
+            });
             goodDefault.sort(function (a, b) {
                 return (a.estimated_price - b.estimated_price)
             });
@@ -145,6 +148,9 @@ const Search = props => {
             });
         }
         else if (currentOrder == "High to Low") {
+            allGood.sort(function (a, b) {
+                return (b.estimated_price - a.estimated_price)
+            });
             goodDefault.sort(function (a, b) {
                 return (b.estimated_price - a.estimated_price)
             });
@@ -398,5 +404,3 @@ function mapStateToProps(state) {
     };
 }
 export default connect(mapStateToProps)(Search);
-
-// export default Search
