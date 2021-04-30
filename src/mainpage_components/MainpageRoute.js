@@ -41,12 +41,28 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * MODEULE MainpageRoute
+ * PURPOSE: set up the route from the button choices to the related function modules, choice is passed into this module
+ * DATA STRUCTURE: 
+ *   - Variable : choice - internal structure
+ *   - Variable : classes - internal structure
+ * ALGORITHM (IMPLEMENTATION) : On receiving the choice number from the previous caller, this module will simply return
+ *                              the shownpart that needed to be diaplayed based on the choice number value.
+ */
 const MainpageRoute = props => {
     const choice = props.choice;
 
     const classes = useStyles();
 
     let ShownPart;
+
+/**
+ * DESCRIPTION: Given choice, return the shownpart based on choice value.
+ * PARAMETERS:
+ *   - choice : INT
+ * ALGORITHM (IMPLEMENTATION): Use a switch-case condition.
+ */
     switch (choice) {
         case 1:
           ShownPart = <UploadGood />;
@@ -67,6 +83,9 @@ const MainpageRoute = props => {
           ShownPart = <PersonalInfo />;
       }
 
+/**
+ * DESCRIPTION: Return the above mentioned output
+ */
     return (
         <div className={classes.root}>
             <Paper elevation={5}> 
@@ -76,4 +95,7 @@ const MainpageRoute = props => {
     );
 }
 
+/**
+ * DESCRIPTION: Return the MainpageRoute to caller
+ */
 export default MainpageRoute;

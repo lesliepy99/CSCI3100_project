@@ -1,3 +1,15 @@
+/*
+*MODULE Mainpage
+*PROGRAMMER: WANG Ruijie
+*VERSION: 1.0 (30 April 2021)
+*PURPOSE: It is the module to display the mainpage, and the precise part to 
+*         be displayed is decided in the mainpage route part 
+*         (you can see at /mainpage_components/MainpageRoute.js)
+*/
+
+/**
+ * Module dependencies and prototypes.
+ */
 import React, { Component } from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
@@ -91,8 +103,24 @@ const useStyles = makeStyles((theme) =>({
 const title = "Personal Mainpage";
 const title_content = "Check the personal information and transactions here";
 
-
+/**
+ * MODEULE Mainpage
+ * PURPOSE: Display the mainpage skeleton, the contents are calling 
+ *          MainpageRoute choice={mainPageChoice} to decide
+ * DATA STRUCTURE: 
+ *   - Variable : handleUploadGoodClick - internal structure
+ *   - Variable : handleViewRankClick - internal structure
+ *   - Variable : handlePersonalInfoClick - internal structure
+ *   - Variable : handleMyHistoryClick - internal structure
+ *   - Variable : handleMyChatListClick - internal structure
+ *   - Variable : mainPageChoice - internal structure
+ * ALGORITHM (IMPLEMENTATION) : we do a switch-case condition and then simply 
+ *                              decide the part to be displayed
+ */
 class Mainpage extends React.Component {
+/**
+ * DESCRIPTION: Initialize variables
+ */
   constructor(props) {
     super(props);
     this.handleUploadGoodClick = this.handleUploadGoodClick.bind(this);
@@ -103,30 +131,45 @@ class Mainpage extends React.Component {
     this.state = { mainPageChoice: 1 };
   }
 
+/**
+ * DESCRIPTION: If UploadGood button is clicked, we set mainPageChoice to be 1
+ */
   handleUploadGoodClick() {
     this.setState((state) => {
       return { mainPageChoice: 1 };
     });
   }
 
+/**
+ * DESCRIPTION: If ViewRank button is clicked, we set mainPageChoice to be 2
+ */
   handleViewRankClick() {
     this.setState((state) => {
       return { mainPageChoice: 2 };
     });
   }
 
+/**
+ * DESCRIPTION: If PersonalInfo button is clicked, we set mainPageChoice to be 3
+ */
   handlePersonalInfoClick() {
     this.setState((state) => {
       return { mainPageChoice: 3 };
     });
   }
 
+/**
+ * DESCRIPTION: If MyHistory button is clicked, we set mainPageChoice to be 4
+ */
   handleMyHistoryClick() {
     this.setState((state) => {
       return { mainPageChoice: 4 };
     });
   }
 
+/**
+ * DESCRIPTION: If MyChatList button is clicked, we set mainPageChoice to be 5
+ */
   handleMyChatListClick() {
     this.setState((state) => {
       return { mainPageChoice: 5 };
@@ -135,27 +178,17 @@ class Mainpage extends React.Component {
   
 
   render() {
+/**
+ * DESCRIPTION: Initialize variable
+ */
     const mainPageChoice = this.state.mainPageChoice;
-    /* let ShownPart;
-    switch (this.state.mainPageChoice) {
-      case 1:
-        ShownPart = <UploadGood />;
-        break;
-      case 2:
-        ShownPart = <ViewRank />;
-        break;
-      case 3:
-        ShownPart = <PersonalInfo />;
-        break;
-      case 4:
-        ShownPart = <MyHistory />;
-        break;
-      default:
-        ShownPart = <PersonalInfo />;
-    } */
 
-    
     /* const classes = useStyles(); */
+/**
+ * DESCRIPTION: the main part to be displayed. We show four buttons, and clicking
+ *              each of them will change the mainPageChoice and therefore refresh
+ *              this mianpage to show the correspoding contents.
+ */
     return (
       <main>
         <Header title={title} content={title_content} />
@@ -198,5 +231,10 @@ function mapStateToProps(state){
   };
 }
 export default connect(mapStateToProps)(Mainpage);
+ */
+
+
+/**
+ * DESCRIPTION: export the current Module to use          
  */
 export default Mainpage;

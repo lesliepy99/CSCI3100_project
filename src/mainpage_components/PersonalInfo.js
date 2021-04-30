@@ -1,3 +1,13 @@
+/*
+*MODULE PersonalInfo
+*PROGRAMMER: WANG Ruijie
+*VERSION: 1.0 (30 April 2021)
+*PURPOSE: Show the personal information of the current user.
+*/
+
+/**
+ * Module dependencies and prototypes.
+ */
 import React, { Component } from 'react';
 import '../App.css';
 import { Link } from 'react-router-dom';
@@ -78,15 +88,28 @@ const useStyles = makeStyles((theme) =>({
 
 
 
-
+/**
+ * MODEULE PersonalInfo
+ * PURPOSE: Show the personal info of the current user
+ * DATA STRUCTURE: 
+ *   - Variable : data - internal structure
+ *   - Variable : thisUser - internal structure
+ * ALGORITHM (IMPLEMENTATION) : firstly run a loop to decide the current user identity, and then
+ *                              we can list all the available personal info on the screen
+ */
 class PersonalInfo extends React.Component {
     render() {
 
-        
+/**
+ * DESCRIPTION: Initialize variables
+ */
         const data = this.props.user_info;
         var thisUser;
 
 
+/**
+ * DESCRIPTION: Initialize variables
+ */
         for(var i=0;i<data.length;i++){
             var tempID = data[i]._id;
             //console.log(tempID);
@@ -102,7 +125,13 @@ class PersonalInfo extends React.Component {
 
 
           
+/**
+ * DESCRIPTION: Log in consle for help debug
+ */
           console.log(thisUser);
+/**
+ * DESCRIPTION: Show all the personal info in a clear way
+ */
       return (
         <div style={{ whiteSpace: 'pre-wrap', padding: "5% 5% 15% 15%" }}>
           <h2> My personal information </h2>
@@ -121,7 +150,9 @@ class PersonalInfo extends React.Component {
   }
 
 
-
+/**
+ * DESCRIPTION: mapStateToProps helps to use the current User information          
+ */
   function mapStateToProps(state){
     console.log(state)
     return{
@@ -129,4 +160,7 @@ class PersonalInfo extends React.Component {
       user_info: state.user_info
     };
   }
+/**
+ * DESCRIPTION: export the current Module to use          
+ */
   export default connect(mapStateToProps)(PersonalInfo);

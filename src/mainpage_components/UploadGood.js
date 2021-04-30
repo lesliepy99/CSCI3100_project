@@ -1,3 +1,15 @@
+/*
+*MODULE UploadGood
+*PROGRAMMER: WANG Ruijie
+*VERSION: 1.0 (30 April 2021)
+*PURPOSE: The function module in Personal Mainpage that can enable the users to upload the goods
+*         they want to sell. And users need to fill in all the required blanks in order to get permission 
+*         to successfully upload the good up to the platform.
+*/
+
+/**
+ * Module dependencies and prototypes.
+ */
 import React, { Component } from 'react';
 import '../App.css';
 import { Link } from 'react-router-dom';
@@ -76,10 +88,35 @@ const useStyles = makeStyles((theme) =>({
 
 }));
 
-
+/**
+ * DESCRIPTION: Use the S3 client API to enable a photo upload function, later to use in following contents.
+ */
 const ReactS3Client = new S3(getConfig("haha"));
 
+/**
+ * MODEULE UploadGood
+ * PURPOSE: enable the users to upload the goods and add up all the related information that are needed, they can upload
+*           what they want to sell
+ * DATA STRUCTURE: 
+ *   - Variable : choice - internal structure
+ *   - Variable : classes - internal structure
+ */
+
+
 class UploadGood extends React.Component {
+/**
+ * DESCRIPTION: Initialize the props to use
+ * PARAMETERS:
+ *    nameOfGood: STRING,
+      typeOfGood: STRING,
+      locationOfGood: STRING,
+      shortDescription: STRING,
+      expectedPrice: STRING,
+      confirmTick: BOOLEAN,
+      selectedFile: NULL,
+      displayImage: NULL,
+      resultGoodID: NULL
+ */
   constructor(props) {
     super(props);
     this.state = {
@@ -95,11 +132,20 @@ class UploadGood extends React.Component {
 
     };
 
+
+/**
+ * DESCRIPTION: initialize the form components, handleInputChange and handleSubmit
+ */
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     
   }
-
+  
+/**
+ * DESCRIPTION: The event handler to handle Form fields Input change: the value will be passed to 
+ *              correspoding variables. One possibility is it is checkbox, then we give it a boolean value,
+ *              another possiblity is that it is other dadtatype, we give it its own type.
+ */
   handleInputChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -115,6 +161,20 @@ class UploadGood extends React.Component {
     event.preventDefault();
   } */
 
+
+
+/**
+ * DESCRIPTION: handle the event that the form is submitted, we transfer the data into their 
+ *              corresponding data fields variables.
+ * PARAMETERS:
+ *    name: STRING,
+ *    description: STRING,
+ *    estimated_price: INT,
+ *    tags: ARRAY,
+ *    userId: ID,
+ *    number_of_views: INT,
+ *    number_of_likes: INT
+ */
   handleSubmit(event) {
     event.preventDefault();
 
@@ -142,6 +202,11 @@ class UploadGood extends React.Component {
       description ,
       estimated_price ) */
       console.log(this.props.my_id);
+
+/**
+ * DESCRIPTION: use a async method to POST the form content onto the database. 
+ *              After the successful upload, a notification will be shown to alert the user.
+ */
       (async () => {
            await fetch('http://54.254.174.175:3000/add_good', {
               method: 'POST',
@@ -172,6 +237,13 @@ class UploadGood extends React.Component {
 }
   
 
+/**
+ * DESCRIPTION: onFileChange and onFileUpload together handle the event that the photo is uploaded into the form.
+ *              We here use the S3 API to handle the file upload process, and thus we can
+ *              enjoy the simple process of file uploading, no need to tansform photo into  
+ *              other ugly data forms such as Binary form.
+ *            
+ */
   onFileChange = event => { 
     // Update the state 
     this.setState({ selectedFile: event.target.files[0],displayImage:URL.createObjectURL(event.target.files[0]) }); 
@@ -200,9 +272,14 @@ class UploadGood extends React.Component {
     return ("nonsense");
   }; 
 
-  
+/**
+ * DESCRIPTION: render the form part to be shown
+ *            
+ */
   render() {
-
+/**
+ * DESCRIPTION: here the socket io API helps us notice the file changes and good changes          
+ */
     var socket = io.connect();
 
     socket.on('userChange', data => {
@@ -212,21 +289,32 @@ class UploadGood extends React.Component {
     this.props.dispatch({type:'update_user',data:data['fullDocument']})
     // dispatch({type:'UPDATE'});
     console.log("Update user")
-
     });
 
     socket.on('goodChange', data => {
     console.log(data);
     console.log("Is that right?");
-
     this.props.dispatch({type:'update_good',data:data})
     // dispatch({type:'UPDATE'});
-
     });
     console.log(this.props.user_info);
     console.log(this.props.goods);
     console.log("Look at here");
 
+/**
+ * DESCRIPTION: This the the main part of the module, which is the form to be filled in.
+ *              Users are required to complete the 
+ *              Name
+ *              Type
+ *              Location you sell the good
+ *              Short Description
+ *              Expected Price
+ *              Its Photo
+ *              All these information are required to fill in, other wise an alert will show 
+ *              and prompt user to complete the form.
+ *              Also we can see the details of each input fields, which are easy to understand.
+ *            
+ */
     return (
       <div style={{ padding: "5% 5% 15% 15%" }}>
         <h2> Upload good </h2>
@@ -364,7 +452,9 @@ class UploadGood extends React.Component {
 }
 
 
-
+/**
+ * DESCRIPTION: mapStateToProps helps to use the current User information          
+ */
 function mapStateToProps(state){
     console.log(state)
     return{
@@ -374,4 +464,7 @@ function mapStateToProps(state){
       user_info: state.user_info
     };
   }
+/**
+ * DESCRIPTION: export the current Module to use          
+ */
   export default connect(mapStateToProps)(UploadGood);

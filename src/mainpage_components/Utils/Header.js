@@ -1,9 +1,22 @@
+/*
+*MODULE Header
+*PROGRAMMER: WANG Ruijie
+*VERSION: 1.0 (30 April 2021)
+*PURPOSE: Get a header to display on the top area, to make the page more beautiful
+*/
+
+/**
+ * Module dependencies and prototypes.
+ */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 
+/**
+ * DESCRIPTION: Set up the Material-UI styles 
+ */
 const useStyles = makeStyles((theme) => ({
     mainFeaturedPost: {
         position: 'relative',
@@ -36,6 +49,11 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+/**
+ * DESCRIPTION: the Header is set up in such a way that a Title will be displayed
+ *              in the middle part, a content will be in below the title, 
+ *              and also there will be a background image to beautify the header
+ */
 const Header = props => {
     const title = props.title;
     const content = props.content;
@@ -59,4 +77,7 @@ const Header = props => {
     );
 };
 
+/**
+ * DESCRIPTION: export the current Module to use          
+ */
 export default Header;

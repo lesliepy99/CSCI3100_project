@@ -118,7 +118,9 @@ class ViewRank extends React.Component {
   }
 
 
-
+/**
+ * DESCRIPTION: mapStateToProps helps to use the current User information          
+ */
   function mapStateToProps(state){
     console.log(state)
     return{
@@ -128,4 +130,7 @@ class ViewRank extends React.Component {
       user_info: state.user_info
     };
   }
+/**
+ * DESCRIPTION: export the current Module to use          
+ */
   export default connect(mapStateToProps)(ViewRank);
