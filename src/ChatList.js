@@ -1,5 +1,5 @@
 /*
-* MODULE ViewRank
+* MODULE ChatList
 * PROGRAMMER: XIONG Jiajie
 * VERSION: 1.0 (30 April 2021)
 * PURPOSE: To pass the seller ID and goodsID to the Chat component

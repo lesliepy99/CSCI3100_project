@@ -1,20 +1,26 @@
+/*
+* MODULE ViewRank
+* PROGRAMMER: WU Xiang
+* VERSION: 1.0 (30 April 2021)
+* PURPOSE: Provide the chat interface. 
+*/
+
 import React, { Component } from 'react';
 import './App.css';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import {connect} from 'react-redux';
 import { io } from "socket.io-client";
 
+// sort the send times of messages
 function sortDownDate(message1, message2) {
     return Date.parse(message1.chat_time) - Date.parse(message2.chat_time);
 }
 
+// format the date time
 function formatDateTime(date) {  
     var y = date.getFullYear();  
     var m = date.getMonth() + 1;  
@@ -32,12 +38,14 @@ class Chat extends React.Component {
         super(props);
         this.state={
             date: new Date(),
-            // seller: this.props.match.params.id,
-            };
+        };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
 
+    /**
+     *  On click the button "BEGIN TRANSACTION", create a new transaction item
+     */
     handleClick(event){
         event.preventDefault();
         const good_id=this.props.goodId;
@@ -62,6 +70,9 @@ class Chat extends React.Component {
 
     }
 
+    /**
+     * Submit the message, along with the two users's IDs and the send time 
+     */
     handleSubmit(event){
         event.preventDefault();
         this.setState({date: new Date()});
@@ -108,6 +119,8 @@ class Chat extends React.Component {
         const all_users=this.props.user_info;
         var user1;
         var user2;
+        
+        // find the two users' information
         for(var i=0;i<all_users.length;i++){
             var tempID = all_users[i]._id;
             if ( (tempID)==(my_id).toString() ){
@@ -121,6 +134,8 @@ class Chat extends React.Component {
         const username2=user2.name;
         var cur_chats=[];
         console.log('yes, there are chats:',all_chats);
+
+        // find the chat between these two users 
         for(var i=0;i<all_chats.length;i++){
             var tempTwoUid = all_chats[i].two_user_id;
             var temp_uid_1 = tempTwoUid[0].id;
@@ -137,6 +152,8 @@ class Chat extends React.Component {
         }
         cur_messages=cur_messages.sort(sortDownDate);
         console.log('wuxiang debug:',cur_messages);
+
+        // Sort the messages and display in the message area
         var displayMessage=``;
         for(var i=0;i<cur_messages.length;i++){
             var sender_name=cur_messages[i].senderId==my_id?username1:username2;
