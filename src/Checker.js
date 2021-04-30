@@ -8,7 +8,6 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
 const Checker = props => {
-  //const [value, setValue] = React.useState('female');
   const [value, setValue] = React.useState('');
 
   const handleChange = (event) => {

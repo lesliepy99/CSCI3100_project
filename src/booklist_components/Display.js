@@ -201,6 +201,7 @@ const Display = props => {
                                             <CardMedia
                                                 className={classes.cardMedia}
                                                 image={getImageUrl("good_image", post._id)}//"https://source.unsplash.com/random"
+                                                //image={post.image}
                                                 title="Image title"
                                             />
                                         </CardActionArea>

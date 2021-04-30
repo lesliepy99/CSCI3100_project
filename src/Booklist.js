@@ -15,51 +15,150 @@ import Bar from './booklist_components/Bar';
 
 const products = [
   {
-    id: 1,
-    title: 'Running Shoes',
-    price: '$68',
-    image: 'https://source.unsplash.com/featured/?shoes'
+      _id: 1,
+      name: 'Running Shoes',
+      estimated_price: 68,
+      image: 'https://source.unsplash.com/featured/?shoes',
+      tags: [{
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e82"
+          },
+          "tag": "Food, Drink, Cooking Materials"
+      }, {
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e83"
+          },
+          "tag": "New Territories"
+      }],
   },
   {
-    id: 2,
-    title: 'Umbrella',
-    price: '$5',
-    image: 'https://source.unsplash.com/featured/?umbrella'
+      _id: 2,
+      name: 'Umbrella',
+      estimated_price: 5,
+      image: 'https://source.unsplash.com/featured/?umbrella',
+      tags: [{
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e82"
+          },
+          "tag": "Food, Drink, Cooking Materials"
+      }, {
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e83"
+          },
+          "tag": "New Territories"
+      }],
   }, {
-    id: 3,
-    title: 'Book - The Little Women',
-    price: '$20',
-    image: 'https://source.unsplash.com/featured/?girl'
+      _id: 3,
+      name: 'Book - The Little Women',
+      estimated_price: 20,
+      image: 'https://source.unsplash.com/featured/?girl',
+      tags: [{
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e82"
+          },
+          "tag": "Food, Drink, Cooking Materials"
+      }, {
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e83"
+          },
+          "tag": "Hong Kong Island"
+      }],
   }, {
-    id: 4,
-    title: 'iPhone4s',
-    price: '$130',
-    image: 'https://source.unsplash.com/featured/?iPhone4s'
+      _id: 4,
+      name: 'iPhone4s',
+      estimated_price: 130,
+      image: 'https://source.unsplash.com/featured/?iPhone4s',
+      tags: [{
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e82"
+          },
+          "tag": "Food, Drink, Cooking Materials"
+      }, {
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e83"
+          },
+          "tag": "Hong Kong Island"
+      }],
   }, {
-    id: 5,
-    title: 'iPad mini',
-    price: '$100',
-    image: 'https://source.unsplash.com/featured/?ipad'
+      _id: 5,
+      name: 'iPad mini',
+      estimated_price: 100,
+      image: 'https://source.unsplash.com/featured/?ipad',
+      tags: [{
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e82"
+          },
+          "tag": "FClothes, Bags"
+      }, {
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e83"
+          },
+          "tag": "New Territories"
+      }],
   }, {
-    id: 6,
-    title: 'Camera',
-    price: '$999',
-    image: 'https://source.unsplash.com/featured/?camera'
+      _id: 6,
+      name: 'Camera',
+      estimated_price: 999,
+      image: 'https://source.unsplash.com/featured/?camera',
+      tags: [{
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e82"
+          },
+          "tag": "Book, Teaching Materials"
+      }, {
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e83"
+          },
+          "tag": "Kowloon"
+      }],
   }, {
-    id: 7,
-    title: 'T-shirt',
-    price: '$10',
-    image: 'https://source.unsplash.com/featured/?shirts'
+      _id: 7,
+      name: 'T-shirt',
+      estimated_price: 10,
+      image: 'https://source.unsplash.com/featured/?shirts',
+      tags: [{
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e82"
+          },
+          "tag": "Book, Teaching Materials"
+      }, {
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e83"
+          },
+          "tag": "Kowloon"
+      }],
   }, {
-    id: 8,
-    title: 'Sunglasses',
-    price: '$7',
-    image: 'https://source.unsplash.com/featured/?sunglasses'
+      _id: 8,
+      name: 'Sunglasses',
+      estimated_price: 7,
+      image: 'https://source.unsplash.com/featured/?sunglasses',
+      tags: [{
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e82"
+          },
+          "tag": "Food, Drink, Cooking Materials"
+      }, {
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e83"
+          },
+          "tag": "New Territories"
+      }],
   }, {
-    id: 9,
-    title: 'Book - Forest',
-    price: '$25',
-    image: 'https://source.unsplash.com/featured/?forest'
+      _id: 9,
+      name: 'Book - Forest',
+      estimated_price: 25,
+      image: 'https://source.unsplash.com/featured/?forest',
+      tags: [{
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e82"
+          },
+          "tag": "Food, Drink, Cooking Materials"
+      }, {
+          "_id": {
+              "$oid": "60772bb367ba2210bc728e83"
+          },
+          "tag": "Kowloon"
+      }],
   },
 ]
 
