@@ -1,8 +1,8 @@
 /*
-*MODULE ViewRank
-*PROGRAMMER: WU Xiang
-*VERSION: 1.0 (30 April 2021)
-*PURPOSE: Keep a chatlist for each user to find their chats with other users
+* MODULE ViewRank
+* PROGRAMMER: WU Xiang
+* VERSION: 1.0 (30 April 2021)
+* PURPOSE: Keep a chatlist for each user to find their chats with other users
 */
 
 import React, { Component } from 'react';

@@ -1,3 +1,10 @@
+/*
+* MODULE ViewRank
+* PROGRAMMER: XIONG Jiajie
+* VERSION: 1.0 (30 April 2021)
+* PURPOSE: To pass the seller ID and goodsID to the Chat component
+*/
+
 import React, { Component } from 'react';
 import Chat from './Chat';
 
