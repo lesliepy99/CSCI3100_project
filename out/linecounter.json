@@ -1,0 +1,1761 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "c:\\Users\\yanyu\\Documents\\GitHub\\CSCI3100_project",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2021-04-30 18:25:49",
+            "filesum": 281,
+            "codesum": 57978,
+            "commentsum": 3401,
+            "blanksum": 6960,
+            "statistics": {
+                ".md": {
+                    "code": 12,
+                    "comment": 3,
+                    "blank": 9
+                },
+                ".json": {
+                    "code": 17760,
+                    "comment": 0,
+                    "blank": 3
+                },
+                ".js": {
+                    "code": 39846,
+                    "comment": 3292,
+                    "blank": 6876
+                },
+                ".txt": {
+                    "code": 6,
+                    "comment": 69,
+                    "blank": 9
+                },
+                ".html": {
+                    "code": 176,
+                    "comment": 23,
+                    "blank": 31
+                },
+                ".css": {
+                    "code": 147,
+                    "comment": 13,
+                    "blank": 26
+                },
+                ".svg": {
+                    "code": 7,
+                    "comment": 0,
+                    "blank": 0
+                },
+                "": {
+                    "code": 20,
+                    "comment": 1,
+                    "blank": 6
+                },
+                ".map": {
+                    "code": 4,
+                    "comment": 0,
+                    "blank": 0
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 6,
+                    "code": 20,
+                    "comment": 1,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 20,
+                    "code": 107,
+                    "comment": 3,
+                    "filename": ".history\\src\\Booklist_20210413141049.js"
+                },
+                {
+                    "blank": 22,
+                    "code": 114,
+                    "comment": 4,
+                    "filename": ".history\\src\\Booklist_20210413141249.js"
+                },
+                {
+                    "blank": 22,
+                    "code": 115,
+                    "comment": 4,
+                    "filename": ".history\\src\\Booklist_20210413141308.js"
+                },
+                {
+                    "blank": 22,
+                    "code": 115,
+                    "comment": 4,
+                    "filename": ".history\\src\\Booklist_20210413153224.js"
+                },
+                {
+                    "blank": 35,
+                    "code": 141,
+                    "comment": 10,
+                    "filename": ".history\\src\\Booklist_20210415003947.js"
+                },
+                {
+                    "blank": 29,
+                    "code": 134,
+                    "comment": 9,
+                    "filename": ".history\\src\\Booklist_20210415122852.js"
+                },
+                {
+                    "blank": 29,
+                    "code": 134,
+                    "comment": 9,
+                    "filename": ".history\\src\\Booklist_20210415142628.js"
+                },
+                {
+                    "blank": 29,
+                    "code": 134,
+                    "comment": 9,
+                    "filename": ".history\\src\\Booklist_20210415142844.js"
+                },
+                {
+                    "blank": 44,
+                    "code": 248,
+                    "comment": 25,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210414232655.js"
+                },
+                {
+                    "blank": 44,
+                    "code": 248,
+                    "comment": 25,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210414232911.js"
+                },
+                {
+                    "blank": 44,
+                    "code": 248,
+                    "comment": 25,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210414235059.js"
+                },
+                {
+                    "blank": 45,
+                    "code": 249,
+                    "comment": 25,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210414235244.js"
+                },
+                {
+                    "blank": 44,
+                    "code": 247,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210414235515.js"
+                },
+                {
+                    "blank": 44,
+                    "code": 248,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210414235611.js"
+                },
+                {
+                    "blank": 44,
+                    "code": 243,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210415003841.js"
+                },
+                {
+                    "blank": 44,
+                    "code": 243,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210415005120.js"
+                },
+                {
+                    "blank": 45,
+                    "code": 244,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210415124148.js"
+                },
+                {
+                    "blank": 45,
+                    "code": 244,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210415124638.js"
+                },
+                {
+                    "blank": 45,
+                    "code": 247,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210415125151.js"
+                },
+                {
+                    "blank": 45,
+                    "code": 247,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210415125321.js"
+                },
+                {
+                    "blank": 45,
+                    "code": 247,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210415125332.js"
+                },
+                {
+                    "blank": 45,
+                    "code": 248,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210415131045.js"
+                },
+                {
+                    "blank": 46,
+                    "code": 250,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210415131933.js"
+                },
+                {
+                    "blank": 46,
+                    "code": 250,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210415131951.js"
+                },
+                {
+                    "blank": 46,
+                    "code": 249,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210415132140.js"
+                },
+                {
+                    "blank": 46,
+                    "code": 249,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210415140606.js"
+                },
+                {
+                    "blank": 46,
+                    "code": 249,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\Bar_20210415140830.js"
+                },
+                {
+                    "blank": 27,
+                    "code": 229,
+                    "comment": 13,
+                    "filename": ".history\\src\\booklist_components\\Display copy_20210414223053.js"
+                },
+                {
+                    "blank": 27,
+                    "code": 229,
+                    "comment": 13,
+                    "filename": ".history\\src\\booklist_components\\Display copy_20210414232628.js"
+                },
+                {
+                    "blank": 21,
+                    "code": 237,
+                    "comment": 3,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414090025.js"
+                },
+                {
+                    "blank": 21,
+                    "code": 237,
+                    "comment": 3,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414090058.js"
+                },
+                {
+                    "blank": 22,
+                    "code": 236,
+                    "comment": 2,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414090442.js"
+                },
+                {
+                    "blank": 22,
+                    "code": 236,
+                    "comment": 2,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414090549.js"
+                },
+                {
+                    "blank": 22,
+                    "code": 237,
+                    "comment": 2,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414090709.js"
+                },
+                {
+                    "blank": 22,
+                    "code": 237,
+                    "comment": 2,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414090809.js"
+                },
+                {
+                    "blank": 22,
+                    "code": 237,
+                    "comment": 2,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414090957.js"
+                },
+                {
+                    "blank": 22,
+                    "code": 237,
+                    "comment": 2,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414091019.js"
+                },
+                {
+                    "blank": 23,
+                    "code": 234,
+                    "comment": 4,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414091231.js"
+                },
+                {
+                    "blank": 23,
+                    "code": 232,
+                    "comment": 6,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414091247.js"
+                },
+                {
+                    "blank": 23,
+                    "code": 232,
+                    "comment": 6,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414091425.js"
+                },
+                {
+                    "blank": 23,
+                    "code": 232,
+                    "comment": 6,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414091509.js"
+                },
+                {
+                    "blank": 27,
+                    "code": 229,
+                    "comment": 13,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414223221.js"
+                },
+                {
+                    "blank": 25,
+                    "code": 235,
+                    "comment": 5,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414232739.js"
+                },
+                {
+                    "blank": 25,
+                    "code": 235,
+                    "comment": 5,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414232745.js"
+                },
+                {
+                    "blank": 25,
+                    "code": 235,
+                    "comment": 5,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414234136.js"
+                },
+                {
+                    "blank": 25,
+                    "code": 235,
+                    "comment": 5,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414234147.js"
+                },
+                {
+                    "blank": 25,
+                    "code": 236,
+                    "comment": 5,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414234904.js"
+                },
+                {
+                    "blank": 25,
+                    "code": 236,
+                    "comment": 6,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414235032.js"
+                },
+                {
+                    "blank": 25,
+                    "code": 236,
+                    "comment": 6,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414235232.js"
+                },
+                {
+                    "blank": 25,
+                    "code": 236,
+                    "comment": 6,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414235307.js"
+                },
+                {
+                    "blank": 25,
+                    "code": 236,
+                    "comment": 6,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414235438.js"
+                },
+                {
+                    "blank": 26,
+                    "code": 236,
+                    "comment": 6,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414235441.js"
+                },
+                {
+                    "blank": 26,
+                    "code": 236,
+                    "comment": 6,
+                    "filename": ".history\\src\\booklist_components\\Display_20210414235549.js"
+                },
+                {
+                    "blank": 26,
+                    "code": 237,
+                    "comment": 6,
+                    "filename": ".history\\src\\booklist_components\\Display_20210415000035.js"
+                },
+                {
+                    "blank": 26,
+                    "code": 237,
+                    "comment": 6,
+                    "filename": ".history\\src\\booklist_components\\Display_20210415000334.js"
+                },
+                {
+                    "blank": 26,
+                    "code": 237,
+                    "comment": 6,
+                    "filename": ".history\\src\\booklist_components\\Display_20210415000633.js"
+                },
+                {
+                    "blank": 26,
+                    "code": 237,
+                    "comment": 7,
+                    "filename": ".history\\src\\booklist_components\\Display_20210415000805.js"
+                },
+                {
+                    "blank": 26,
+                    "code": 237,
+                    "comment": 7,
+                    "filename": ".history\\src\\booklist_components\\Display_20210415002501.js"
+                },
+                {
+                    "blank": 26,
+                    "code": 237,
+                    "comment": 7,
+                    "filename": ".history\\src\\booklist_components\\Display_20210415002505.js"
+                },
+                {
+                    "blank": 28,
+                    "code": 237,
+                    "comment": 3,
+                    "filename": ".history\\src\\booklist_components\\Display_20210415003216.js"
+                },
+                {
+                    "blank": 26,
+                    "code": 237,
+                    "comment": 7,
+                    "filename": ".history\\src\\booklist_components\\Display_20210415003243.js"
+                },
+                {
+                    "blank": 30,
+                    "code": 235,
+                    "comment": 3,
+                    "filename": ".history\\src\\booklist_components\\Display_20210415003326.js"
+                },
+                {
+                    "blank": 29,
+                    "code": 234,
+                    "comment": 3,
+                    "filename": ".history\\src\\booklist_components\\Display_20210415003334.js"
+                },
+                {
+                    "blank": 30,
+                    "code": 234,
+                    "comment": 4,
+                    "filename": ".history\\src\\booklist_components\\Display_20210415123501.js"
+                },
+                {
+                    "blank": 30,
+                    "code": 234,
+                    "comment": 4,
+                    "filename": ".history\\src\\booklist_components\\Display_20210415125740.js"
+                },
+                {
+                    "blank": 30,
+                    "code": 233,
+                    "comment": 4,
+                    "filename": ".history\\src\\booklist_components\\Display_20210415132155.js"
+                },
+                {
+                    "blank": 30,
+                    "code": 233,
+                    "comment": 4,
+                    "filename": ".history\\src\\booklist_components\\Display_20210415140336.js"
+                },
+                {
+                    "blank": 30,
+                    "code": 233,
+                    "comment": 4,
+                    "filename": ".history\\src\\booklist_components\\Display_20210415140510.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 57,
+                    "comment": 0,
+                    "filename": ".history\\src\\booklist_components\\Header_20210413153203.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 57,
+                    "comment": 0,
+                    "filename": ".history\\src\\booklist_components\\Header_20210415120955.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": ".history\\src\\booklist_components\\Header_20210415121011.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": ".history\\src\\booklist_components\\Header_20210415121029.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": ".history\\src\\booklist_components\\Header_20210415121040.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 57,
+                    "comment": 0,
+                    "filename": ".history\\src\\booklist_components\\Header_20210415121204.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": ".history\\src\\booklist_components\\Header_20210415121208.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 53,
+                    "comment": 0,
+                    "filename": ".history\\src\\booklist_components\\Header_20210415121406.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 57,
+                    "comment": 0,
+                    "filename": ".history\\src\\booklist_components\\Header_20210415121550.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": ".history\\src\\booklist_components\\Header_20210415121554.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": ".history\\src\\booklist_components\\Header_20210415121604.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": ".history\\src\\booklist_components\\Header_20210415121746.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": ".history\\src\\booklist_components\\Header_20210415122235.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": ".history\\src\\booklist_components\\Header_20210415122433.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 56,
+                    "comment": 1,
+                    "filename": ".history\\src\\booklist_components\\Header_20210415122547.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 56,
+                    "comment": 1,
+                    "filename": ".history\\src\\booklist_components\\Header_20210415122828.js"
+                },
+                {
+                    "blank": 19,
+                    "code": 203,
+                    "comment": 7,
+                    "filename": ".history\\src\\booklist_components\\UserDisplay_20210415001014.js"
+                },
+                {
+                    "blank": 19,
+                    "code": 203,
+                    "comment": 8,
+                    "filename": ".history\\src\\booklist_components\\UserDisplay_20210415001141.js"
+                },
+                {
+                    "blank": 19,
+                    "code": 203,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\UserDisplay_20210415001340.js"
+                },
+                {
+                    "blank": 19,
+                    "code": 203,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\UserDisplay_20210415002016.js"
+                },
+                {
+                    "blank": 19,
+                    "code": 203,
+                    "comment": 9,
+                    "filename": ".history\\src\\booklist_components\\UserDisplay_20210415002101.js"
+                },
+                {
+                    "blank": 19,
+                    "code": 203,
+                    "comment": 8,
+                    "filename": ".history\\src\\booklist_components\\UserDisplay_20210415002157.js"
+                },
+                {
+                    "blank": 19,
+                    "code": 203,
+                    "comment": 8,
+                    "filename": ".history\\src\\booklist_components\\UserDisplay_20210415002251.js"
+                },
+                {
+                    "blank": 19,
+                    "code": 203,
+                    "comment": 7,
+                    "filename": ".history\\src\\booklist_components\\UserDisplay_20210415002300.js"
+                },
+                {
+                    "blank": 18,
+                    "code": 202,
+                    "comment": 1,
+                    "filename": ".history\\src\\booklist_components\\UserDisplay_20210415003419.js"
+                },
+                {
+                    "blank": 18,
+                    "code": 204,
+                    "comment": 1,
+                    "filename": ".history\\src\\booklist_components\\UserDisplay_20210415112758.js"
+                },
+                {
+                    "blank": 18,
+                    "code": 202,
+                    "comment": 1,
+                    "filename": ".history\\src\\booklist_components\\UserDisplay_20210415115113.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": ".history\\src\\ChatList_20210413234123.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 32,
+                    "comment": 1,
+                    "filename": ".history\\src\\checker_20210414233404.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 32,
+                    "comment": 2,
+                    "filename": ".history\\src\\checker_20210415130107.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 94,
+                    "comment": 2,
+                    "filename": ".history\\src\\Display_20210413142116.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 93,
+                    "comment": 2,
+                    "filename": ".history\\src\\Display_20210413142136.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 93,
+                    "comment": 2,
+                    "filename": ".history\\src\\Display_20210413152046.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": ".history\\src\\footer_20210319235724.js"
+                },
+                {
+                    "blank": 20,
+                    "code": 96,
+                    "comment": 0,
+                    "filename": ".history\\src\\Home_20210415140319.js"
+                },
+                {
+                    "blank": 20,
+                    "code": 96,
+                    "comment": 0,
+                    "filename": ".history\\src\\Home_20210415140814.js"
+                },
+                {
+                    "blank": 34,
+                    "code": 122,
+                    "comment": 4,
+                    "filename": ".history\\src\\index_20210414023642.js"
+                },
+                {
+                    "blank": 40,
+                    "code": 172,
+                    "comment": 22,
+                    "filename": ".history\\src\\mainpage_components\\UploadGood_20210415003434.js"
+                },
+                {
+                    "blank": 39,
+                    "code": 172,
+                    "comment": 21,
+                    "filename": ".history\\src\\mainpage_components\\UploadGood_20210415004021.js"
+                },
+                {
+                    "blank": 37,
+                    "code": 172,
+                    "comment": 21,
+                    "filename": ".history\\src\\mainpage_components\\UploadGood_20210415004035.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": ".history\\src\\Nav_20210413233600.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": ".history\\src\\Nav_20210413234003.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 50,
+                    "comment": 2,
+                    "filename": ".history\\src\\product-detail\\actions_20210415002542.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 49,
+                    "comment": 2,
+                    "filename": ".history\\src\\product-detail\\actions_20210415132215.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": ".history\\src\\product-detail\\detail_20210414232821.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": ".history\\src\\product-detail\\detail_20210414233459.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": ".history\\src\\product-detail\\detail_20210414233617.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": ".history\\src\\product-detail\\detail_20210414234423.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": ".history\\src\\product-detail\\detail_20210414235102.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": ".history\\src\\product-detail\\name_20210415133812.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 78,
+                    "comment": 2,
+                    "filename": ".history\\src\\product-detail\\seller_20210415003809.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 78,
+                    "comment": 3,
+                    "filename": ".history\\src\\product-detail\\seller_20210415123118.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 78,
+                    "comment": 2,
+                    "filename": ".history\\src\\product-detail\\seller_20210415123436.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 78,
+                    "comment": 3,
+                    "filename": ".history\\src\\product-detail\\seller_20210415123445.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 78,
+                    "comment": 3,
+                    "filename": ".history\\src\\product-detail\\seller_20210415123448.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 59,
+                    "comment": 2,
+                    "filename": ".history\\src\\Product_20210413234156.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 65,
+                    "comment": 0,
+                    "filename": ".history\\src\\Product_20210414232603.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 65,
+                    "comment": 0,
+                    "filename": ".history\\src\\Product_20210414232756.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 66,
+                    "comment": 0,
+                    "filename": ".history\\src\\Product_20210414234617.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 66,
+                    "comment": 1,
+                    "filename": ".history\\src\\Product_20210414234734.js"
+                },
+                {
+                    "blank": 30,
+                    "code": 177,
+                    "comment": 5,
+                    "filename": ".history\\src\\Search_20210413150701.js"
+                },
+                {
+                    "blank": 30,
+                    "code": 179,
+                    "comment": 5,
+                    "filename": ".history\\src\\Search_20210413151935.js"
+                },
+                {
+                    "blank": 30,
+                    "code": 177,
+                    "comment": 5,
+                    "filename": ".history\\src\\Search_20210413152001.js"
+                },
+                {
+                    "blank": 30,
+                    "code": 177,
+                    "comment": 5,
+                    "filename": ".history\\src\\Search_20210413153304.js"
+                },
+                {
+                    "blank": 34,
+                    "code": 193,
+                    "comment": 6,
+                    "filename": ".history\\src\\Search_20210413234324.js"
+                },
+                {
+                    "blank": 34,
+                    "code": 193,
+                    "comment": 6,
+                    "filename": ".history\\src\\Search_20210413234408.js"
+                },
+                {
+                    "blank": 32,
+                    "code": 199,
+                    "comment": 6,
+                    "filename": ".history\\src\\Search_20210413234521.js"
+                },
+                {
+                    "blank": 32,
+                    "code": 198,
+                    "comment": 7,
+                    "filename": ".history\\src\\Search_20210413234538.js"
+                },
+                {
+                    "blank": 32,
+                    "code": 199,
+                    "comment": 6,
+                    "filename": ".history\\src\\Search_20210413234542.js"
+                },
+                {
+                    "blank": 32,
+                    "code": 199,
+                    "comment": 6,
+                    "filename": ".history\\src\\Search_20210413234557.js"
+                },
+                {
+                    "blank": 32,
+                    "code": 199,
+                    "comment": 6,
+                    "filename": ".history\\src\\Search_20210413235013.js"
+                },
+                {
+                    "blank": 32,
+                    "code": 199,
+                    "comment": 6,
+                    "filename": ".history\\src\\Search_20210413235104.js"
+                },
+                {
+                    "blank": 32,
+                    "code": 199,
+                    "comment": 6,
+                    "filename": ".history\\src\\Search_20210413235304.js"
+                },
+                {
+                    "blank": 32,
+                    "code": 198,
+                    "comment": 7,
+                    "filename": ".history\\src\\Search_20210414003311.js"
+                },
+                {
+                    "blank": 58,
+                    "code": 248,
+                    "comment": 27,
+                    "filename": ".history\\src\\Search_20210414223307.js"
+                },
+                {
+                    "blank": 61,
+                    "code": 255,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414223927.js"
+                },
+                {
+                    "blank": 61,
+                    "code": 255,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414223958.js"
+                },
+                {
+                    "blank": 62,
+                    "code": 258,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414224048.js"
+                },
+                {
+                    "blank": 62,
+                    "code": 258,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414224059.js"
+                },
+                {
+                    "blank": 62,
+                    "code": 258,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414224115.js"
+                },
+                {
+                    "blank": 62,
+                    "code": 258,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414224130.js"
+                },
+                {
+                    "blank": 62,
+                    "code": 262,
+                    "comment": 29,
+                    "filename": ".history\\src\\Search_20210414224520.js"
+                },
+                {
+                    "blank": 63,
+                    "code": 262,
+                    "comment": 29,
+                    "filename": ".history\\src\\Search_20210414224542.js"
+                },
+                {
+                    "blank": 64,
+                    "code": 262,
+                    "comment": 29,
+                    "filename": ".history\\src\\Search_20210414224544.js"
+                },
+                {
+                    "blank": 64,
+                    "code": 263,
+                    "comment": 29,
+                    "filename": ".history\\src\\Search_20210414224704.js"
+                },
+                {
+                    "blank": 64,
+                    "code": 264,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414224940.js"
+                },
+                {
+                    "blank": 64,
+                    "code": 264,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414224949.js"
+                },
+                {
+                    "blank": 64,
+                    "code": 264,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414225012.js"
+                },
+                {
+                    "blank": 64,
+                    "code": 264,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414225512.js"
+                },
+                {
+                    "blank": 65,
+                    "code": 265,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414225756.js"
+                },
+                {
+                    "blank": 65,
+                    "code": 265,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414225845.js"
+                },
+                {
+                    "blank": 65,
+                    "code": 265,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414230027.js"
+                },
+                {
+                    "blank": 65,
+                    "code": 265,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414230436.js"
+                },
+                {
+                    "blank": 65,
+                    "code": 265,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414230500.js"
+                },
+                {
+                    "blank": 65,
+                    "code": 259,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414230706.js"
+                },
+                {
+                    "blank": 69,
+                    "code": 268,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414231148.js"
+                },
+                {
+                    "blank": 69,
+                    "code": 268,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414231206.js"
+                },
+                {
+                    "blank": 69,
+                    "code": 268,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414231311.js"
+                },
+                {
+                    "blank": 66,
+                    "code": 258,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414231454.js"
+                },
+                {
+                    "blank": 67,
+                    "code": 266,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414231535.js"
+                },
+                {
+                    "blank": 67,
+                    "code": 266,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414231602.js"
+                },
+                {
+                    "blank": 67,
+                    "code": 266,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414231645.js"
+                },
+                {
+                    "blank": 67,
+                    "code": 266,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414231858.js"
+                },
+                {
+                    "blank": 67,
+                    "code": 266,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414232121.js"
+                },
+                {
+                    "blank": 66,
+                    "code": 258,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414232418.js"
+                },
+                {
+                    "blank": 67,
+                    "code": 266,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414232453.js"
+                },
+                {
+                    "blank": 67,
+                    "code": 266,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414233118.js"
+                },
+                {
+                    "blank": 67,
+                    "code": 266,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414233140.js"
+                },
+                {
+                    "blank": 67,
+                    "code": 266,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414233235.js"
+                },
+                {
+                    "blank": 67,
+                    "code": 266,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414233240.js"
+                },
+                {
+                    "blank": 67,
+                    "code": 266,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414233253.js"
+                },
+                {
+                    "blank": 67,
+                    "code": 266,
+                    "comment": 28,
+                    "filename": ".history\\src\\Search_20210414233337.js"
+                },
+                {
+                    "blank": 66,
+                    "code": 266,
+                    "comment": 22,
+                    "filename": ".history\\src\\Search_20210415002608.js"
+                },
+                {
+                    "blank": 65,
+                    "code": 264,
+                    "comment": 22,
+                    "filename": ".history\\src\\Search_20210415003628.js"
+                },
+                {
+                    "blank": 58,
+                    "code": 256,
+                    "comment": 15,
+                    "filename": ".history\\src\\Search_20210415003801.js"
+                },
+                {
+                    "blank": 58,
+                    "code": 256,
+                    "comment": 16,
+                    "filename": ".history\\src\\Search_20210415130258.js"
+                },
+                {
+                    "blank": 59,
+                    "code": 256,
+                    "comment": 16,
+                    "filename": ".history\\src\\Search_20210415130300.js"
+                },
+                {
+                    "blank": 59,
+                    "code": 256,
+                    "comment": 16,
+                    "filename": ".history\\src\\Search_20210415130315.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 59,
+                    "comment": 0,
+                    "filename": ".history\\src\\SearchBar_20210415002649.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 59,
+                    "comment": 0,
+                    "filename": ".history\\src\\SearchBar_20210415002754.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 41,
+                    "comment": 0,
+                    "filename": ".history\\src\\tab_20210415123148.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 41,
+                    "comment": 1,
+                    "filename": ".history\\src\\tab_20210415123221.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 41,
+                    "comment": 1,
+                    "filename": ".history\\src\\tab_20210415123227.js"
+                },
+                {
+                    "filename": "admin.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 44,
+                    "code": 334,
+                    "comment": 182,
+                    "filename": "app.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "build\\asset-manifest.json"
+                },
+                {
+                    "filename": "build\\favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build\\index.html"
+                },
+                {
+                    "filename": "build\\logo192.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "build\\logo512.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "build\\manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "build\\precache-manifest.4d6b4eee267d5c4785ce9b05196c43b5.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 1,
+                    "filename": "build\\robots.txt"
+                },
+                {
+                    "blank": 8,
+                    "code": 14,
+                    "comment": 17,
+                    "filename": "build\\service-worker.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "build\\static\\css\\main.b9ab7082.chunk.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build\\static\\css\\main.b9ab7082.chunk.css.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 3,
+                    "filename": "build\\static\\js\\2.8c67ffd4.chunk.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 0,
+                    "comment": 67,
+                    "filename": "build\\static\\js\\2.8c67ffd4.chunk.js.LICENSE.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build\\static\\js\\2.8c67ffd4.chunk.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 2,
+                    "filename": "build\\static\\js\\main.e71dd6e0.chunk.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build\\static\\js\\main.e71dd6e0.chunk.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "build\\static\\js\\runtime-main.00d7f250.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build\\static\\js\\runtime-main.00d7f250.js.map"
+                },
+                {
+                    "filename": "build\\static\\media\\notebook_new.cd8eba9b.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 8,
+                    "code": 29,
+                    "comment": 1,
+                    "filename": "Comment.js"
+                },
+                {
+                    "blank": 50,
+                    "code": 316,
+                    "comment": 133,
+                    "filename": "database.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 17640,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 2,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "filename": "public\\favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 20,
+                    "comment": 23,
+                    "filename": "public\\index.html"
+                },
+                {
+                    "filename": "public\\logo192.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public\\logo512.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "public\\manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 1,
+                    "filename": "public\\robots.txt"
+                },
+                {
+                    "blank": 9,
+                    "code": 12,
+                    "comment": 3,
+                    "filename": "README.md"
+                },
+                {
+                    "filename": "src\\admin\\admin.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 18,
+                    "code": 75,
+                    "comment": 0,
+                    "filename": "src\\admin\\admin_page.html"
+                },
+                {
+                    "blank": 13,
+                    "code": 80,
+                    "comment": 0,
+                    "filename": "src\\admin\\manage_page.html"
+                },
+                {
+                    "blank": 6,
+                    "code": 24,
+                    "comment": 10,
+                    "filename": "src\\App.css"
+                },
+                {
+                    "blank": 5,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "src\\App.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "src\\App.test.js"
+                },
+                {
+                    "blank": 36,
+                    "code": 150,
+                    "comment": 10,
+                    "filename": "src\\Booklist copy.js"
+                },
+                {
+                    "blank": 17,
+                    "code": 53,
+                    "comment": 21,
+                    "filename": "src\\Booklist.js"
+                },
+                {
+                    "blank": 35,
+                    "code": 247,
+                    "comment": 31,
+                    "filename": "src\\booklist_components\\Bar.js"
+                },
+                {
+                    "blank": 26,
+                    "code": 245,
+                    "comment": 27,
+                    "filename": "src\\booklist_components\\Display.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 56,
+                    "comment": 17,
+                    "filename": "src\\booklist_components\\Header.js"
+                },
+                {
+                    "blank": 22,
+                    "code": 208,
+                    "comment": 26,
+                    "filename": "src\\booklist_components\\UserDisplay.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src\\books.json"
+                },
+                {
+                    "blank": 17,
+                    "code": 168,
+                    "comment": 48,
+                    "filename": "src\\Chat.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 17,
+                    "comment": 6,
+                    "filename": "src\\ChatList.js"
+                },
+                {
+                    "blank": 38,
+                    "code": 118,
+                    "comment": 14,
+                    "filename": "src\\Comment.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 30,
+                    "comment": 11,
+                    "filename": "src\\Footer.js"
+                },
+                {
+                    "blank": 17,
+                    "code": 96,
+                    "comment": 3,
+                    "filename": "src\\Home.js"
+                },
+                {
+                    "filename": "src\\img\\notebook.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "src\\img\\notebook_new.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 1,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src\\index.css"
+                },
+                {
+                    "blank": 39,
+                    "code": 190,
+                    "comment": 32,
+                    "filename": "src\\index.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 79,
+                    "comment": 28,
+                    "filename": "src\\LoginPage.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src\\logo.svg"
+                },
+                {
+                    "blank": 28,
+                    "code": 133,
+                    "comment": 79,
+                    "filename": "src\\Mainpage.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 50,
+                    "comment": 41,
+                    "filename": "src\\mainpage_components\\MainpageRoute.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 86,
+                    "comment": 23,
+                    "filename": "src\\mainpage_components\\MyChatList.js"
+                },
+                {
+                    "blank": 45,
+                    "code": 161,
+                    "comment": 83,
+                    "filename": "src\\mainpage_components\\MyHistory.js"
+                },
+                {
+                    "blank": 16,
+                    "code": 86,
+                    "comment": 36,
+                    "filename": "src\\mainpage_components\\PersonalInfo.js"
+                },
+                {
+                    "blank": 38,
+                    "code": 172,
+                    "comment": 111,
+                    "filename": "src\\mainpage_components\\UploadGood.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 57,
+                    "comment": 20,
+                    "filename": "src\\mainpage_components\\Utils\\Header.js"
+                },
+                {
+                    "blank": 11,
+                    "code": 98,
+                    "comment": 27,
+                    "filename": "src\\mainpage_components\\ViewRank.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 26,
+                    "comment": 6,
+                    "filename": "src\\Nav.js"
+                },
+                {
+                    "blank": 19,
+                    "code": 110,
+                    "comment": 2,
+                    "filename": "src\\post_components\\comment_index.css"
+                },
+                {
+                    "blank": 9,
+                    "code": 51,
+                    "comment": 8,
+                    "filename": "src\\post_components\\CommentContent.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 83,
+                    "comment": 6,
+                    "filename": "src\\post_components\\CommentInput.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 32,
+                    "comment": 6,
+                    "filename": "src\\post_components\\CommentList.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 38,
+                    "comment": 6,
+                    "filename": "src\\post_components\\EachComment.js"
+                },
+                {
+                    "blank": 20,
+                    "code": 73,
+                    "comment": 12,
+                    "filename": "src\\post_components\\NewPost.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 31,
+                    "comment": 6,
+                    "filename": "src\\post_components\\PostDetail.js"
+                },
+                {
+                    "blank": 13,
+                    "code": 60,
+                    "comment": 6,
+                    "filename": "src\\post_components\\PostList.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 55,
+                    "comment": 18,
+                    "filename": "src\\Product.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 47,
+                    "comment": 13,
+                    "filename": "src\\product_components\\actions.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 38,
+                    "comment": 11,
+                    "filename": "src\\product_components\\detail.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 42,
+                    "comment": 11,
+                    "filename": "src\\product_components\\image.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 22,
+                    "comment": 11,
+                    "filename": "src\\product_components\\name.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 12,
+                    "comment": 10,
+                    "filename": "src\\product_components\\price.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 73,
+                    "comment": 14,
+                    "filename": "src\\product_components\\seller.js"
+                },
+                {
+                    "blank": 59,
+                    "code": 290,
+                    "comment": 54,
+                    "filename": "src\\Search.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 32,
+                    "comment": 13,
+                    "filename": "src\\search_components\\Checker.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 55,
+                    "comment": 17,
+                    "filename": "src\\search_components\\SearchBar.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 39,
+                    "comment": 12,
+                    "filename": "src\\search_components\\tab.js"
+                },
+                {
+                    "blank": 15,
+                    "code": 95,
+                    "comment": 31,
+                    "filename": "src\\serviceWorker.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 4,
+                    "filename": "src\\setupTests.js"
+                },
+                {
+                    "blank": 9,
+                    "code": 150,
+                    "comment": 42,
+                    "filename": "src\\SignUpPage.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 9,
+                    "comment": 9,
+                    "filename": "src\\utils\\getImageUrl.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 11,
+                    "comment": 6,
+                    "filename": "src\\utils\\handle_image_upload.js"
+                }
+            ]
+        }
+    ]
+}

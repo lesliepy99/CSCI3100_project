@@ -1,0 +1,306 @@
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2021-04-30 18:25:49
+count workspace : c:\Users\yanyu\Documents\GitHub\CSCI3100_project
+total files : 281
+total code lines : 57978
+total comment lines : 3401
+total blank lines : 6960
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |            .md|             12|              3|              9|  0.021|
+   |          .json|          17760|              0|              3|     31|
+   |            .js|          39846|           3292|           6876|     69|
+   |           .txt|              6|             69|              9|  0.010|
+   |          .html|            176|             23|             31|   0.30|
+   |           .css|            147|             13|             26|   0.25|
+   |           .svg|              7|              0|              0|  0.012|
+   |               |             20|              1|              6|  0.034|
+   |           .map|              4|              0|              0| 0.0069|
+   -------------------------------------------------------------------------
+.gitignore, code is 20, comment is 1, blank is 6.
+.history\src\Booklist_20210413141049.js, code is 107, comment is 3, blank is 20.
+.history\src\Booklist_20210413141249.js, code is 114, comment is 4, blank is 22.
+.history\src\Booklist_20210413141308.js, code is 115, comment is 4, blank is 22.
+.history\src\Booklist_20210413153224.js, code is 115, comment is 4, blank is 22.
+.history\src\Booklist_20210415003947.js, code is 141, comment is 10, blank is 35.
+.history\src\Booklist_20210415122852.js, code is 134, comment is 9, blank is 29.
+.history\src\Booklist_20210415142628.js, code is 134, comment is 9, blank is 29.
+.history\src\Booklist_20210415142844.js, code is 134, comment is 9, blank is 29.
+.history\src\booklist_components\Bar_20210414232655.js, code is 248, comment is 25, blank is 44.
+.history\src\booklist_components\Bar_20210414232911.js, code is 248, comment is 25, blank is 44.
+.history\src\booklist_components\Bar_20210414235059.js, code is 248, comment is 25, blank is 44.
+.history\src\booklist_components\Bar_20210414235244.js, code is 249, comment is 25, blank is 45.
+.history\src\booklist_components\Bar_20210414235515.js, code is 247, comment is 9, blank is 44.
+.history\src\booklist_components\Bar_20210414235611.js, code is 248, comment is 9, blank is 44.
+.history\src\booklist_components\Bar_20210415003841.js, code is 243, comment is 9, blank is 44.
+.history\src\booklist_components\Bar_20210415005120.js, code is 243, comment is 9, blank is 44.
+.history\src\booklist_components\Bar_20210415124148.js, code is 244, comment is 9, blank is 45.
+.history\src\booklist_components\Bar_20210415124638.js, code is 244, comment is 9, blank is 45.
+.history\src\booklist_components\Bar_20210415125151.js, code is 247, comment is 9, blank is 45.
+.history\src\booklist_components\Bar_20210415125321.js, code is 247, comment is 9, blank is 45.
+.history\src\booklist_components\Bar_20210415125332.js, code is 247, comment is 9, blank is 45.
+.history\src\booklist_components\Bar_20210415131045.js, code is 248, comment is 9, blank is 45.
+.history\src\booklist_components\Bar_20210415131933.js, code is 250, comment is 9, blank is 46.
+.history\src\booklist_components\Bar_20210415131951.js, code is 250, comment is 9, blank is 46.
+.history\src\booklist_components\Bar_20210415132140.js, code is 249, comment is 9, blank is 46.
+.history\src\booklist_components\Bar_20210415140606.js, code is 249, comment is 9, blank is 46.
+.history\src\booklist_components\Bar_20210415140830.js, code is 249, comment is 9, blank is 46.
+.history\src\booklist_components\Display copy_20210414223053.js, code is 229, comment is 13, blank is 27.
+.history\src\booklist_components\Display copy_20210414232628.js, code is 229, comment is 13, blank is 27.
+.history\src\booklist_components\Display_20210414090025.js, code is 237, comment is 3, blank is 21.
+.history\src\booklist_components\Display_20210414090058.js, code is 237, comment is 3, blank is 21.
+.history\src\booklist_components\Display_20210414090442.js, code is 236, comment is 2, blank is 22.
+.history\src\booklist_components\Display_20210414090549.js, code is 236, comment is 2, blank is 22.
+.history\src\booklist_components\Display_20210414090709.js, code is 237, comment is 2, blank is 22.
+.history\src\booklist_components\Display_20210414090809.js, code is 237, comment is 2, blank is 22.
+.history\src\booklist_components\Display_20210414090957.js, code is 237, comment is 2, blank is 22.
+.history\src\booklist_components\Display_20210414091019.js, code is 237, comment is 2, blank is 22.
+.history\src\booklist_components\Display_20210414091231.js, code is 234, comment is 4, blank is 23.
+.history\src\booklist_components\Display_20210414091247.js, code is 232, comment is 6, blank is 23.
+.history\src\booklist_components\Display_20210414091425.js, code is 232, comment is 6, blank is 23.
+.history\src\booklist_components\Display_20210414091509.js, code is 232, comment is 6, blank is 23.
+.history\src\booklist_components\Display_20210414223221.js, code is 229, comment is 13, blank is 27.
+.history\src\booklist_components\Display_20210414232739.js, code is 235, comment is 5, blank is 25.
+.history\src\booklist_components\Display_20210414232745.js, code is 235, comment is 5, blank is 25.
+.history\src\booklist_components\Display_20210414234136.js, code is 235, comment is 5, blank is 25.
+.history\src\booklist_components\Display_20210414234147.js, code is 235, comment is 5, blank is 25.
+.history\src\booklist_components\Display_20210414234904.js, code is 236, comment is 5, blank is 25.
+.history\src\booklist_components\Display_20210414235032.js, code is 236, comment is 6, blank is 25.
+.history\src\booklist_components\Display_20210414235232.js, code is 236, comment is 6, blank is 25.
+.history\src\booklist_components\Display_20210414235307.js, code is 236, comment is 6, blank is 25.
+.history\src\booklist_components\Display_20210414235438.js, code is 236, comment is 6, blank is 25.
+.history\src\booklist_components\Display_20210414235441.js, code is 236, comment is 6, blank is 26.
+.history\src\booklist_components\Display_20210414235549.js, code is 236, comment is 6, blank is 26.
+.history\src\booklist_components\Display_20210415000035.js, code is 237, comment is 6, blank is 26.
+.history\src\booklist_components\Display_20210415000334.js, code is 237, comment is 6, blank is 26.
+.history\src\booklist_components\Display_20210415000633.js, code is 237, comment is 6, blank is 26.
+.history\src\booklist_components\Display_20210415000805.js, code is 237, comment is 7, blank is 26.
+.history\src\booklist_components\Display_20210415002501.js, code is 237, comment is 7, blank is 26.
+.history\src\booklist_components\Display_20210415002505.js, code is 237, comment is 7, blank is 26.
+.history\src\booklist_components\Display_20210415003216.js, code is 237, comment is 3, blank is 28.
+.history\src\booklist_components\Display_20210415003243.js, code is 237, comment is 7, blank is 26.
+.history\src\booklist_components\Display_20210415003326.js, code is 235, comment is 3, blank is 30.
+.history\src\booklist_components\Display_20210415003334.js, code is 234, comment is 3, blank is 29.
+.history\src\booklist_components\Display_20210415123501.js, code is 234, comment is 4, blank is 30.
+.history\src\booklist_components\Display_20210415125740.js, code is 234, comment is 4, blank is 30.
+.history\src\booklist_components\Display_20210415132155.js, code is 233, comment is 4, blank is 30.
+.history\src\booklist_components\Display_20210415140336.js, code is 233, comment is 4, blank is 30.
+.history\src\booklist_components\Display_20210415140510.js, code is 233, comment is 4, blank is 30.
+.history\src\booklist_components\Header_20210413153203.js, code is 57, comment is 0, blank is 5.
+.history\src\booklist_components\Header_20210415120955.js, code is 57, comment is 0, blank is 5.
+.history\src\booklist_components\Header_20210415121011.js, code is 56, comment is 0, blank is 5.
+.history\src\booklist_components\Header_20210415121029.js, code is 56, comment is 0, blank is 5.
+.history\src\booklist_components\Header_20210415121040.js, code is 52, comment is 0, blank is 5.
+.history\src\booklist_components\Header_20210415121204.js, code is 57, comment is 0, blank is 5.
+.history\src\booklist_components\Header_20210415121208.js, code is 56, comment is 0, blank is 6.
+.history\src\booklist_components\Header_20210415121406.js, code is 53, comment is 0, blank is 5.
+.history\src\booklist_components\Header_20210415121550.js, code is 57, comment is 0, blank is 5.
+.history\src\booklist_components\Header_20210415121554.js, code is 56, comment is 0, blank is 6.
+.history\src\booklist_components\Header_20210415121604.js, code is 52, comment is 0, blank is 7.
+.history\src\booklist_components\Header_20210415121746.js, code is 52, comment is 0, blank is 7.
+.history\src\booklist_components\Header_20210415122235.js, code is 56, comment is 0, blank is 6.
+.history\src\booklist_components\Header_20210415122433.js, code is 56, comment is 0, blank is 5.
+.history\src\booklist_components\Header_20210415122547.js, code is 56, comment is 1, blank is 5.
+.history\src\booklist_components\Header_20210415122828.js, code is 56, comment is 1, blank is 6.
+.history\src\booklist_components\UserDisplay_20210415001014.js, code is 203, comment is 7, blank is 19.
+.history\src\booklist_components\UserDisplay_20210415001141.js, code is 203, comment is 8, blank is 19.
+.history\src\booklist_components\UserDisplay_20210415001340.js, code is 203, comment is 9, blank is 19.
+.history\src\booklist_components\UserDisplay_20210415002016.js, code is 203, comment is 9, blank is 19.
+.history\src\booklist_components\UserDisplay_20210415002101.js, code is 203, comment is 9, blank is 19.
+.history\src\booklist_components\UserDisplay_20210415002157.js, code is 203, comment is 8, blank is 19.
+.history\src\booklist_components\UserDisplay_20210415002251.js, code is 203, comment is 8, blank is 19.
+.history\src\booklist_components\UserDisplay_20210415002300.js, code is 203, comment is 7, blank is 19.
+.history\src\booklist_components\UserDisplay_20210415003419.js, code is 202, comment is 1, blank is 18.
+.history\src\booklist_components\UserDisplay_20210415112758.js, code is 204, comment is 1, blank is 18.
+.history\src\booklist_components\UserDisplay_20210415115113.js, code is 202, comment is 1, blank is 18.
+.history\src\ChatList_20210413234123.js, code is 16, comment is 0, blank is 6.
+.history\src\checker_20210414233404.js, code is 32, comment is 1, blank is 3.
+.history\src\checker_20210415130107.js, code is 32, comment is 2, blank is 4.
+.history\src\Display_20210413142116.js, code is 94, comment is 2, blank is 9.
+.history\src\Display_20210413142136.js, code is 93, comment is 2, blank is 8.
+.history\src\Display_20210413152046.js, code is 93, comment is 2, blank is 8.
+.history\src\footer_20210319235724.js, code is 32, comment is 0, blank is 3.
+.history\src\Home_20210415140319.js, code is 96, comment is 0, blank is 20.
+.history\src\Home_20210415140814.js, code is 96, comment is 0, blank is 20.
+.history\src\index_20210414023642.js, code is 122, comment is 4, blank is 34.
+.history\src\mainpage_components\UploadGood_20210415003434.js, code is 172, comment is 22, blank is 40.
+.history\src\mainpage_components\UploadGood_20210415004021.js, code is 172, comment is 21, blank is 39.
+.history\src\mainpage_components\UploadGood_20210415004035.js, code is 172, comment is 21, blank is 37.
+.history\src\Nav_20210413233600.js, code is 26, comment is 0, blank is 5.
+.history\src\Nav_20210413234003.js, code is 26, comment is 0, blank is 4.
+.history\src\product-detail\actions_20210415002542.js, code is 50, comment is 2, blank is 10.
+.history\src\product-detail\actions_20210415132215.js, code is 49, comment is 2, blank is 10.
+.history\src\product-detail\detail_20210414232821.js, code is 39, comment is 0, blank is 5.
+.history\src\product-detail\detail_20210414233459.js, code is 39, comment is 0, blank is 5.
+.history\src\product-detail\detail_20210414233617.js, code is 39, comment is 0, blank is 5.
+.history\src\product-detail\detail_20210414234423.js, code is 39, comment is 0, blank is 5.
+.history\src\product-detail\detail_20210414235102.js, code is 39, comment is 0, blank is 6.
+.history\src\product-detail\name_20210415133812.js, code is 23, comment is 0, blank is 3.
+.history\src\product-detail\seller_20210415003809.js, code is 78, comment is 2, blank is 9.
+.history\src\product-detail\seller_20210415123118.js, code is 78, comment is 3, blank is 10.
+.history\src\product-detail\seller_20210415123436.js, code is 78, comment is 2, blank is 10.
+.history\src\product-detail\seller_20210415123445.js, code is 78, comment is 3, blank is 10.
+.history\src\product-detail\seller_20210415123448.js, code is 78, comment is 3, blank is 10.
+.history\src\Product_20210413234156.js, code is 59, comment is 2, blank is 7.
+.history\src\Product_20210414232603.js, code is 65, comment is 0, blank is 7.
+.history\src\Product_20210414232756.js, code is 65, comment is 0, blank is 7.
+.history\src\Product_20210414234617.js, code is 66, comment is 0, blank is 8.
+.history\src\Product_20210414234734.js, code is 66, comment is 1, blank is 8.
+.history\src\Search_20210413150701.js, code is 177, comment is 5, blank is 30.
+.history\src\Search_20210413151935.js, code is 179, comment is 5, blank is 30.
+.history\src\Search_20210413152001.js, code is 177, comment is 5, blank is 30.
+.history\src\Search_20210413153304.js, code is 177, comment is 5, blank is 30.
+.history\src\Search_20210413234324.js, code is 193, comment is 6, blank is 34.
+.history\src\Search_20210413234408.js, code is 193, comment is 6, blank is 34.
+.history\src\Search_20210413234521.js, code is 199, comment is 6, blank is 32.
+.history\src\Search_20210413234538.js, code is 198, comment is 7, blank is 32.
+.history\src\Search_20210413234542.js, code is 199, comment is 6, blank is 32.
+.history\src\Search_20210413234557.js, code is 199, comment is 6, blank is 32.
+.history\src\Search_20210413235013.js, code is 199, comment is 6, blank is 32.
+.history\src\Search_20210413235104.js, code is 199, comment is 6, blank is 32.
+.history\src\Search_20210413235304.js, code is 199, comment is 6, blank is 32.
+.history\src\Search_20210414003311.js, code is 198, comment is 7, blank is 32.
+.history\src\Search_20210414223307.js, code is 248, comment is 27, blank is 58.
+.history\src\Search_20210414223927.js, code is 255, comment is 28, blank is 61.
+.history\src\Search_20210414223958.js, code is 255, comment is 28, blank is 61.
+.history\src\Search_20210414224048.js, code is 258, comment is 28, blank is 62.
+.history\src\Search_20210414224059.js, code is 258, comment is 28, blank is 62.
+.history\src\Search_20210414224115.js, code is 258, comment is 28, blank is 62.
+.history\src\Search_20210414224130.js, code is 258, comment is 28, blank is 62.
+.history\src\Search_20210414224520.js, code is 262, comment is 29, blank is 62.
+.history\src\Search_20210414224542.js, code is 262, comment is 29, blank is 63.
+.history\src\Search_20210414224544.js, code is 262, comment is 29, blank is 64.
+.history\src\Search_20210414224704.js, code is 263, comment is 29, blank is 64.
+.history\src\Search_20210414224940.js, code is 264, comment is 28, blank is 64.
+.history\src\Search_20210414224949.js, code is 264, comment is 28, blank is 64.
+.history\src\Search_20210414225012.js, code is 264, comment is 28, blank is 64.
+.history\src\Search_20210414225512.js, code is 264, comment is 28, blank is 64.
+.history\src\Search_20210414225756.js, code is 265, comment is 28, blank is 65.
+.history\src\Search_20210414225845.js, code is 265, comment is 28, blank is 65.
+.history\src\Search_20210414230027.js, code is 265, comment is 28, blank is 65.
+.history\src\Search_20210414230436.js, code is 265, comment is 28, blank is 65.
+.history\src\Search_20210414230500.js, code is 265, comment is 28, blank is 65.
+.history\src\Search_20210414230706.js, code is 259, comment is 28, blank is 65.
+.history\src\Search_20210414231148.js, code is 268, comment is 28, blank is 69.
+.history\src\Search_20210414231206.js, code is 268, comment is 28, blank is 69.
+.history\src\Search_20210414231311.js, code is 268, comment is 28, blank is 69.
+.history\src\Search_20210414231454.js, code is 258, comment is 28, blank is 66.
+.history\src\Search_20210414231535.js, code is 266, comment is 28, blank is 67.
+.history\src\Search_20210414231602.js, code is 266, comment is 28, blank is 67.
+.history\src\Search_20210414231645.js, code is 266, comment is 28, blank is 67.
+.history\src\Search_20210414231858.js, code is 266, comment is 28, blank is 67.
+.history\src\Search_20210414232121.js, code is 266, comment is 28, blank is 67.
+.history\src\Search_20210414232418.js, code is 258, comment is 28, blank is 66.
+.history\src\Search_20210414232453.js, code is 266, comment is 28, blank is 67.
+.history\src\Search_20210414233118.js, code is 266, comment is 28, blank is 67.
+.history\src\Search_20210414233140.js, code is 266, comment is 28, blank is 67.
+.history\src\Search_20210414233235.js, code is 266, comment is 28, blank is 67.
+.history\src\Search_20210414233240.js, code is 266, comment is 28, blank is 67.
+.history\src\Search_20210414233253.js, code is 266, comment is 28, blank is 67.
+.history\src\Search_20210414233337.js, code is 266, comment is 28, blank is 67.
+.history\src\Search_20210415002608.js, code is 266, comment is 22, blank is 66.
+.history\src\Search_20210415003628.js, code is 264, comment is 22, blank is 65.
+.history\src\Search_20210415003801.js, code is 256, comment is 15, blank is 58.
+.history\src\Search_20210415130258.js, code is 256, comment is 16, blank is 58.
+.history\src\Search_20210415130300.js, code is 256, comment is 16, blank is 59.
+.history\src\Search_20210415130315.js, code is 256, comment is 16, blank is 59.
+.history\src\SearchBar_20210415002649.js, code is 59, comment is 0, blank is 7.
+.history\src\SearchBar_20210415002754.js, code is 59, comment is 0, blank is 7.
+.history\src\tab_20210415123148.js, code is 41, comment is 0, blank is 4.
+.history\src\tab_20210415123221.js, code is 41, comment is 1, blank is 4.
+.history\src\tab_20210415123227.js, code is 41, comment is 1, blank is 4.
+admin.png, it is a binary file.
+app.js, code is 334, comment is 182, blank is 44.
+build\asset-manifest.json, code is 22, comment is 0, blank is 1.
+build\favicon.ico, it is a binary file.
+build\index.html, code is 1, comment is 0, blank is 0.
+build\logo192.png, it is a binary file.
+build\logo512.png, it is a binary file.
+build\manifest.json, code is 25, comment is 0, blank is 0.
+build\precache-manifest.4d6b4eee267d5c4785ce9b05196c43b5.js, code is 30, comment is 0, blank is 0.
+build\robots.txt, code is 3, comment is 1, blank is 0.
+build\service-worker.js, code is 14, comment is 17, blank is 8.
+build\static\css\main.b9ab7082.chunk.css, code is 1, comment is 1, blank is 0.
+build\static\css\main.b9ab7082.chunk.css.map, code is 1, comment is 0, blank is 0.
+build\static\js\2.8c67ffd4.chunk.js, code is 1, comment is 3, blank is 0.
+build\static\js\2.8c67ffd4.chunk.js.LICENSE.txt, code is 0, comment is 67, blank is 9.
+build\static\js\2.8c67ffd4.chunk.js.map, code is 1, comment is 0, blank is 0.
+build\static\js\main.e71dd6e0.chunk.js, code is 1, comment is 2, blank is 0.
+build\static\js\main.e71dd6e0.chunk.js.map, code is 1, comment is 0, blank is 0.
+build\static\js\runtime-main.00d7f250.js, code is 1, comment is 1, blank is 0.
+build\static\js\runtime-main.00d7f250.js.map, code is 1, comment is 0, blank is 0.
+build\static\media\notebook_new.cd8eba9b.jpg, it is a binary file.
+Comment.js, code is 29, comment is 1, blank is 8.
+database.js, code is 316, comment is 133, blank is 50.
+package-lock.json, code is 17640, comment is 0, blank is 0.
+package.json, code is 47, comment is 0, blank is 2.
+public\favicon.ico, it is a binary file.
+public\index.html, code is 20, comment is 23, blank is 0.
+public\logo192.png, it is a binary file.
+public\logo512.png, it is a binary file.
+public\manifest.json, code is 25, comment is 0, blank is 0.
+public\robots.txt, code is 3, comment is 1, blank is 0.
+README.md, code is 12, comment is 3, blank is 9.
+src\admin\admin.png, it is a binary file.
+src\admin\admin_page.html, code is 75, comment is 0, blank is 18.
+src\admin\manage_page.html, code is 80, comment is 0, blank is 13.
+src\App.css, code is 24, comment is 10, blank is 6.
+src\App.js, code is 29, comment is 0, blank is 5.
+src\App.test.js, code is 8, comment is 0, blank is 1.
+src\Booklist copy.js, code is 150, comment is 10, blank is 36.
+src\Booklist.js, code is 53, comment is 21, blank is 17.
+src\booklist_components\Bar.js, code is 247, comment is 31, blank is 35.
+src\booklist_components\Display.js, code is 245, comment is 27, blank is 26.
+src\booklist_components\Header.js, code is 56, comment is 17, blank is 8.
+src\booklist_components\UserDisplay.js, code is 208, comment is 26, blank is 22.
+src\books.json, code is 1, comment is 0, blank is 0.
+src\Chat.js, code is 168, comment is 48, blank is 17.
+src\ChatList.js, code is 17, comment is 6, blank is 6.
+src\Comment.js, code is 118, comment is 14, blank is 38.
+src\Footer.js, code is 30, comment is 11, blank is 5.
+src\Home.js, code is 96, comment is 3, blank is 17.
+src\img\notebook.jpg, it is a binary file.
+src\img\notebook_new.jpg, it is a binary file.
+src\index.css, code is 12, comment is 0, blank is 1.
+src\index.js, code is 190, comment is 32, blank is 39.
+src\LoginPage.js, code is 79, comment is 28, blank is 8.
+src\logo.svg, code is 7, comment is 0, blank is 0.
+src\Mainpage.js, code is 133, comment is 79, blank is 28.
+src\mainpage_components\MainpageRoute.js, code is 50, comment is 41, blank is 10.
+src\mainpage_components\MyChatList.js, code is 86, comment is 23, blank is 7.
+src\mainpage_components\MyHistory.js, code is 161, comment is 83, blank is 45.
+src\mainpage_components\PersonalInfo.js, code is 86, comment is 36, blank is 16.
+src\mainpage_components\UploadGood.js, code is 172, comment is 111, blank is 38.
+src\mainpage_components\Utils\Header.js, code is 57, comment is 20, blank is 6.
+src\mainpage_components\ViewRank.js, code is 98, comment is 27, blank is 11.
+src\Nav.js, code is 26, comment is 6, blank is 5.
+src\post_components\comment_index.css, code is 110, comment is 2, blank is 19.
+src\post_components\CommentContent.js, code is 51, comment is 8, blank is 9.
+src\post_components\CommentInput.js, code is 83, comment is 6, blank is 14.
+src\post_components\CommentList.js, code is 32, comment is 6, blank is 8.
+src\post_components\EachComment.js, code is 38, comment is 6, blank is 8.
+src\post_components\NewPost.js, code is 73, comment is 12, blank is 20.
+src\post_components\PostDetail.js, code is 31, comment is 6, blank is 10.
+src\post_components\PostList.js, code is 60, comment is 6, blank is 13.
+src\Product.js, code is 55, comment is 18, blank is 10.
+src\product_components\actions.js, code is 47, comment is 13, blank is 9.
+src\product_components\detail.js, code is 38, comment is 11, blank is 6.
+src\product_components\image.js, code is 42, comment is 11, blank is 7.
+src\product_components\name.js, code is 22, comment is 11, blank is 5.
+src\product_components\price.js, code is 12, comment is 10, blank is 5.
+src\product_components\seller.js, code is 73, comment is 14, blank is 9.
+src\Search.js, code is 290, comment is 54, blank is 59.
+src\search_components\Checker.js, code is 32, comment is 13, blank is 6.
+src\search_components\SearchBar.js, code is 55, comment is 17, blank is 8.
+src\search_components\tab.js, code is 39, comment is 12, blank is 8.
+src\serviceWorker.js, code is 95, comment is 31, blank is 15.
+src\setupTests.js, code is 1, comment is 4, blank is 0.
+src\SignUpPage.js, code is 150, comment is 42, blank is 9.
+src\utils\getImageUrl.js, code is 9, comment is 9, blank is 2.
+src\utils\handle_image_upload.js, code is 11, comment is 6, blank is 2.
+===============================================================================
