@@ -1,3 +1,10 @@
+/*
+*Comment content MODULE
+*PROGRAMMER: XU Haoran
+*VERSION: 1.0 (30 April 2021)
+*PURPOSE: Provide the comment content interface for users to comment under each post.
+*/
+
 import React, { Component } from 'react';
 import CommentInput from './CommentInput';
 import CommentList from './CommentList';
@@ -27,6 +34,7 @@ class CommentContent extends Component {
     localStorage.setItem('comments', JSON.stringify(comments))
   }
 
+  // Deal with submission of comments
   handleSubmitComment (comment) {
     if (!comment) return
     if (!comment.username) return alert('Please Type Username')
@@ -36,7 +44,8 @@ class CommentContent extends Component {
     this.setState({ comments })
     this._saveComments(comments)
   }
-
+  
+  // Deal with deletion of comments
   handleDeleteComment (index) {
     const comments = this.state.comments
     comments.splice(index, 1)

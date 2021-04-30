@@ -1,3 +1,10 @@
+/*
+*Comment list MODULE
+*PROGRAMMER: XU Haoran
+*VERSION: 1.0 (30 April 2021)
+*PURPOSE: Provide the comment list interface for users to view all the comments under each post.
+*/
+
 import React, { Component} from 'react';
 import Comment from './EachComment';
 import PropTypes from 'prop-types';

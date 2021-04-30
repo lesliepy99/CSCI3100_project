@@ -1,3 +1,10 @@
+/*
+*Create Post MODULE
+*PROGRAMMER: XU Haoran
+*VERSION: 1.0 (30 April 2021)
+*PURPOSE: Provide the interface for creating new posts, and this is called as New Post page.
+*/
+
 import React, { Component } from 'react';
 import '../App.css';
 import TextField from '@material-ui/core/TextField';
@@ -5,19 +12,13 @@ import { connect } from 'react-redux';
 import { io } from "socket.io-client";
 
 
-
-
-
 class NewPost extends React.Component {
-
-
 
     constructor(props) {
       super(props);
       this.state = { content: ""
      };
-      
-  
+        
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -25,10 +26,11 @@ class NewPost extends React.Component {
     handleChange(event) {
       this.setState({ content: event.target.value });
     }
-  
+    /*
+     *There are two purposes of this function, first is to add the newly created post to the post list and show it in the posts page.
+     *Second is to navigate back to the posts page.
+     */
     handleSubmit(event) {
-      // 1. add the post to postList
-      // 2. navigate back to postList page
       alert("You have created a new post! Click the forum button to view it!");
       event.preventDefault();
 
@@ -49,7 +51,7 @@ class NewPost extends React.Component {
                 comments: Comments,
                 
             })
-        }).then((response) => response.text()) //change from json to text
+        }).then((response) => response.text()) //change from json to text, otherwise there will be warnings.
         .then((data) => {
             console.log(data)
                                
@@ -69,7 +71,6 @@ class NewPost extends React.Component {
         console.log("Changing Post");
   
         this.props.dispatch({ type: 'update_post', data: data })
-        // dispatch({type:'UPDATE'});
   
       });
       return (
@@ -82,7 +83,7 @@ class NewPost extends React.Component {
             multiline
             fullWidth
             rows={8}
-            value={this.PostContent}  // set value to be content
+            value={this.PostContent}// set value to be content 
             onChange={this.handleChange} 
             />
           <br />

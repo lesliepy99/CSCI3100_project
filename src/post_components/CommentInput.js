@@ -1,3 +1,10 @@
+/*
+*Comment input MODULE
+*PROGRAMMER: XU Haoran
+*VERSION: 1.0 (30 April 2021)
+*PURPOSE: Provide the comment input interface for users to comment under each post.
+*/
+
 import React, { Component} from 'react';
 import PropTypes from 'prop-types';
 import './comment_index.css'
@@ -49,7 +56,7 @@ class CommentInput extends Component {
       content: event.target.value
     })
   }
-
+  
   handleSubmit () {
     if (this.props.onSubmit) {
       this.props.onSubmit({

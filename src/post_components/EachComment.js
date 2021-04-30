@@ -1,3 +1,11 @@
+/*
+*Comment MODULE
+*PROGRAMMER: XU Haoran
+*VERSION: 1.0 (30 April 2021)
+*PURPOSE: Provide the interface of each comment submitted by users.
+*/
+
+
 import React, { Component} from 'react';
 import PropTypes from 'prop-types';
 import './comment_index.css'

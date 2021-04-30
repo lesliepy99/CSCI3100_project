@@ -1,27 +1,13 @@
+/*
+*Post Detail MODULE
+*PROGRAMMER: XU Haoran
+*VERSION: 1.0 (30 April 2021)
+*PURPOSE: Show the detailed information of each post in this Post Detail page.
+*/
+
 import React, { Component } from 'react';
-
 import '../App.css';
-import Button from '@material-ui/core/Button';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import IconButton from '@material-ui/core/IconButton';
-import Paper from '@material-ui/core/Paper';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import CreateIcon from '@material-ui/icons/Create';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import TextField from '@material-ui/core/TextField';
-import {Route, NavLink, Switch, Redirect, Link} from 'react-router-dom';
-
-import CommentContent from './CommentContent';
 import { connect } from 'react-redux';
-import { io } from "socket.io-client";
-import { useHistory, useParams } from 'react-router-dom'
 
 
 class PostDetail extends React.Component  {
@@ -32,6 +18,7 @@ class PostDetail extends React.Component  {
       }
     render(){
         var Content = this.state.content;
+        {/* Navigate based on the unique post id of each post */} 
         const { id } = this.props.match.params;
         console.log(Content);
 
@@ -40,11 +27,8 @@ class PostDetail extends React.Component  {
             <div>
             
             <h1>{Content}</h1>
-            {/* <PostContent/> */}
-            
+            {/* <PostContent/> */}            
             {/* <CommentContent/> */}
-
-            {/* Haven't done the comment part */}
             </div>
     
         )

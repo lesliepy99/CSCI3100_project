@@ -1,38 +1,28 @@
+/*
+* MODULE Forum
+* PROGRAMMER: XU Haoran
+* VERSION: 1.0 (30 April 2021)
+* PURPOSE: Provide the forum interface. 
+*/
+
 import React, { Component } from 'react';
 import './App.css';
-
-
-
 import Button from '@material-ui/core/Button';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import CreateIcon from '@material-ui/icons/Create';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import TextField from '@material-ui/core/TextField';
-import { NavLink, Redirect, Link} from 'react-router-dom';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import {  Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { io } from "socket.io-client";
-
 import PostList from './post_components/PostList';
 import { withStyles } from "@material-ui/core/styles";
-import { spacing } from '@material-ui/system';
 import Box from '@material-ui/core/Box';
-
-import Image from './img/notebook_new.jpg'; // Import using relative path
+import Image from './img/notebook_new.jpg'; 
 
 
   
-
+//A list of blogs for testing purpose
 const blogs = [
   {
     title: 'Books',
@@ -55,6 +45,8 @@ const blogs = [
     content: 'Looking for some interesting shoes!',
   },
 ]
+
+//Set css styles for forum page
 const styles = {
   paperContainer: {
       backgroundImage: `url(${Image})`
@@ -66,6 +58,7 @@ const WhiteTextTypography = withStyles({
   }
 })(Typography);
 
+// Main component contains the header section and the post lists section imported from PostList.js of the forum page. 
 class Main extends React.Component {
 
   constructor(props) {
@@ -75,7 +68,6 @@ class Main extends React.Component {
 
     return (
       <main>
-        {/* return of 1st component: background image */}
         <Paper Paper style={styles.paperContainer}>
          
           <div />
@@ -83,7 +75,7 @@ class Main extends React.Component {
           <Container maxWidth="sm">
             <div>
             <Box p={1}>
-              <WhiteTextTypography align="center"  variant="h3"  gutterBottom={true}>{/*true 的语法，color怎么调 */}
+              <WhiteTextTypography align="center"  variant="h3"  gutterBottom={true}>
                 Post Area
               </WhiteTextTypography>
               </Box>
@@ -105,8 +97,10 @@ class Main extends React.Component {
 
 }
 
-{/*The language used in the textEditor is still Chinese */ }
-
+/**
+* Comment component contains the button for creating new post.
+* On click the button in this component, users will be redirected to New Post page.
+*/
 class Comment extends React.Component {
   constructor(props) {
     super(props);
@@ -118,7 +112,6 @@ class Comment extends React.Component {
         console.log("Is that right?");
         
         this.props.dispatch({type:'update_post',data:data['fullDocument']})
-        // dispatch({type:'UPDATE'});
         console.log("Update post")
       
       });
@@ -142,7 +135,6 @@ class Comment extends React.Component {
         </Link>
         </Box>
         <Main/>
-        {/*实验性质 */}
         
       </div>
 
