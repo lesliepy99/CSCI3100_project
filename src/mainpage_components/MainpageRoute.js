@@ -1,3 +1,13 @@
+/*
+*MODULE MainpageRoute
+*PROGRAMMER: WANG Ruijie
+*VERSION: 1.0 (30 April 2021)
+*PURPOSE: set up a route that can direct users to different function parts in Personal Mainpage
+*/
+
+/**
+ * Module dependencies and prototypes.
+ */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -8,6 +18,9 @@ import PersonalInfo from './PersonalInfo';
 import MyHistory from './MyHistory';
 import MyChatList from './MyChatList';
 
+/**
+ * DESCRIPTION: Set up the Material-UI styles 
+ */
 const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',

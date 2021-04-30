@@ -23,6 +23,9 @@ import Typography from '@material-ui/core/Typography';
 import ReactS3 from 'react-s3';
 import S3 from 'react-aws-s3';
 
+/**
+ * DESCRIPTION: Set up the Material-UI styles 
+ */
 const useStyles = makeStyles((theme) =>({
   root: {
     maxWidth: 450,

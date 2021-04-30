@@ -1,3 +1,16 @@
+/*
+*MODULE ViewRank
+*PROGRAMMER: WANG Ruijie
+*VERSION: 1.0 (30 April 2021)
+*PURPOSE: The original purpose was to give a rank based on the good comments, but we found that this idea
+*         is not quite feasible, and has not much actual meaning, so we stopped the development of this
+*         module. 
+*         Maybe this module can be reopened some other day, after considering the cost.
+*/
+
+/**
+ * Module dependencies and prototypes.
+ */
 import React, { Component } from 'react';
 import '../App.css';
 import { Link } from 'react-router-dom';
@@ -23,6 +36,9 @@ import Typography from '@material-ui/core/Typography';
 import ReactS3 from 'react-s3';
 import S3 from 'react-aws-s3';
 
+/**
+ * DESCRIPTION: Set up the Material-UI styles 
+ */
 const useStyles = makeStyles((theme) =>({
   root: {
     maxWidth: 450,
@@ -74,7 +90,10 @@ const useStyles = makeStyles((theme) =>({
 
 
 
-
+/**
+ * DESCRIPTION: A deserted function part, maybe useful some other day.
+ *              But now it is better to remain hidden. 
+ */
 class ViewRank extends React.Component {
     render() {
       return (

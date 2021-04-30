@@ -33,6 +33,9 @@ import MainpageRoute from './mainpage_components/MainpageRoute';
 // import from utils folder
 import Header from './mainpage_components/Utils/Header';
 
+/**
+ * DESCRIPTION: Set up the Material-UI styles 
+ */
 const useStyles = makeStyles((theme) =>({
   root: {
     maxWidth: 450,
@@ -82,7 +85,9 @@ const useStyles = makeStyles((theme) =>({
 
 }));
 
-
+/**
+ * DESCRIPTION: Create Title name and Content 
+ */
 const title = "Personal Mainpage";
 const title_content = "Check the personal information and transactions here";
 
