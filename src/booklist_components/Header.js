@@ -1,11 +1,22 @@
-// Reference: https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/blog
+/*
+* MODULE Header
+* PROGRAMMER: XIONG Jiajie
+* VERSION: 1.0 (30 April 2021)
+* PURPOSE: A image header containing title and discription. 
+* Reference: https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/blog
+*/
 
+
+/**
+ * Module dependencies and prototypes.
+ */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 
+// css styles for Material UI components
 const useStyles = makeStyles((theme) => ({
     backGround: {
         position: 'relative',
@@ -38,6 +49,13 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+
+/**
+ * MODEULE Header
+ * DATA STRUCTURE: 
+ *   - Method: Image header with text content
+ * ALGORITHM (IMPLEMENTATION) : Using overlay to darken the background image
+ */
 const Header = props => {
   const title = props.title;
   const content = props.content;

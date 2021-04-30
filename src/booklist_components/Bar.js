@@ -1,6 +1,17 @@
+/*
+* MODULE Toolbar
+* PROGRAMMER: XIONG Jiajie
+* VERSION: 1.0 (30 April 2021)
+* PURPOSE: Provide toolbar containing shoppingcart and link to search page. 
+* Reference: https://material-ui.com/zh/components/drawers/
+*/
+
+
+/**
+ * Module dependencies and prototypes.
+ */
 import React from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Box from '@material-ui/core/Box';
@@ -8,11 +19,11 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Link } from 'react-router-dom';
 
+// UI icons
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -25,19 +36,17 @@ import LocalMallIcon from '@material-ui/icons/LocalMall';
 import Hidden from '@material-ui/core/Hidden';
 
 import { connect } from 'react-redux';
-
 import getImageUrl from '../utils/getImageUrl';
 
 
-
+// css styles for Material UI components
 const useStyles = makeStyles((theme) => ({
-    // search
+    // Toolbar
     inputRoot: {
         color: 'inherit',
     },
     inputInput: {
         padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
         transition: theme.transitions.create('width'),
         width: '100%',
@@ -78,6 +87,7 @@ const useStyles = makeStyles((theme) => ({
     toolbarTitle: {
         flex: 1,
     },
+
     // drawer
     list: {
         width: 250,
@@ -86,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
         width: 'auto',
     },
 
-    //cards
+    //product cards
     cardGrid: {
         paddingTop: theme.spacing(2),
         paddingBottom: theme.spacing(2),
@@ -101,36 +111,34 @@ const useStyles = makeStyles((theme) => ({
     },
     cardMedia: {
         width: 100,
-        //height: 150,
     },
 }));
 
+/**
+ * MODEULE Toolbar
+ * DATA STRUCTURE: 
+ *   - Method: use drawer to contain the shopping cart;
+ *             delete from shopping cart.
+ * ALGORITHM (IMPLEMENTATION) : Acquire goods and user data from database.
+ *                              Filter shopping cart goods for the current user.
+ *                              Send request to server to delete items.
+ */
 const Bar = props => {
     const classes = useStyles();
-
-
     let allGood = props.goods;
 
-    console.log(props.user_info);
-
-    // filter my info
+    // filter current user info
     let filter_info = props.user_info.filter(info => {
         if (info._id == props.my_id) {
-            console.log(info);
             return info;
         }
     })
-    console.log(filter_info);
-
     let my_info = filter_info[0];
-
-    console.log(my_info);
-
 
     // filter shopping cart
     let shopList = [];
-    if(my_info){
-    shopList = my_info.shopping_list;
+    if (my_info) {
+        shopList = my_info.shopping_list;
     }
 
     let filtered = allGood.filter(good => {
@@ -138,16 +146,14 @@ const Bar = props => {
             return good
         }
     })
-
     let cartGood = filtered;
 
 
     props.dispatch({ type: "default" })
     const myId = props.my_id;
 
-    // delete from cart
+    // send request to server to delete from shopping cart
     const deleteCart = (e, goodId) => {
-
         (async () => {
             await fetch('http://54.254.174.175:3000/deleteShoppingListItem', {
                 method: 'POST',
@@ -164,10 +170,12 @@ const Bar = props => {
 
     };
 
+    /* shopping cart drawer */
     const [state, setState] = React.useState({
         left: false,
     });
 
+    // user toggle function to open and close shopping cart
     const toggleDrawer = (anchor, open) => (event) => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
@@ -176,6 +184,7 @@ const Bar = props => {
         setState({ ...state, [anchor]: open });
     };
 
+    // shopping cart content
     const list = (anchor) => (
         <div
             className={clsx(classes.list, {
@@ -209,14 +218,17 @@ const Bar = props => {
                         </Hidden>
                         <div className={classes.cardDetails}>
                             <CardContent>
+                                {/*product name*/}
                                 <Typography variant="h8">
                                     {item.name}
                                 </Typography>
+
+                                {/*product price*/}
                                 <Typography variant="subtitle1" color="textSecondary">
                                     HK${item.estimated_price}
                                 </Typography>
 
-
+                                {/*link to product detail*/}
                                 <Link to={{
                                     pathname: `/home/product/${item._id}`, state: {
                                         id: item._id, name: item.name, price: item.estimated_price, tags: item.tags,
@@ -227,7 +239,8 @@ const Bar = props => {
                                         detail
                                     </Button>
                                 </Link>
-
+                                
+                                {/*delete button*/}
                                 <IconButton color="secondary" aria-label="delete froms shopping cart" onClick={(e) => deleteCart(e, item._id)}>
                                     <DeleteIcon />
                                 </IconButton>
@@ -235,12 +248,10 @@ const Bar = props => {
                             </CardContent>
                         </div>
                     </Card>
-
-
                 </Grid>
-
             ))}
 
+            {/*checkout button*/}
             <Divider />
             <Box textAlign='center' paddingTop={2}>
 
@@ -255,13 +266,13 @@ const Bar = props => {
             </Box>
         </div>
     );
-
+    
+    /* Toolbar */
     return (
         <Grid>
             <Toolbar className={classes.toolbar}>
                 <IconButton aria-label="shopping cart" onClick={toggleDrawer('left', true)}>
                     <ShoppingCartIcon />
-                    {/* <Typography>Cart</Typography> */}
                 </IconButton>
                 <SwipeableDrawer
                     anchor={'left'}
@@ -300,5 +311,3 @@ function mapStateToProps(state) {
     };
 }
 export default connect(mapStateToProps)(Bar);
-
-//export default Bar;

@@ -1,5 +1,16 @@
-//Reference: https://material-ui.com/zh/components/cards/
+/*
+* MODULE Display
+* PROGRAMMER: XIONG Jiajie
+* VERSION: 1.0 (30 April 2021)
+* PURPOSE: Display products in store page and search page. 
+* Reference: https://material-ui.com/zh/components/cards/
+*            https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/album
+*/
 
+
+/**
+ * Module dependencies and prototypes.
+ */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -11,18 +22,16 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Divider from '@material-ui/core/Divider';
 import { Link } from 'react-router-dom';
 
 import IconButton from '@material-ui/core/IconButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Header from './Header';
-
 import getImageUrl from '../utils/getImageUrl';
 
 import { useState, useEffect } from 'react';
 
+// css styles for Material UI components
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
         paddingTop: theme.spacing(2),
@@ -40,24 +49,32 @@ const useStyles = makeStyles((theme) => ({
         variant: "outlined",
     },
     cardMedia: {
-        paddingTop: '80%' // '56.25%', // 16:9
+        paddingTop: '80%',
     },
     cardContent: {
         flexGrow: 1,
     },
 }));
 
+/**
+ * MODEULE Display
+ * DATA STRUCTURE: 
+ *   - Method: use cards to display each product,
+ *             containing buttons.
+ *             Page number.
+ * ALGORITHM (IMPLEMENTATION) : Simple map function.
+ *                              Setting pages according to product number.
+ *                              Jump to different page according to input button.
+ */
 const Display = props => {
-    const catagory = props.catagory;
-    const products = props.products;
-
     const classes = useStyles();
 
+    const catagory = props.catagory;
+    const products = props.products;
     const myId = props.myId;
 
+    /* Send request to server to add to shopping cart */
     const addCart = (e, goodId) => {
-
-
         (async () => {
             await fetch('http://54.254.174.175:3000/insertShoppingList', {
                 method: 'POST',
@@ -71,12 +88,10 @@ const Display = props => {
             }
             );
         })();
-
-
     };
 
+    /* set page number and current page number */
     let len = products.length;
-
     let list = [];
 
     for (var i = 1; i < len; i++) {
@@ -89,10 +104,10 @@ const Display = props => {
         }
     }
 
-
     const [flag, setFlag] = React.useState('');
     const [goods, setGoods] = React.useState('');
 
+    // change page
     const changePage = async (e, pageNumber) => {
         let array = products;
         setFlag(pageNumber);
@@ -104,16 +119,18 @@ const Display = props => {
     let sample = products;
     sample = sample.slice(0, 9);
 
-
+    // page changed
     if (goods.length != 0) {
         return (
             <Container className={classes.cardGrid} maxWidth="md">
+                {/* display category */}
                 <div pclassName={classes.catagory}>
                 <Typography variant="h8" component="h2" paddingRight={140} gutterBottom>
                     {catagory}
                 </Typography>
-            </div>
+                </div>
 
+                {/* display product scards */}
                 <Grid container spacing={4}>
                     {goods && goods.map((post) => {
                         if (post) {
@@ -121,22 +138,27 @@ const Display = props => {
                                 <Grid item key={post} xs={12} sm={4} md={4}>
                                     <Card className={classes.card}>
                                         <CardActionArea>
+                                            {/* product image */}
                                             <CardMedia
                                                 className={classes.cardMedia}
-                                                image= {getImageUrl("good_image", post._id)} //"https://source.unsplash.com/random"
+                                                image= {getImageUrl("good_image", post._id)}
                                                 title="Image title"
                                             />
                                         </CardActionArea>
 
                                         <CardContent className={classes.cardContent}>
+                                            {/* product name */}
                                             <Typography gutterBottom variant="h6" >
                                                 {post.name}
                                             </Typography>
+
+                                            {/* product price */}
                                             <Typography variant="h8" component="h2">
                                                 HK${post.estimated_price}
                                             </Typography>
                                         </CardContent>
                                         <CardActions >
+                                            {/* link to product detail */}
                                             <Link to={{
                                                 pathname: `/home/product/${post._id}`, state: {
                                                     id: post._id, name: post.name, price: post.estimated_price, tags: post.tags,
@@ -147,6 +169,8 @@ const Display = props => {
                                                     detail
                                             </Button>
                                             </Link>
+
+                                            {/* add to shopping cart */}
                                             <IconButton color="secondary" aria-label="add to shopping cart" onClick={(e) => addCart(e, post._id)}>
                                                 <AddShoppingCartIcon />
                                             </IconButton>
@@ -158,7 +182,8 @@ const Display = props => {
                         return null
                     })}
                 </Grid>
-
+                
+                {/* page numbers */}
                 <div style={{ paddingTop: 16, align: "center" }} align="center">
                     <ButtonGroup color="secondary" aria-label="outlined secondary button group">
                         {list.map((page) => {
@@ -182,6 +207,7 @@ const Display = props => {
             </Container>
         );
     }
+    // first time loaded
     else {
         return (
             <Container className={classes.cardGrid} maxWidth="md">
@@ -198,23 +224,27 @@ const Display = props => {
                                 <Grid item key={post} xs={12} sm={4} md={4}>
                                     <Card className={classes.card}>
                                         <CardActionArea>
+                                            {/* product image */}
                                             <CardMedia
                                                 className={classes.cardMedia}
-                                                image={getImageUrl("good_image", post._id)}//"https://source.unsplash.com/random"
-                                                //image={post.image}
+                                                image={getImageUrl("good_image", post._id)}
                                                 title="Image title"
                                             />
                                         </CardActionArea>
 
                                         <CardContent className={classes.cardContent}>
+                                            {/* product name */}
                                             <Typography gutterBottom variant="h6" >
                                                 {post.name}
                                             </Typography>
+
+                                            {/* product price */}
                                             <Typography variant="h8" component="h2">
                                                 HK${post.estimated_price}
                                             </Typography>
                                         </CardContent>
                                         <CardActions >
+                                            {/* link to product detail */}
                                             <Link to={{
                                                 pathname: `/home/product/${post._id}`, state: {
                                                     id: post._id, name: post.name, price: post.estimated_price, tags: post.tags,
@@ -225,6 +255,8 @@ const Display = props => {
                                                     detail
                                                 </Button>
                                             </Link>
+
+                                            {/* add to shopping cart */}
                                             <IconButton color="secondary" aria-label="add to shopping cart" onClick={(e) => addCart(e, post._id)}>
                                                 <AddShoppingCartIcon />
                                             </IconButton>
@@ -236,7 +268,8 @@ const Display = props => {
                         return null
                     })}
                 </Grid>
-
+                
+                {/* page numbers */}
                 <div style={{ paddingTop: 16, align: "center" }} align="center">
                     <ButtonGroup color="secondary" aria-label="outlined secondary button group">
                         {list.map((page) => {

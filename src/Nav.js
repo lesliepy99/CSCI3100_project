@@ -18,13 +18,13 @@ class Nav extends Component {
         return (
             <nav>
 	          <ul className="nav-links" >
-	            <Link to='/home/booklist'>
+	            <Link to='/home/booklist' style={{ textDecoration: 'none' }}>
 	              <wt>Store</wt>
 		        </Link>
-                <Link to='/home/comment'>
+                <Link to='/home/comment' style={{ textDecoration: 'none' }}>
                     <wt>Forum</wt>
                 </Link>
-                <Link to='/home/mainpage'>
+                <Link to='/home/mainpage' style={{ textDecoration: 'none' }}>
                     <wt>User</wt>
                 </Link>
               </ul>

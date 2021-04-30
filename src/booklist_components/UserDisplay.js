@@ -1,3 +1,16 @@
+/*
+* MODULE UserDisplay
+* PROGRAMMER: XIONG Jiajie
+* VERSION: 1.0 (30 April 2021)
+* PURPOSE: Display users in search page. 
+* Reference: https://material-ui.com/zh/components/cards/
+*            https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/album
+*/
+
+
+/**
+ * Module dependencies and prototypes.
+ */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -20,9 +33,10 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 import { useState, useEffect } from 'react';
-
 import getImageUrl from '../utils/getImageUrl';
 
+
+// css styles for Material UI components
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
         paddingTop: theme.spacing(2),
@@ -50,12 +64,21 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+/**
+ * MODEULE UserDisplay
+ * DATA STRUCTURE: 
+ *   - Method: use cards to display each user,
+ * ALGORITHM (IMPLEMENTATION) : Simple map function.
+ *                              Random pictures.
+ *                              Page change.
+ */
 const DisplayUser = props => {
     const catagory = props.catagory;
     const products = props.products;
 
     const classes = useStyles();
 
+    /* set pages */
     let len = products.length;
     let list = [];
 
@@ -72,6 +95,7 @@ const DisplayUser = props => {
     const [flag, setFlag] = React.useState('');
     const [goods, setGoods] = React.useState('');
 
+    // change page
     const changePage = async (e, pageNumber) => {
         let array = products;
         setFlag(pageNumber);
@@ -83,6 +107,7 @@ const DisplayUser = props => {
     sample = sample.slice(0, 9);
 
 
+    // page changing
     if (goods.length != 0) {
         return (
             <Container className={classes.cardGrid} maxWidth="md">
@@ -99,6 +124,7 @@ const DisplayUser = props => {
                                 <Grid item key={post} xs={12} sm={4} md={4}>
                                     <Grid className={classes.cardGrid}>
                                         <Card className={classes.card}>
+                                            {/* user avatar */}
                                             <CardHeader
                                                 avatar={
                                                     <Avatar aria-label="recipe" className={classes.avatar}>
@@ -110,9 +136,12 @@ const DisplayUser = props => {
                                                         <MoreVertIcon />
                                                     </IconButton>
                                                 }
+                                                // user name and school
                                                 title={post.name}
                                                 subheader={post.school}
                                             />
+
+                                            {/* user image */}
                                             <CardMedia
                                                 className={classes.cardMedia}
                                                 image='https://source.unsplash.com/featured/?people'
@@ -126,7 +155,8 @@ const DisplayUser = props => {
                         return null
                     })}
                 </Grid>
-
+                
+                {/* page numbers */}
                 <div style={{ paddingTop: 16, align: "center" }} align="center">
                     <ButtonGroup color="secondary" aria-label="outlined secondary button group">
                         {list.map((page) => {
@@ -165,6 +195,7 @@ const DisplayUser = props => {
                             return (
                                 <Grid item key={post} xs={12} sm={4} md={4}>
                                     <Card className={classes.card}>
+                                            {/* user avatar */}
                                             <CardHeader
                                                 avatar={
                                                     <Avatar aria-label="recipe" className={classes.avatar}>
@@ -176,9 +207,12 @@ const DisplayUser = props => {
                                                         <MoreVertIcon />
                                                     </IconButton>
                                                 }
+                                                // user name and school
                                                 title={post.name}
                                                 subheader={post.school}
                                             />
+
+                                            {/* user image */}
                                             <CardMedia
                                                 className={classes.cardMedia}
                                                 image='https://source.unsplash.com/featured/?people'
@@ -191,7 +225,8 @@ const DisplayUser = props => {
                         return null
                     })}
                 </Grid>
-
+                
+                {/* page numbers */}
                 <div style={{ paddingTop: 16, align: "center" }} align="center">
                     <ButtonGroup color="secondary" aria-label="outlined secondary button group">
                         {list.map((page) => {
