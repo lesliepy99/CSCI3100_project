@@ -336,14 +336,14 @@ const Search = props => {
                                 </div>}
 
                                 {/* Tags checker */}
-                                {(msg == 0) && <><div style={{ paddingTop: 20, paddingBottom: 20, marginLeft: 18 }}>
+                                {(msg == 0) && <div><div style={{ paddingTop: 20, paddingBottom: 20, marginLeft: 18 }}>
                                     <Checker tags={tagger} tagKind="Tag" parentTag={tagBack} />
                                 </div>
 
                                 {/* Location checker */}
                                 <div style={{ paddingTop: 20, paddingBottom: 20, marginLeft: 18 }}>
                                     <Checker tags={region} tagKind="Loc" parentTag={locBack} />
-                                </div></>}
+                                </div></div>}
 
                                 {/* School checker */}
                                 {(msg == 1) && <div style={{ paddingTop: 20, paddingBottom: 20, marginLeft: 18 }}>
