@@ -223,7 +223,7 @@ app.post('/register', jsonParser, async (req, res) => {
 
 /**
  * DESCRIPTION: a REST API to authticate the login information of common users
- * URL: /admin_login
+ * URL: /login
  * METHOD: POST
  * Parameters: 
  *   - email : STRING
