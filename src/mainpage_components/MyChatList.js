@@ -1,3 +1,10 @@
+/*
+*MODULE ViewRank
+*PROGRAMMER: WU Xiang
+*VERSION: 1.0 (30 April 2021)
+*PURPOSE: Keep a chatlist for each user to find their chats with other users
+*/
+
 import React, { Component } from 'react';
 import '../App.css';
 import { Link } from 'react-router-dom';
@@ -13,7 +20,6 @@ import Divider from '@material-ui/core/Divider';
 class MyChatList extends React.Component {
     constructor(props) {
         super(props);
-        //this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     render() {
@@ -22,6 +28,8 @@ class MyChatList extends React.Component {
         const all_users=this.props.user_info;
         var chat_users=[];
         var data =[]
+
+        // find all chats of the current user
         for(var i=0;i<all_chats.length;i++){
             var tempTwoUid = all_chats[i].two_user_id;
             var temp_uid_1 = tempTwoUid[0].id;
@@ -33,7 +41,8 @@ class MyChatList extends React.Component {
                 chat_users.push(temp_uid_1);
             }}
         }
-        console.log("wuxiang debug:",chat_users);
+
+        // find all usernames of the chats
         var renderItem=``;
         for(var i=0;i<chat_users.length;i++){
             var uid_2=chat_users[i];
