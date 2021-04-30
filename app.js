@@ -23,8 +23,9 @@ const { assert } = require("console");
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var jsonParser = bodyParser.json({ extended: false });
 
-
-// Specify the configuration of the email account to send auth code
+/*
+ * Specify the configuration of the email account to send auth code
+ */
 const transport = nodemailer.createTransport(smtpTransport({
     host: 'smtp.qq.com',
     port: 465,
@@ -44,7 +45,16 @@ const randomFns = () => {
     return code
 }
 
-// send email
+/**
+ * DESCRIPTION: a REST API to send an email with auth code to users' emails
+ *              (1) check whether the email has been registered before
+ *              (2) generate a random auth code and send to the target email
+ *              (3) the auth code will be expired after 5 minutes
+ * URL: /send_email
+ * METHOD: POST
+ * Parameters: 
+ *   - email : STRING
+ */
 app.post("/send_email", jsonParser, async (req, res) => {
     const EMAIL = req.body.email;
     var email_exist=await UserModel.findOne({email: EMAIL});
