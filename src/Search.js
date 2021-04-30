@@ -75,7 +75,6 @@ const BootstrapInput = withStyles((theme) => ({
     },
 }))(InputBase);
 
-
 /**
  * MODEULE Display
  * DATA STRUCTURE: 
@@ -90,7 +89,7 @@ const BootstrapInput = withStyles((theme) => ({
  *                              Change searching mode with a selector.
  *                              Setting pages according to product/user number.
  *                              Jump to different page according to input button.
- */
+ */ 
 const Search = props => {
     let allGood = props.goods;
     let allUser = props.user_info;
@@ -387,12 +386,8 @@ const Search = props => {
                     </Grid>
                 </Grid>
             </Container>
-
-
         </div>
     );
-
-
 }
 
 function mapStateToProps(state) {
