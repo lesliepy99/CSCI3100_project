@@ -1,10 +1,13 @@
 /*
-* MODULE ViewRank
+* MODULE Chat
 * PROGRAMMER: WU Xiang
 * VERSION: 1.0 (30 April 2021)
 * PURPOSE: Provide the chat interface. 
 */
 
+/**
+ * Module dependencies and prototypes.
+ */
 import React, { Component } from 'react';
 import './App.css';
 import Container from '@material-ui/core/Container';
@@ -15,12 +18,16 @@ import SendIcon from '@material-ui/icons/Send';
 import {connect} from 'react-redux';
 import { io } from "socket.io-client";
 
-// sort the send times of messages
+/**
+ * Description: sort the send times of message
+ */
 function sortDownDate(message1, message2) {
     return Date.parse(message1.chat_time) - Date.parse(message2.chat_time);
 }
 
-// format the date time
+/**
+ * Description: format the date time
+ */
 function formatDateTime(date) {  
     var y = date.getFullYear();  
     var m = date.getMonth() + 1;  
@@ -33,6 +40,20 @@ function formatDateTime(date) {
     return y + '-' + m + '-' + d+' '+h+':'+minute;  
 };
 
+/**
+ * MODEULE Chat
+ * PURPOSE: Provide the chat interface. 
+ * DATA STRUCTURE: 
+ *   - Variable : user1 - internal structure
+ *   - Variable : user2 - internal structure
+ *   - Variable : all_chats - internal structure
+ *   - Method: handleClick - internal structure
+ *   - Method: handleSubmit - internal structure
+ * ALGORITHM (IMPLEMENTATION) : we first do a loop to decide all the chats that 
+ *                              are related to the current two users, one possiblity is that 
+ *                              seller is current user. Then we concatenate all the chat messages 
+ *                              between them, and we show them on screen
+ */
 class Chat extends React.Component {
     constructor(props) {
         super(props);
@@ -44,7 +65,12 @@ class Chat extends React.Component {
     }
 
     /**
-     *  On click the button "BEGIN TRANSACTION", create a new transaction item
+     *  Description: On click the button "BEGIN TRANSACTION", create a new transaction item
+     *  Parameters:
+     *    - good_id: String
+     *    - my_id: String
+     *    - seller_id: String
+     *    - transaction_time: Sting
      */
     handleClick(event){
         event.preventDefault();
@@ -71,7 +97,12 @@ class Chat extends React.Component {
     }
 
     /**
-     * Submit the message, along with the two users's IDs and the send time 
+     * Description: Submit the message, along with the two users's IDs and the send time 
+     * Parameters:
+     *    - send_time: Date
+     *    - uid1: String
+     *    - uid2: String
+     *    - message_content: Sting
      */
     handleSubmit(event){
         event.preventDefault();

@@ -17,6 +17,18 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ChatIcon from '@material-ui/icons/Chat';
 import Divider from '@material-ui/core/Divider';
 
+/**
+ * MODEULE MyChatList
+ * DATA STRUCTURE: 
+ *   - Variable : uid1 - internal structure
+ *   - Variable : chat_users - internal structure
+ *   - Variable : all_ chats - internal structure
+ *   - Variable : all_users - internal structure
+ *   - Variable : data - internal structure
+ * ALGORITHM (IMPLEMENTATION) : we first do a loop to decide all the chats that 
+ *                              are related to the current User. Then find the username
+ *                              of these chats, keep them in the chatlist
+ */
 class MyChatList extends React.Component {
     constructor(props) {
         super(props);
