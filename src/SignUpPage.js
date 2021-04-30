@@ -1,3 +1,13 @@
+/*
+* MODULE SignUpPage
+* PROGRAMMER: WU Xiang
+* VERSION: 1.0 (30 April 2021)
+* PURPOSE: Provide the user register page interface. 
+*/
+
+/**
+ * Module dependencies and prototypes.
+ */
 import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
@@ -6,6 +16,18 @@ import './App.css';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
 
+/**
+ * MODEULE SignUpPage
+ * DATA STRUCTURE: 
+ *   - Variable: verification - Boolean
+ *   - Method: handleClick - internal structure
+ *   - Method: handleSubmit - internal structure
+ * ALGORITHM (IMPLEMENTATION) : In the register phase, after the user fill in the register form and submit, 
+ *                              send the request to the server. If the information is valid, go to the 
+ *                              verification phase which executes the verification of email by the auth code. 
+ *                              If the auth code is correct, finish the registration and jump to
+ *                              the success interface.  
+ */
 class SignUpPage extends Component {
     constructor(props) {
         super(props);
@@ -14,6 +36,11 @@ class SignUpPage extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    /**
+     *  Description: At the verification phase, on click the 
+     *               "Go Back to the Last Step and Resend AuthCode" button, 
+     *               return to the register phase. 
+     */
     handleClick(event){
         event.preventDefault();
         this.setState({verification: false});
@@ -25,6 +52,18 @@ class SignUpPage extends Component {
         refresh_button.style="display: none";
     }
 
+    /**
+     *  Description: At the register phase, on click the submit button,
+     *               check the validiy of the information. If information is valid,
+     *               go to the verification phase and send the request to the server, 
+     *               which will send an auth code to the restrant's email address.
+     *  Parameters:
+     *    - email: String
+     *    - password: String
+     *    - password_confirm: String
+     *    - nickname: String
+     *    - school: String
+     */
     handleSubmit(event) {
         event.preventDefault();
         var email = event.target.elements.email.value;
@@ -32,6 +71,8 @@ class SignUpPage extends Component {
         var password_confirm = event.target.elements.password_confirm.value
         var nickname = event.target.elements.nickname.value;
         var school = event.target.elements.school.value;
+
+        // at the register phase
         if(!this.state.verification){
             console.log("before the verification,",email,password,nickname,school)
             var info_valid = true;
@@ -79,6 +120,8 @@ class SignUpPage extends Component {
                 })();
             }    
         }
+
+        // at the verification phase
         if(this.state.verification){
             var authcode=event.target.elements.authcode.value;
             console.log("when verification,",email,password,nickname,school,authcode);
@@ -98,12 +141,16 @@ class SignUpPage extends Component {
                 });
                 const resContent=await response.json();
                 const veri_ok=resContent.veri_result;
+
+                // successfully sign up
                 if(veri_ok){
                     var sign_up_area=document.getElementById("sign_up_area");
                     var success_message=document.getElementById("success_message");
                     sign_up_area.style="display: none";
                     success_message.style="display: block";
                 }
+
+                // fail to sign up
                 else alert("Fail to verify, your auth code is wrong or expired!");
             })();
         }

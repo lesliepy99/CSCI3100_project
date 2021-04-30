@@ -5,6 +5,9 @@
 * PURPOSE: Keep a chatlist for each user to find their chats with other users
 */
 
+/**
+ * Module dependencies and prototypes.
+ */
 import React, { Component } from 'react';
 import '../App.css';
 import { Link } from 'react-router-dom';

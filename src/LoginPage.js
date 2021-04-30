@@ -1,22 +1,43 @@
+/*
+* MODULE LoginPage
+* PROGRAMMER: WU Xiang
+* VERSION: 1.0 (30 April 2021)
+* PURPOSE: Provide the user login page interface. 
+*/
+
+/**
+ * Module dependencies and prototypes.
+ */
 import React,{Component} from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 
 
-
+/**
+ * MODEULE LoginPage
+ * DATA STRUCTURE: 
+ *   - Method: handleSubmit - internal structure
+ * ALGORITHM (IMPLEMENTATION) : After the user fill in the login form and submit, 
+ *                              send the request to the server. If successfully login, 
+ *                              jump to the homepage of the account. 
+ */
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    /**
+     *  Description: On click the submit button, send the request to the server, 
+     *               if the email and password match, jump to the homepage.
+     *  Parameters:
+     *    - email: String
+     *    - password: String
+     */
     handleSubmit(event){
       event.preventDefault();
       var email = event.target.elements.email.value;
@@ -34,11 +55,13 @@ class LoginPage extends React.Component {
         });
         const resContent=await response.json();
         const my_id = resContent.my_id;
+        // successfully login
         if(my_id){
           this.props.dispatch({type: 'signin', data: my_id});
           console.log("here,",this.props.my_id);
           this.props.history.push('/home');
         }
+        // fail to login
         else alert("Wrong email or password!");
       })();
     }
